@@ -14,7 +14,6 @@
         }
 
         * { box-sizing: border-box; }
-        
         html { scroll-behavior: smooth; }
 
         body {
@@ -27,10 +26,9 @@
             align-items: center;
             padding: 60px 20px;
             overflow-x: hidden;
-            -webkit-tap-highlight-color: transparent;
+            transition: opacity 0.8s ease;
         }
 
-        /* FUNDO DE ESTRELAS */
         #espaco-sideral {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -51,7 +49,6 @@
             50% { opacity: 1; transform: scale(1.4); }
         }
 
-        /* CONTROLADOR DE ÁUDIO */
         .painel-audio-premium {
             position: fixed;
             top: 20px;
@@ -68,14 +65,16 @@
         }
 
         .btn-controle-midia {
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.1);
             border: none;
             color: #f8fafc;
             cursor: pointer;
-            width: 32px;
-            height: 32px;
+            width: 35px;
+            height: 35px;
             border-radius: 50%;
-            transition: 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .slider-volume-custom {
@@ -83,70 +82,56 @@
             cursor: pointer;
         }
 
-        /* TIMING DE ENTRADA LUXUOSA (FADE-IN EFFECT) */
         .efeito-luxo-entrada {
             opacity: 0;
-            transform: translateY(25px);
-            animation: surgirSuave 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            transform: translateY(20px);
+            animation: surgirSuave 1.5s ease-out forwards;
             width: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            max-width: 800px;
         }
 
         @keyframes surgirSuave {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        /* TITULO PRATA COM RETRO-EFEITO OURO ESCURO */
         .titulo-pagina {
             font-size: 2.2rem;
             letter-spacing: 7px;
             text-transform: uppercase;
-            font-weight: 700;
             text-align: center;
             margin-bottom: 30px;
-            background: linear-gradient(135deg, #e2e8f0 0%, #ffffff 25%, #94a3b8 50%, #ffffff 75%, #64748b 100%);
+            background: linear-gradient(135deg, #e2e8f0, #ffffff, #94a3b8);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            filter: drop-shadow(2px 2px 0px var(--ouro-escuro)) drop-shadow(0px 0px 15px rgba(255,255,255,0.1));
-            font-family: 'Times New Roman', serif;
+            filter: drop-shadow(2px 2px 0px var(--ouro-escuro));
         }
 
-        /* CARD E TEXTO COM ADICIONAL DE BORDA DE OURO ESCURO */
         .card-carta-container {
-            width: 100%;
-            max-width: 800px;
             background: var(--prata-fino);
             padding: 3px;
             border-radius: 24px;
-            /* Nova borda externa sutil em ouro escuro para emoldurar o conjunto prata */
             outline: 2px solid var(--ouro-escuro);
             outline-offset: 4px;
             box-shadow: 0 30px 70px rgba(0, 0, 0, 0.85);
-            margin-top: 15px;
         }
 
         .folha-texto-antigo {
             background-color: var(--papel-antigo);
             background-image: url('https://www.transparenttextures.com/patterns/cream-paper.png');
             border-radius: 21px;
-            padding: 50px 45px;
+            padding: 50px 40px;
             color: var(--texto-cor);
             border: 2px solid var(--ouro-escuro);
             display: flex;
             flex-direction: column;
-            gap: 26px;
+            gap: 25px;
         }
 
         .paragrafo-relato {
-            font-size: 1.18rem;
-            line-height: 1.85;
+            font-size: 1.15rem;
+            line-height: 1.8;
             text-align: justify;
-            text-indent: 40px;
+            text-indent: 30px;
             margin: 0;
         }
 
@@ -154,40 +139,35 @@
             font-style: italic;
             font-weight: 600;
             color: #3d3112;
-            border-bottom: 1px dotted var(--ouro-escuro);
         }
 
-        /* BOTÃO PRÓXIMA */
         .area-botao {
             display: flex;
             justify-content: flex-end;
-            margin-top: 25px;
+            margin-top: 20px;
         }
 
         .btn-proxima {
             background: linear-gradient(135deg, #0f172a, #1e293b);
             color: #ffffff;
             border: 1px solid var(--ouro-escuro);
-            padding: 16px 55px;
+            padding: 16px 45px;
             border-radius: 8px;
             font-weight: bold;
             text-transform: uppercase;
             letter-spacing: 2px;
             cursor: pointer;
-            transition: all 0.4s ease;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+            transition: 0.3s;
         }
 
         .btn-proxima:hover {
-            background: linear-gradient(135deg, #614d1a, #0f172a);
-            letter-spacing: 4px;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(97, 77, 26, 0.4);
+            background: var(--ouro-escuro);
+            transform: scale(1.02);
         }
 
         @media (max-width: 768px) {
-            .titulo-pagina { font-size: 1.6rem; letter-spacing: 4px; }
-            .folha-texto-antigo { padding: 35px 20px; }
+            .titulo-pagina { font-size: 1.5rem; }
+            .folha-texto-antigo { padding: 30px 20px; }
             .area-botao { justify-content: center; }
             .btn-proxima { width: 100%; }
         }
@@ -199,43 +179,25 @@
 
     <!-- PAINEL DE CONTROLE DE MÍDIA -->
     <div class="painel-audio-premium" onclick="event.stopPropagation()">
-        <button class="btn-controle-midia" id="btn-play-pause" onclick="alternarAudio()">
-            ⏸️
-        </button>
+        <button class="btn-controle-midia" id="btn-play-pause" onclick="alternarAudio()">▶️</button>
         <input type="range" class="slider-volume-custom" id="controle-volume" min="0" max="1" step="0.05" value="1" oninput="ajustarVolume(this.value)">
     </div>
 
-    <!-- ANIMAÇÃO DE ROLAGEM/SURGIMENTO LUXUOSA -->
     <div class="efeito-luxo-entrada">
-        
-        <!-- TEXTO DO TÍTULO CORRIGIDO E ATIVADO -->
         <h1 class="titulo-pagina">Uma Luz na Escuridão</h1>
 
         <!-- CARD PRINCIPAL -->
         <div class="card-carta-container">
             <div class="folha-texto-antigo">
-                
-                <p class="paragrafo-relato">
-                    No meio do caos cultural e após anos longe de Belém, o meu retorno não foi um processo simples. Vivi tempestades silenciosas que guardei quase inteiramente para mim; uma gestação de altíssimo risco onde as únicas testemunhas éramos eu e minha sobrinha.
-                </p>
+                <p class="paragrafo-relato">No meio do caos cultural e após anos longe de Belém, o meu retorno não foi um processo simples. Vivi tempestades silenciosas que guardei quase inteiramente para mim; uma gestação de altíssimo risco onde as únicas testemunhas éramos eu e minha sobrinha.</p>
+                <p class="paragrafo-relato">Desde muito jovem aprendi que diminuir o outro é o pior erro humano; o sol brilha para todos, mas habitar a luz ou a sombra é uma escolha estritamente individual. Ninguém muda ninguém.</p>
+                <p class="paragrafo-relato">Por trás das aparências, sou uma pessoa extremamente racional, embora guarde em mim um lado profundamente romântico. <span class="destaque-poetico">Você transcendeu o papel da médica que zela pela minha mente; vejo em você uma pérola rara.</span></p>
+                <p class="paragrafo-relato">Não há pretensão de reciprocidade ou de posse em minhas palavras. Carrego o perfeccionismo como um defeito confesso, mas hoje ele serve apenas a um propósito: garantir que você receba o melhor de mim.</p>
 
-                <p class="paragrafo-relato">
-                    Desde muito jovem aprendi que diminuir o outro é o pior erro humano; o sol brilha para todos, mas habitar a luz ou a sombra é uma escolha estritamente individual. Ninguém muda ninguém.
-                </p>
-
-                <p class="paragrafo-relato">
-                    Por trás das aparências, sou uma pessoa extremamente racional, embora guarde em mim um lado profundamente romântico. <span class="destaque-poetico">Você transcendeu o papel da médica que zela pela minha mente; vejo em você uma pérola rara.</span>
-                </p>
-
-                <p class="paragrafo-relato">
-                    Não há pretensão de reciprocidade ou de posse em minhas palavras. Carrego o perfeccionismo como um defeito confesso, mas hoje ele serve apenas a um propósito: garantir que você receba o melhor de mim.
-                </p>
-
-                <!-- BOTÃO DE NAVEGAÇÃO INTERNA -->
+                <!-- BOTÃO DE NAVEGAÇÃO -->
                 <div class="area-botao">
                     <button class="btn-proxima" onclick="irParaProxima(event)">Próxima Página</button>
                 </div>
-
             </div>
         </div>
     </div>
@@ -243,70 +205,74 @@
     <audio id="som-ambiente" src="elvis.html.mp3" loop></audio>
 
     <script>
-        const audioTrack = document.getElementById('som-ambiente');
-        const btnPlayPause = document.getElementById('btn-play-pause');
-        let playing = false;
+        const audio = document.getElementById('som-ambiente');
+        const btn = document.getElementById('btn-play-pause');
 
-        // Estrelas dinâmicas
-        const cosmos = document.getElementById('espaco-sideral');
-        for (let i = 0; i < 45; i++) {
-            const star = document.createElement('div');
-            star.className = 'estrela-pulsante';
-            star.style.width = (Math.random() * 3 + 1) + 'px';
-            star.style.height = star.style.width;
-            star.style.top = Math.random() * 100 + '%';
-            star.style.left = Math.random() * 100 + '%';
-            star.style.animationDuration = (Math.random() * 2 + 2) + 's';
-            cosmos.appendChild(star);
-        }
-
-        // Carregar estados anteriores de áudio
+        // 1. SINCRONIZAÇÃO DE ÁUDIO ENTRE PÁGINAS
         window.addEventListener('DOMContentLoaded', () => {
-            const tempoSalvo = localStorage.getItem('elvis_audio_time');
-            if (tempoSalvo) audioTrack.currentTime = parseFloat(tempoSalvo);
-            
-            const volSalvo = localStorage.getItem('elvis_audio_volume');
-            if (volSalvo !== null) {
-                audioTrack.volume = parseFloat(volSalvo);
-                document.getElementById('controle-volume').value = volSalvo;
+            const savedTime = localStorage.getItem('elvis_time');
+            const isPlaying = localStorage.getItem('elvis_playing');
+            const savedVol = localStorage.getItem('elvis_vol');
+
+            if (savedTime) audio.currentTime = parseFloat(savedTime);
+            if (savedVol) {
+                audio.volume = parseFloat(savedVol);
+                document.getElementById('controle-volume').value = savedVol;
+            }
+
+            // Tenta retomar se o usuário já tiver interagido antes
+            if (isPlaying === 'true') {
+                desbloquearAudio();
             }
         });
 
         function desbloquearAudio() {
-            if (!playing) {
-                audioTrack.play().then(() => { 
-                    playing = true; 
-                    btnPlayPause.textContent = "⏸️";
-                }).catch(e => console.log("Aguardando interação"));
-            }
+            audio.play().then(() => {
+                btn.textContent = "⏸️";
+                localStorage.setItem('elvis_playing', 'true');
+            }).catch(() => console.log("Aguardando interação inicial"));
         }
 
         function alternarAudio() {
-            if (audioTrack.paused) {
-                audioTrack.play();
-                btnPlayPause.textContent = "⏸️";
+            if (audio.paused) {
+                audio.play();
+                btn.textContent = "⏸️";
+                localStorage.setItem('elvis_playing', 'true');
             } else {
-                audioTrack.pause();
-                btnPlayPause.textContent = "▶️";
+                audio.pause();
+                btn.textContent = "▶️";
+                localStorage.setItem('elvis_playing', 'false');
             }
         }
 
-        function ajustarVolume(valor) {
-            audioTrack.volume = valor;
-            localStorage.setItem('elvis_audio_volume', valor);
+        function ajustarVolume(v) {
+            audio.volume = v;
+            localStorage.setItem('elvis_vol', v);
         }
 
-        function irParaProxima(event) {
-            event.stopPropagation();
-            localStorage.setItem('elvis_audio_time', audioTrack.currentTime);
-            localStorage.setItem('elvis_audio_volume', audioTrack.volume);
+        // 2. TRANSIÇÃO EM FADE-OUT E SALVAMENTO
+        function irParaProxima(e) {
+            e.stopPropagation();
+            
+            // Guarda o tempo atual da música para a próxima página ler
+            localStorage.setItem('elvis_time', audio.currentTime);
             
             document.body.style.opacity = "0";
-            document.body.style.transition = "opacity 0.6s ease";
-            
             setTimeout(() => {
-                window.location.href = "pagina4.html"; 
-            }, 600);
+                window.location.href = "felicidade.html"; 
+            }, 800);
+        }
+
+        // Fundo estrelado dinâmico
+        const cosmos = document.getElementById('espaco-sideral');
+        for (let i = 0; i < 40; i++) {
+            const s = document.createElement('div');
+            s.className = 'estrela-pulsante';
+            s.style.width = s.style.height = (Math.random() * 3 + 1) + 'px';
+            s.style.top = Math.random() * 100 + '%';
+            s.style.left = Math.random() * 100 + '%';
+            s.style.animationDuration = (Math.random() * 3 + 2) + 's';
+            cosmos.appendChild(s);
         }
     </script>
 </body>
