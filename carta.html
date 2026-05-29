@@ -1,302 +1,160 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Prontuário Médico - Oficial</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uma Luz na Escuridão</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Lora:ital,wght@0,400;0,600;1,400&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --ouro-escuro: #7a6021;
-            --ouro-brilho: #c5a85c;
-            --prata-brilho: #e0e0e0;
-            --azul-fundo: #02050a;
-            --papel-antigo: #f2e8d5;
-            --texto-cor: #1a150e;
+            --space-blue: #020617;
+            --silver: #e2e8f0;
+            --silver-border: #94a3b8;
         }
 
-        * { box-sizing: border-box; }
-        body, html {
-            margin: 0; padding: 0;
-            width: 100%; height: 100%;
-            overflow: hidden;
-            background-color: var(--azul-fundo);
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--space-blue);
+            color: #2d2d2d;
+            font-family: 'Lora', serif;
+            overflow-x: hidden;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            -webkit-tap-highlight-color: transparent;
         }
 
-        /* FUNDO DE ESTRELAS PRATAS */
-        #espaco-estrelado {
+        /* Fundo de Estrelas Pulsantes */
+        .stars-container {
             position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             z-index: -1;
-            background: radial-gradient(circle at center, #050d1f 0%, var(--azul-fundo) 100%);
+            background: radial-gradient(circle at center, #0a192f 0%, #020617 100%);
         }
 
-        .estrela {
+        .star {
             position: absolute;
             background: white;
             border-radius: 50%;
-            opacity: 0.5;
-            box-shadow: 0 0 5px var(--prata-brilho);
-            animation: brilhar infinite ease-in-out;
+            opacity: 0.3;
+            animation: pulse 3s infinite ease-in-out;
         }
 
-        @keyframes brilhar {
-            0%, 100% { opacity: 0.2; transform: scale(0.8); }
-            50% { opacity: 1; transform: scale(1.2); }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.3; }
+            50% { transform: scale(1.5); opacity: 0.8; box-shadow: 0 0 10px white; }
         }
 
-        /* TÍTULO IMPACTANTE */
-        .header-prontuario {
+        /* Título Futurista */
+        .header-card {
+            margin-top: 50px;
+            padding: 40px;
             text-align: center;
-            margin-bottom: 30px;
-            z-index: 10;
+            border: 1px solid var(--silver-border);
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(5px);
+            border-radius: 4px;
+            max-width: 90%;
+            box-shadow: 0 0 30px rgba(148, 163, 184, 0.2);
         }
 
-        .header-prontuario h1 {
-            color: var(--prata-brilho);
-            font-size: 2.2rem;
-            letter-spacing: 12px;
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(1.8rem, 5vw, 3.5rem);
+            color: var(--silver);
             text-transform: uppercase;
+            letter-spacing: 8px;
             margin: 0;
-            font-weight: 900;
-            text-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
-            border-bottom: 2px solid rgba(192, 192, 192, 0.3);
-            padding-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
         }
 
-        /* LAYOUT DOS CARDS */
-        .container-cards {
-            display: flex;
-            gap: 25px;
-            max-width: 1100px;
-            width: 95%;
-            height: 75vh;
-            max-height: 650px;
-            z-index: 10;
+        /* Carta de Papel Antigo */
+        .letter-container {
+            margin: 60px 20px;
+            max-width: 800px;
+            background: #fdf5e6; /* Parchment color */
+            padding: 60px 50px;
+            box-shadow: 0 10px 50px rgba(0,0,0,0.8), inset 0 0 100px rgba(139, 69, 19, 0.1);
+            position: relative;
+            border-radius: 2px;
+            border: 1px solid #dcd1bd;
         }
 
-        .card {
-            flex: 1;
-            background: linear-gradient(145deg, #333, #111);
-            border-radius: 20px;
-            padding: 3px; /* Moldura */
-            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
-            transition: all 0.4s ease;
-            display: flex;
+        /* Efeito de textura de papel */
+        .letter-container::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: url('https://www.transparenttextures.com/patterns/paper.png');
+            pointer-events: none;
+            opacity: 0.6;
         }
 
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 25px 60px rgba(0,0,0,0.9), 0 0 20px rgba(197, 168, 92, 0.3);
-        }
-
-        /* TEXTURA DE PAPEL ANTIGO DENTRO DO CARD */
-        .papel-interno {
-            background-color: var(--papel-antigo);
-            background-image: url('https://www.transparenttextures.com/patterns/pinstriped-suit.png');
-            border-radius: 17px;
-            flex: 1;
-            padding: 30px;
-            overflow-y: auto;
-            color: var(--texto-cor);
-            box-shadow: inset 0 0 40px rgba(0,0,0,0.1);
-        }
-
-        /* Estilo da Rolagem Interna */
-        .papel-interno::-webkit-scrollbar { width: 6px; }
-        .papel-interno::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.2); border-radius: 10px; }
-
-        .secao-titulo {
-            font-family: 'Courier New', Courier, monospace;
-            font-weight: 900;
-            text-transform: uppercase;
-            border-bottom: 2px solid rgba(0,0,0,0.1);
-            padding-bottom: 8px;
-            margin-bottom: 20px;
-            color: #4a3b2a;
-            letter-spacing: 2px;
-        }
-
-        /* ICONES E LISTA */
-        .item-prescricao {
-            display: flex;
-            align-items: flex-start;
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-
-        .icone {
-            font-size: 1.5rem;
-            min-width: 35px;
-            text-align: center;
-        }
-
-        .texto-remedio strong {
-            display: block;
-            text-transform: uppercase;
-            color: #1a4225;
-            font-size: 0.9rem;
-            margin-bottom: 3px;
-        }
-
-        .texto-remedio span {
-            font-size: 0.95rem;
-            line-height: 1.4;
-            display: block;
-        }
-
-        .paragrafo-paciente {
-            font-size: 1.05rem;
-            line-height: 1.6;
+        .content {
+            line-height: 1.8;
+            font-size: 1.25rem;
             text-align: justify;
-            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
         }
 
-        .carimbo {
-            border: 3px double #a82424;
-            color: #a82424;
-            padding: 5px 15px;
-            display: inline-block;
-            font-weight: 900;
-            transform: rotate(-3deg);
-            margin-top: 10px;
-            font-family: 'Courier New', monospace;
+        p {
+            margin-bottom: 25px;
         }
 
-        /* BOTÃO DE SAÍDA */
-        .btn-footer {
-            margin-top: 25px;
-            background: linear-gradient(to right, #0a1d37, #1a4225);
-            color: white;
-            border: none;
-            padding: 15px 40px;
-            border-radius: 50px;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            cursor: pointer;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.4);
-            transition: 0.3s;
-            z-index: 10;
+        .highlight {
+            font-weight: 600;
+            color: #1a1a1a;
         }
 
-        .btn-footer:hover {
-            transform: scale(1.05);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.6);
-        }
-
-        /* RESPONSIVIDADE PARA CELULAR */
-        @media (max-width: 768px) {
-            body { overflow-y: auto; height: auto; padding: 40px 0; }
-            .container-cards { flex-direction: column; height: auto; max-height: none; }
-            .header-prontuario h1 { font-size: 1.4rem; letter-spacing: 5px; }
-            .papel-interno { padding: 20px; }
+        /* Responsividade */
+        @media (max-width: 600px) {
+            .letter-container { padding: 40px 25px; }
+            h1 { letter-spacing: 4px; }
+            .content { font-size: 1.1rem; }
         }
     </style>
 </head>
-<body onclick="iniciarSom()">
+<body>
 
-    <div id="espaco-estrelado"></div>
+    <div class="stars-container" id="stars"></div>
 
-    <div class="header-prontuario">
-        <h1>Prontuário Eletrônico</h1>
+    <div class="header-card">
+        <h1>UMA LUZ NA ESCURIDÃO</h1>
     </div>
 
-    <div class="container-cards">
-        <div class="card">
-            <div class="papel-interno">
-                <div class="secao-titulo">📌 Histórico da Paciente</div>
-                <p class="paragrafo-paciente">
-                    <strong>Identificação:</strong> Alma resiliente, em trânsito por Belém. Apresenta um quadro de 
-                    <em>Afeto Agudo Incurável</em> e admiração profunda pela equipe médica responsável.
-                </p>
-                <p class="paragrafo-paciente">
-                    <strong>Evolução:</strong> Mais de duas décadas de jornada terapêutica. Demonstra alta capacidade de 
-                    separar a admiração pessoal da conduta ética profissional, mantendo o respeito absoluto aos limites do oceano da Dra. Débora.
-                </p>
-                <p class="paragrafo-paciente">
-                    <strong>Observação:</strong> O sorriso da médica é relatado como o principal fator de estabilização emocional da paciente durante as sessões.
-                </p>
-                <div class="carimbo">ALTA ESTIMADA: NUNCA</div>
-            </div>
+    <article class="letter-container">
+        <div class="content">
+            <p>No meio do caos cultural e após anos de ausência, o meu retorno a Belém não foi um processo simples. Vivi tempestades silenciosas que guardei quase inteiramente para mim; uma gestação de altíssimo risco onde as únicas testemunhas éramos eu e minha sobrinha. Cruzar aquele limiar assustador para testemunhar o nascimento de Helena Sophia tornou-se um marco definitivo sobre a fragilidade e a força indomável da vida.</p>
+
+            <p>Sempre que retornava a esta cidade, meu foco era absoluto em proteger os raros momentos com minha família. No entanto, deixar para trás uma trajetória estável em Brasília e minha própria liberdade provocou uma guinada de 360 graus na minha existência. Nesse percurso, enfrentei uma rasteira profissional — um golpe severo que, ironicamente, transformou-se em fortaleza. Ali compreendi que minha capacidade técnica e intelectual vai muito além do que aqueles que me subestimam conseguem enxergar.</p>
+
+            <p>Talvez confundam a ausência de arrogância com fraqueza. Mas aprendi cedo que diminuir o próximo é o pior erro humano. O sol brilha para todos, mas habitar a luz ou a sombra é uma escolha estritamente individual. Ninguém muda ninguém; essa transformação pertence apenas a Deus e ao próprio indivíduo. A vida é curta demais para aceitarmos andar em círculos.</p>
+
+            <p>Este recomeço já era uma pauta constante com a <span class="highlight">Dra. Laila</span>, que me acompanha há cerca de três anos com uma interatividade incrível. Minha vinda foi cercada de orientações cruciais para preservar meu equilíbrio psicológico. Ainda assim, por razões complexas, muitas vezes me sinto como um peixe fora d'água nesta cidade.</p>
+
+            <p>Por trás das aparências, sou uma pessoa racional, embora guarde um lado profundamente romântico. Sei delimitar com precisão os papéis da profissional e da mulher. E é nessa clareza que reafirmo o quanto você se tornou importante na minha realidade. Você transcendeu o papel da médica que zela pela minha mente; vejo em você uma pérola rara.</p>
+
+            <p>Não há pretensão de reciprocidade ou de posse. Como lhe disse outrora, uma linda sereia pertence aos oceanos mais vastos, e não ao pequeno lago que representa a minha vida. No entanto, essa percepção não anula o meu desejo genuíno de estar aqui, traduzindo o que sou através deste gesto. Carrego o perfeccionismo como um defeito confesso, mas hoje ele serve apenas para garantir que você receba o melhor de mim. Que esta leitura lhe faça sentir exatamente o tamanho do seu valor.</p>
         </div>
-
-        <div class="card">
-            <div class="papel-interno">
-                <div class="secao-titulo">💊 Prescrição & Conduta</div>
-                
-                <div class="item-prescricao">
-                    <div class="icone">⭐</div>
-                    <div class="texto-remedio">
-                        <strong>1. Realização de Sonhos</strong>
-                        <span>Dose diária: Ininterrupta. Não se contentar em apenas sobreviver; buscar a felicidade plena.</span>
-                    </div>
-                </div>
-
-                <div class="item-prescricao">
-                    <div class="icone">💙</div>
-                    <div class="texto-remedio">
-                        <strong>2. Memória Afetiva Ativa</strong>
-                        <span>Recordar a doçura do olhar e o brilho da presença da Dra. Débora como tônico revigorante.</span>
-                    </div>
-                </div>
-
-                <div class="item-prescricao">
-                    <div class="icone">🕊️</div>
-                    <div class="texto-remedio">
-                        <strong>3. Desapego Terapêutico</strong>
-                        <span>Eliminar autocobranças e culpas. Substituir o peso do passado pela leveza das escolhas presentes.</span>
-                    </div>
-                </div>
-
-                <div class="item-prescricao">
-                    <div class="icone">🎶</div>
-                    <div class="texto-remedio">
-                        <strong>4. Musicoterapia (Elvis)</strong>
-                        <span>Ouvir clássicos que acalmam a alma para manter os oceanos internos em perfeita calmaria.</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <button class="btn-footer" onclick="finalizar()">Encerrar Prontuário</button>
-
-    <audio id="player-elvis" src="elvis.html.mp3" loop></audio>
+    </article>
 
     <script>
-        // Criar estrelas pratas dinamicamente
-        const espaco = document.getElementById('espaco-estrelado');
-        for (let i = 0; i < 60; i++) {
-            const estrela = document.createElement('div');
-            estrela.className = 'estrela';
-            const size = Math.random() * 3 + 1;
-            estrela.style.width = size + 'px';
-            estrela.style.height = size + 'px';
-            estrela.style.top = Math.random() * 100 + '%';
-            estrela.style.left = Math.random() * 100 + '%';
-            estrela.style.animationDuration = (Math.random() * 3 + 2) + 's';
-            estrela.style.animationDelay = Math.random() * 5 + 's';
-            espaco.appendChild(estrela);
-        }
-
-        // Função de Áudio
-        function iniciarSom() {
-            const audio = document.getElementById('player-elvis');
-            audio.play().catch(() => console.log("Aguardando interação..."));
-        }
-
-        function finalizar() {
-            document.body.style.opacity = '0';
-            document.body.style.transition = '1s';
-            setTimeout(() => {
-                window.location.href = "index.html";
-            }, 1000);
+        // Gerador de estrelas aleatórias
+        const container = document.getElementById('stars');
+        for (let i = 0; i < 150; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            const size = Math.random() * 3;
+            star.style.width = size + 'px';
+            star.style.height = size + 'px';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.animationDelay = Math.random() * 3 + 's';
+            container.appendChild(star);
         }
     </script>
 </body>
