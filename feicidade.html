@@ -3,19 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Declaração Sincera</title>
+    <title>Felicidade - Uma Luz na Escuridão</title>
     <style>
         :root {
-            --azul-cosmos: #030712;
-            --ouro-escuro: #5c4718;
-            --prata-ferro: #94a3b8;
-            --papel-pergaminho: #f4ebd0;
-            --texto-cor: #1e1b15;
+            --azul-cosmos: #03081e;
+            --prata-fino: linear-gradient(135deg, #bdc3c7, #ffffff, #95a5a6, #ffffff, #7f8c8d);
+            --ouro-escuro: #614d1a;
+            --papel-antigo: #f7edd6;
+            --texto-cor: #1c160c;
         }
 
         * { box-sizing: border-box; }
-        
-        body, html {
+        html { scroll-behavior: smooth; }
+
+        body {
             margin: 0; padding: 0;
             width: 100%; min-height: 100vh;
             background-color: var(--azul-cosmos);
@@ -23,228 +24,314 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            padding: 40px 20px;
+            padding: 60px 20px;
             overflow-x: hidden;
+            transition: opacity 0.8s ease;
         }
 
-        /* FUNDO DE ESTRELAS BRILHANTES */
-        #fundo-estrelado {
+        #espaco-sideral {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             z-index: -1;
-            background: radial-gradient(circle at center, #0b1528 0%, var(--azul-cosmos) 100%);
+            background: radial-gradient(circle at center, #0a163a 0%, var(--azul-cosmos) 100%);
         }
 
-        .estrela {
+        .estrela-pulsante {
             position: absolute;
             background: #ffffff;
             border-radius: 50%;
-            opacity: 0.6;
-            box-shadow: 0 0 8px rgba(255, 255, 255, 0.9);
-            animation: brilhar infinite ease-in-out;
+            opacity: 0.3;
+            animation: pulsar ease-in-out infinite;
         }
 
-        @keyframes brilhar {
-            0%, 100% { opacity: 0.3; transform: scale(0.8); }
-            50% { opacity: 1; transform: scale(1.2); }
+        @keyframes pulsar {
+            0%, 100% { opacity: 0.2; transform: scale(0.8); }
+            50% { opacity: 1; transform: scale(1.4); }
         }
 
-        /* TÍTULO EM MAIÚSCULAS COM BORDA DE FERRO PRATA */
-        .titulo-container {
-            border: 3px solid var(--prata-ferro);
-            padding: 15px 30px;
-            border-radius: 4px;
-            margin-bottom: 40px;
-            text-align: center;
-            position: relative;
-            background: rgba(15, 23, 42, 0.6);
-            box-shadow: 0 0 15px rgba(148, 163, 184, 0.3);
-            animation: eletricidadeSutil 4s infinite alternate;
-        }
-
-        .titulo-principal {
-            font-family: 'Arial Black', sans-serif;
-            font-size: 1.6rem;
-            color: #f8fafc;
-            margin: 0;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-        }
-
-        @keyframes eletricidadeSutil {
-            0%, 100% { box-shadow: 0 0 10px rgba(148, 163, 184, 0.2), inset 0 0 5px rgba(255,255,255,0.1); }
-            50% { box-shadow: 0 0 20px rgba(203, 213, 225, 0.6), inset 0 0 10px rgba(255,255,255,0.2); border-color: #cbd5e1; }
-        }
-
-        /* CARD DE PAPEL ANTIGO */
-        .card-container {
-            max-width: 750px;
-            width: 100%;
-            position: relative;
-            transition: transform 0.4s ease;
-        }
-
-        .papel-enrolado {
-            background-color: var(--papel-pergaminho);
-            background-image: url('https://www.transparenttextures.com/patterns/cream-paper.png');
-            color: var(--texto-cor);
-            padding: 45px;
-            border-radius: 4px;
-            border-left: 14px solid var(--ouro-escuro);
-            border-right: 14px solid var(--ouro-escuro);
-            box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.2), 0 25px 50px rgba(0, 0, 0, 0.6);
-        }
-
-        .texto-carta {
-            font-size: 1.05rem;
-            line-height: 1.7;
-            text-align: justify;
-            margin-bottom: 30px;
-        }
-
-        .destaque {
-            font-weight: bold;
-            color: #3d2f10;
-        }
-
-        /* PAINEL DE CONTROLE FINAL */
-        .painel-final {
-            display: none; /* Inicia escondido */
-            flex-direction: column;
-            align-items: center;
-            gap: 20px;
-            margin-top: 30px;
-            padding: 20px;
-            border-top: 1px dashed var(--ouro-escuro);
-            animation: fadeIn 1s ease forwards;
-        }
-
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-
-        .controles-musica {
+        /* PAINEL DE CONTROLE DE ÁUDIO - MANTIDO PARA REPRODUÇÃO CONTÍNUA */
+        .painel-audio-premium {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #1e293b, #0f172a);
+            border: 1px solid #94a3b8;
+            padding: 10px 16px;
+            border-radius: 30px;
             display: flex;
             align-items: center;
-            gap: 20px;
-            background: rgba(0,0,0,0.05);
-            padding: 10px 20px;
-            border-radius: 50px;
+            gap: 12px;
+            z-index: 1000;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
-        .btn-acao {
-            background: linear-gradient(135deg, #1e293b, #0f172a);
+        .btn-controle-midia {
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: #f8fafc;
+            cursor: pointer;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .slider-volume-custom {
+            width: 70px;
+            cursor: pointer;
+        }
+
+        .efeito-luxo-entrada {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: surgirSuave 1.5s ease-out forwards;
+            width: 100%;
+            max-width: 800px;
+        }
+
+        @keyframes surgirSuave {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .titulo-pagina {
+            font-size: 2.2rem;
+            letter-spacing: 7px;
+            text-transform: uppercase;
+            text-align: center;
+            margin-bottom: 40px;
+            background: linear-gradient(135deg, #e2e8f0, #ffffff, #94a3b8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(2px 2px 0px var(--ouro-escuro));
+        }
+
+        .card-carta-container {
+            background: var(--prata-fino);
+            padding: 3px;
+            border-radius: 24px;
+            outline: 2px solid var(--ouro-escuro);
+            outline-offset: 4px;
+            box-shadow: 0 30px 70px rgba(0, 0, 0, 0.85);
+            perspective: 1200px;
+        }
+
+        .folha-texto-antigo {
+            background-color: var(--papel-antigo);
+            background-image: url('https://www.transparenttextures.com/patterns/cream-paper.png');
+            border-radius: 21px;
+            padding: 60px 45px;
+            color: var(--texto-cor);
+            border: 2px solid var(--ouro-escuro);
+            display: flex;
+            flex-direction: column;
+            gap: 35px;
+        }
+
+        /* EFEITO DE ROLAGEM FUTURISTA CINEMÁTICO */
+        .paragrafo-relato {
+            font-size: 1.15rem;
+            line-height: 1.9;
+            text-align: justify;
+            text-indent: 30px;
+            margin: 0;
+            opacity: 0.2;
+            transform: scale(0.92) rotateX(15deg) translateY(30px);
+            transform-origin: center top;
+            transition: all 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+            filter: blur(2px);
+        }
+
+        .paragrafo-relato.em-foco {
+            opacity: 1;
+            transform: scale(1) rotateX(0deg) translateY(0);
+            filter: blur(0px);
+        }
+
+        .destaque-poetico {
+            font-style: italic;
+            font-weight: 600;
+            color: #3d3112;
+        }
+
+        .area-botao {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 20px;
+        }
+
+        .btn-proxima {
+            background: linear-gradient(135deg, #0f172a, #1e293b);
             color: #ffffff;
             border: 1px solid var(--ouro-escuro);
-            padding: 12px 35px;
-            border-radius: 6px;
+            padding: 16px 45px;
+            border-radius: 8px;
             font-weight: bold;
             text-transform: uppercase;
             letter-spacing: 2px;
             cursor: pointer;
-            transition: 0.3s;
+            transition: all 0.4s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
         }
 
-        .btn-acao:hover {
-            transform: scale(1.05);
+        .btn-proxima:hover {
             background: var(--ouro-escuro);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(97, 77, 26, 0.5);
         }
 
-        .slider-vol {
-            cursor: pointer;
-            accent-color: var(--ouro-escuro);
-        }
-
-        @media (max-width: 600px) {
-            .titulo-principal { font-size: 1rem; }
-            .papel-enrolado { padding: 25px 15px; }
-            .controles-musica { flex-direction: column; border-radius: 10px; width: 100%; }
+        @media (max-width: 768px) {
+            .titulo-pagina { font-size: 1.5rem; }
+            .folha-texto-antigo { padding: 40px 20px; gap: 25px; }
+            .area-botao { justify-content: center; }
+            .btn-proxima { width: 100%; }
+            .paragrafo-relato { font-size: 1.05rem; }
         }
     </style>
 </head>
-<body onclick="garantirMusica()">
+<body onclick="desbloquearAudio()">
 
-    <div id="fundo-estrelado"></div>
+    <div id="espaco-sideral"></div>
 
-    <div class="titulo-container">
-        <h1 class="titulo-principal">ME PERDOE SE ESTOU SENDO INVASIVA</h1>
+    <!-- PAINEL DE CONTROLE DE MÍDIA COMPATÍVEL -->
+    <div class="painel-audio-premium" onclick="event.stopPropagation()">
+        <button class="btn-controle-midia" id="btn-play-pause" onclick="alternarAudio()">▶️</button>
+        <input type="range" class="slider-volume-custom" id="controle-volume" min="0" max="1" step="0.05" value="1" oninput="ajustarVolume(this.value)">
     </div>
 
-    <div class="card-container">
-        <div class="papel-enrolado">
-            <div class="texto-carta">
-                <p>Às vezes penso que posso parecer boba, mas a verdade é que eu ainda acredito no amor verdadeiro. Tenho essa referência sólida dentro de casa, olhando para os meus pais. No entanto, a vida me ensinou que o amor precisa ser livre; aprendi que precisamos olhar para o céu não apenas para prever a chuva, mas para apreciar o momento sagrado que Deus nos concede.</p>
+    <div class="efeito-luxo-entrada">
+        <h1 class="titulo-pagina">Felicidade</h1>
 
-                <p>Eu sinto saudades de você e das nossas conversas. Tomei decisões importantes: mesmo amando profundamente a minha família e as pessoas queridas que entraram na minha vida aqui, sei que meu caminho chama por algo mais. Não digo que sinto um amor romântico por você, mas sim uma atração muito forte, um desejo genuíno e profundo de te ver bem. É algo difícil de explicar... por que isso aconteceu comigo?</p>
+        <!-- CARD PRINCIPAL -->
+        <div class="card-carta-container">
+            <div class="folha-texto-antigo">
+                
+                <!-- Insira seus novos parágrafos aqui para a página Felicidade -->
+               <div class="folha-texto-antigo">
+            
+            <p class="paragrafo-relato">
+                No meio do caos cultural e após anos longe de Belém, o meu retorno não foi um processo simples. Vivi tempestades silenciosas que guardei quase inteiramente para mim; uma gestação de altíssimo risco onde as únicas testemunhas éramos eu e minha sobrinha. Cruzar aquele limiar assustador para ver o nascimento mágico de Helena Sophia foi um marco definitivo sobre a fragilidade e a força da vida.
+            </p>
 
-                <p>Já possuo uma história de vida madura, estou em uma idade onde busco alguém para caminhar comigo a vida inteira. Já vivi muitos enredos nesse sentido, mas esta é a primeira vez que tento demonstrar algo tão singelo e bonito que você despertou em mim. Colocar o meu rosto à mostra, sem estremecer diante de você, não é tão fácil quanto parece. Mas não me arrependo de absolutamente nada do que digo ou faço; não é um sentimento ruim e nem me alimenta falsas esperanças de que algo aconteça.</p>
+            <p class="paragrafo-relato">
+                Sempre que eu retornava a Belém, meu foco era absoluto em proteger e vivenciar os raros momentos com a minha família. No entanto, deixar para trás uma trajetória perfeitamente estável em Brasília e a minha própria liberdade provocou uma guinada abrupta de 360 graus na minha existência. Nesse percurso, enfrentei uma rasteira profissional — um golpe severo, mas que ironicamente se transformou em fortaleza. Ali eu compreendi que possuo uma capacidade técnica e intelectual que vai muito além do que aqueles que me subestimam conseguem enxergar. Talvez confundam a ausência de arrogância e prepotência com fraqueza.
+            </p>
 
-                <p>Até porque eu tenho os pés bem firmes no chão. <span class="destaque">Você merece mares e oceanos lindos, e não o meu laguinho.</span> Não digo isso para me diminuir, mas sim olhando para a realidade: você tem alguém, e eu jamais, em hipótese alguma, faria você se sentir sem jeito ou andar pisando em ovos comigo. Jamais! Sou o tipo de pessoa que demuestra e fala o que sente, porém nunca usaria essa posição para confundir as coisas com quem está cuidando da minha saúde mental. Você me acolheu, me validou como profissional e como mulher. Quando olho nos seus olhos, vejo uma fortaleza e também algumas fragilidades; o seu olhar fala bastante. E eu me perdi nesse olhar, não porque você tenha olhado de forma diferente — jamais! Pelo contrário, você mantém a distância e a postura impecável de uma médica com sua paciente. Mas eu sinto; é como se meu sentimento ultrapassasse a barreira clínica e enxergasse você simplesmente como mulher. Espero de coração que me entenda e compreenda.</p>
+            <p class="paragrafo-relato">
+                Desde muito jovem aprendi que diminuir o outro é o pior erro humano; o sol brilha para todos, mas habitar a luz ou a sombra é uma escolha estritamente individual. Ninguém muda ninguém. Essa transformação pertence apenas a Deus e ao próprio indivíduo. A vida é curta demais para aceitarmos andar em círculos sem sair do lugar.
+            </p>
 
-                <p>Escrevo tudo isso agora porque em meados de agosto eu volto para Brasília. Não será nada fácil deixar meus pais, irmãos, sobrinhos, amigos e você. Mas seguir em frente é necessário, sem medo de errar, apenas tentando. No âmbito profissional, confesso que estou cansada, muito cansada de não ter uma âncora estável. Trabalhar no setor privado nos impõe um tempo de validade e isso esgota... Mas eu conheço a minha essência: mesmo exausta, eu não desisto, eu luto pelos meus objetivos e vou além. Sempre além.</p>
+            <p class="paragrafo-relato">
+                Esse recomeço do zero já era uma pauta constante com a Dra. Laila, que me acompanha há cerca de três anos com uma interatividade incrível. Minha vinda para cá foi cercada de orientações cruciais que ouvi atentamente para preservar meu equilíbrio psicológico. Ainda assim, por razões complexas e difíceis de exprimir, muitas vezes me sinto como um peixe fora d'água nesta cidade.
+            </p>
 
-                <p>Me perdoe de todo o coração por escrever tudo isso sabendo que você já tem alguém na sua vida, e que essas palavras vêm de outra mulher... Por favor, continue sendo essa profissional mágica, humana e gentil. Na estrada da vida, as pessoas entram e descem desse trem nos seus respectivos desembarques. Nós aprendemos com tudo. E eu sei que irei morrer aprendendo.</p>
+            <p class="paragrafo-relato">
+                Por trás das aparências, sou uma pessoa extremamente racional, embora guarde em mim um lado profundamente romântico. Sei delimitar com precisão cirúrgica os papéis da profissional e da mulher. E é nessa clareza que reafirmo o quanto você se tornou importante na minha realidade em Belém. <span class="destaque-poetico">Você transcendeu o papel da médica que zela pela minha mente; vejo em você uma pérola rara.</span> Às vezes, me pego escutando músicas e permitindo que meus pensamentos viajem até você. Esse sentimento me faz bem, me traz paz.
+            </p>
+
+            <p class="paragrafo-relato">
+                Não há pretensão de reciprocidade ou de posse em minhas palavras. Como eu já lhe disse uma vez, uma linda sereia pertence aos oceanos mais vastos e deslumbrantes, e não ao pequeno lago que representa a minha vida. No entanto, essa percepção não anula o meu desejo genuíno de estar aqui, traduzindo o que som através deste pequeno gesto de admiração. Carrego o perfeccionismo como um defeito confesso, mas hoje ele serve apenas a um propósito: garantir que você receba o melhor de mim. Que esta leitura te faça sentir exatamente o tamanho do seu valor.
+            </p>
+
+            <!-- Linha Indicadora de Continuidade -->
+            <div class="indicador-fluxo">
+                ✨ Transmissão em Andamento... Continua ✨
             </div>
-
-            <div id="container-btn-final" style="text-align: right;">
-                <button class="btn-acao" onclick="revelarControles()">Próxima</button>
-            </div>
-
-            <div id="painel-musica" class="painel-final">
-                <span class="destaque" style="font-size: 0.9rem; letter-spacing: 1px;">CONTROLE DA TRILHA SONORA</span>
-                <div class="controles-musica">
-                    <button class="btn-acao" id="btn-play-pause" onclick="alternarPlay()">PAUSE</button>
-                    <div style="display: flex; align-items: center; gap: 10px;">
-                        <span>🔈</span>
-                        <input type="range" class="slider-vol" min="0" max="1" step="0.1" value="1" oninput="mudarVolume(this.value)">
-                        <span>🔊</span>
-                    </div>
+                <!-- BOTÃO DE NAVEGAÇÃO DA PRÓXIMA ETAPA -->
+                <div class="area-botao">
+                    <button class="btn-proxima" onclick="irParaProxima(event)">Concluir Jornada</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <audio id="musica-final" src="elvis.html.mp3" loop></audio>
+    <!-- O MESMO ARQUIVO DE ÁUDIO DE ORIGEM -->
+    <audio id="som-ambiente" src="elvis.html.mp3" loop></audio>
 
     <script>
-        // Estrelas
-        const ceu = document.getElementById('fundo-estrelado');
-        for (let i = 0; i < 60; i++) {
-            const star = document.createElement('div');
-            star.className = 'estrela';
-            const size = Math.random() * 3 + 1;
-            star.style.width = size + 'px'; star.style.height = size + 'px';
-            star.style.top = Math.random() * 100 + '%'; star.style.left = Math.random() * 100 + '%';
-            star.style.animationDuration = (Math.random() * 2 + 2) + 's';
-            ceu.appendChild(star);
-        }
+        const audio = document.getElementById('som-ambiente');
+        const btn = document.getElementById('btn-play-pause');
 
-        const audio = document.getElementById('musica-final');
-        let tocando = false;
+        // 1. SINCRONIZAÇÃO ABSOLUTA E RETOMADA DO ÁUDIO SEM CORTES
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedTime = localStorage.getItem('elvis_time');
+            const isPlaying = localStorage.getItem('elvis_playing');
+            const savedVol = localStorage.getItem('elvis_vol');
 
-        function garantirMusica() {
-            if(!tocando) {
-                audio.play().then(() => tocando = true);
+            if (savedTime) audio.currentTime = parseFloat(savedTime);
+            if (savedVol) {
+                audio.volume = parseFloat(savedVol);
+                document.getElementById('controle-volume').value = savedVol;
             }
+
+            // Se vinha tocando da página anterior, força o desbloqueio contínuo
+            if (isPlaying === 'true') {
+                desbloquearAudio();
+            }
+        });
+
+        function desbloquearAudio() {
+            audio.play().then(() => {
+                btn.textContent = "⏸️";
+                localStorage.setItem('elvis_playing', 'true');
+            }).catch(() => console.log("Aguardando clique na tela para persistência de áudio"));
         }
 
-        function revelarControles() {
-            document.getElementById('container-btn-final').style.display = 'none';
-            document.getElementById('painel-musica').style.display = 'flex';
-        }
-
-        function alternarPlay() {
-            const btn = document.getElementById('btn-play-pause');
+        function alternarAudio() {
             if (audio.paused) {
                 audio.play();
-                btn.innerText = "PAUSE";
+                btn.textContent = "⏸️";
+                localStorage.setItem('elvis_playing', 'true');
             } else {
                 audio.pause();
-                btn.innerText = "PLAY";
+                btn.textContent = "▶️";
+                localStorage.setItem('elvis_playing', 'false');
             }
         }
 
-        function mudarVolume(v) {
+        function ajustarVolume(v) {
             audio.volume = v;
+            localStorage.setItem('elvis_vol', v);
+        }
+
+        // 2. DIRECIONAMENTO PARA A PRÓXIMA PÁGINA (Se houver uma terceira, mude o destino abaixo)
+        function irParaProxima(e) {
+            e.stopPropagation();
+            localStorage.setItem('elvis_time', audio.currentTime);
+            document.body.style.opacity = "0";
+            setTimeout(() => {
+                // Altere aqui se for criar uma página final (ex: "fim.html") ou se encerra aqui
+                window.location.href = "final.html"; 
+            }, 800);
+        }
+
+        // 3. ATIVADOR DE ROLAGEM ESPACIAL (3D Matrix Reveal)
+        const paragrafos = document.querySelectorAll('.paragrafo-relato');
+        
+        const monitorarScroll = new IntersectionObserver((entradas) => {
+            entradas.forEach(entrada => {
+                if (entrada.isIntersecting) {
+                    entrada.target.classList.add('em-foco');
+                }
+            });
+        }, {
+            threshold: 0.12,
+            rootMargin: "0px 0px -40px 0px"
+        });
+
+        paragrafos.forEach(p => monitorarScroll.observe(p));
+
+        // Universo de estrelas dinâmico de fundo
+        const cosmos = document.getElementById('espaco-sideral');
+        for (let i = 0; i < 40; i++) {
+            const s = document.createElement('div');
+            s.className = 'estrela-pulsante';
+            s.style.width = s.style.height = (Math.random() * 3 + 1) + 'px';
+            s.style.top = Math.random() * 100 + '%';
+            s.style.left = Math.random() * 100 + '%';
+            s.style.animationDuration = (Math.random() * 3 + 2) + 's';
+            cosmos.appendChild(s);
         }
     </script>
 </body>
