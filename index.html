@@ -227,13 +227,13 @@
             transform: scale(1.07);
         }
 
-        /* IFRAME QUE EXIBIRÁ O PRONTUÁRIO.HTM */
+        /* O SEGREDO AQUI: display: none garante que o iframe não apareça de fundo */
         #prontuario-frame {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             border: none;
             z-index: 200;
-            display: none;
+            display: none; 
             opacity: 0;
             transition: opacity 1.5s ease;
         }
@@ -253,7 +253,7 @@
     <!-- Fundo de Estrelas Fixo -->
     <div id="cenario-cosmos"></div>
 
-    <!-- Tela Inicial: Envelope -->
+    <!-- Tela Inicial: Apenas um Envelope na tela -->
     <div class="container-experiencia" id="painel-principal">
         <div class="envelope-realista">
             <div class="carimbo-militar">CONFIDENCIAL • MARINHA DO BRASIL</div>
@@ -276,10 +276,10 @@
         </div>
     </div>
 
-    <!-- Frame carregando estritamente o prontuario.htm -->
+    <!-- O iframe começa 100% oculto do layout -->
     <iframe id="prontuario-frame" src="prontuario.htm"></iframe>
 
-    <!-- Áudio de Fundo (Preload ativado, mas SEM o atributo autoplay) -->
+    <!-- Áudio de Fundo -->
     <audio id="musica-elvis" src="elvis.html.mp3" preload="auto" loop></audio>
 
     <script>
@@ -305,17 +305,17 @@
             const interfaceOriginal = document.getElementById('painel-principal');
             const frameProntuario = document.getElementById('prontuario-frame');
 
-            // 1. Toca a música estritamente AGORA (após o clique)
-            som.play().catch(err => console.log("Áudio iniciado pelo usuário."));
+            // 1. Toca a música após o clique
+            som.play().catch(err => console.log("Áudio iniciado."));
 
-            // 2. Transição visual suave para sumir com o envelope
+            // 2. Transição para sumir com o primeiro envelope
             interfaceOriginal.style.opacity = '0';
             interfaceOriginal.style.transform = 'scale(0.92)';
 
             setTimeout(() => {
                 interfaceOriginal.style.display = 'none';
 
-                // 3. Abre o PRONTUARIO.HTM na tela inteira
+                // 3. Só agora o iframe passa a existir e aparecer na tela inteira
                 frameProntuario.style.display = 'block';
                 setTimeout(() => {
                     frameProntuario.style.opacity = '1';
