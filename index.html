@@ -4,261 +4,269 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Dra. Débora - Oficial</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Lora:ital,wght@0,400;0,600;1,400&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --azul-espacial: #030816;
-            --vermelho-alerta: #d31212;
-            --texto-dra: #0a1d37;
-            --ouro-relevo: #bd9b4c;
-            --papel-antigo: #e6d5b8;
-            --neon-brilho: #00f2ff;
+            --azul-espacial: #020617;
+            --vermelho-militar: #991b1b;
+            --ouro-luxo: #d4af37;
+            --ouro-sutil: rgba(212, 175, 55, 0.3);
+            --papel-canva: #f4ecd8;
         }
 
         * { box-sizing: border-box; }
+
         body, html {
             margin: 0; padding: 0;
             width: 100%; height: 100%;
-            overflow: hidden;
             background-color: var(--azul-espacial);
-            font-family: 'Georgia', serif;
+            font-family: 'Lora', serif;
             display: flex;
             justify-content: center;
             align-items: center;
+            overflow: hidden;
             -webkit-tap-highlight-color: transparent;
         }
 
-        /* FUNDO ULTRA MODERNO: Nebulosa Cósmica com Estrelas de Alto Brilho */
+        /* FUNDO CÓSMICO DE ALTO PADRÃO */
         #cenario-cosmos {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             z-index: -1;
-            background: 
-                radial-gradient(circle at 20% 30%, rgba(0, 242, 255, 0.15) 0%, transparent 40%),
-                radial-gradient(circle at 80% 70%, rgba(157, 0, 255, 0.15) 0%, transparent 45%),
-                radial-gradient(circle at center, #0d1b3e 0%, var(--azul-espacial) 100%);
+            background: radial-gradient(circle at center, #0b162c 0%, var(--azul-espacial) 100%);
         }
 
-        /* Estrelas muito mais visíveis e brilhantes com correção na animação */
-        .estrela-brilhante {
+        .estrela-pulsante {
             position: absolute;
             background: #ffffff;
             border-radius: 50%;
-            box-shadow: 0 0 10px #ffffff, 0 0 18px rgba(255, 255, 255, 0.8);
-            animation: pulsarPlaneta 3s infinite ease-in-out;
+            box-shadow: 0 0 8px #ffffff;
+            animation: pulsarEstrela 4s infinite ease-in-out;
             pointer-events: none;
         }
 
-        @keyframes pulsarPlaneta {
-            0%, 100% { opacity: 0.3; transform: scale(0.7); filter: blur(0.5px); }
-            50% { opacity: 1; transform: scale(1.4); filter: drop-shadow(0 0 6px rgba(255,255,255,1)); }
+        @keyframes pulsarEstrela {
+            0%, 100% { opacity: 0.15; transform: scale(0.8); }
+            50% { opacity: 0.85; transform: scale(1.3); }
         }
 
-        .container-principal {
+        /* ESTRUTURA PRINCIPAL */
+        .container-experiencia {
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 35px;
+            gap: 40px;
             width: 100%;
-            height: 100%;
+            max-width: 440px;
             padding: 20px;
             z-index: 10;
+            transition: opacity 1s cubic-bezier(0.4, 0, 0.2, 1), transform 1s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        /* ENVELOPE REALISTA TRIDIMENSIONAL */
-        .envelope-container {
+        /* ENVELOPE LUXUOSO COM ZOOM SUAVE */
+        .envelope-realista {
             position: relative;
-            background: var(--papel-antigo);
+            background-color: var(--papel-canva);
             background-image: url('https://www.transparenttextures.com/patterns/handmade-paper.png');
             width: 100%;
-            max-width: 430px;
-            height: 460px;
-            border-radius: 4px;
-            box-shadow: 0 30px 70px rgba(0,0,0,0.8), inset 0 0 40px rgba(0,0,0,0.15);
+            height: 450px;
+            border-radius: 6px;
+            /* Borda dupla sofisticada em Ouro */
+            border: 3px double var(--ouro-luxo);
+            padding: 40px 25px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 25px;
-            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            border: 1px solid rgba(0,0,0,0.1);
+            box-shadow: 0 30px 70px rgba(0,0,0,0.8), 
+                        inset 0 0 40px rgba(139,92,26,0.15),
+                        0 0 20px var(--ouro-sutil);
+            
+            /* Transição para o Zoom Suave */
+            transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.6s ease;
         }
 
-        /* Simulação das dobras de um envelope de verdade */
-        .envelope-container::after {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: 
-                linear-gradient(35deg, transparent 49%, rgba(0,0,0,0.04) 50%, transparent 51%),
-                linear-gradient(-35deg, transparent 49%, rgba(0,0,0,0.04) 50%, transparent 51%);
-            pointer-events: none;
+        /* Efeito Zoom Inteligente para PC e Touch de Celular */
+        @media (hover: hover) {
+            .envelope-realista:hover {
+                transform: scale(1.04);
+                box-shadow: 0 40px 80px rgba(0,0,0,0.85), 0 0 30px rgba(212, 175, 55, 0.4);
+            }
+        }
+        .envelope-realista:active {
+            transform: scale(1.04);
         }
 
-        .envelope-container:hover {
-            transform: scale(1.04) rotate(0.5deg);
-        }
-
-        /* TEXTOS ORGANIZADOS SEM SOBREPOSIÇÃO */
         .carimbo-militar {
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             text-transform: uppercase;
             letter-spacing: 5px;
-            color: var(--vermelho-alerta);
+            color: var(--vermelho-militar);
             font-weight: 900;
-            border: 2px dashed var(--vermelho-alerta);
-            padding: 4px 12px;
-            margin-bottom: 25px;
+            border: 1px dashed var(--vermelho-militar);
+            padding: 5px 14px;
+            margin-bottom: 35px;
             font-family: 'Courier New', monospace;
-            transform: rotate(-1deg);
+            opacity: 0.85;
         }
 
-        /* Nome da Doutora Legível e Imponente (Sem Vermelho) */
+        /* Nome da Doutora Imponente e Clássico (Sem vermelho) */
         .nome-doutora {
-            font-size: 2.4rem;
-            color: var(--texto-dra);
-            font-family: 'Georgia', serif;
-            font-weight: bold;
+            font-family: 'Cinzel', serif;
+            font-size: 2.6rem;
+            color: #1e293b;
+            font-weight: 700;
             text-align: center;
             letter-spacing: 1px;
-            text-shadow: 1px 1px 0px rgba(255,255,255,0.8), 0 0 2px var(--ouro-relevo);
-            margin-bottom: 5px;
+            margin-bottom: 4px;
+            text-shadow: 1px 1px 0px rgba(255,255,255,0.6);
         }
 
         .subtitulo-medica {
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             text-transform: uppercase;
-            letter-spacing: 3px;
-            color: #554433;
-            margin-bottom: 30px;
-            font-weight: bold;
+            letter-spacing: 4px;
+            color: #5c4d3c;
+            margin-bottom: 40px;
+            font-weight: 600;
         }
 
         .tarja-sigiloso {
             font-size: 1.4rem;
-            letter-spacing: 8px;
-            color: var(--vermelho-alerta);
+            letter-spacing: 9px;
+            color: var(--vermelho-militar);
             font-weight: 900;
             font-family: 'Arial Black', sans-serif;
-            border: 4px double var(--vermelho-alerta);
-            padding: 3px 20px;
+            border: 4px double var(--vermelho-militar);
+            padding: 4px 25px;
+            transform: rotate(-1deg);
             margin-bottom: auto;
-            transform: rotate(2deg);
         }
 
-        /* Box do Paciente isolado para não bater nas letras */
         .bloco-paciente {
-            width: 90%;
+            width: 100%;
             text-align: center;
-            border-top: 1px solid rgba(0, 0, 0, 0.15);
-            padding-top: 15px;
-            margin-bottom: auto;
+            border-top: 1px dashed rgba(0, 0, 0, 0.15);
+            padding-top: 20px;
+            margin-bottom: 10px;
         }
 
         .rotulo-paciente {
             font-size: 0.75rem;
             text-transform: uppercase;
-            color: #665544;
-            letter-spacing: 2px;
+            color: #78350f;
+            letter-spacing: 3px;
             display: block;
-            margin-bottom: 5px;
+            margin-bottom: 6px;
+            font-weight: 600;
         }
 
         .texto-identificacao {
             font-style: italic;
-            color: #111111;
-            font-size: 1.1rem;
-            font-weight: bold;
+            color: #0f172a;
+            font-size: 1.15rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
         }
 
-        /* LACRE DE CERA COM SÍMBOLO PSIQUIÁTRICO (Ψ) */
-        .lacre-realista {
-            width: 80px; height: 80px;
-            background: radial-gradient(circle at 30% 30%, #b81414 0%, #4a0202 100%);
+        /* Lacre de Cera Tradicional */
+        .lacre-cera {
+            width: 76px; height: 76px;
+            background: radial-gradient(circle at 35% 35%, #a11818 0%, #4c0505 100%);
             border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.5), inset -3px -3px 8px rgba(0,0,0,0.7);
-            z-index: 3;
-            margin-top: 10px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5), inset -3px -3px 10px rgba(0,0,0,0.8);
+            position: absolute;
+            bottom: -38px;
+            z-index: 5;
         }
 
-        .lacre-realista::after {
+        .lacre-cera::after {
             content: 'Ψ';
-            color: #240101;
-            font-size: 2.8rem;
+            color: #1e0202;
+            font-size: 2.6rem;
             font-family: 'Times New Roman', serif;
-            text-shadow: 1px 1px 2px rgba(255,255,255,0.2);
         }
 
-        /* BOTÃO INTERATIVO IMPACTANTE E FUTURISTA (ESTILO SCI-FI CYBERPUNK) */
-        .wrapper-botao-futurista {
-            position: relative;
+        /* BOTÃO LUXUOSO COM ZOOM SUAVE */
+        .wrapper-botao {
+            margin-top: 20px;
+            padding: 2px;
             border-radius: 40px;
-            padding: 3px;
-            background: linear-gradient(90deg, #00f2ff, #9d00ff, #00f2ff);
+            background: linear-gradient(90deg, rgba(255,255,255,0.1), var(--ouro-luxo), rgba(255,255,255,0.1));
             background-size: 200% auto;
-            animation: moverGradiente 3s linear infinite;
-            box-shadow: 0 0 20px rgba(0, 242, 255, 0.3);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 0 20px rgba(214, 175, 87, 0.15);
+            
+            /* Transição para o Zoom Suave */
+            transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.5s ease;
         }
 
-        @keyframes moverGradiente {
-            0% { background-position: 0% 50%; }
-            100% { background-position: 200% 50%; }
-        }
-
-        .btn-futurista-neon {
-            background: #040a18;
-            color: #ffffff;
+        .btn-experiencia {
+            background: #030712;
+            color: #f8fafc;
             border: none;
-            padding: 16px 50px;
+            padding: 18px 50px;
             border-radius: 38px;
             text-transform: uppercase;
             letter-spacing: 4px;
             cursor: pointer;
-            font-weight: 900;
-            font-family: 'Arial', sans-serif;
+            font-weight: 700;
+            font-family: 'Orbitron', sans-serif;
             font-size: 0.85rem;
             display: block;
             outline: none;
-            transition: all 0.3s ease;
+            transition: background 0.3s ease, color 0.3s ease;
         }
 
-        /* Efeito Hover Ultra Chamativo */
-        .wrapper-botao-futurista:hover {
-            transform: scale(1.08);
-            box-shadow: 0 0 35px var(--neon-brilho), 0 0 15px rgba(157, 0, 255, 0.5);
+        /* Zoom do Botão no PC e no Toque */
+        @media (hover: hover) {
+            .wrapper-botao:hover {
+                transform: scale(1.07);
+                box-shadow: 0 0 30px var(--ouro-luxo);
+                background-position: right center;
+            }
+            .wrapper-botao:hover .btn-experiencia {
+                background: var(--ouro-luxo);
+                color: #030712;
+            }
+        }
+        .wrapper-botao:active {
+            transform: scale(1.07);
         }
 
-        .wrapper-botao-futurista:hover .btn-futurista-neon {
-            background: transparent;
-            color: #040a18;
-            font-weight: 900;
+        /* Iframe invisível inicialmente para o Prontuário */
+        #prontuario-frame {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            border: none;
+            z-index: 200;
+            display: none;
+            opacity: 0;
+            transition: opacity 1.5s ease;
         }
 
-        /* Adaptação Inteligente para Celulares */
-        @media (max-height: 640px) {
-            .container-principal { gap: 15px; }
-            .envelope-container { height: 400px; padding: 15px; }
-            .nome-doutora { font-size: 1.9rem; }
-            .subtitulo-medica { margin-bottom: 15px; }
-            .tarja-sigiloso { font-size: 1.1rem; }
-            .lacre-realista { width: 60px; height: 60px; }
-            .lacre-realista::after { font-size: 2.1rem; }
-            .btn-futurista-neon { padding: 12px 35px; font-size: 0.75rem; }
+        /* Ajustes para Celulares Pequenos */
+        @media (max-height: 620px) {
+            .container-experiencia { gap: 25px; }
+            .envelope-realista { height: 400px; padding: 25px 15px; }
+            .nome-doutora { font-size: 2.1rem; }
+            .subtitulo-medica { margin-bottom: 25px; }
+            .tarja-sigiloso { font-size: 1.15rem; }
+            .btn-experiencia { padding: 14px 40px; font-size: 0.75rem; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Fundo de Alta Tecnologia Cósmica -->
+    <!-- Fundo de Estrelas Fixo -->
     <div id="cenario-cosmos"></div>
 
-    <div class="container-principal">
+    <!-- Interface Principal do Envelope -->
+    <div class="container-experiencia" id="painel-principal">
         
-        <!-- ENVELOPE REALISTA -->
-        <div class="envelope-container">
+        <div class="envelope-realista">
             <div class="carimbo-militar">CONFIDENCIAL • MARINHA DO BRASIL</div>
             
             <div class="nome-doutora">Dra. Débora</div>
@@ -267,70 +275,66 @@
             <div class="tarja-sigiloso">SIGILOSO</div>
 
             <div class="bloco-paciente">
-                <span class="rotulo-paciente">Identificação do Paciente:</span>
+                <span class="rotulo-paciente">Paciente:</span>
                 <span class="texto-identificacao">"A pessoa que jamais esquecerá você"</span>
             </div>
 
-            <!-- Lacre Físico Intacto -->
-            <div class="lacre-realista"></div>
+            <div class="lacre-cera"></div>
         </div>
 
-        <!-- BOTÃO CYBERPUNK DE ALTO IMPACTO -->
-        <div class="wrapper-botao-futurista">
-            <button class="btn-futurista-neon" onclick="dispararExperiencia()">Aperte com carinho</button>
+        <div class="wrapper-botao">
+            <button class="btn-experiencia" onclick="dispararTudo()">Aperte com carinho</button>
         </div>
 
     </div>
 
-    <!-- Elemento oculto local para forçar o desbloqueio do áudio antes da transição -->
-    <audio id="som-ativador" src="elvis.html.mp3" preload="auto"></audio>
+    <!-- Carregamento sutil do prontuário em segundo plano -->
+    <iframe id="prontuario-frame" src="prontuario.htm"></iframe>
+
+    <!-- Áudio de Fundo -->
+    <audio id="musica-elvis" src="elvis.html.mp3" preload="auto" loop></audio>
 
     <script>
-        // Gerador Dinâmico de Estrelas de Alta Visibilidade
+        // Gerador de Fundo Estelar Inteligente
         const cosmos = document.getElementById('cenario-cosmos');
-        const quantidadeEstrelas = 45;
+        const totalEstrelas = 90;
 
-        for (let i = 0; i < quantidadeEstrelas; i++) {
-            const star = document.createElement('div');
-            star.className = 'estrela-brilhante';
-            
-            // Tamanhos variados para profundidade realista
-            const tamanho = Math.random() * 4 + 2; 
-            star.style.width = `${tamanho}px`;
-            star.style.height = `${tamanho}px`;
-            
-            star.style.top = Math.random() * 100 + 'vh';
-            star.style.left = Math.random() * 100 + 'vw';
-            
-            // Ritmos de pulsação variados
-            star.style.animationDelay = Math.random() * 3 + 's';
-            star.style.animationDuration = (Math.random() * 2 + 2) + 's';
-            
-            cosmos.appendChild(star);
+        for (let i = 0; i < totalEstrelas; i++) {
+            const estrela = document.createElement('div');
+            estrela.className = 'estrela-pulsante';
+            const tamanho = Math.random() * 2.5 + 1.5;
+            estrela.style.width = `${tamanho}px`;
+            estrela.style.height = `${tamanho}px`;
+            estrela.style.top = Math.random() * 100 + 'vh';
+            estrela.style.left = Math.random() * 100 + 'vw';
+            estrela.style.animationDelay = Math.random() * 4 + 's';
+            estrela.style.animationDuration = (Math.random() * 2 + 3) + 's';
+            cosmos.appendChild(estrela);
         }
 
-        // Função: Toca o som localmente e envia o usuário com a sessão de áudio ativa
-        function dispararExperiencia() {
-            const som = document.getElementById('som-ativador');
-            
-            // Dá o play imediato aqui. Isso quebra a barreira de segurança do navegador!
-            som.play().then(() => {
-                // Guarda no navegador o aviso de que o usuário permitiu o som
-                localStorage.setItem('musicaPermitida', 'sim');
-                
-                // Transição visual impecável
-                document.querySelector('.container-principal').style.transition = "all 0.8s ease";
-                document.querySelector('.container-principal').style.opacity = "0";
-                document.querySelector('.container-principal').style.transform = "scale(0.95)";
-                
+        // Ação de Transição de Alto Impacto
+        function dispararTudo() {
+            const som = document.getElementById('musica-elvis');
+            const interfaceOriginal = document.getElementById('painel-principal');
+            const frameProntuario = document.getElementById('prontuario-frame');
+
+            // 1. Inicia a música do Elvis na hora
+            som.play().catch(err => console.log("Áudio ativo."));
+
+            // 2. Desaparece suavemente com o envelope e o botão
+            interfaceOriginal.style.opacity = '0';
+            interfaceOriginal.style.transform = 'scale(0.92)';
+
+            setTimeout(() => {
+                interfaceOriginal.style.display = 'none';
+
+                // 3. Revela o prontuário.htm na mesma tela de forma cinematográfica
+                frameProntuario.style.display = 'block';
                 setTimeout(() => {
-                    // Vai direto para o seu arquivo da carta
-                    window.location.href = "carta.html";
-                }, 800);
-            }).catch((erro) => {
-                // Caso falte interação ou arquivo local, força a mudança direto
-                window.location.href = "carta.html";
-            });
+                    frameProntuario.style.opacity = '1';
+                }, 50);
+
+            }, 1000);
         }
     </script>
 </body>
