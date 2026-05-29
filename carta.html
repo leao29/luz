@@ -1,197 +1,406 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Uma Luz na Escuridão - Carta</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Lora:ital,wght@0,400;0,600;1,400&family=Orbitron:wght@700&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Dra. Débora - Uma Luz na Escuridão</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Lora:ital,wght@0,400;0,600;1,400&family=Orbitron:wght@700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --space-black: #02040a;
-            --gold-glow: #fbbf24;
-            --parchment-base: #fcf6e8;
-            --silver-futuristic: #e2e8f0;
+            --azul-espacial: #020617;
+            --vermelho-militar: #991b1b;
+            --texto-claro: #f8fafc;
+            --ouro-brilhante: #fbbf24;
+            --ouro-velho: #b45309;
+            --papel-canva: #fbf4e6;
         }
 
-        * {
-            box-sizing: border-box;
-            -webkit-font-smoothing: antialiased;
-        }
+        * { box-sizing: border-box; }
+        
+        /* Customização da barra de rolagem para ser elegante */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--azul-espacial); }
+        ::-webkit-scrollbar-thumb { background: var(--ouro-velho); border-radius: 4px; }
 
-        body {
-            margin: 0;
-            padding: 0;
-            background-color: var(--space-black);
-            overflow-x: hidden;
+        body, html {
+            margin: 0; padding: 0;
+            width: 100%; min-height: 100%;
+            background-color: var(--azul-espacial);
+            font-family: 'Lora', serif;
             display: flex;
             flex-direction: column;
             align-items: center;
+            -webkit-tap-highlight-color: transparent;
         }
 
-        /* Fundo Cósmico Pulsante */
-        .cosmic-background {
+        /* FUNDO CÓSMICO DE ALTO IMPACTO */
+        #cenario-cosmos {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            background: radial-gradient(circle at center, #0a101f 0%, #02040a 100%);
-        }
-
-        .star {
-            position: absolute;
-            background: white;
-            border-radius: 50%;
-            opacity: 0.3;
-            animation: pulse 4s infinite ease-in-out;
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); opacity: 0.2; }
-            50% { transform: scale(1.6); opacity: 0.8; box-shadow: 0 0 10px rgba(255, 255, 255, 0.4); }
-        }
-
-        /* Container de Rolagem */
-        .scroll-wrapper {
-            width: 100%;
-            max-width: 900px;
-            padding: 60px 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        /* Card do Título Luxuoso */
-        .title-card {
-            width: 100%;
-            padding: 40px 20px;
-            text-align: center;
-            border: 2px solid var(--gold-glow);
-            background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(8px);
-            border-radius: 4px;
-            margin-bottom: 50px;
-            box-shadow: 0 0 40px rgba(251, 191, 36, 0.2);
-        }
-
-        h1 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: clamp(1.8rem, 5vw, 3.2rem);
-            color: #fff;
-            text-transform: uppercase;
-            letter-spacing: 10px;
-            margin: 0;
-            text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
-        }
-
-        /* Card da Carta - Estilo Pergaminho Canva Envelhecido */
-        .letter-card {
-            width: 100%;
-            background-color: var(--parchment-base);
-            padding: 60px 50px;
-            border-radius: 2px;
-            position: relative;
-            box-shadow: 0 30px 70px rgba(0, 0, 0, 0.8);
-            border: 1px solid #dcd1bd;
-            /* Efeito de borda futurista sutil nas quinas */
-            clip-path: polygon(
-                0% 5%, 5% 0%, 95% 0%, 100% 5%, 
-                100% 95%, 95% 100%, 5% 100%, 0% 95%
-            );
-        }
-
-        /* Textura de papel envelhecido */
-        .letter-card::before {
-            content: "";
-            position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background-image: url('https://www.transparenttextures.com/patterns/handmade-paper.png');
-            opacity: 0.5;
+            z-index: -1;
+            background: radial-gradient(circle at center, #0b1528 0%, var(--azul-espacial) 100%);
+        }
+
+        .estrela-pulsante {
+            position: absolute;
+            background: #ffffff;
+            border-radius: 50%;
+            box-shadow: 0 0 8px #ffffff, 0 0 15px rgba(255, 255, 255, 0.6);
+            animation: pulsar Estrela 4s infinite ease-in-out;
             pointer-events: none;
         }
 
-        /* Borda Dourada Interna Elegante */
-        .inner-border {
-            border: 1px solid rgba(180, 83, 9, 0.2);
+        @keyframes pulsarEstrela {
+            0%, 100% { opacity: 0.2; transform: scale(0.8); }
+            50% { opacity: 1; transform: scale(1.5); box-shadow: 0 0 12px #ffffff; }
+        }
+
+        /* TELA 1: INTERFACE DO ENVELOPE (Inicial) */
+        .tela-inicial {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            z-index: 100;
             padding: 20px;
-            height: 100%;
-            position: relative;
+            transition: opacity 1s ease, transform 1s ease, visibility 1s;
         }
 
-        .letter-content {
-            font-family: 'Lora', serif;
-            font-size: 1.3rem;
-            line-height: 1.9;
-            color: #1a1a1a;
-            text-align: justify;
+        /* TEXTURA DO ENVELOPE CANVA ENVELHECIDO DE VERDADE */
+        .envelope-realista {
             position: relative;
-            z-index: 2;
+            background-color: #ebdcb9;
+            background-image: url('https://www.transparenttextures.com/patterns/handmade-paper.png');
+            width: 100%;
+            max-width: 440px;
+            height: 450px;
+            border-radius: 4px;
+            box-shadow: 0 35px 70px rgba(0,0,0,0.9), inset 0 0 50px rgba(139,92,26,0.2);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 35px 25px;
+            border: 1px solid #d1c29d;
         }
 
-        .letter-content p {
+        .envelope-realista::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(145deg, rgba(0,0,0,0.03) 0%, transparent 50%, rgba(0,0,0,0.03) 100%);
+            pointer-events: none;
+        }
+
+        .carimbo-militar {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            color: var(--vermelho-militar);
+            font-weight: 900;
+            border: 2px dashed var(--vermelho-militar);
+            padding: 5px 14px;
             margin-bottom: 30px;
+            font-family: 'Courier New', monospace;
+            transform: rotate(-1.5deg);
         }
 
-        .highlight-name {
+        .nome-doutora-capa {
+            font-family: 'Cinzel', serif;
+            font-size: 2.5rem;
+            color: #1e293b;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 5px;
+            letter-spacing: 1px;
+        }
+
+        .subtitulo-medica {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: #5c4d3c;
+            margin-bottom: 35px;
+            font-weight: bold;
+        }
+
+        .tarja-sigiloso {
+            font-size: 1.5rem;
+            letter-spacing: 8px;
+            color: var(--vermelho-militar);
+            font-weight: 900;
+            font-family: 'Arial Black', sans-serif;
+            border: 4px double var(--vermelho-militar);
+            padding: 4px 25px;
+            transform: rotate(1deg);
+            margin-bottom: auto;
+        }
+
+        .bloco-paciente {
+            width: 100%;
+            text-align: center;
+            border-top: 1px dashed rgba(0, 0, 0, 0.2);
+            padding-top: 20px;
+            margin-bottom: 15px;
+        }
+
+        .texto-identificacao {
+            font-style: italic;
+            color: #2d2419;
+            font-size: 1.1rem;
+            font-weight: bold;
+        }
+
+        .lacre-cera {
+            width: 75px; height: 75px;
+            background: radial-gradient(circle at 35% 35%, #991b1b 0%, #450a0a 100%);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.6), inset -3px -3px 10px rgba(0,0,0,0.8);
+            position: absolute;
+            bottom: -35px;
+        }
+
+        .lacre-cera::after {
+            content: 'Ψ';
+            color: #1a0303;
+            font-size: 2.6rem;
+            font-family: 'Times New Roman', serif;
+        }
+
+        /* BOTÃO FUTURISTA MAJESTOSO */
+        .wrapper-botao-futurista {
+            margin-top: 40px;
+            padding: 2px;
+            border-radius: 40px;
+            background: linear-gradient(90deg, #00f2ff, var(--ouro-brilhante), #9d00ff);
+            background-size: 300% auto;
+            animation: brilhoGradiente 4s linear infinite;
+            box-shadow: 0 0 25px rgba(0, 242, 255, 0.3);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        @keyframes brilhoGradiente {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .btn-experiencia {
+            background: #030712;
+            color: #ffffff;
+            border: none;
+            padding: 18px 55px;
+            border-radius: 38px;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            cursor: pointer;
+            font-weight: 900;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .wrapper-botao-futurista:hover {
+            transform: scale(1.06);
+            box-shadow: 0 0 35px var(--ouro-brilhante);
+        }
+
+        /* TELA 2: ROLAGEM ULTRA ELEGANTE DA CARTA (Oculta no início) */
+        .tela-carta {
+            width: 100%;
+            max-width: 860px;
+            padding: 60px 20px;
+            display: none; /* Ativado via JavaScript */
+            flex-direction: column;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 1.5s ease;
+        }
+
+        /* CARD DO TITULO FUTURISTA COM TRATAMENTO PRATA FINO NA BORDA */
+        .card-titulo-futurista {
+            width: 100%;
+            padding: 35px 20px;
+            text-align: center;
+            background: rgba(2, 6, 23, 0.7);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(226, 232, 240, 0.4); /* Prata fino na borda */
+            border-radius: 6px;
+            margin-bottom: 50px;
+            box-shadow: 0 0 40px rgba(255, 255, 255, 0.05);
+        }
+
+        .card-titulo-futurista h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(1.6rem, 5vw, 3rem);
+            color: #ffffff;
+            text-transform: uppercase;
+            letter-spacing: 12px;
+            margin: 0;
+            /* Efeito Prata Metálico */
+            background: linear-gradient(180deg, #ffffff 30%, #cbd5e1 70%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 2px 8px rgba(0,0,0,0.8));
+        }
+
+        /* CARD DA CARTA - PAPEL CANVA TOTALMENTE ENVELHECIDO COM MOLDURA DOURADA */
+        .card-carta-envelhecida {
+            width: 100%;
+            background-color: var(--papel-canva);
+            background-image: url('https://www.transparenttextures.com/patterns/lined-paper-2.png');
+            padding: 65px 50px;
+            border-radius: 4px;
+            position: relative;
+            box-shadow: 0 30px 80px rgba(0,0,0,0.9);
+            /* Moldura Dourada Relevo */
+            border: 3px double var(--ouro-velho);
+        }
+
+        /* Efeito de quinas geométricas/futuristas discretas sobre o clássico */
+        .card-carta-envelhecida::before {
+            content: '';
+            position: absolute;
+            top: 10px; left: 10px; right: 10px; bottom: 10px;
+            border: 1px solid rgba(180, 83, 9, 0.15);
+            pointer-events: none;
+        }
+
+        .conteudo-carta {
+            font-family: 'Lora', serif;
+            font-size: 1.35rem; /* Letras maiores e altamente legíveis */
+            line-height: 1.95;
+            color: #111111;
+            text-align: justify;
+        }
+
+        .conteudo-carta p {
+            margin-bottom: 35px;
+            text-indent: 40px;
+        }
+
+        .destaque-elegante {
             font-family: 'Cinzel', serif;
             font-weight: 700;
-            color: #7c2d12;
-            font-size: 1.1em;
+            color: #451a03; /* Marrom escuro luxuoso, nunca vermelho */
+            border-bottom: 1px dashed var(--ouro-velho);
+            padding-bottom: 2px;
         }
 
-        /* Responsividade */
+        /* Responsividade para Celulares */
         @media (max-width: 600px) {
-            .scroll-wrapper { padding: 40px 15px; }
-            .letter-card { padding: 40px 25px; }
-            .letter-content { font-size: 1.15rem; line-height: 1.7; }
-            h1 { letter-spacing: 4px; font-size: 1.6rem; }
+            .envelope-realista { height: 420px; padding: 25px 15px; }
+            .nome-doutora-capa { font-size: 2rem; }
+            .card-carta-envelhecida { padding: 40px 22px; }
+            .conteudo-carta { font-size: 1.18rem; line-height: 1.8; }
+            .conteudo-carta p { text-indent: 20px; margin-bottom: 25px; }
+            .card-titulo-futurista h1 { letter-spacing: 6px; }
         }
     </style>
 </head>
 <body>
 
-    <div class="cosmic-background" id="stars"></div>
+    <!-- Fundo Estelar Comum para as duas fases -->
+    <div id="cenario-cosmos"></div>
 
-    <div class="scroll-wrapper">
+    <!-- TELA 1: APRESENTAÇÃO DO ENVELOPE -->
+    <div class="tela-inicial" id="modulo-capa">
+        <div class="envelope-realista">
+            <div class="carimbo-militar">CONFIDENCIAL • MARINHA DO BRASIL</div>
+            
+            <div class="nome-doutora-capa">Dra. Débora</div>
+            <div class="subtitulo-medica">Oficial Médica Psiquiatra</div>
+            
+            <div class="tarja-sigiloso">SIGILOSO</div>
+
+            <div class="bloco-paciente">
+                <span class="texto-identificacao">"Para ler com a alma"</span>
+            </div>
+
+            <div class="lacre-cera"></div>
+        </div>
+
+        <div class="wrapper-botao-futurista">
+            <button class="btn-experiencia" onclick="abrirEnvelope()">Aperte com carinho</button>
+        </div>
+    </div>
+
+    <!-- TELA 2: A CARTA MAGNÍFICA COM ROLAGEM -->
+    <main class="tela-carta" id="modulo-carta">
         
-        <header class="title-card">
+        <header class="card-titulo-futurista">
             <h1>UMA LUZ NA ESCURIDÃO</h1>
         </header>
 
-        <article class="letter-card">
-            <div class="inner-border">
-                <div class="letter-content">
-                    <p>No meio do caos cultural e após anos longe de Belém, o meu retorno não foi um processo simples. Vivi tempestades silenciosas que guardei quase inteiramente para mim; uma gestação de altíssimo risco onde as únicas testemunhas éramos eu e minha sobrinha. Cruzar aquele limiar assustador para ver o nascimento mágico de Helena Sophia foi um marco definitivo sobre a fragilidade e a força da vida.</p>
+        <article class="card-carta-envelhecida">
+            <div class="conteudo-carta">
+                <p>No meio do caos cultural e após anos longe de Belém, o meu retorno não foi um processo simples. Vivi tempestades silenciosas que guardei quase inteiramente para mim; uma gestação de altíssimo risco onde as únicas testemunhas éramos eu e minha sobrinha. Cruzar aquele limiar assustador para ver o nascimento mágico de Helena Sophia foi um marco definitivo sobre a fragilidade e a força da vida.</p>
 
-                    <p>Sempre que eu retornava a Belém, meu foco era absoluto em proteger e vivenciar os raros momentos com a minha família. No entanto, deixar para trás uma trajetória perfeitamente estável em Brasília e a minha própria liberdade provocou uma guinada abrupta de 360 graus na minha existência. Nesse percurso, enfrentei uma rasteira profissional — um golpe severo, mas que ironicamente se transformou em fortaleza. Ali eu compreendi que possuo uma capacidade técnica e intelectual que vai muito além do que aqueles que me subestimam conseguem enxergar. Talvez confundam a ausência de arrogância e prepotência com fraqueza.</p>
+                <p>Sempre que eu retornava a Belém, meu foco era absoluto em proteger e vivenciar os raros momentos com a minha família. No entanto, deixar para trás uma trajetória perfeitamente estável em Brasília e a minha própria liberdade provocou uma guinada abrupta de 360 graus na minha existência. Nesse percurso, enfrentei uma rasteira profissional — um golpe severo, mas que ironicamente se transformou em fortaleza. Ali eu compreendi que possuo uma capacidade técnica e intelectual que vai muito além do que aqueles que me subestimam conseguem enxergar. Talvez confundam a ausência de arrogância e prepotência com fraqueza. Desde muito jovem aprendi que diminuir o outro é o pior erro humano; o sol brilha para todos, mas habitar a luz ou a sombra é uma escolha estritamente individual. Ninguém muda ninguém. Essa transformação pertence apenas a Deus e ao próprio indivíduo. A vida é curta demais para aceitarmos andar em círculos sem sair do lugar.</p>
 
-                    <p>Desde muito jovem aprendi que diminuir o outro é o pior erro humano; o sol brilha para todos, mas habitar a luz ou a sombra é uma escolha estritamente individual. Ninguém muda ninguém. Essa transformação pertence apenas a Deus e ao próprio indivíduo. A vida é curta demais para aceitarmos andar em círculos sem sair do lugar.</p>
+                <p>Esse recomeço do zero já era uma pauta constante com a <span class="destaque-elegante">Dra. Débora</span>, que acompanha cada passo da reconstrução dos meus oceanos internos. Minha vinda para cá foi cercada de orientações cruciais que ouvi atentamente para preservar meu equilíbrio psicológico. Ainda assim, por razões complexas e difíceis de exprimir, muitas vezes me sinto como um peixe fora d'água nesta cidade.</p>
 
-                    <p>Esse recomeço do zero já era uma pauta constante com a <span class="highlight-name">Dra. Laila</span>, que me acompanha há cerca de três anos com uma interatividade incrível. Minha vinda para cá foi cercada de orientações cruciais que ouvi atentamente para preservar meu equilíbrio psicológico. Ainda assim, por razões complexas e difíceis de exprimir, muitas vezes me sinto como um peixe fora d'água nesta cidade.</p>
+                <p>Por trás das aparências, sou uma pessoa extremamente racional, embora guarde em mim um lado profundamente romântico. Sei delimitar com precisão cirúrgica os papéis da profissional e da mulher. E é nessa clareza que reafirmo o quanto você se tornou importante na minha realidade em Belém. Você transcendeu o papel da médica que zela pela minha mente; vejo em você uma pérola rara. Às vezes, me pego escutando músicas e permitindo que meus pensamentos viajem até você. Esse sentimento me faz bem, me traz paz.</p>
 
-                    <p>Por trás das aparências, sou uma pessoa extremamente racional, embora guarde em mim um lado profundamente romântico. Sei delimitar com precisão cirúrgica os papéis da profissional e da mulher. E é nessa clareza que reafirmo o quanto você se tornou importante na minha realidade em Belém. Você transcendeu o papel da médica que zela pela minha mente; vejo em você uma pérola rara. Às vezes, me pego escutando músicas e permitindo que meus pensamentos viajem até você. Esse sentimento me faz bem, me traz paz.</p>
-
-                    <p>Não há pretensão de reciprocidade ou de posse em minhas palavras. Como eu já lhe disse uma vez, uma linda sereia pertence aos oceanos mais vastos e deslumbrantes, e não ao pequeno lago que representa a minha vida. No entanto, essa percepção não anula o meu desejo genuíno de estar aqui, traduzindo o que sou através deste pequeno gesto de admiração. Carrego o perfeccionismo como um defeito confesso, mas hoje ele serve apenas a um propósito: garantir que você receba o melhor de mim. Que esta leitura te faça sentir exatamente o tamanho do seu valor.</p>
-                </div>
+                <p>Não há pretensão de reciprocidade ou de posse em minhas palavras. Como eu já lhe disse uma vez, uma linda sereia pertence aos oceanos mais vastos e deslumbrantes, e não ao pequeno lago que representa a minha vida. No entanto, essa percepção não anula o meu desejo genuíno de estar aqui, traduzindo o que sou através deste pequeno gesto de admiração. Carrego o perfeccionismo como um defeito confesso, mas hoje ele serve apenas a um propósito: garantir que você receba o melhor de mim. Que esta leitura te faça sentir exatamente o tamanho do seu valor.</p>
             </div>
         </article>
 
-    </div>
+    </main>
+
+    <!-- PLAYER DE ÁUDIO REAL (Usando o arquivo do seu repositório) -->
+    <audio id="musica-fundo" src="elvis.html.mp3" preload="auto" loop></audio>
 
     <script>
-        const container = document.getElementById('stars');
-        const count = 150;
-        for (let i = 0; i < count; i++) {
+        // 1. Gerador do Universo Estelar
+        const cosmos = document.getElementById('cenario-cosmos');
+        const estrelasTotais = 130;
+
+        for (let i = 0; i < estrelasTotais; i++) {
             const star = document.createElement('div');
-            star.className = 'star';
-            const size = Math.random() * 3;
-            star.style.width = size + 'px';
-            star.style.height = size + 'px';
-            star.style.top = Math.random() * 100 + '%';
-            star.style.left = Math.random() * 100 + '%';
+            star.className = 'estrela-pulsante';
+            const tam = Math.random() * 3 + 1.5;
+            star.style.width = `${tam}px`;
+            star.style.height = `${tam}px`;
+            star.style.top = Math.random() * 100 + 'vh';
+            star.style.left = Math.random() * 100 + 'vw';
             star.style.animationDelay = Math.random() * 4 + 's';
-            container.appendChild(star);
+            star.style.animationDuration = (Math.random() * 2 + 3) + 's';
+            cosmos.appendChild(star);
+        }
+
+        // 2. Transição Mágica: Toca Música + Some Envelope + Libera Carta com Rolagem
+        function abrirEnvelope() {
+            const musica = document.getElementById('musica-fundo');
+            const capa = document.getElementById('modulo-capa');
+            const carta = document.getElementById('modulo-carta');
+
+            // Toca a música elvis.html.mp3 rompendo o bloqueio do navegador
+            musica.play().catch(e => console.log("Aviso de autoplay superado."));
+
+            // Animação de saída do envelope
+            capa.style.opacity = '0';
+            capa.style.transform = 'scale(0.9) translateY(-30px)';
+            
+            setTimeout(() => {
+                capa.style.display = 'none';
+                
+                // Ativa a exibição da carta e restaura a rolagem natural do corpo do site
+                document.body.style.overflow = 'auto';
+                document.documentElement.style.overflow = 'auto';
+                
+                carta.style.display = 'flex';
+                
+                // Força o efeito fade-in luxuoso
+                setTimeout(() => {
+                    carta.style.opacity = '1';
+                }, 50);
+
+            }, 1000);
         }
     </script>
 </body>
