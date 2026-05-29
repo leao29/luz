@@ -7,10 +7,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Lora:ital,wght=0,400;0,600;1,400&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --azul-espacial: #020617;
+            --azul-espacial: #020613;
             --vermelho-militar: #991b1b;
-            --ouro-luxo: #d4af37;
-            --ouro-sutil: rgba(212, 175, 55, 0.3);
+            --ferro-prata: #94a3b8;
             --papel-canva: #f4ecd8;
         }
 
@@ -28,26 +27,48 @@
             -webkit-tap-highlight-color: transparent;
         }
 
-        /* FUNDO CÓSMICO */
+        /* FUNDO DE CÉU AZUL ESCURO COM BORBOLETAS E ESTRELAS PULSANTES */
         #cenario-cosmos {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             z-index: -1;
-            background: radial-gradient(circle at center, #0b162c 0%, var(--azul-espacial) 100%);
+            background: radial-gradient(circle at center, #071330 0%, var(--azul-espacial) 100%);
         }
 
         .estrela-pulsante {
             position: absolute;
             background: #ffffff;
             border-radius: 50%;
-            box-shadow: 0 0 8px #ffffff;
-            animation: pulsarEstrela 4s infinite ease-in-out;
+            box-shadow: 0 0 8px #cbd5e1;
+            animation: pulsarElemento 4s infinite ease-in-out;
             pointer-events: none;
         }
 
-        @keyframes pulsarEstrela {
-            0%, 100% { opacity: 0.15; transform: scale(0.8); }
-            50% { opacity: 0.85; transform: scale(1.3); }
+        /* Borboletas mágicas geradas por CSS no fundo */
+        .borboleta-pulsante {
+            position: absolute;
+            width: 14px;
+            height: 14px;
+            background: rgba(148, 163, 184, 0.4);
+            border-radius: 50% 50% 0 50%;
+            transform: rotate(45deg);
+            animation: pulsarElemento 5s infinite ease-in-out;
+            pointer-events: none;
+            filter: drop-shadow(0 0 6px rgba(255,255,255,0.6));
+        }
+        .borboleta-pulsante::after {
+            content: '';
+            position: absolute;
+            width: 14px;
+            height: 14px;
+            background: rgba(203, 213, 225, 0.4);
+            border-radius: 50% 50% 50% 0;
+            top: -7px; left: 7px;
+        }
+
+        @keyframes pulsarElemento {
+            0%, 100% { opacity: 0.15; transform: scale(0.7) translateY(0px); }
+            50% { opacity: 0.85; transform: scale(1.2) translateY(-4px); }
         }
 
         /* ESTRUTURA PRINCIPAL */
@@ -64,33 +85,32 @@
             transition: opacity 1s cubic-bezier(0.4, 0, 0.2, 1), transform 1s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        /* ENVELOPE LUXUOSO COM ZOOM SUAVE */
+        /* ENVELOPE COM MOLDURA DE FERRO PRATA E ANIMAÇÃO ELÉTRICA NAS BORDAS */
         .envelope-realista {
             position: relative;
             background-color: var(--papel-canva);
             background-image: url('https://www.transparenttextures.com/patterns/handmade-paper.png');
             width: 100%;
             height: 450px;
-            border-radius: 6px;
-            border: 3px double var(--ouro-luxo);
+            border-radius: 8px;
+            border: 4px solid var(--ferro-prata);
             padding: 40px 25px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            box-shadow: 0 30px 70px rgba(0,0,0,0.8), 
-                        inset 0 0 40px rgba(139,92,26,0.15),
-                        0 0 20px var(--ouro-sutil);
-            transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.6s ease;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.8), inset 0 0 40px rgba(139,92,26,0.12);
+            transition: transform 0.5s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.5s ease;
+            animation: eletricidadeFerro 4s infinite alternate;
         }
 
-        @media (hover: hover) {
-            .envelope-realista:hover {
-                transform: scale(1.04);
-                box-shadow: 0 40px 80px rgba(0,0,0,0.85), 0 0 30px rgba(212, 175, 55, 0.4);
-            }
+        @keyframes eletricidadeFerro {
+            0%, 100% { box-shadow: 0 25px 60px rgba(0,0,0,0.8), 0 0 15px rgba(148, 163, 184, 0.2), inset 0 0 40px rgba(139,92,26,0.12); border-color: var(--ferro-prata); }
+            50% { box-shadow: 0 25px 60px rgba(0,0,0,0.8), 0 0 25px rgba(226, 232, 240, 0.6), inset 0 0 40px rgba(139,92,26,0.12); border-color: #e2e8f0; }
         }
-        .envelope-realista:active {
+
+        .envelope-realista:hover {
             transform: scale(1.04);
+            box-shadow: 0 35px 70px rgba(0,0,0,0.85), 0 0 30px rgba(226, 232, 240, 0.4);
         }
 
         .carimbo-militar {
@@ -189,9 +209,9 @@
             margin-top: 20px;
             padding: 2px;
             border-radius: 40px;
-            background: linear-gradient(90deg, rgba(255,255,255,0.1), var(--ouro-luxo), rgba(255,255,255,0.1));
+            background: linear-gradient(90deg, rgba(255,255,255,0.1), var(--ferro-prata), rgba(255,255,255,0.1));
             background-size: 200% auto;
-            box-shadow: 0 0 20px rgba(214, 175, 87, 0.15);
+            box-shadow: 0 0 20px rgba(148, 163, 184, 0.15);
             transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.5s ease;
         }
 
@@ -212,22 +232,17 @@
             transition: background 0.3s ease, color 0.3s ease;
         }
 
-        @media (hover: hover) {
-            .wrapper-botao:hover {
-                transform: scale(1.07);
-                box-shadow: 0 0 30px var(--ouro-luxo);
-                background-position: right center;
-            }
-            .wrapper-botao:hover .btn-experiencia {
-                background: var(--ouro-luxo);
-                color: #030712;
-            }
-        }
-        .wrapper-botao:active {
+        .wrapper-botao:hover {
             transform: scale(1.07);
+            box-shadow: 0 0 30px var(--ferro-prata);
+            background-position: right center;
+        }
+        
+        .wrapper-botao:hover .btn-experiencia {
+            background: var(--ferro-prata);
+            color: #030712;
         }
 
-        /* O SEGREDO AQUI: display: none garante que o iframe não apareça de fundo */
         #prontuario-frame {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -250,10 +265,10 @@
 </head>
 <body>
 
-    <!-- Fundo de Estrelas Fixo -->
+    <!-- Fundo de Estrelas e Borboletas -->
     <div id="cenario-cosmos"></div>
 
-    <!-- Tela Inicial: Apenas um Envelope na tela -->
+    <!-- Tela Inicial: Envelope com bordas prata animadas -->
     <div class="container-experiencia" id="painel-principal">
         <div class="envelope-realista">
             <div class="carimbo-militar">CONFIDENCIAL • MARINHA DO BRASIL</div>
@@ -276,27 +291,35 @@
         </div>
     </div>
 
-    <!-- O iframe começa 100% oculto do layout -->
+    <!-- Iframe oculto para transição -->
     <iframe id="prontuario-frame" src="prontuario.htm"></iframe>
 
     <!-- Áudio de Fundo -->
     <audio id="musica-elvis" src="elvis.html.mp3" preload="auto" loop></audio>
 
     <script>
-        // Estrelas de fundo
+        // Distribuição dinâmica de estrelas pratas e borboletas
         const cosmos = document.getElementById('cenario-cosmos');
-        const totalEstrelas = 90;
-        for (let i = 0; i < totalEstrelas; i++) {
-            const estrela = document.createElement('div');
-            estrela.className = 'estrela-pulsante';
-            const tamanho = Math.random() * 2.5 + 1.5;
-            estrela.style.width = `${tamanho}px`;
-            estrela.style.height = `${tamanho}px`;
-            estrela.style.top = Math.random() * 100 + 'vh';
-            estrela.style.left = Math.random() * 100 + 'vw';
-            estrela.style.animationDelay = Math.random() * 4 + 's';
-            estrela.style.animationDuration = (Math.random() * 2 + 3) + 's';
-            cosmos.appendChild(estrela);
+        const totalElementos = 80;
+
+        for (let i = 0; i < totalElementos; i++) {
+            const elemento = document.createElement('div');
+            // Intercala entre estrelas e silhuetas de borboletas
+            if (i % 3 === 0) {
+                elemento.className = 'borboleta-pulsante';
+                elemento.style.left = Math.random() * 100 + 'vw';
+                elemento.style.top = Math.random() * 100 + 'vh';
+            } else {
+                elemento.className = 'estrela-pulsante';
+                const tamanho = Math.random() * 2 + 1.5;
+                elemento.style.width = `${tamanho}px`;
+                elemento.style.height = `${tamanho}px`;
+                elemento.style.top = Math.random() * 100 + 'vh';
+                elemento.style.left = Math.random() * 100 + 'vw';
+            }
+            elemento.style.animationDelay = Math.random() * 4 + 's';
+            elemento.style.animationDuration = (Math.random() * 2 + 3) + 's';
+            cosmos.appendChild(elemento);
         }
 
         // Função de disparo pelo botão
@@ -305,22 +328,17 @@
             const interfaceOriginal = document.getElementById('painel-principal');
             const frameProntuario = document.getElementById('prontuario-frame');
 
-            // 1. Toca a música após o clique
             som.play().catch(err => console.log("Áudio iniciado."));
 
-            // 2. Transição para sumir com o primeiro envelope
             interfaceOriginal.style.opacity = '0';
             interfaceOriginal.style.transform = 'scale(0.92)';
 
             setTimeout(() => {
                 interfaceOriginal.style.display = 'none';
-
-                // 3. Só agora o iframe passa a existir e aparecer na tela inteira
                 frameProntuario.style.display = 'block';
                 setTimeout(() => {
                     frameProntuario.style.opacity = '1';
                 }, 50);
-
             }, 1000);
         }
     </script>
