@@ -2,291 +2,310 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Início - Dra. Débora</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Dra. Débora - Oficial</title>
     <style>
         :root {
-            --ouro-naval: #9e7e38;
-            --ouro-brilho: #d4af37;
-            --azul-marinha: #020b1a; 
-            --papel-antigo: #dfcca6; /* Tom pergaminho escurecido para não cansar a vista */
+            --azul-profundo: #020611;
+            --vermelho-militar: #b30000;
+            --prata-raio: linear-gradient(105deg, rgba(255,255,255,0) 30%, rgba(220,225,235,0.4) 45%, rgba(255,255,255,0) 60%);
+            /* Tom de pergaminho antigo imperial escurecido luxuoso (nada de bege comum) */
+            --envelope-antigo: linear-gradient(135deg, #c5a880 0%, #a3855c 100%);
+            --sombra-prata: 0 0 25px rgba(192, 192, 192, 0.4);
         }
 
+        /* Bloqueio absoluto de rolagem e tela cheia imersiva */
+        * { box-sizing: border-box; }
         body, html {
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            height: 100%;
+            margin: 0; padding: 0;
+            width: 100%; height: 100%;
             overflow: hidden;
-            background-color: var(--azul-marinha);
+            background-color: var(--azul-profundo);
             font-family: 'Georgia', serif;
             display: flex;
             justify-content: center;
             align-items: center;
+            -webkit-tap-highlight-color: transparent;
         }
 
-        /* Fundo Luxuoso Canva: Azul quase preto com borboletas neon flutuantes */
+        /* Fundo Dinâmico com Estrelas Pulsantes */
         #cenario-fundo {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             z-index: -1;
-            background: radial-gradient(circle at center, #0a162b 0%, #020b1a 100%);
+            background: radial-gradient(circle at center, #0a1326 0%, var(--azul-profundo) 100%);
         }
 
-        .borboleta-neon {
+        .estrela {
             position: absolute;
-            width: 12px;
-            height: 12px;
-            background: rgba(0, 238, 255, 0.25);
+            background: #ffffff;
             border-radius: 50%;
-            box-shadow: 0 0 15px rgba(0, 238, 255, 0.6), 0 0 30px rgba(0, 238, 255, 0.3);
-            animation: flutuarBorboleta 12s infinite ease-in-out;
+            box-shadow: 0 0 8px #cbd5e1;
+            animation: pulsarEstrela 4s infinite ease-in-out;
             pointer-events: none;
         }
 
-        @keyframes flutuarBorboleta {
-            0% { transform: translate(0, 100vh) scale(0.6) rotate(0deg); opacity: 0; }
-            20% { opacity: 0.7; }
-            80% { opacity: 0.5; }
-            100% { transform: translate(80px, -10vh) scale(1.2) rotate(360deg); opacity: 0; }
+        @keyframes pulsarEstrela {
+            0%, 100% { opacity: 0.2; transform: scale(0.8); }
+            50% { opacity: 0.9; transform: scale(1.3); box-shadow: 0 0 12px #fff; }
         }
 
-        /* Layout em coluna para alinhar o envelope e o botão embaixo */
-        .area-principal {
+        /* Container Principal sem estouro de layout */
+        .container-principal {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 30px;
+            justify-content: center;
+            gap: 25px;
+            width: 100%;
+            height: 100%;
+            padding: 20px;
             z-index: 10;
         }
 
-        /* CARD FUTURISTA COM BORDA ELÉTRICA OURO NAVAL */
-        .card-futurista {
+        /* CARD FUTURISTA / ENVELOPE 3D */
+        .envelope-3d {
             position: relative;
-            background: linear-gradient(135deg, var(--ouro-naval), #4d3d1b, var(--ouro-naval));
-            background-size: 200% 200%;
-            padding: 4px;
-            border-radius: 24px;
-            box-shadow: 0 0 35px rgba(158, 126, 56, 0.3);
-            transition: transform 0.5s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.5s ease;
-            animation: bordaEletrica 4s linear infinite;
-        }
-
-        @keyframes bordaEletrica {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        /* Efeito de zoom leve e suave solicitado (tanto mouse quanto celular) */
-        .card-futurista:hover {
-            transform: scale(1.03);
-            box-shadow: 0 0 55px rgba(212, 175, 55, 0.6);
-        }
-
-        /* Papel Antigo (Estilo Canva Premium mas Gratuito) */
-        .papel-prontuario {
-            background-color: var(--papel-antigo);
-            background-image: url('https://www.transparenttextures.com/patterns/handmade-paper.png');
-            width: 400px;
-            min-height: 520px;
-            border-radius: 20px;
-            padding: 35px;
-            color: #1e140a; /* Tom ultra legível, mas suave */
+            background: var(--envelope-antigo);
+            width: 100%;
+            max-width: 420px;
+            height: 480px;
+            border-radius: 12px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.6), inset 0 0 30px rgba(0,0,0,0.3);
             display: flex;
             flex-direction: column;
             align-items: center;
-            position: relative;
-            box-shadow: inset 0 0 40px rgba(0,0,0,0.15);
-            box-sizing: border-box;
+            padding: 30px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.4s ease;
+            overflow: hidden; /* Garante que o raio de prata não vaze do card */
         }
 
-        /* Imagem do Topo com Zoom Sutil Próprio */
-        .imagem-topo {
-            width: 100px;
-            height: auto;
-            margin-bottom: 20px;
-            border-radius: 6px;
-            transition: transform 0.4s ease;
+        /* Efeito Raio de Prata Sutil Passando */
+        .envelope-3d::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -150%;
+            width: 300%; height: 100%;
+            background: var(--prata-raio);
+            transition: 0s;
+            pointer-events: none;
         }
 
-        .imagem-topo:hover {
-            transform: scale(1.07);
+        /* Gatilho do Raio e Zoom (Funciona no PC e no Celular) */
+        .envelope-3d:hover, .envelope-3d:active {
+            transform: scale(1.03) translateY(-5px);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.8), var(--sombra-prata);
         }
 
-        .identificacao-marinha {
+        .envelope-3d:hover::before {
+            left: 150%;
+            transition: 1.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Elementos Textuais Internos em Vermelho (Nada se sobrepõe) */
+        .cabecalho-militar {
             font-size: 0.75rem;
             text-transform: uppercase;
             letter-spacing: 4px;
-            color: #53402b;
-            font-weight: bold;
-            margin-bottom: 15px;
+            color: var(--vermelho-militar);
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 10px;
+            opacity: 0.9;
         }
 
-        .carimbo-medico {
-            font-size: 2.3rem;
-            color: #8b0000;
-            border: 4px double #8b0000;
-            padding: 6px 25px;
+        .carimbo-nome {
+            font-size: 2.2rem;
+            color: var(--vermelho-militar);
+            border: 3px double var(--vermelho-militar);
+            padding: 5px 25px;
             text-transform: uppercase;
-            transform: rotate(-3deg);
+            font-family: 'Impact', 'Arial Black', sans-serif;
+            letter-spacing: 2px;
             margin: 15px 0;
-            font-family: 'Arial Black', sans-serif;
+            transform: rotate(-1.5deg);
+        }
+
+        .tarja-status {
+            font-size: 0.9rem;
+            letter-spacing: 7px;
+            color: var(--vermelho-militar);
+            font-weight: 900;
+            margin-bottom: auto;
+            text-shadow: 1px 1px 0px rgba(0,0,0,0.1);
+        }
+
+        .bloco-mensagem {
+            text-align: center;
+            background: rgba(0, 0, 0, 0.05);
+            padding: 15px;
+            border-radius: 8px;
+            width: 100%;
+            margin-bottom: auto;
+            box-shadow: inset 0 1px 5px rgba(0,0,0,0.1);
+        }
+
+        .rotulo-paciente {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            color: #4a3b2c;
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
             letter-spacing: 1px;
         }
 
-        .tarja-sigilo {
-            font-size: 0.85rem;
-            letter-spacing: 6px;
-            color: #1e140a;
-            font-weight: bold;
-            margin-bottom: 25px;
-            opacity: 0.8;
-        }
-
-        .mensagem-paciente {
+        .texto-paciente {
             font-style: italic;
-            text-align: center;
-            line-height: 1.7;
-            font-size: 1.2rem;
-            margin: 10px 0;
+            color: #1a0f05;
+            font-size: 1.15rem;
+            line-height: 1.5;
         }
 
         /* Lacre de Cera Realista Timbrado com Símbolo de Psiquiatria (Ψ) */
-        .lacre-cera {
-            width: 70px;
-            height: 70px;
-            background: radial-gradient(circle at 35% 35%, #a51d1d 0%, #5a0000 100%);
+        .lacre-selo {
+            width: 75px; height: 75px;
+            background: radial-gradient(circle at 35% 35%, #cc0000 0%, #4a0000 100%);
             border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-top: auto;
-            box-shadow: 3px 5px 12px rgba(0,0,0,0.4), inset -3px -3px 8px rgba(0,0,0,0.5);
-            position: relative;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.5), inset -2px -2px 6px rgba(0,0,0,0.6);
+            filter: drop-shadow(0px 2px 2px rgba(0,0,0,0.3));
         }
 
-        .lacre-cera::after {
+        .lacre-selo::after {
             content: 'Ψ';
-            color: #3b0000;
-            font-size: 2.5rem;
+            color: #2b0000;
+            font-size: 2.6rem;
             font-family: 'Times New Roman', serif;
-            text-shadow: 1px 1px 2px rgba(255,255,255,0.2);
+            text-shadow: 1px 1px 1px rgba(255,255,255,0.15);
         }
 
-        /* CARD DO BOTÃO INFERIOR FUTURISTA */
-        .card-botao-externo {
+        /* CARD DO BOTÃO INFERIOR INTERATIVO (Estilo Canva Moderno/Descolado) */
+        .card-botao {
             position: relative;
-            background: linear-gradient(135deg, var(--ouro-naval), #2b200b, var(--ouro-naval));
+            background: rgba(255, 255, 255, 0.03);
             padding: 2px;
-            border-radius: 40px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-            transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.4s ease;
+            border-radius: 35px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+            transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.3s ease;
         }
 
-        .card-botao-externo:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 30px var(--ouro-brilho);
-        }
-
-        .btn-carinho {
-            background: var(--azul-marinha);
-            border: none;
-            color: var(--ouro-brilho);
-            padding: 15px 45px;
-            border-radius: 38px;
+        .btn-interativo {
+            background: linear-gradient(135deg, #162238 0%, #08101f 100%);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #cbd5e1;
+            padding: 14px 40px;
+            border-radius: 33px;
             text-transform: uppercase;
             letter-spacing: 3px;
             cursor: pointer;
             font-weight: bold;
             font-family: 'Georgia', serif;
-            font-size: 0.85rem;
-            transition: background 0.3s, color 0.3s;
+            font-size: 0.8rem;
+            display: block;
+            outline: none;
+            transition: all 0.3s ease;
         }
 
-        .card-botao-externo:hover .btn-carinho {
-            background: var(--ouro-brilho);
-            color: var(--azul-marinha);
+        /* Zoom e Sombras Pratas no Botão (PC e Mobile) */
+        .card-botao:hover, .card-botao:active {
+            transform: scale(1.05);
+            box-shadow: var(--sombra-prata);
         }
 
-        @media (max-width: 600px) {
-            .papel-prontuario { width: 90vw; min-height: 480px; padding: 25px 20px; }
-            .carimbo-medico { font-size: 1.9rem; }
+        .card-botao:hover .btn-interativo, .card-botao:active .btn-interativo {
+            background: #ffffff;
+            color: var(--azul-profundo);
+            border-color: #ffffff;
+        }
+
+        /* Ajustes responsivos para telas pequenas de celular não quebrarem */
+        @media (max-height: 620px) {
+            .container-principal { gap: 12px; padding: 10px; }
+            .envelope-3d { height: 390px; padding: 15px; }
+            .carimbo-nome { font-size: 1.7rem; margin: 5px 0; }
+            .bloco-mensagem { padding: 8px; }
+            .texto-paciente { font-size: 1rem; }
+            .lacre-selo { width: 55px; height: 55px; }
+            .lacre-selo::after { font-size: 2rem; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Fundo de Estrelas e Borboletas Suaves -->
+    <!-- Fundo Estelar -->
     <div id="cenario-fundo"></div>
 
-    <div class="area-principal">
+    <div class="container-principal" id="area-conteudo">
         
-        <!-- CARD DO ENVELOPE / PRONTUÁRIO -->
-        <div class="card-futurista">
-            <div class="papel-prontuario">
-                
-                <!-- Imagem do topo puxando o arquivo do repositório -->
-                <img src="prontuario.html.png" alt="Emblema Oficial" class="imagem-topo" onerror="this.style.display='none';">
+        <!-- ENVELOPE LUXUOSO 3D -->
+        <div class="envelope-3d">
+            <div class="cabecalho-militar">CONFIDENCIAL • MARINHA DO BRASIL</div>
+            
+            <div class="carimbo-nome">Dra. Débora</div>
+            
+            <div class="tarja-status">SIGILOSO</div>
 
-                <div class="identificacao-marinha">Confidencial • Marinha do Brasil</div>
-                
-                <div class="carimbo-medico">Dra. Débora</div>
-                
-                <div class="tarja-sigilo">SIGILOSO</div>
-
-                <div class="mensagem-paciente">
-                    <strong>Paciente:</strong> <br>
-                    "Jamais esquecerei de você"
-                </div>
-
-                <!-- Lacre em Cera com Psiquiatria -->
-                <div class="lacre-cera"></div>
+            <div class="bloco-mensagem">
+                <span class="rotulo-paciente">Paciente:</span>
+                <span class="texto-paciente">"A pessoa que jamais esquecerá você"</span>
             </div>
+
+            <!-- Lacre Oficial em Cera -->
+            <div class="lacre-selo"></div>
         </div>
 
-        <!-- CARD DO BOTÃO INFERIOR INTERATIVO -->
-        <div class="card-botao-externo">
-            <button class="btn-carinho" onclick="mudarDePagina()">Aperte com carinho</button>
+        <!-- BOTÃO INTERATIVO COM ESTILO CANVA -->
+        <div class="card-botao">
+            <button class="btn-interativo" onclick="avancarComCarinho()">Aperte com carinho</button>
         </div>
 
     </div>
 
-    <!-- Áudio nativo do repositório -->
-    <audio id="som-ambiente" src="elvis.htm.mp3"></audio>
+    <!-- Gatilho oculto para a música elvis.mp3 rodar automaticamente após a transição -->
+    <audio id="trilha-audiovisual" src="elvis.mp3" preload="auto"></audio>
 
     <script>
-        // Sistema automatizado para gerar as borboletas neon flutuantes em posições orgânicas
+        // Sistema que gera as estrelas pratas piscando ao fundo de forma aleatória
         const fundo = document.getElementById('cenario-fundo');
-        const quantidadeBorboletas = 15;
+        const numEstrelas = 35;
 
-        for (let i = 0; i < quantidadeBorboletas; i++) {
-            let borboleta = document.createElement('div');
-            borboleta.className = 'borboleta-neon';
+        for (let i = 0; i < numEstrelas; i++) {
+            const estrela = document.createElement('div');
+            estrela.className = 'estrela';
             
-            borboleta.style.left = Math.random() * 100 + 'vw';
-            borboleta.style.animationDelay = Math.random() * 12 + 's';
-            borboleta.style.animationDuration = (Math.random() * 6 + 9) + 's';
+            // Cria tamanhos diferentes para gerar profundidade 3D visual
+            const tamanho = Math.random() * 3 + 1;
+            estrela.style.width = `${tamanho}px`;
+            estrela.style.height = `${tamanho}px`;
             
-            // Pequenas variações de tons sutis de neon
-            if (i % 2 === 0) {
-                borboleta.style.background = 'rgba(224, 130, 243, 0.25)';
-                borboleta.style.boxShadow = '0 0 15px rgba(224, 130, 243, 0.6)';
-            }
+            estrela.style.top = Math.random() * 100 + 'vh';
+            estrela.style.left = Math.random() * 100 + 'vw';
             
-            fundo.appendChild(borboleta);
+            // Tempos de pulsação dessincronizados para parecer natural
+            estrela.style.animationDelay = Math.random() * 4 + 's';
+            
+            fundo.appendChild(estrela);
         }
 
-        function mudarDePagina() {
-            const playerAudio = document.getElementById('som-ambiente');
-            playerAudio.play().catch(erro => console.log("Aguardando interação inicial."));
+        // Função cinematográfica disparada pelo botão
+        function avancarComCarinho() {
+            const audio = document.getElementById('trilha-audiovisual');
+            const conteudo = document.getElementById('area-conteudo');
             
-            // Efeito cinematográfico de transição suave
-            document.body.style.transition = "opacity 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94)";
-            document.body.style.opacity = "0";
+            // Dá o play no áudio por segurança (o navegador valida o clique e autoriza rodar automático na próxima)
+            audio.play().catch(() => console.log("Áudio carregado."));
+            
+            // Efeito fade-out ultra profissional sumindo com o conteúdo antes de trocar de tela
+            conteudo.style.transition = "opacity 1.2s ease-in-out";
+            conteudo.style.opacity = "0";
             
             setTimeout(() => {
-                window.location.href = "prontuario.htm"; 
+                // Redireciona para a página da carta (carta.html) onde a música começará tocando direto
+                window.location.href = "carta.html";
             }, 1200);
         }
     </script>
