@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Uma Luz na Escuridão</title>
+    <title>Felicidade - Uma Luz na Escuridão</title>
     <style>
         :root {
             --azul-cosmos: #03081e;
@@ -49,6 +49,7 @@
             50% { opacity: 1; transform: scale(1.4); }
         }
 
+        /* PAINEL DE CONTROLE DE ÁUDIO - MANTIDO PARA REPRODUÇÃO CONTÍNUA */
         .painel-audio-premium {
             position: fixed;
             top: 20px;
@@ -99,7 +100,7 @@
             letter-spacing: 7px;
             text-transform: uppercase;
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 40px;
             background: linear-gradient(135deg, #e2e8f0, #ffffff, #94a3b8);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -113,26 +114,39 @@
             outline: 2px solid var(--ouro-escuro);
             outline-offset: 4px;
             box-shadow: 0 30px 70px rgba(0, 0, 0, 0.85);
+            perspective: 1200px;
         }
 
         .folha-texto-antigo {
             background-color: var(--papel-antigo);
             background-image: url('https://www.transparenttextures.com/patterns/cream-paper.png');
             border-radius: 21px;
-            padding: 50px 40px;
+            padding: 60px 45px;
             color: var(--texto-cor);
             border: 2px solid var(--ouro-escuro);
             display: flex;
             flex-direction: column;
-            gap: 25px;
+            gap: 35px;
         }
 
+        /* EFEITO DE ROLAGEM FUTURISTA CINEMÁTICO */
         .paragrafo-relato {
             font-size: 1.15rem;
-            line-height: 1.8;
+            line-height: 1.9;
             text-align: justify;
             text-indent: 30px;
             margin: 0;
+            opacity: 0.2;
+            transform: scale(0.92) rotateX(15deg) translateY(30px);
+            transform-origin: center top;
+            transition: all 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+            filter: blur(2px);
+        }
+
+        .paragrafo-relato.em-foco {
+            opacity: 1;
+            transform: scale(1) rotateX(0deg) translateY(0);
+            filter: blur(0px);
         }
 
         .destaque-poetico {
@@ -157,19 +171,22 @@
             text-transform: uppercase;
             letter-spacing: 2px;
             cursor: pointer;
-            transition: 0.3s;
+            transition: all 0.4s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
         }
 
         .btn-proxima:hover {
             background: var(--ouro-escuro);
-            transform: scale(1.02);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(97, 77, 26, 0.5);
         }
 
         @media (max-width: 768px) {
             .titulo-pagina { font-size: 1.5rem; }
-            .folha-texto-antigo { padding: 30px 20px; }
+            .folha-texto-antigo { padding: 40px 20px; gap: 25px; }
             .area-botao { justify-content: center; }
             .btn-proxima { width: 100%; }
+            .paragrafo-relato { font-size: 1.05rem; }
         }
     </style>
 </head>
@@ -177,38 +194,42 @@
 
     <div id="espaco-sideral"></div>
 
-    <!-- PAINEL DE CONTROLE DE MÍDIA -->
+    <!-- PAINEL DE CONTROLE DE MÍDIA COMPATÍVEL -->
     <div class="painel-audio-premium" onclick="event.stopPropagation()">
         <button class="btn-controle-midia" id="btn-play-pause" onclick="alternarAudio()">▶️</button>
         <input type="range" class="slider-volume-custom" id="controle-volume" min="0" max="1" step="0.05" value="1" oninput="ajustarVolume(this.value)">
     </div>
 
     <div class="efeito-luxo-entrada">
-        <h1 class="titulo-pagina">Uma Luz na Escuridão</h1>
+        <h1 class="titulo-pagina">Felicidade</h1>
 
         <!-- CARD PRINCIPAL -->
         <div class="card-carta-container">
             <div class="folha-texto-antigo">
-                <p class="paragrafo-relato">No meio do caos cultural e após anos longe de Belém, o meu retorno não foi um processo simples. Vivi tempestades silenciosas que guardei quase inteiramente para mim; uma gestação de altíssimo risco onde as únicas testemunhas éramos eu e minha sobrinha.</p>
-                <p class="paragrafo-relato">Desde muito jovem aprendi que diminuir o outro é o pior erro humano; o sol brilha para todos, mas habitar a luz ou a sombra é uma escolha estritamente individual. Ninguém muda ninguém.</p>
-                <p class="paragrafo-relato">Por trás das aparências, sou uma pessoa extremamente racional, embora guarde em mim um lado profundamente romântico. <span class="destaque-poetico">Você transcendeu o papel da médica que zela pela minha mente; vejo em você uma pérola rara.</span></p>
-                <p class="paragrafo-relato">Não há pretensão de reciprocidade ou de posse em minhas palavras. Carrego o perfeccionismo como um defeito confesso, mas hoje ele serve apenas a um propósito: garantir que você receba o melhor de mim.</p>
+                
+                <!-- Insira seus novos parágrafos aqui para a página Felicidade -->
+                <p class="paragrafo-relato">A verdadeira felicidade não reside na ausência de problemas, mas sim na capacidade de encontrar serenidade quando o horizonte parece incerto. Redescobrir meus passos e alinhar meus pensamentos foi o primeiro grande marco dessa nova jornada.</p>
+                
+                <p class="paragrafo-relato">Com o tempo, compreendi que as respostas que tanto buscamos do lado de fora já estão consolidadas no nosso íntimo, aguardando o momento correto de florescer sob a luz da razão e do afeto sincero.</p>
+                
+                <p class="paragrafo-relato"><span class="destaque-poetico">Encontrar esse equilíbrio dividindo minhas vulnerabilidades com quem sabe proteger minha mente trouxe uma paz que eu há muito não experimentava.</span></p>
 
-                <!-- BOTÃO DE NAVEGAÇÃO -->
+                <!-- BOTÃO DE NAVEGAÇÃO DA PRÓXIMA ETAPA -->
                 <div class="area-botao">
-                    <button class="btn-proxima" onclick="irParaProxima(event)">Próxima Página</button>
+                    <button class="btn-proxima" onclick="irParaProxima(event)">Concluir Jornada</button>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- O MESMO ARQUIVO DE ÁUDIO DE ORIGEM -->
     <audio id="som-ambiente" src="elvis.html.mp3" loop></audio>
 
     <script>
         const audio = document.getElementById('som-ambiente');
         const btn = document.getElementById('btn-play-pause');
 
-        // 1. SINCRONIZAÇÃO DE ÁUDIO ENTRE PÁGINAS
+        // 1. SINCRONIZAÇÃO ABSOLUTA E RETOMADA DO ÁUDIO SEM CORTES
         window.addEventListener('DOMContentLoaded', () => {
             const savedTime = localStorage.getItem('elvis_time');
             const isPlaying = localStorage.getItem('elvis_playing');
@@ -220,7 +241,7 @@
                 document.getElementById('controle-volume').value = savedVol;
             }
 
-            // Tenta retomar se o usuário já tiver interagido antes
+            // Se vinha tocando da página anterior, força o desbloqueio contínuo
             if (isPlaying === 'true') {
                 desbloquearAudio();
             }
@@ -230,7 +251,7 @@
             audio.play().then(() => {
                 btn.textContent = "⏸️";
                 localStorage.setItem('elvis_playing', 'true');
-            }).catch(() => console.log("Aguardando interação inicial"));
+            }).catch(() => console.log("Aguardando clique na tela para persistência de áudio"));
         }
 
         function alternarAudio() {
@@ -250,20 +271,34 @@
             localStorage.setItem('elvis_vol', v);
         }
 
-        // 2. TRANSIÇÃO EM FADE-OUT E SALVAMENTO
+        // 2. DIRECIONAMENTO PARA A PRÓXIMA PÁGINA (Se houver uma terceira, mude o destino abaixo)
         function irParaProxima(e) {
             e.stopPropagation();
-            
-            // Guarda o tempo atual da música para a próxima página ler
             localStorage.setItem('elvis_time', audio.currentTime);
-            
             document.body.style.opacity = "0";
             setTimeout(() => {
-                window.location.href = "felicidade.html"; 
+                // Altere aqui se for criar uma página final (ex: "fim.html") ou se encerra aqui
+                window.location.href = "final.html"; 
             }, 800);
         }
 
-        // Fundo estrelado dinâmico
+        // 3. ATIVADOR DE ROLAGEM ESPACIAL (3D Matrix Reveal)
+        const paragrafos = document.querySelectorAll('.paragrafo-relato');
+        
+        const monitorarScroll = new IntersectionObserver((entradas) => {
+            entradas.forEach(entrada => {
+                if (entrada.isIntersecting) {
+                    entrada.target.classList.add('em-foco');
+                }
+            });
+        }, {
+            threshold: 0.12,
+            rootMargin: "0px 0px -40px 0px"
+        });
+
+        paragrafos.forEach(p => monitorarScroll.observe(p));
+
+        // Universo de estrelas dinâmico de fundo
         const cosmos = document.getElementById('espaco-sideral');
         for (let i = 0; i < 40; i++) {
             const s = document.createElement('div');
