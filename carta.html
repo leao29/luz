@@ -3,158 +3,280 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Uma Luz na Escuridão</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Lora:ital,wght@0,400;0,600;1,400&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <title>Prontuário Médico - Uma Luz na Escuridão</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Lora:ital,wght@0,400;0,600;1,400&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --space-blue: #020617;
-            --silver: #e2e8f0;
-            --silver-border: #94a3b8;
+            --space-dark: #030712;
+            --gold-bright: #fbbf24;
+            --gold-dim: #b45309;
+            --cyber-silver: #e2e8f0;
+            --parchment: #fcf6e8;
+        }
+
+        * {
+            box-sizing: border-box;
         }
 
         body {
             margin: 0;
             padding: 0;
-            background-color: var(--space-blue);
-            color: #2d2d2d;
+            background-color: var(--space-dark);
+            color: #1e293b;
             font-family: 'Lora', serif;
-            overflow-x: hidden;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
+            overflow-x: hidden;
         }
 
-        /* Fundo de Estrelas Pulsantes */
-        .stars-container {
+        /* Fundo Estelar Dinâmico */
+        .universe-bg {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             z-index: -1;
-            background: radial-gradient(circle at center, #0a192f 0%, #020617 100%);
+            background: radial-gradient(circle at center, #0f172a 0%, #030712 100%);
         }
 
         .star {
             position: absolute;
-            background: white;
+            background: #fff;
             border-radius: 50%;
-            opacity: 0.3;
-            animation: pulse 3s infinite ease-in-out;
+            opacity: 0.2;
+            animation: pulseStar 4s infinite ease-in-out;
         }
 
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); opacity: 0.3; }
-            50% { transform: scale(1.5); opacity: 0.8; box-shadow: 0 0 10px white; }
+        @keyframes pulseStar {
+            0%, 100% { transform: scale(1); opacity: 0.2; }
+            50% { transform: scale(1.8); opacity: 0.7; box-shadow: 0 0 8px #fff; }
         }
 
-        /* Título Futurista */
-        .header-card {
-            margin-top: 50px;
-            padding: 40px;
+        /* Container Principal com Rolagem Elegante */
+        .main-scroll {
+            width: 100%;
+            max-width: 850px;
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            align-items: center;
+        }
+
+        /* Card de Título Luxuoso */
+        .luxury-header-card {
+            width: 100%;
             text-align: center;
-            border: 1px solid var(--silver-border);
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(5px);
-            border-radius: 4px;
-            max-width: 90%;
-            box-shadow: 0 0 30px rgba(148, 163, 184, 0.2);
+            padding: 35px 20px;
+            background: rgba(3, 7, 18, 0.6);
+            backdrop-filter: blur(10px);
+            border-radius: 8px;
+            position: relative;
+            /* Borda Dourada Elegante solicitada */
+            border: 2px solid transparent;
+            background-image: linear-gradient(rgba(3, 7, 18, 0.8), rgba(3, 7, 18, 0.8)), 
+                              linear-gradient(to right, var(--gold-bright), var(--gold-dim), var(--gold-bright));
+            background-origin: border-box;
+            background-clip: padding-box, border-box;
+            box-shadow: 0 0 35px rgba(251, 191, 36, 0.15);
         }
 
-        h1 {
+        .luxury-header-card h1 {
             font-family: 'Orbitron', sans-serif;
-            font-size: clamp(1.8rem, 5vw, 3.5rem);
-            color: var(--silver);
+            font-size: clamp(1.5rem, 4vw, 2.8rem);
+            color: #f8fafc;
             text-transform: uppercase;
-            letter-spacing: 8px;
+            letter-spacing: 6px;
             margin: 0;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
         }
 
-        /* Carta de Papel Antigo */
-        .letter-container {
-            margin: 60px 20px;
-            max-width: 800px;
-            background: #fdf5e6; /* Parchment color */
-            padding: 60px 50px;
-            box-shadow: 0 10px 50px rgba(0,0,0,0.8), inset 0 0 100px rgba(139, 69, 19, 0.1);
+        .luxury-header-card .subtitle {
+            font-family: 'Cinzel', serif;
+            color: var(--gold-bright);
+            font-size: 0.95rem;
+            letter-spacing: 4px;
+            margin-top: 12px;
+            text-transform: uppercase;
+        }
+
+        /* Card da Carta / Prontuário (Mistura de antigo com bordas futuristas) */
+        .document-card {
+            width: 100%;
+            background-color: var(--parchment);
+            padding: 55px 45px;
             position: relative;
-            border-radius: 2px;
-            border: 1px solid #dcd1bd;
+            border-radius: 4px;
+            /* Efeito de borda futurista sutil e luxuosa */
+            border: 1px solid rgba(226, 232, 240, 0.2);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7), 
+                        inset 0 0 80px rgba(139, 92, 26, 0.08);
         }
 
-        /* Efeito de textura de papel */
-        .letter-container::before {
-            content: "";
+        /* Detalhes angulares futuristas nas quinas do papel antigo */
+        .document-card::before, .document-card::after {
+            content: '';
             position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background-image: url('https://www.transparenttextures.com/patterns/paper.png');
+            width: 15px;
+            height: 15px;
+            border: 2px solid var(--gold-bright);
             pointer-events: none;
-            opacity: 0.6;
         }
+        /* Topo esquerda e baixo direita */
+        .document-card::before { top: 15px; left: 15px; border-right: 0; border-bottom: 0; }
+        .document-card::after { bottom: 15px; right: 15px; border-left: 0; border-top: 0; }
 
-        .content {
-            line-height: 1.8;
-            font-size: 1.25rem;
+        /* Estilização do Conteúdo do Prontuário */
+        .medical-content {
+            font-size: 1.2rem;
+            line-height: 1.85;
             text-align: justify;
-            position: relative;
-            z-index: 1;
+            color: #1e293b;
         }
 
-        p {
-            margin-bottom: 25px;
+        .section-title {
+            font-family: 'Cinzel', serif;
+            font-weight: 700;
+            font-size: 1.35rem;
+            color: #7c2d12;
+            margin-top: 35px;
+            margin-bottom: 15px;
+            border-bottom: 1px solid rgba(124, 45, 18, 0.2);
+            padding-bottom: 5px;
+            letter-spacing: 1px;
         }
 
-        .highlight {
+        .meta-line {
+            margin-bottom: 12px;
+            font-size: 1.15rem;
+        }
+
+        .label {
+            font-family: 'Cinzel', serif;
+            font-weight: 700;
+            color: #9a3412;
+            font-size: 1.05rem;
+            display: inline-block;
+            width: 140px;
+        }
+
+        .prescription-list {
+            margin: 0;
+            padding-left: 20px;
+        }
+
+        .prescription-list li {
+            margin-bottom: 20px;
+            list-style-type: square;
+        }
+
+        .prescription-title {
             font-weight: 600;
-            color: #1a1a1a;
+            color: #0f172a;
+            display: block;
+            font-size: 1.25rem;
+            margin-bottom: 4px;
         }
 
-        /* Responsividade */
+        /* Responsividade para Celulares */
         @media (max-width: 600px) {
-            .letter-container { padding: 40px 25px; }
-            h1 { letter-spacing: 4px; }
-            .content { font-size: 1.1rem; }
+            .main-scroll { padding: 20px 12px; gap: 25px; }
+            .luxury-header-card { padding: 25px 15px; }
+            .document-card { padding: 35px 20px; }
+            .label { display: block; width: auto; margin-bottom: 2px; }
+            .medical-content { font-size: 1.1rem; line-height: 1.7; }
+            .section-title { font-size: 1.2rem; }
         }
     </style>
 </head>
 <body>
 
-    <div class="stars-container" id="stars"></div>
+    <!-- Fundo Estrelado -->
+    <div class="universe-bg" id="universe"></div>
 
-    <div class="header-card">
-        <h1>UMA LUZ NA ESCURIDÃO</h1>
-    </div>
-
-    <article class="letter-container">
-        <div class="content">
-            <p>No meio do caos cultural e após anos de ausência, o meu retorno a Belém não foi um processo simples. Vivi tempestades silenciosas que guardei quase inteiramente para mim; uma gestação de altíssimo risco onde as únicas testemunhas éramos eu e minha sobrinha. Cruzar aquele limiar assustador para testemunhar o nascimento de Helena Sophia tornou-se um marco definitivo sobre a fragilidade e a força indomável da vida.</p>
-
-            <p>Sempre que retornava a esta cidade, meu foco era absoluto em proteger os raros momentos com minha família. No entanto, deixar para trás uma trajetória estável em Brasília e minha própria liberdade provocou uma guinada de 360 graus na minha existência. Nesse percurso, enfrentei uma rasteira profissional — um golpe severo que, ironicamente, transformou-se em fortaleza. Ali compreendi que minha capacidade técnica e intelectual vai muito além do que aqueles que me subestimam conseguem enxergar.</p>
-
-            <p>Talvez confundam a ausência de arrogância com fraqueza. Mas aprendi cedo que diminuir o próximo é o pior erro humano. O sol brilha para todos, mas habitar a luz ou a sombra é uma escolha estritamente individual. Ninguém muda ninguém; essa transformação pertence apenas a Deus e ao próprio indivíduo. A vida é curta demais para aceitarmos andar em círculos.</p>
-
-            <p>Este recomeço já era uma pauta constante com a <span class="highlight">Dra. Laila</span>, que me acompanha há cerca de três anos com uma interatividade incrível. Minha vinda foi cercada de orientações cruciais para preservar meu equilíbrio psicológico. Ainda assim, por razões complexas, muitas vezes me sinto como um peixe fora d'água nesta cidade.</p>
-
-            <p>Por trás das aparências, sou uma pessoa racional, embora guarde um lado profundamente romântico. Sei delimitar com precisão os papéis da profissional e da mulher. E é nessa clareza que reafirmo o quanto você se tornou importante na minha realidade. Você transcendeu o papel da médica que zela pela minha mente; vejo em você uma pérola rara.</p>
-
-            <p>Não há pretensão de reciprocidade ou de posse. Como lhe disse outrora, uma linda sereia pertence aos oceanos mais vastos, e não ao pequeno lago que representa a minha vida. No entanto, essa percepção não anula o meu desejo genuíno de estar aqui, traduzindo o que sou através deste gesto. Carrego o perfeccionismo como um defeito confesso, mas hoje ele serve apenas para garantir que você receba o melhor de mim. Que esta leitura lhe faça sentir exatamente o tamanho do seu valor.</p>
+    <!-- Container de Rolagem -->
+    <main class="main-scroll">
+        
+        <!-- Card Superior Luxuoso -->
+        <div class="luxury-header-card">
+            <h1>Uma Luz na Escuridão</h1>
+            <div class="subtitle">Prontuário Médico Afetivo</div>
         </div>
-    </article>
 
+        <!-- Card da Carta com Textura Antiga e Toque Cyber/Futurista Sutil -->
+        <article class="document-card">
+            <div class="medical-content">
+                
+                <div class="section-title">Histórico & Quadro Clínico</div>
+                
+                <div class="meta-line">
+                    <span class="label">Diagnóstico:</span> Afeto Agudo Incurável
+                </div>
+                
+                <div class="meta-line">
+                    <span class="label">Paciente:</span> Identificada como uma alma sonhadora em trânsito temporário por Belém (período de 1 ano e 3 meses fixado pelas raízes familiares e pelo primeiro ano da pequena Helena em 5 de agosto), com retorno programado para Brasília pós-aniversário.
+                </div>
+                
+                <div class="meta-line">
+                    <span class="label">Evolução:</span> Veterana de uma jornada de mais de 20 anos enfrentando a síndrome do pânico. Apresenta alta capacidade de discernimento e blindagem terapêutica, sabendo separar perfeitamente a relação médico-paciente tradicional.
+                </div>
+                
+                <p style="margin-top: 20px;">
+                    <strong style="color: #9a3412; font-family: 'Cinzel', serif; font-size: 1.05rem;">Nota Clínica Importante:</strong> 
+                    Desenvolveu uma percepção única e genuína sobre a profissional responsável. Relata enxergar através da postura inicialmente rígida e sem apertos de mão dos primeiros 10 minutos, avistando uma essência magnífica. Descreve a médica poeticamente como uma *"sereia enorme que merece os maiores oceanos"*, reconhecendo com total respeito os limites da privacidade, mas celebrando o privilégio de sua presença e de seu sorriso.
+                </p>
+
+                <div class="section-title">Receituário Especial & Conduta</div>
+                
+                <ul class="prescription-list">
+                    <li>
+                        <span class="prescription-title">1. Dose Regular de Realização</span>
+                        Focar no lado profissional e ir em busca de não apenas sobreviver, mas viver plenamente os próprios sonhos.
+                    </li>
+                    <li>
+                        <span class="prescription-title">2. Memória Visual Ativa</span>
+                        Apreciar os gestos magníficos e a doçura do olhar descoberto naquela consulta de 45 minutos a cada dois meses.
+                    </li>
+                    <li>
+                        <span class="prescription-title">3. Desapego de Cobranças</span>
+                        Reduzir imediatamente as autocobranças excessivas que geram mal-estar, substituindo-as pela paz das próprias escolhas.
+                    </li>
+                    <li>
+                        <span class="prescription-title">4. Música e Arte</span>
+                        Uso contínuo de canções clássicas para acalmar os oceanos internos e harmonizar os pensamentos.
+                    </li>
+                </ul>
+
+            </div>
+        </article>
+    </main>
+
+    <!-- Script para gerar o fundo de estrelas pulsantes -->
     <script>
-        // Gerador de estrelas aleatórias
-        const container = document.getElementById('stars');
-        for (let i = 0; i < 150; i++) {
+        const universe = document.getElementById('universe');
+        const totalStars = 120;
+
+        for (let i = 0; i < totalStars; i++) {
             const star = document.createElement('div');
             star.className = 'star';
-            const size = Math.random() * 3;
-            star.style.width = size + 'px';
-            star.style.height = size + 'px';
-            star.style.top = Math.random() * 100 + '%';
-            star.style.left = Math.random() * 100 + '%';
-            star.style.animationDelay = Math.random() * 3 + 's';
-            container.appendChild(star);
+            
+            // Tamanhos variados para profundidade
+            const size = Math.random() * 2.5 + 0.5;
+            star.style.width = `${size}px`;
+            star.style.height = `${size}px`;
+            
+            // Posições aleatórias
+            star.style.top = `${Math.random() * 100}%`;
+            star.style.left = `${Math.random() * 100}%`;
+            
+            // Tempos de pulsação dessincronizados para naturalidade
+            star.style.animationDelay = `${Math.random() * 4}s`;
+            star.style.animationDuration = `${Math.random() * 3 + 2}s`;
+            
+            universe.appendChild(star);
         }
     </script>
 </body>
