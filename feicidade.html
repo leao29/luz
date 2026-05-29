@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Declaração Sincera</title>
+    <style>
+        :root {
+            --azul-cosmos: #030712;
+            --ouro-escuro: #5c4718;
+            --prata-ferro: #94a3b8;
+            --papel-pergaminho: #f4ebd0;
+            --texto-cor: #1e1b15;
+        }
+
+        * { box-sizing: border-box; }
+        
+        body, html {
+            margin: 0; padding: 0;
+            width: 100%; min-height: 100vh;
+            background-color: var(--azul-cosmos);
+            font-family: 'Georgia', serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+            overflow-x: hidden;
+        }
+
+        /* FUNDO DE ESTRELAS BRILHANTES */
+        #fundo-estrelado {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1;
+            background: radial-gradient(circle at center, #0b1528 0%, var(--azul-cosmos) 100%);
+        }
+
+        .estrela {
+            position: absolute;
+            background: #ffffff;
+            border-radius: 50%;
+            opacity: 0.6;
+            box-shadow: 0 0 8px rgba(255, 255, 255, 0.9);
+            animation: brilhar infinite ease-in-out;
+        }
+
+        @keyframes brilhar {
+            0%, 100% { opacity: 0.3; transform: scale(0.8); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+
+        /* TÍTULO EM MAIÚSCULAS COM BORDA DE FERRO PRATA E ELETRICIDADE SUBTIL */
+        .titulo-container {
+            border: 3px solid var(--prata-ferro);
+            padding: 15px 30px;
+            border-radius: 4px;
+            margin-bottom: 40px;
+            text-align: center;
+            position: relative;
+            background: rgba(15, 23, 42, 0.6);
+            box-shadow: 0 0 15px rgba(148, 163, 184, 0.3);
+            animation: eletricidadeSutil 4s infinite alternate;
+        }
+
+        .titulo-principal {
+            font-family: 'Arial Black', sans-serif;
+            font-size: 1.6rem;
+            color: #f8fafc;
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        @keyframes eletricidadeSutil {
+            0%, 100% { box-shadow: 0 0 10px rgba(148, 163, 184, 0.2), inset 0 0 5px rgba(255,255,255,0.1); }
+            50% { box-shadow: 0 0 20px rgba(203, 213, 225, 0.6), inset 0 0 10px rgba(255,255,255,0.2); border-color: #cbd5e1; }
+        }
+
+        /* CARD CENTRAL COM EFEITO DE ZOOM LEVE FUTURISTA */
+        .card-container {
+            max-width: 750px;
+            width: 100%;
+            position: relative;
+            transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.4s ease;
+        }
+
+        .card-container:hover {
+            transform: scale(1.02);
+        }
+
+        /* PAPEL ANTIGO SIMULANDO ROLO NAS BORDAS E BORDA OURO ESCURO */
+        .papel-enrolado {
+            background-color: var(--papel-pergaminho);
+            background-image: url('https://www.transparenttextures.com/patterns/cream-paper.png');
+            color: var(--texto-cor);
+            padding: 45px;
+            border-radius: 4px;
+            border-left: 14px solid var(--ouro-escuro); /* Simula a sombra do rolo inicial */
+            border-right: 14px solid var(--ouro-escuro); /* Simula a sombra do rolo final */
+            box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.2), 0 25px 50px rgba(0, 0, 0, 0.6);
+            position: relative;
+        }
+
+        /* Efeito visual de papel enrolado nas pontas superior e inferior */
+        .papel-enrolado::before, .papel-enrolado::after {
+            content: "";
+            position: absolute;
+            left: 0; right: 0;
+            height: 8px;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.15), transparent);
+        }
+        .papel-enrolado::before { top: 0; }
+        .papel-enrolado::after { bottom: 0; transform: rotate(180deg); }
+
+        /* TEXTO DA CARTA REFINADO E CONTUDENTE */
+        .texto-carta {
+            font-size: 1.05rem;
+            line-height: 1.7;
+            text-align: justify;
+            margin: 0 0 25px 0;
+        }
+
+        .texto-carta p {
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+
+        .destaque {
+            font-weight: bold;
+            color: #3d2f10;
+        }
+
+        /* CONTAINER E BOTÃO PRÓXIMA */
+        .area-botao {
+            display: flex;
+            justify-content: flex-end;
+            width: 100%;
+            margin-top: 30px;
+        }
+
+        .btn-proxima {
+            background: linear-gradient(135deg, #1e293b, #0f172a);
+            color: #ffffff;
+            border: 1px solid var(--ouro-escuro);
+            padding: 12px 40px;
+            border-radius: 6px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+            transition: all 0.3s ease;
+        }
+
+        .btn-proxima:hover {
+            background: linear-gradient(135deg, var(--ouro-discreto, #5c4718), #1e293b);
+            letter-spacing: 4px;
+            box-shadow: 0 6px 20px rgba(92, 71, 24, 0.4);
+        }
+
+        /* RESPONSIVIDADE CELULAR */
+        @media (max-width: 600px) {
+            body { padding: 20px 10px; }
+            .titulo-principal { font-size: 1.1rem; letter-spacing: 1px; }
+            .papel-enrolado { padding: 25px 18px; border-left: 8px solid var(--ouro-escuro); border-right: 8px solid var(--ouro-escuro); }
+            .texto-carta { font-size: 0.95rem; line-height: 1.6; }
+            .area-botao { justify-content: center; }
+            .btn-proxima { width: 100%; text-align: center; }
+        }
+    </style>
+</head>
+<body onclick="garantirTrilhaSonora()">
+
+    <!-- Fundo Estrelado -->
+    <div id="fundo-estrelado"></div>
+
+    <!-- Título Principal com Borda de Ferro e Eletricidade -->
+    <div class="titulo-container">
+        <h1 class="titulo-principal">ME PERDOE SE ESTOU SENDO INVASIVA</h1>
+    </div>
+
+    <!-- Card de Papel Antigo Enrolado -->
+    <div class="card-container">
+        <div class="papel-enrolado">
+            <div class="texto-carta">
+                <p>Às vezes penso que posso parecer boba, mas a verdade é que eu ainda acredito no amor verdadeiro. Tenho essa referência sólida dentro de casa, olhando para os meus pais. No entanto, a vida me ensinou que o amor precisa ser livre; aprendi que precisamos olhar para o céu não apenas para prever a chuva, mas para apreciar o momento sagrado que Deus nos concede.</p>
+
+                <p>Eu sinto saudades de você e das nossas conversas. Tomei decisões importantes: mesmo amando profundamente a minha família e as pessoas queridas que entraram na minha vida aqui, sei que meu caminho chama por algo mais. Não digo que sinto um amor romântico por você, mas sim uma atração muito forte, um desejo genuíno e profundo de te ver bem. É algo difícil de explicar... por que isso aconteceu comigo?</p>
+
+                <p>Já possuo uma história de vida madura, estou em uma idade onde busco alguém para caminhar comigo a vida inteira. Já vivi muitos enredos nesse sentido, mas esta é a primeira vez que tento demonstrar algo tão singelo e bonito que você despertou em mim. Colocar o meu rosto à mostra, sem estremecer diante de você, não é tão fácil quanto parece. Mas não me arrependo de absolutamente nada do que digo ou faço; não é um sentimento ruim e nem me alimenta falsas esperanças de que algo aconteça.</p>
+
+                <p>Até porque eu tenho os pés bem firmes no chão. <span class="destaque">Você merece mares e oceanos lindos, e não o meu laguinho.</span> Não digo isso para me diminuir, mas sim olhando para a realidade: você tem alguém, e eu jamais, em hipótese alguma, faria você se sentir sem jeito ou andar pisando em ovos comigo. Jamais! Sou o tipo de pessoa que demonstra e fala o que sente, porém nunca usaria essa posição para confundir as coisas com quem está cuidando da minha saúde mental. Você me acolheu, me validou como profissional e como mulher. Quando olho nos seus olhos, vejo uma fortaleza e também algumas fragilidades; o seu olhar fala bastante. E eu me perdi nesse olhar, não porque você tenha olhado de forma diferente — jamais! Pelo contrário, você mantém a distância e a postura impecável de uma médica com sua paciente. Mas eu sinto; é como se meu sentimento ultrapassasse a barreira clínica e enxergasse você simplesmente como mulher. Espero de coração que me entenda e compreenda.</p>
+
+                <p>Escrevo tudo isso agora porque em meados de agosto eu volto para Brasília. Não será nada fácil deixar meus pais, irmãos, sobrinhos, amigos e você. Mas seguir em frente é necessário, sem medo de errar, apenas tentando. No âmbito profissional, confesso que estou cansada, muito cansada de não ter uma âncora estável. Trabalhar no setor privado nos impõe um tempo de validade e isso esgota... Mas eu conheço a minha essência: mesmo exausta, eu não desisto, eu luto pelos meus objetivos e vou além. Sempre além.</p>
+
+                <p>Me perdoe de todo o coração por escrever tudo isso sabendo que você já tem alguém na sua vida, e que essas palavras vêm de outra mulher... Por favor, continue sendo essa profissional mágica, humana e gentil. Na estrada da vida, as pessoas entram e descem desse trem nos seus respectivos desembarques. Nós aprendemos com tudo. E eu sei que irei morrer aprendendo.</p>
+            </div>
+
+            <!-- Botão Próxima -->
+            <div class="area-botao">
+                <button class="btn-proxima" onclick="irParaProxima(event)">Próxima</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Música de Fundo Opcional -->
+    <audio id="musica-fundo" src="elvis.html.mp3" loop></audio>
+
+    <script>
+        // Gerador de Estrelas Brilhantes
+        const ceu = document.getElementById('fundo-estrelado');
+        const quantidadeEstrelas = 60;
+        for (let i = 0; i < quantidadeEstrelas; i++) {
+            const star = document.createElement('div');
+            star.className = 'estrela';
+            const tamanho = Math.random() * 3 + 1.5;
+            star.style.width = tamanho + 'px';
+            star.style.height = tamanho + 'px';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.animationDuration = (Math.random() * 2 + 2) + 's';
+            star.style.animationDelay = Math.random() * 3 + 's';
+            ceu.appendChild(star);
+        }
+
+        // Controle do Áudio
+        const somAmbiente = document.getElementById('musica-fundo');
+        let playerAtivo = false;
+        function garantirTrilhaSonora() {
+            if (!playerAtivo) {
+                somAmbiente.play().then(() => { playerAtivo = true; })
+                .catch(() => console.log("Aguardando clique..."));
+            }
+        }
+
+        // Redirecionamento da página
+        function irParaProxima(event) {
+            event.stopPropagation();
+            document.body.style.transition = "opacity 0.6s ease";
+            document.body.style.opacity = "0";
+            setTimeout(() => {
+                window.location.href = "proxima_pagina.html"; // Mude para o nome do próximo arquivo se necessário
+            }, 600);
+        }
+    </script>
+</body>
+</html>
