@@ -3,298 +3,300 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Prontuário Médico Confidencial</title>
+    <title>Prontuário Médico - Oficial</title>
     <style>
         :root {
             --ouro-escuro: #7a6021;
             --ouro-brilho: #c5a85c;
-            --azul-fundo: #040914;
-            --papel-claro: #f4eedb; /* Tom pergaminho claro de altíssima legibilidade */
-            --texto-escuro: #2a1f10;
-            --prata-raio: linear-gradient(105deg, rgba(255,255,255,0) 30%, rgba(220,225,235,0.4) 45%, rgba(255,255,255,0) 60%);
-            --sombra-prata: 0 0 25px rgba(192, 192, 192, 0.4);
+            --prata-brilho: #e0e0e0;
+            --azul-fundo: #02050a;
+            --papel-antigo: #f2e8d5;
+            --texto-cor: #1a150e;
         }
 
-        /* Configuração do fundo e tela cheia sem rolagem */
         * { box-sizing: border-box; }
         body, html {
-            margin: 0;
-            padding: 0;
-            width: 100vw;
-            height: 100vh;
+            margin: 0; padding: 0;
+            width: 100%; height: 100%;
             overflow: hidden;
             background-color: var(--azul-fundo);
-            font-family: 'Georgia', serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            background: radial-gradient(circle at center, #0a1428 0%, #040914 100%);
             -webkit-tap-highlight-color: transparent;
         }
 
-        /* Título Principal em Letras de Forma */
-        .titulo-prontuario {
-            color: var(--ouro-brilho);
-            font-size: 1.8rem;
-            font-weight: 900;
-            letter-spacing: 6px;
-            text-transform: uppercase;
-            margin-bottom: 25px;
-            text-align: center;
-            text-shadow: 0 0 10px rgba(197, 168, 92, 0.3);
+        /* FUNDO DE ESTRELAS PRATAS */
+        #espaco-estrelado {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1;
+            background: radial-gradient(circle at center, #050d1f 0%, var(--azul-fundo) 100%);
         }
 
-        /* Container dos Dois Cards Lateral a Lateral */
+        .estrela {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            opacity: 0.5;
+            box-shadow: 0 0 5px var(--prata-brilho);
+            animation: brilhar infinite ease-in-out;
+        }
+
+        @keyframes brilhar {
+            0%, 100% { opacity: 0.2; transform: scale(0.8); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+
+        /* TÍTULO IMPACTANTE */
+        .header-prontuario {
+            text-align: center;
+            margin-bottom: 30px;
+            z-index: 10;
+        }
+
+        .header-prontuario h1 {
+            color: var(--prata-brilho);
+            font-size: 2.2rem;
+            letter-spacing: 12px;
+            text-transform: uppercase;
+            margin: 0;
+            font-weight: 900;
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+            border-bottom: 2px solid rgba(192, 192, 192, 0.3);
+            padding-bottom: 10px;
+        }
+
+        /* LAYOUT DOS CARDS */
         .container-cards {
             display: flex;
             gap: 25px;
             max-width: 1100px;
-            width: 90%;
-            justify-content: center;
-            align-items: stretch;
+            width: 95%;
+            height: 75vh;
+            max-height: 650px;
+            z-index: 10;
         }
 
-        /* Estrutura do Card Futurista/Moderno */
-        .card-luxo {
+        .card {
             flex: 1;
-            background: linear-gradient(135deg, var(--ouro-escuro), #2d220a, var(--ouro-escuro));
-            padding: 3px; /* Espessura da borda sutil */
-            border-radius: 16px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 15px rgba(122, 96, 33, 0.2);
-            transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), 
-                        box-shadow 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        /* Efeito Raio de Prata Sutil Passando pelos Cards */
-        .card-luxo::before {
-            content: '';
-            position: absolute;
-            top: 0; left: -150%;
-            width: 300%; height: 100%;
-            background: var(--prata-raio);
-            transition: 0s;
-            pointer-events: none;
-            z-index: 2;
-        }
-
-        /* Efeito Zoom e Brilho Ouro/Prata combinados */
-        .card-luxo:hover, .card-luxo:active {
-            transform: scale(1.02) translateY(-3px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6), var(--sombra-prata);
-        }
-
-        .card-luxo:hover::before {
-            left: 150%;
-            transition: 1.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        /* Interior do Card (Papel Envelhecido de Luxo) */
-        .conteudo-papel {
-            background-color: var(--papel-claro);
-            background-image: url('https://www.transparenttextures.com/patterns/cream-paper.png');
-            border-radius: 13px;
-            padding: 30px;
-            height: 100%;
-            min-height: 460px;
-            box-sizing: border-box;
-            color: var(--texto-escuro);
+            background: linear-gradient(145deg, #333, #111);
+            border-radius: 20px;
+            padding: 3px; /* Moldura */
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+            transition: all 0.4s ease;
             display: flex;
-            flex-direction: column;
-            box-shadow: inset 0 0 30px rgba(42, 31, 16, 0.08);
         }
 
-        .cabecalho-card {
-            font-size: 0.85rem;
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 25px 60px rgba(0,0,0,0.9), 0 0 20px rgba(197, 168, 92, 0.3);
+        }
+
+        /* TEXTURA DE PAPEL ANTIGO DENTRO DO CARD */
+        .papel-interno {
+            background-color: var(--papel-antigo);
+            background-image: url('https://www.transparenttextures.com/patterns/pinstriped-suit.png');
+            border-radius: 17px;
+            flex: 1;
+            padding: 30px;
+            overflow-y: auto;
+            color: var(--texto-cor);
+            box-shadow: inset 0 0 40px rgba(0,0,0,0.1);
+        }
+
+        /* Estilo da Rolagem Interna */
+        .papel-interno::-webkit-scrollbar { width: 6px; }
+        .papel-interno::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.2); border-radius: 10px; }
+
+        .secao-titulo {
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: 900;
+            text-transform: uppercase;
+            border-bottom: 2px solid rgba(0,0,0,0.1);
+            padding-bottom: 8px;
+            margin-bottom: 20px;
+            color: #4a3b2a;
+            letter-spacing: 2px;
+        }
+
+        /* ICONES E LISTA */
+        .item-prescricao {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .icone {
+            font-size: 1.5rem;
+            min-width: 35px;
+            text-align: center;
+        }
+
+        .texto-remedio strong {
+            display: block;
+            text-transform: uppercase;
+            color: #1a4225;
+            font-size: 0.9rem;
+            margin-bottom: 3px;
+        }
+
+        .texto-remedio span {
+            font-size: 0.95rem;
+            line-height: 1.4;
+            display: block;
+        }
+
+        .paragrafo-paciente {
+            font-size: 1.05rem;
+            line-height: 1.6;
+            text-align: justify;
+            margin-bottom: 15px;
+        }
+
+        .carimbo {
+            border: 3px double #a82424;
+            color: #a82424;
+            padding: 5px 15px;
+            display: inline-block;
+            font-weight: 900;
+            transform: rotate(-3deg);
+            margin-top: 10px;
+            font-family: 'Courier New', monospace;
+        }
+
+        /* BOTÃO DE SAÍDA */
+        .btn-footer {
+            margin-top: 25px;
+            background: linear-gradient(to right, #0a1d37, #1a4225);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 50px;
             font-weight: bold;
             text-transform: uppercase;
             letter-spacing: 2px;
-            border-bottom: 2px solid rgba(42, 31, 16, 0.15);
-            padding-bottom: 10px;
-            margin-bottom: 20px;
-            color: #5c4324;
-            font-family: 'Courier New', Courier, monospace;
-        }
-
-        /* Estilização dos Textos */
-        p {
-            font-size: 0.95rem;
-            line-height: 1.6;
-            margin: 0 0 15px 0;
-            text-align: justify;
-        }
-
-        .carimbo-humor {
-            display: inline-block;
-            border: 2px dashed #a82424;
-            color: #a82424;
-            font-weight: bold;
-            padding: 4px 10px;
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            transform: rotate(-1.5deg);
-            margin-bottom: 15px;
-            font-family: 'Courier New', Courier, monospace;
-            align-self: flex-start;
-        }
-
-        /* Lista de Remédios Especiais */
-        .lista-remedios {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .lista-remedios li {
-            padding: 10px 0;
-            border-bottom: 1px dashed rgba(42, 31, 16, 0.2);
-            font-size: 0.9rem;
-            line-height: 1.5;
-        }
-
-        .lista-remedios li:last-child {
-            border-bottom: none;
-        }
-
-        .remedio-nome {
-            font-weight: bold;
-            color: #1a4225; /* Verde farmacêutico sutil */
-            text-transform: uppercase;
-            display: block;
-            margin-bottom: 4px;
-            font-family: 'Courier New', Courier, monospace;
-        }
-
-        /* Botão Discreto de Próxima Página integrado no design */
-        .btn-navegacao {
-            margin-top: auto;
-            background: transparent;
-            border: 1px solid var(--ouro-escuro);
-            color: var(--texto-escuro);
-            padding: 12px;
-            border-radius: 6px;
             cursor: pointer;
-            font-family: inherit;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+            transition: 0.3s;
+            z-index: 10;
         }
 
-        .btn-navegacao:hover {
-            background-color: var(--ouro-escuro);
-            color: white;
-            box-shadow: 0 0 10px rgba(122, 96, 33, 0.4);
+        .btn-footer:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.6);
         }
 
-        /* Responsividade e travamento de rolagem para celulares */
+        /* RESPONSIVIDADE PARA CELULAR */
         @media (max-width: 768px) {
-            body, html {
-                overflow: hidden;
-                height: 100vh;
-            }
-            .titulo-prontuario { font-size: 1.4rem; margin-bottom: 15px; }
-            .container-cards {
-                flex-direction: column;
-                gap: 15px;
-                height: 80%;
-                width: 92%;
-            }
-            .card-luxo { height: 50%; }
-            .conteudo-papel { min-height: auto; padding: 18px; }
-            .cabecalho-card { margin-bottom: 8px; padding-bottom: 5px; }
-            .carimbo-humor { margin-bottom: 8px; font-size: 0.7rem; }
-            p { font-size: 0.8rem; line-height: 1.4; margin-bottom: 8px; }
-            .lista-remedios li { padding: 6px 0; font-size: 0.78rem; line-height: 1.3; }
-            .btn-navegacao { padding: 8px; font-size: 0.75rem; }
+            body { overflow-y: auto; height: auto; padding: 40px 0; }
+            .container-cards { flex-direction: column; height: auto; max-height: none; }
+            .header-prontuario h1 { font-size: 1.4rem; letter-spacing: 5px; }
+            .papel-interno { padding: 20px; }
         }
     </style>
 </head>
-<body onclick="garantirMusica()">
+<body onclick="iniciarSom()">
 
-    <h1 class="titulo-prontuario">PRONTUÁRIO MÉDICO</h1>
+    <div id="espaco-estrelado"></div>
 
-    <div class="container-cards">
-
-        <!-- CARD 1: QUADRO DA PACIENTE -->
-        <div class="card-luxo">
-            <div class="conteudo-papel">
-                <div class="cabecalho-card">Histórico & Quadro Clínico</div>
-                
-                <div class="carimbo-humor">Diagnóstico: Afeto Agudo Incurável</div>
-                
-                <p><strong>Paciente:</strong> Identificada como uma alma sonhadora em trânsito temporário por Belém (período de 1 ano e 3 meses fixado pelas raízes familiares e pelo primeiro ano da pequena Helena em 5 de agosto), com retorno programado para Brasília pós-aniversário.</p>
-                
-                <p><strong>Evolução:</strong> Veterana de uma jornada de mais de 20 anos enfrentando a síndrome do pânico. Apresenta alta capacidade de discernimento e blindagem terapêutica, sabendo separar perfeitamente a relação médico-paciente tradicional.</p>
-                
-                <p><strong>Nota Clínica Importante:</strong> Desenvolveu uma percepção única e genuína sobre a profissional responsável. Relata enxergar através da postura inicialmente rígida e sem apertos de mão dos primeiros 10 minutos, avistando uma essência magnífica. Descreve a médica poeticamente como uma "sereia enorme que merece os maiores oceanos", reconhecendo com total respeito os limites da privacidade, mas celebrando o privilégio de sua presença e de seu sorriso.</p>
-            </div>
-        </div>
-
-        <!-- CARD 2: PRESCRIÇÃO -->
-        <div class="card-luxo">
-            <div class="conteudo-papel">
-                <div class="cabecalho-card">Receituário Especial & Conduta</div>
-                
-                <ul class="lista-remedios">
-                    <li>
-                        <span class="remedio-nome">1. Dose Regular de Realização</span>
-                        Focar no lado profissional e ir em busca de não apenas sobreviver, mas viver plenamente os próprios sonhos.
-                    </li>
-                    <li>
-                        <span class="remedio-nome">2. Memória Visual Ativa</span>
-                        Apreciar os gestos magníficos e a doçura do olhar descoberto naquela consulta de 45 minutos a cada dois meses.
-                    </li>
-                    <li>
-                        <span class="remedio-nome">3. Desapego de Cobranças</span>
-                        Reduzir imediatamente as autocobranças excessivas que geram mal-estar, substituindo-as pela paz das próprias escolhas.
-                    </li>
-                    <li>
-                        <span class="remedio-nome">4. Música e Arte</span>
-                        Uso contínuo de canções clássicas para acalmar organicamente os oceanos internos.
-                    </li>
-                </ul>
-
-                <!-- Redirecionamento configurado para voltar para a página inicial ou menu principal -->
-                <button class="btn-navegacao" onclick="proximaPagina(event)">Finalizar Sessão</button>
-            </div>
-        </div>
-
+    <div class="header-prontuario">
+        <h1>Prontuário Eletrônico</h1>
     </div>
 
-    <!-- Elemento de Áudio Corrigido para a extensão correta do repositório (elvis.html.mp3) -->
+    <div class="container-cards">
+        <div class="card">
+            <div class="papel-interno">
+                <div class="secao-titulo">📌 Histórico da Paciente</div>
+                <p class="paragrafo-paciente">
+                    <strong>Identificação:</strong> Alma resiliente, em trânsito por Belém. Apresenta um quadro de 
+                    <em>Afeto Agudo Incurável</em> e admiração profunda pela equipe médica responsável.
+                </p>
+                <p class="paragrafo-paciente">
+                    <strong>Evolução:</strong> Mais de duas décadas de jornada terapêutica. Demonstra alta capacidade de 
+                    separar a admiração pessoal da conduta ética profissional, mantendo o respeito absoluto aos limites do oceano da Dra. Débora.
+                </p>
+                <p class="paragrafo-paciente">
+                    <strong>Observação:</strong> O sorriso da médica é relatado como o principal fator de estabilização emocional da paciente durante as sessões.
+                </p>
+                <div class="carimbo">ALTA ESTIMADA: NUNCA</div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="papel-interno">
+                <div class="secao-titulo">💊 Prescrição & Conduta</div>
+                
+                <div class="item-prescricao">
+                    <div class="icone">⭐</div>
+                    <div class="texto-remedio">
+                        <strong>1. Realização de Sonhos</strong>
+                        <span>Dose diária: Ininterrupta. Não se contentar em apenas sobreviver; buscar a felicidade plena.</span>
+                    </div>
+                </div>
+
+                <div class="item-prescricao">
+                    <div class="icone">💙</div>
+                    <div class="texto-remedio">
+                        <strong>2. Memória Afetiva Ativa</strong>
+                        <span>Recordar a doçura do olhar e o brilho da presença da Dra. Débora como tônico revigorante.</span>
+                    </div>
+                </div>
+
+                <div class="item-prescricao">
+                    <div class="icone">🕊️</div>
+                    <div class="texto-remedio">
+                        <strong>3. Desapego Terapêutico</strong>
+                        <span>Eliminar autocobranças e culpas. Substituir o peso do passado pela leveza das escolhas presentes.</span>
+                    </div>
+                </div>
+
+                <div class="item-prescricao">
+                    <div class="icone">🎶</div>
+                    <div class="texto-remedio">
+                        <strong>4. Musicoterapia (Elvis)</strong>
+                        <span>Ouvir clássicos que acalmam a alma para manter os oceanos internos em perfeita calmaria.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <button class="btn-footer" onclick="finalizar()">Encerrar Prontuário</button>
+
     <audio id="player-elvis" src="elvis.html.mp3" loop></audio>
 
     <script>
-        // Inicia o áudio de forma segura na interação
-        function garantirMusica() {
-            const musica = document.getElementById('player-elvis');
-            if (musica.paused) {
-                musica.play().catch(e => console.log("Áudio aguardando clique explícito."));
-            }
+        // Criar estrelas pratas dinamicamente
+        const espaco = document.getElementById('espaco-estrelado');
+        for (let i = 0; i < 60; i++) {
+            const estrela = document.createElement('div');
+            estrela.className = 'estrela';
+            const size = Math.random() * 3 + 1;
+            estrela.style.width = size + 'px';
+            estrela.style.height = size + 'px';
+            estrela.style.top = Math.random() * 100 + '%';
+            estrela.style.left = Math.random() * 100 + '%';
+            estrela.style.animationDuration = (Math.random() * 3 + 2) + 's';
+            estrela.style.animationDelay = Math.random() * 5 + 's';
+            espaco.appendChild(estrela);
         }
 
-        window.addEventListener('DOMContentLoaded', () => {
-            const musica = document.getElementById('player-elvis');
-            musica.play().catch(() => {
-                console.log("Clique em qualquer lugar para garantir a continuidade da música.");
-            });
-        });
+        // Função de Áudio
+        function iniciarSom() {
+            const audio = document.getElementById('player-elvis');
+            audio.play().catch(() => console.log("Aguardando interação..."));
+        }
 
-        // Redirecionamento fluido de saída
-        function proximaPagina(event) {
-            event.stopPropagation(); 
-            
-            document.body.style.transition = "opacity 0.8s ease, transform 0.8s ease";
-            document.body.style.opacity = "0";
-            document.body.style.transform = "scale(0.95)";
-            
+        function finalizar() {
+            document.body.style.opacity = '0';
+            document.body.style.transition = '1s';
             setTimeout(() => {
-                // Configurado para retornar ao index.html perfeitamente
-                window.location.href = "index.html"; 
-            }, 800);
+                window.location.href = "index.html";
+            }, 1000);
         }
     </script>
 </body>
