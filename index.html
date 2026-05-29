@@ -14,7 +14,6 @@
             --ouro-escuro: #614d1a;
             --ouro-brilhante: #d4af37;
         }
-
         * { box-sizing: border-box; }
 
         body, html {
@@ -67,12 +66,10 @@
             border-radius: 50% 50% 50% 0;
             top: -7px; left: 7px;
         }
-
         @keyframes pulsarElemento {
             0%, 100% { opacity: 0.15; transform: scale(0.7) translateY(0px); }
             50% { opacity: 0.85; transform: scale(1.2) translateY(-4px); }
         }
-
         /* ESTRUTURA PRINCIPAL */
         .container-experiencia {
             display: flex;
@@ -86,7 +83,6 @@
             z-index: 10;
             transition: opacity 1s cubic-bezier(0.4, 0, 0.2, 1), transform 1s cubic-bezier(0.4, 0, 0.2, 1);
         }
-
         /* CONTAINER DA BORDA DE OURO ANIMADA (CORRENTE) */
         .borda-ouro-correndo {
             position: relative;
@@ -101,7 +97,6 @@
             box-shadow: 0 25px 60px rgba(0,0,0,0.8);
             transition: transform 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
         }
-
         /* Efeito do feixe de luz girando ao fundo */
         .borda-ouro-correndo::before {
             content: '';
@@ -117,7 +112,6 @@
             );
             animation: girarBorda 4s linear infinite;
         }
-
         @keyframes girarBorda {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
@@ -144,7 +138,6 @@
             transform: scale(1.04);
             box-shadow: 0 35px 70px rgba(0,0,0,0.9), 0 0 30px rgba(212, 175, 55, 0.3);
         }
-
         .carimbo-militar {
             font-size: 0.75rem;
             text-transform: uppercase;
@@ -157,7 +150,6 @@
             font-family: 'Courier New', monospace;
             opacity: 0.85;
         }
-
         .nome-doutora {
             font-family: 'Cinzel', serif;
             font-size: 2.6rem;
@@ -168,7 +160,6 @@
             margin-bottom: 4px;
             text-shadow: 1px 1px 0px rgba(255,255,255,0.6);
         }
-
         .subtitulo-medica {
             font-size: 0.8rem;
             text-transform: uppercase;
@@ -177,7 +168,6 @@
             margin-bottom: 40px;
             font-weight: 600;
         }
-
         .tarja-sigiloso {
             font-size: 1.4rem;
             letter-spacing: 9px;
@@ -189,7 +179,6 @@
             transform: rotate(-1deg);
             margin-bottom: auto;
         }
-
         .bloco-paciente {
             width: 100%;
             text-align: center;
@@ -197,7 +186,6 @@
             padding-top: 20px;
             margin-bottom: 10px;
         }
-
         .rotulo-paciente {
             font-size: 0.75rem;
             text-transform: uppercase;
@@ -207,7 +195,6 @@
             margin-bottom: 6px;
             font-weight: 600;
         }
-
         .texto-identificacao {
             font-style: italic;
             color: #0f172a;
@@ -215,7 +202,6 @@
             font-weight: 700;
             letter-spacing: 0.5px;
         }
-
         .lacre-cera {
             width: 76px; height: 76px;
             background: radial-gradient(circle at 35% 35%, #a11818 0%, #4c0505 100%);
@@ -228,7 +214,6 @@
             bottom: -38px;
             z-index: 5;
         }
-
         .lacre-cera::after {
             content: 'Ψ';
             color: #1e0202;
