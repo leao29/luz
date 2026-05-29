@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Dra. Débora - Oficial</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Lora:ital,wght@0,400;0,600;1,400&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Lora:ital,wght=0,400;0,600;1,400&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --azul-espacial: #020617;
@@ -28,7 +28,7 @@
             -webkit-tap-highlight-color: transparent;
         }
 
-        /* FUNDO CÓSMICO DE ALTO PADRÃO */
+        /* FUNDO CÓSMICO */
         #cenario-cosmos {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -72,7 +72,6 @@
             width: 100%;
             height: 450px;
             border-radius: 6px;
-            /* Borda dupla sofisticada em Ouro */
             border: 3px double var(--ouro-luxo);
             padding: 40px 25px;
             display: flex;
@@ -81,12 +80,9 @@
             box-shadow: 0 30px 70px rgba(0,0,0,0.8), 
                         inset 0 0 40px rgba(139,92,26,0.15),
                         0 0 20px var(--ouro-sutil);
-            
-            /* Transição para o Zoom Suave */
             transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.6s ease;
         }
 
-        /* Efeito Zoom Inteligente para PC e Touch de Celular */
         @media (hover: hover) {
             .envelope-realista:hover {
                 transform: scale(1.04);
@@ -110,7 +106,6 @@
             opacity: 0.85;
         }
 
-        /* Nome da Doutora Imponente e Clássico (Sem vermelho) */
         .nome-doutora {
             font-family: 'Cinzel', serif;
             font-size: 2.6rem;
@@ -169,7 +164,6 @@
             letter-spacing: 0.5px;
         }
 
-        /* Lacre de Cera Tradicional */
         .lacre-cera {
             width: 76px; height: 76px;
             background: radial-gradient(circle at 35% 35%, #a11818 0%, #4c0505 100%);
@@ -198,8 +192,6 @@
             background: linear-gradient(90deg, rgba(255,255,255,0.1), var(--ouro-luxo), rgba(255,255,255,0.1));
             background-size: 200% auto;
             box-shadow: 0 0 20px rgba(214, 175, 87, 0.15);
-            
-            /* Transição para o Zoom Suave */
             transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.5s ease;
         }
 
@@ -220,7 +212,6 @@
             transition: background 0.3s ease, color 0.3s ease;
         }
 
-        /* Zoom do Botão no PC e no Toque */
         @media (hover: hover) {
             .wrapper-botao:hover {
                 transform: scale(1.07);
@@ -236,7 +227,7 @@
             transform: scale(1.07);
         }
 
-        /* Iframe invisível inicialmente para o Prontuário */
+        /* IFRAME QUE EXIBIRÁ O PRONTUÁRIO.HTM */
         #prontuario-frame {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -247,7 +238,6 @@
             transition: opacity 1.5s ease;
         }
 
-        /* Ajustes para Celulares Pequenos */
         @media (max-height: 620px) {
             .container-experiencia { gap: 25px; }
             .envelope-realista { height: 400px; padding: 25px 15px; }
@@ -263,9 +253,8 @@
     <!-- Fundo de Estrelas Fixo -->
     <div id="cenario-cosmos"></div>
 
-    <!-- Interface Principal do Envelope -->
+    <!-- Tela Inicial: Envelope -->
     <div class="container-experiencia" id="painel-principal">
-        
         <div class="envelope-realista">
             <div class="carimbo-militar">CONFIDENCIAL • MARINHA DO BRASIL</div>
             
@@ -285,20 +274,18 @@
         <div class="wrapper-botao">
             <button class="btn-experiencia" onclick="dispararTudo()">Aperte com carinho</button>
         </div>
-
     </div>
 
-    <!-- Carregamento sutil do prontuário em segundo plano -->
+    <!-- Frame carregando estritamente o prontuario.htm -->
     <iframe id="prontuario-frame" src="prontuario.htm"></iframe>
 
-    <!-- Áudio de Fundo -->
+    <!-- Áudio de Fundo (Preload ativado, mas SEM o atributo autoplay) -->
     <audio id="musica-elvis" src="elvis.html.mp3" preload="auto" loop></audio>
 
     <script>
-        // Gerador de Fundo Estelar Inteligente
+        // Estrelas de fundo
         const cosmos = document.getElementById('cenario-cosmos');
         const totalEstrelas = 90;
-
         for (let i = 0; i < totalEstrelas; i++) {
             const estrela = document.createElement('div');
             estrela.className = 'estrela-pulsante';
@@ -312,23 +299,23 @@
             cosmos.appendChild(estrela);
         }
 
-        // Ação de Transição de Alto Impacto
+        // Função de disparo pelo botão
         function dispararTudo() {
             const som = document.getElementById('musica-elvis');
             const interfaceOriginal = document.getElementById('painel-principal');
             const frameProntuario = document.getElementById('prontuario-frame');
 
-            // 1. Inicia a música do Elvis na hora
-            som.play().catch(err => console.log("Áudio ativo."));
+            // 1. Toca a música estritamente AGORA (após o clique)
+            som.play().catch(err => console.log("Áudio iniciado pelo usuário."));
 
-            // 2. Desaparece suavemente com o envelope e o botão
+            // 2. Transição visual suave para sumir com o envelope
             interfaceOriginal.style.opacity = '0';
             interfaceOriginal.style.transform = 'scale(0.92)';
 
             setTimeout(() => {
                 interfaceOriginal.style.display = 'none';
 
-                // 3. Revela o prontuário.htm na mesma tela de forma cinematográfica
+                // 3. Abre o PRONTUARIO.HTM na tela inteira
                 frameProntuario.style.display = 'block';
                 setTimeout(() => {
                     frameProntuario.style.opacity = '1';
