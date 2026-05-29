@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prontuário Médico Confidencial</title>
+    <style>
+        :root {
+            --ouro-escuro: #7a6021;
+            --ouro-brilho: #c5a85c;
+            --azul-fundo: #040914;
+            --papel-claro: #f4eedb; /* Tom pergaminho claro de altíssima legibilidade */
+            --texto-escuro: #2a1f10;
+        }
+
+        /* Configuração do fundo e tela cheia sem rolagem */
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            background-color: var(--azul-fundo);
+            font-family: 'Courier New', Courier, monospace;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: radial-gradient(circle at center, #0a1428 0%, #040914 100%);
+        }
+
+        /* Título Principal em Letras de Forma */
+        .titulo-prontuario {
+            color: var(--ouro-brilho);
+            font-size: 2rem;
+            font-weight: 900;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            margin-bottom: 30px;
+            text-align: center;
+            text-shadow: 0 0 10px rgba(197, 168, 92, 0.3);
+        }
+
+        /* Container dos Dois Cards Lateral a Lateral */
+        .container-cards {
+            display: flex;
+            gap: 30px;
+            max-width: 1100px;
+            width: 90%;
+            justify-content: center;
+            align-items: stretch;
+        }
+
+        /* Estrutura do Card Futurista/Moderno */
+        .card-luxo {
+            flex: 1;
+            background: linear-gradient(135deg, var(--ouro-escuro), #2d220a, var(--ouro-escuro));
+            padding: 3px; /* Espessura da borda sutil */
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 15px rgba(122, 96, 33, 0.2);
+            transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), 
+                        box-shadow 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            cursor: pointer;
+        }
+
+        /* Efeito Zoom e Brilho Ouro ao passar o mouse ou tocar */
+        .card-luxo:hover, .card-luxo:active {
+            transform: scale(1.03);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6), 0 0 25px var(--ouro-brilho);
+        }
+
+        /* Interior do Card (Papel Envelhecido de Luxo) */
+        .conteudo-papel {
+            background-color: var(--papel-claro);
+            background-image: url('https://www.transparenttextures.com/patterns/cream-paper.png');
+            border-radius: 13px;
+            padding: 35px 30px;
+            height: 100%;
+            min-height: 480px;
+            box-sizing: border-box;
+            color: var(--texto-escuro);
+            display: flex;
+            flex-direction: column;
+            box-shadow: inset 0 0 30px rgba(42, 31, 16, 0.08);
+        }
+
+        .cabecalho-card {
+            font-size: 0.85rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border-bottom: 2px solid rgba(42, 31, 16, 0.15);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            color: #5c4324;
+        }
+
+        /* Estilização dos Textos */
+        p {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin: 0 0 15px 0;
+            text-align: justify;
+        }
+
+        .carimbo-humor {
+            display: inline-block;
+            border: 2px dashed #a82424;
+            color: #a82424;
+            font-weight: bold;
+            padding: 4px 10px;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            transform: rotate(-2deg);
+            margin-bottom: 15px;
+        }
+
+        /* Lista de Remédios Especiais */
+        .lista-remedios {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .lista-remedios li {
+            padding: 12px 0;
+            border-bottom: 1px dashed rgba(42, 31, 16, 0.2);
+            font-size: 0.95rem;
+        }
+
+        .lista-remedios li:last-child {
+            border-bottom: none;
+        }
+
+        .remedio-nome {
+            font-weight: bold;
+            color: #1a4225; /* Verde farmacêutico sutil */
+            text-transform: uppercase;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        /* Botão Discreto de Próxima Página integrado no design */
+        .btn-navegacao {
+            margin-top: auto;
+            background: transparent;
+            border: 1px solid var(--ouro-escuro);
+            color: var(--texto-escuro);
+            padding: 10px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-family: inherit;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+        }
+
+        .btn-navegacao:hover {
+            background-color: var(--ouro-escuro);
+            color: white;
+        }
+
+        /* Responsividade para celulares */
+        @media (max-width: 768px) {
+            body, html {
+                overflow-y: auto;
+                height: auto;
+                padding: 40px 0;
+            }
+            .container-cards {
+                flex-direction: column;
+                gap: 25px;
+            }
+        }
+    </style>
+</head>
+<body onclick="garantirMusica()">
+
+    <h1 class="titulo-prontuario">PRONTUÁRIO MÉDICO</h1>
+
+    <div class="container-cards">
+
+        <!-- CARD 1: QUADRO DA PACIENTE -->
+        <div class="card-luxo">
+            <div class="conteudo-papel">
+                <div class="cabecalho-card">Histórico & Quadro Clínico</div>
+                
+                <div class="carimbo-humor">Diagnóstico: Afeto Agudo Incurável</div>
+                
+                <p><strong>Paciente:</strong> Identificada como uma alma sonhadora em trânsito temporário por Belém (período de 1 ano e 3 meses fixado pelas raízes familiares e pelo primeiro ano da pequena Helena em 5 de agosto), com retorno programado para Brasília pós-aniversário.</p>
+                
+                <p><strong>Evolução:</strong> Veterana de uma jornada de mais de 20 anos enfrentando a síndrome do pânico. Apresenta alta capacidade de discernimento e blindagem terapêutica, sabendo separar perfeitamente a relação médico-paciente tradicional.</p>
+                
+                <p><strong>Nota Clínica Importante:</strong> Desenvolveu uma percepção única e genuína sobre a profissional responsável. Relata enxergar através da postura inicialmente rígida e sem apertos de mão dos primeiros 10 minutos, avistando uma essência magnífica. Descreve a médica poeticamente como uma "sereia enorme que merece os maiores oceanos", reconhecendo com total respeito os limites da privacidade, mas celebrando o privilégio de sua presença e de seu sorriso.</p>
+            </div>
+        </div>
+
+        <!-- CARD 2: PRESCRIÇÃO -->
+        <div class="card-luxo">
+            <div class="conteudo-papel">
+                <div class="cabecalho-card">Receituário Especial & Conduta</div>
+                
+                <ul class="lista-remedios">
+                    <li>
+                        <span class="remedio-nome">1. Dose Regular de Realização</span>
+                        Focar no lado profissional e ir em busca de não apenas sobreviver, mas viver plenamente os próprios sonhos.
+                    </li>
+                    <li>
+                        <span class="remedio-nome">2. Memória Visual Ativa</span>
+                        Apreciar os gestos magníficos e a doçura do olhar descoberto naquela consulta de 45 minutos a cada dois meses.
+                    </li>
+                    <li>
+                        <span class="remedio-nome">3. Desapego de Cobranças</span>
+                        Reduzir imediatamente as autocobranças excessivas que geram mal-estar, substituindo-as pela paz das próprias escolhas.
+                    </li>
+                    <li>
+                        <span class="remedio-nome">4. Música e Arte</span>
+                        Uso contínuo de canções clássicas (como o arquivo de áudio anexado a este repositório) para acalmar os oceanos internos.
+                    </li>
+                </ul>
+
+                <button class="btn-navegacao" onclick="proximaPagina(event)">Avançar Páginas</button>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Elemento de Áudio Oculto -->
+    <audio id="player-elvis" src="elvis.htm.mp3" loop></audio>
+
+    <script>
+        // Inicia o áudio na interação
+        function garantirMusica() {
+            const musica = document.getElementById('player-elvis');
+            if (musica.paused) {
+                musica.play().catch(e => console.log("Áudio aguardando clique explícito."));
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const musica = document.getElementById('player-elvis');
+            musica.play().catch(() => {
+                console.log("Clique em qualquer lugar para iniciar a música.");
+            });
+        });
+
+        // Redirecionamento para a próxima página
+        function proximaPagina(event) {
+            event.stopPropagation(); 
+            
+            document.body.style.transition = "opacity 0.8s ease, transform 0.8s ease";
+            document.body.style.opacity = "0";
+            document.body.style.transform = "scale(0.95)";
+            
+            setTimeout(() => {
+                window.location.href = "memoria.html.html"; 
+            }, 800);
+        }
+    </script>
+</body>
+</html>
