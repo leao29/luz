@@ -2,215 +2,299 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Uma Luz na Escuridão</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Prontuário Médico Confidencial</title>
     <style>
         :root {
-            --prata-naval: #c0c0c0;
-            --prata-brilho: #e0e0e0;
-            --azul-profundo: #020b1a;
-            --papel-pergaminho: #dfcca6;
-            --texto-suave: #22180b;
+            --ouro-escuro: #7a6021;
+            --ouro-brilho: #c5a85c;
+            --azul-fundo: #040914;
+            --papel-claro: #f4eedb; /* Tom pergaminho claro de altíssima legibilidade */
+            --texto-escuro: #2a1f10;
+            --prata-raio: linear-gradient(105deg, rgba(255,255,255,0) 30%, rgba(220,225,235,0.4) 45%, rgba(255,255,255,0) 60%);
+            --sombra-prata: 0 0 25px rgba(192, 192, 192, 0.4);
         }
 
+        /* Configuração do fundo e tela cheia sem rolagem */
+        * { box-sizing: border-box; }
         body, html {
             margin: 0;
             padding: 0;
-            width: 100%;
-            height: 100%;
-            overflow-x: hidden;
-            background-color: var(--azul-profundo);
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            background-color: var(--azul-fundo);
             font-family: 'Georgia', serif;
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 40px 0;
+            justify-content: center;
+            background: radial-gradient(circle at center, #0a1428 0%, #040914 100%);
+            -webkit-tap-highlight-color: transparent;
         }
 
-        /* Fundo Estrelado Mágico */
-        #espaco-sideral {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            z-index: -1;
-            background: radial-gradient(circle at center, #0a162b 0%, #020b1a 100%);
-        }
-
-        .estrela-cadente {
-            position: absolute;
-            background: white;
-            border-radius: 50%;
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.9), 0 0 20px rgba(255, 255, 255, 0.4);
-            animation: pulsarEstrela 5s infinite ease-in-out;
-        }
-
-        @keyframes pulsarEstrela {
-            0%, 100% { transform: scale(0.6); opacity: 0.2; }
-            50% { transform: scale(1.4); opacity: 1; }
-        }
-
-        .container-carta {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 35px;
-            max-width: 650px;
-            width: 90%;
-            z-index: 10;
-        }
-
-        /* CARD DO TÍTULO - FUTURISTA COM BORDA PRATA */
-        .card-titulo {
-            position: relative;
-            background: linear-gradient(135deg, var(--prata-naval), #444, var(--prata-brilho));
-            background-size: 200% 200%;
-            padding: 3px;
-            border-radius: 16px;
-            box-shadow: 0 0 25px rgba(192, 192, 192, 0.3);
-            animation: brilhoPrata 4s linear infinite;
-            width: 100%;
-            text-align: center;
-            box-sizing: border-box;
-            transition: transform 0.4s ease, box-shadow 0.4s ease;
-        }
-
-        @keyframes brilhoPrata {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        .card-titulo:hover {
-            transform: scale(1.02);
-            box-shadow: 0 0 40px rgba(255, 255, 255, 0.5);
-        }
-
-        .interno-titulo {
-            background-color: var(--azul-profundo);
-            border-radius: 14px;
-            padding: 20px;
-        }
-
-        .interno-titulo h1 {
-            color: #ffffff;
-            margin: 0;
+        /* Título Principal em Letras de Forma */
+        .titulo-prontuario {
+            color: var(--ouro-brilho);
             font-size: 1.8rem;
+            font-weight: 900;
             letter-spacing: 6px;
             text-transform: uppercase;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
-            font-weight: 400;
+            margin-bottom: 25px;
+            text-align: center;
+            text-shadow: 0 0 10px rgba(197, 168, 92, 0.3);
         }
 
-        /* CARD DA CARTA - TEXTURA ANTIGA E BORDA PRATA */
-        .card-conteudo {
+        /* Container dos Dois Cards Lateral a Lateral */
+        .container-cards {
+            display: flex;
+            gap: 25px;
+            max-width: 1100px;
+            width: 90%;
+            justify-content: center;
+            align-items: stretch;
+        }
+
+        /* Estrutura do Card Futurista/Moderno */
+        .card-luxo {
+            flex: 1;
+            background: linear-gradient(135deg, var(--ouro-escuro), #2d220a, var(--ouro-escuro));
+            padding: 3px; /* Espessura da borda sutil */
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 15px rgba(122, 96, 33, 0.2);
+            transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), 
+                        box-shadow 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
             position: relative;
-            background: linear-gradient(135deg, #777, var(--prata-naval), #333);
-            padding: 3px;
-            border-radius: 24px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
-            width: 100%;
+            overflow: hidden;
+        }
+
+        /* Efeito Raio de Prata Sutil Passando pelos Cards */
+        .card-luxo::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -150%;
+            width: 300%; height: 100%;
+            background: var(--prata-raio);
+            transition: 0s;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        /* Efeito Zoom e Brilho Ouro/Prata combinados */
+        .card-luxo:hover, .card-luxo:active {
+            transform: scale(1.02) translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6), var(--sombra-prata);
+        }
+
+        .card-luxo:hover::before {
+            left: 150%;
+            transition: 1.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Interior do Card (Papel Envelhecido de Luxo) */
+        .conteudo-papel {
+            background-color: var(--papel-claro);
+            background-image: url('https://www.transparenttextures.com/patterns/cream-paper.png');
+            border-radius: 13px;
+            padding: 30px;
+            height: 100%;
+            min-height: 460px;
             box-sizing: border-box;
-            transition: transform 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+            color: var(--texto-escuro);
+            display: flex;
+            flex-direction: column;
+            box-shadow: inset 0 0 30px rgba(42, 31, 16, 0.08);
         }
 
-        .card-conteudo:hover {
-            transform: scale(1.01);
-        }
-
-        /* Folha Antiga Canva Luxo - Sem cansar a vista */
-        .folha-antiga {
-            background-color: var(--papel-pergaminho);
-            background-image: url('https://www.transparenttextures.com/patterns/handmade-paper.png');
-            border-radius: 22px;
-            padding: 45px 40px;
-            color: var(--texto-suave);
-            box-shadow: inset 0 0 60px rgba(0,0,0,0.18);
-            box-sizing: border-box;
-        }
-
-        .paragrafo-carta {
-            font-size: 1.15rem;
-            line-height: 1.8;
-            text-align: justify;
-            text-indent: 2em;
+        .cabecalho-card {
+            font-size: 0.85rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border-bottom: 2px solid rgba(42, 31, 16, 0.15);
+            padding-bottom: 10px;
             margin-bottom: 20px;
-            font-weight: 400;
-            letter-spacing: 0.3px;
+            color: #5c4324;
+            font-family: 'Courier New', Courier, monospace;
         }
 
-        .paragrafo-carta:last-child {
-            margin-bottom: 0;
+        /* Estilização dos Textos */
+        p {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin: 0 0 15px 0;
+            text-align: justify;
         }
 
-        @media (max-width: 600px) {
-            body { padding: 20px 0; }
-            .folha-antiga { padding: 30px 20px; }
-            .interno-titulo h1 { font-size: 1.3rem; letter-spacing: 4px; }
-            .paragrafo-carta { font-size: 1.05rem; text-align: left; }
+        .carimbo-humor {
+            display: inline-block;
+            border: 2px dashed #a82424;
+            color: #a82424;
+            font-weight: bold;
+            padding: 4px 10px;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            transform: rotate(-1.5deg);
+            margin-bottom: 15px;
+            font-family: 'Courier New', Courier, monospace;
+            align-self: flex-start;
+        }
+
+        /* Lista de Remédios Especiais */
+        .lista-remedios {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .lista-remedios li {
+            padding: 10px 0;
+            border-bottom: 1px dashed rgba(42, 31, 16, 0.2);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .lista-remedios li:last-child {
+            border-bottom: none;
+        }
+
+        .remedio-nome {
+            font-weight: bold;
+            color: #1a4225; /* Verde farmacêutico sutil */
+            text-transform: uppercase;
+            display: block;
+            margin-bottom: 4px;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        /* Botão Discreto de Próxima Página integrado no design */
+        .btn-navegacao {
+            margin-top: auto;
+            background: transparent;
+            border: 1px solid var(--ouro-escuro);
+            color: var(--texto-escuro);
+            padding: 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-family: inherit;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+        }
+
+        .btn-navegacao:hover {
+            background-color: var(--ouro-escuro);
+            color: white;
+            box-shadow: 0 0 10px rgba(122, 96, 33, 0.4);
+        }
+
+        /* Responsividade e travamento de rolagem para celulares */
+        @media (max-width: 768px) {
+            body, html {
+                overflow: hidden;
+                height: 100vh;
+            }
+            .titulo-prontuario { font-size: 1.4rem; margin-bottom: 15px; }
+            .container-cards {
+                flex-direction: column;
+                gap: 15px;
+                height: 80%;
+                width: 92%;
+            }
+            .card-luxo { height: 50%; }
+            .conteudo-papel { min-height: auto; padding: 18px; }
+            .cabecalho-card { margin-bottom: 8px; padding-bottom: 5px; }
+            .carimbo-humor { margin-bottom: 8px; font-size: 0.7rem; }
+            p { font-size: 0.8rem; line-height: 1.4; margin-bottom: 8px; }
+            .lista-remedios li { padding: 6px 0; font-size: 0.78rem; line-height: 1.3; }
+            .btn-navegacao { padding: 8px; font-size: 0.75rem; }
         }
     </style>
 </head>
-<body>
+<body onclick="garantirMusica()">
 
-    <div id="espaco-sideral"></div>
+    <h1 class="titulo-prontuario">PRONTUÁRIO MÉDICO</h1>
 
-    <div class="container-carta">
-        
-        <!-- CARD DO TÍTULO EM MAIÚSCULO -->
-        <div class="card-titulo">
-            <div class="interno-titulo">
-                <h1>Uma Luz na Escuridão</h1>
+    <div class="container-cards">
+
+        <!-- CARD 1: QUADRO DA PACIENTE -->
+        <div class="card-luxo">
+            <div class="conteudo-papel">
+                <div class="cabecalho-card">Histórico & Quadro Clínico</div>
+                
+                <div class="carimbo-humor">Diagnóstico: Afeto Agudo Incurável</div>
+                
+                <p><strong>Paciente:</strong> Identificada como uma alma sonhadora em trânsito temporário por Belém (período de 1 ano e 3 meses fixado pelas raízes familiares e pelo primeiro ano da pequena Helena em 5 de agosto), com retorno programado para Brasília pós-aniversário.</p>
+                
+                <p><strong>Evolução:</strong> Veterana de uma jornada de mais de 20 anos enfrentando a síndrome do pânico. Apresenta alta capacidade de discernimento e blindagem terapêutica, sabendo separar perfeitamente a relação médico-paciente tradicional.</p>
+                
+                <p><strong>Nota Clínica Importante:</strong> Desenvolveu uma percepção única e genuína sobre a profissional responsável. Relata enxergar através da postura inicialmente rígida e sem apertos de mão dos primeiros 10 minutos, avistando uma essência magnífica. Descreve a médica poeticamente como uma "sereia enorme que merece os maiores oceanos", reconhecendo com total respeito os limites da privacidade, mas celebrando o privilégio de sua presença e de seu sorriso.</p>
             </div>
         </div>
 
-        <!-- CARD DA CARTA EM PERGAMINHO ESCURECIDO -->
-        <div class="card-conteudo">
-            <div class="folha-antiga">
+        <!-- CARD 2: PRESCRIÇÃO -->
+        <div class="card-luxo">
+            <div class="conteudo-papel">
+                <div class="cabecalho-card">Receituário Especial & Conduta</div>
                 
-                <div class="paragrafo-carta">
-                    No meio do caos cultural e após anos longe de Belém, o meu retorno não foi um processo simples. Vivi tempestades silenciosas que guardei quase inteiramente para mim; uma gestação de altíssimo risco onde as únicas testemunhas éramos eu e minha sobrinha. Cruzar aquele limiar assustador para ver o nascimento mágico de Helena Sophia foi um marco definitivo sobre a fragilidade e a força da vida.
-                </div>
+                <ul class="lista-remedios">
+                    <li>
+                        <span class="remedio-nome">1. Dose Regular de Realização</span>
+                        Focar no lado profissional e ir em busca de não apenas sobreviver, mas viver plenamente os próprios sonhos.
+                    </li>
+                    <li>
+                        <span class="remedio-nome">2. Memória Visual Ativa</span>
+                        Apreciar os gestos magníficos e a doçura do olhar descoberto naquela consulta de 45 minutos a cada dois meses.
+                    </li>
+                    <li>
+                        <span class="remedio-nome">3. Desapego de Cobranças</span>
+                        Reduzir imediatamente as autocobranças excessivas que geram mal-estar, substituindo-as pela paz das próprias escolhas.
+                    </li>
+                    <li>
+                        <span class="remedio-nome">4. Música e Arte</span>
+                        Uso contínuo de canções clássicas para acalmar organicamente os oceanos internos.
+                    </li>
+                </ul>
 
-                <div class="paragrafo-carta">
-                    Sempre que eu retornava a Belém, meu foco era absoluto em proteger e vivenciar os raros momentos com a minha família. No entanto, deixar para trás uma trajetória perfeitamente estável em Brasília e a minha própria liberdade provocou uma guinada abrupta de 360 graus na minha existência. Nesse percurso, enfrentei uma rasteira profissional — um golpe severo, mas que ironicamente se transformou em fortaleza. Ali eu compreendi que possuo uma capacidade técnica e intelectual que vai muito além do que aqueles que me subestimam conseguem enxergar. Talvez confundam a ausência de arrogância e prepotência com fraqueza. Desde muito jovem aprendi que diminuir o outro é o pior erro humano; o sol brilha para todos, mas habitar a luz ou a sombra é uma escolha estritamente individual. Ninguém muda ninguém. Essa transformação pertence apenas a Deus e ao próprio indivíduo. A vida é curta demais para aceitarmos andar em círculos sem sair do lugar.
-                </div>
-
-                <div class="paragrafo-carta">
-                    Esse recomeço do zero já era uma pauta constante com a Dra. Laila, que me acompanha há cerca de três anos com uma interatividade incrível. Minha vinda para cá foi cercada de orientações cruciais que ouvi atentamente para preservar meu equilíbrio psicológico. Ainda assim, por razões complexas e difíceis de exprimir, muitas vezes me sinto como um peixe fora d'água nesta cidade.
-                </div>
-
-                <div class="paragrafo-carta">
-                    Por trás das aparências, sou uma pessoa extremamente racional, embora guarde em mim um lado profundamente romântico. Sei delimitar com precisão cirúrgica os papéis da profissional e da mulher. E é nessa clareza que reafirmo o quanto você se tornou importante na minha realidade em Belém. Você transcendeu o papel da médica que zela pela minha mente; vejo em você uma pérola rara. Às vezes, me pego escutando músicas e permitindo que meus pensamentos viajem até você. Esse sentimento me faz bem, me traz paz.
-                </div>
-
-                <div class="paragrafo-carta">
-                    Não há pretensão de reciprocidade ou de posse em minhas palavras. Como eu já lhe disse uma vez, uma linda sereia pertence aos oceanos mais vastos e deslumbrantes, e não ao pequeno lago que representa a minha vida. No entanto, essa percepção não anula o meu desejo genuíno de estar aqui, traduzindo o que sou através deste pequeno gesto de admiração. Carrego o perfeccionismo como um defeito confesso, mas hoje ele serve apenas a um propósito: garantir que você receba o melhor de mim. Que esta leitura te faça sentir exatamente o tamanho do seu valor.
-                </div>
-
+                <!-- Redirecionamento configurado para voltar para a página inicial ou menu principal -->
+                <button class="btn-navegacao" onclick="proximaPagina(event)">Finalizar Sessão</button>
             </div>
         </div>
 
     </div>
 
-    <script>
-        // Criação de estrelas brilhantes dinâmicas
-        const universo = document.getElementById('espaco-sideral');
-        const totalEstrelas = 40;
+    <!-- Elemento de Áudio Corrigido para a extensão correta do repositório (elvis.html.mp3) -->
+    <audio id="player-elvis" src="elvis.html.mp3" loop></audio>
 
-        for (let i = 0; i < totalEstrelas; i++) {
-            let star = document.createElement('div');
-            star.className = 'estrela-cadente';
+    <script>
+        // Inicia o áudio de forma segura na interação
+        function garantirMusica() {
+            const musica = document.getElementById('player-elvis');
+            if (musica.paused) {
+                musica.play().catch(e => console.log("Áudio aguardando clique explícito."));
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const musica = document.getElementById('player-elvis');
+            musica.play().catch(() => {
+                console.log("Clique em qualquer lugar para garantir a continuidade da música.");
+            });
+        });
+
+        // Redirecionamento fluido de saída
+        function proximaPagina(event) {
+            event.stopPropagation(); 
             
-            let tam = Math.random() * 3 + 2;
-            star.style.width = tam + 'px';
-            star.style.height = tam + 'px';
+            document.body.style.transition = "opacity 0.8s ease, transform 0.8s ease";
+            document.body.style.opacity = "0";
+            document.body.style.transform = "scale(0.95)";
             
-            star.style.left = Math.random() * 100 + 'vw';
-            star.style.top = Math.random() * 100 + 'vh';
-            
-            star.style.animationDelay = Math.random() * 5 + 's';
-            star.style.animationDuration = (Math.random() * 4 + 4) + 's';
-            
-            universo.appendChild(star);
+            setTimeout(() => {
+                // Configurado para retornar ao index.html perfeitamente
+                window.location.href = "index.html"; 
+            }, 800);
         }
     </script>
 </body>
