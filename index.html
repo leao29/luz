@@ -11,6 +11,8 @@
             --vermelho-militar: #991b1b;
             --ferro-prata: #94a3b8;
             --papel-canva: #f4ecd8;
+            --ouro-escuro: #614d1a;
+            --ouro-brilhante: #d4af37;
         }
 
         * { box-sizing: border-box; }
@@ -85,32 +87,62 @@
             transition: opacity 1s cubic-bezier(0.4, 0, 0.2, 1), transform 1s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        /* ENVELOPE COM MOLDURA DE FERRO PRATA E ANIMAÇÃO ELÉTRICA NAS BORDAS */
+        /* CONTAINER DA BORDA DE OURO ANIMADA (CORRENTE) */
+        .borda-ouro-correndo {
+            position: relative;
+            width: 100%;
+            height: 456px; /* Ajustado para cobrir perfeitamente o envelope */
+            border-radius: 12px;
+            overflow: hidden;
+            padding: 4px; /* Espessura da borda animada */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.8);
+            transition: transform 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        /* Efeito do feixe de luz girando ao fundo */
+        .borda-ouro-correndo::before {
+            content: '';
+            position: absolute;
+            width: 150%;
+            height: 150%;
+            background: conic-gradient(
+                transparent, 
+                var(--ouro-escuro), 
+                var(--ouro-brilhante), 
+                var(--ouro-escuro), 
+                transparent 40%
+            );
+            animation: girarBorda 4s linear infinite;
+        }
+
+        @keyframes girarBorda {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* ENVELOPE CONFIGURADO COMO CAMADA INTERNA */
         .envelope-realista {
             position: relative;
             background-color: var(--papel-canva);
             background-image: url('https://www.transparenttextures.com/patterns/handmade-paper.png');
             width: 100%;
-            height: 450px;
+            height: 100%;
             border-radius: 8px;
-            border: 4px solid var(--ferro-prata);
             padding: 40px 25px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            box-shadow: 0 25px 60px rgba(0,0,0,0.8), inset 0 0 40px rgba(139,92,26,0.12);
-            transition: transform 0.5s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.5s ease;
-            animation: eletricidadeFerro 4s infinite alternate;
+            z-index: 2;
+            box-shadow: inset 0 0 40px rgba(139,92,26,0.15);
         }
 
-        @keyframes eletricidadeFerro {
-            0%, 100% { box-shadow: 0 25px 60px rgba(0,0,0,0.8), 0 0 15px rgba(148, 163, 184, 0.2), inset 0 0 40px rgba(139,92,26,0.12); border-color: var(--ferro-prata); }
-            50% { box-shadow: 0 25px 60px rgba(0,0,0,0.8), 0 0 25px rgba(226, 232, 240, 0.6), inset 0 0 40px rgba(139,92,26,0.12); border-color: #e2e8f0; }
-        }
-
-        .envelope-realista:hover {
+        /* Efeito de hover integrado no bloco completo */
+        .borda-ouro-correndo:hover {
             transform: scale(1.04);
-            box-shadow: 0 35px 70px rgba(0,0,0,0.85), 0 0 30px rgba(226, 232, 240, 0.4);
+            box-shadow: 0 35px 70px rgba(0,0,0,0.9), 0 0 30px rgba(212, 175, 55, 0.3);
         }
 
         .carimbo-militar {
@@ -255,7 +287,7 @@
 
         @media (max-height: 620px) {
             .container-experiencia { gap: 25px; }
-            .envelope-realista { height: 400px; padding: 25px 15px; }
+            .borda-ouro-correndo { height: 406px; }
             .nome-doutora { font-size: 2.1rem; }
             .subtitulo-medica { margin-bottom: 25px; }
             .tarja-sigiloso { font-size: 1.15rem; }
@@ -268,22 +300,24 @@
     <!-- Fundo de Estrelas e Borboletas -->
     <div id="cenario-cosmos"></div>
 
-    <!-- Tela Inicial: Envelope com bordas prata animadas -->
+    <!-- Tela Inicial: Envelope com a nova Borda Ouro que corre continuamente -->
     <div class="container-experiencia" id="painel-principal">
-        <div class="envelope-realista">
-            <div class="carimbo-militar">CONFIDENCIAL • MARINHA DO BRASIL</div>
-            
-            <div class="nome-doutora">Dra. Débora</div>
-            <div class="subtitulo-medica">Oficial Médica Psiquiatra</div>
-            
-            <div class="tarja-sigiloso">SIGILOSO</div>
+        <div class="borda-ouro-correndo">
+            <div class="envelope-realista">
+                <div class="carimbo-militar">CONFIDENCIAL • L</div>
+                
+                <div class="nome-doutora">Dra. Débora</div>
+                <div class="subtitulo-medica">Oficial Médica que Cura a Alma</div>
+                
+                <div class="tarja-sigiloso">SIGILOSO</div>
 
-            <div class="bloco-paciente">
-                <span class="rotulo-paciente">Paciente:</span>
-                <span class="texto-identificacao">"A pessoa que jamais esquecerá você"</span>
+                <div class="bloco-paciente">
+                    <span class="rotulo-paciente">Paciente:</span>
+                    <span class="texto-identificacao">"A pessoa que jamais esquecerá você"</span>
+                </div>
+
+                <div class="lacre-cera"></div>
             </div>
-
-            <div class="lacre-cera"></div>
         </div>
 
         <div class="wrapper-botao">
@@ -304,7 +338,6 @@
 
         for (let i = 0; i < totalElementos; i++) {
             const elemento = document.createElement('div');
-            // Intercala entre estrelas e silhuetas de borboletas
             if (i % 3 === 0) {
                 elemento.className = 'borboleta-pulsante';
                 elemento.style.left = Math.random() * 100 + 'vw';
