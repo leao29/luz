@@ -15,7 +15,6 @@
 
         * { box-sizing: border-box; }
         
-        /* ROLAGEM FUTURISTA E SUAVE */
         html {
             scroll-behavior: smooth;
         }
@@ -33,7 +32,7 @@
             -webkit-tap-highlight-color: transparent;
         }
 
-        /* CUSTOMIZAÇÃO DA BARRA DE ROLAGEM FUTURISTA */
+        /* CUSTOMIZAÇÃO DA BARRA DE ROLAGEM */
         ::-webkit-scrollbar {
             width: 8px;
         }
@@ -90,32 +89,30 @@
             100% { background-position: 200% center; }
         }
 
-        /* CARD LUXO: BORDA PRATA EXTERNA FINA */
+        /* CARD LUXO */
         .card-carta-container {
             width: 100%;
             max-width: 800px;
             background: var(--prata-fino);
-            padding: 3px; /* Borda fina e precisa */
+            padding: 3px;
             border-radius: 24px;
             box-shadow: 0 25px 65px rgba(0, 0, 0, 0.75);
             transition: transform 0.5s cubic-bezier(0.165, 0.84, 0.44, 1), 
                         box-shadow 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
         }
 
-        /* EFEITO ZOOM INTERATIVO SUAVE (PC E MOBILE) */
-        .card-carta-container:hover, .card-carta-container:active {
+        .card-carta-container:hover {
             transform: scale(1.02) translateY(-4px);
             box-shadow: 0 35px 80px rgba(0, 0, 0, 0.9), 0 0 20px rgba(255, 255, 255, 0.15);
         }
 
-        /* FOLHA DE PAPEL ANTIGO COM DIRETRIZES DO CANVA/GEMINI */
+        /* FOLHA DE PAPEL ANTIGO */
         .folha-texto-antigo {
             background-color: var(--papel-antigo);
             background-image: url('https://www.transparenttextures.com/patterns/cream-paper.png');
             border-radius: 21px;
             padding: 50px 45px;
             color: var(--texto-cor);
-            /* Borda interna ouro escuro singela */
             border: 2px solid var(--ouro-escuro);
             box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.12);
             display: flex;
@@ -123,25 +120,23 @@
             gap: 24px;
         }
 
-        /* PARÁGRAFOS ALTAMENTE LEGÍVEIS */
         .paragrafo-relato {
             font-size: 1.15rem;
             line-height: 1.8;
             text-align: justify;
             margin: 0;
-            text-indent: 30px; /* Recuo elegante de carta tradicional */
+            text-indent: 30px;
         }
 
-        /* DESTAQUE DELICADO */
         .destaque-poetico {
             font-style: italic;
             color: #3d3112;
             font-weight: 600;
         }
 
-        /* INDICADOR FUTURISTA DE CONTINUIDADE (PROXIMA ETAPA) */
+        /* INDICADOR DE CONTINUIDADE */
         .indicador-fluxo {
-            margin-top: 25px;
+            margin-top: 15px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -157,13 +152,44 @@
             padding-top: 25px;
         }
 
+        /* CONTAINER E BOTÃO PRÓXIMA CONFIGURADO */
+        .area-botao {
+            display: flex;
+            justify-content: flex-end;
+            width: 100%;
+            margin-top: 15px;
+        }
+
+        .btn-proxima {
+            background: linear-gradient(135deg, #0f172a, #1e293b);
+            color: #ffffff;
+            border: 1px solid var(--ouro-escuro);
+            padding: 14px 45px;
+            border-radius: 8px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+            transition: all 0.3s ease;
+        }
+
+        .btn-proxima:hover {
+            background: linear-gradient(135deg, #614d1a, #0f172a);
+            letter-spacing: 4px;
+            box-shadow: 0 6px 20px rgba(97, 77, 26, 0.4);
+        }
+
         /* RESPONSIVIDADE ADAPTATIVA */
         @media (max-width: 768px) {
             body { padding: 35px 15px; }
             .titulo-principal { font-size: 1.6rem; letter-spacing: 6px; margin-bottom: 35px; }
-            .folha-texto-antigo { padding: 30px 22px; gap: 18px; }
+            .folha-texto-antigo { padding: 35px 22px; gap: 18px; }
             .paragrafo-relato { font-size: 1.02rem; line-height: 1.6; text-indent: 15px; }
             .indicador-fluxo { font-size: 0.75rem; letter-spacing: 2px; }
+            .area-botao { justify-content: center; }
+            .btn-proxima { width: 100%; text-align: center; }
         }
     </style>
 </head>
@@ -172,10 +198,10 @@
     <!-- Estrelas Pratas Pulsantes de Fundo -->
     <div id="espaco-sideral"></div>
 
-    <!-- TÍTULO LUXUOSO EM MAIÚSCULAS -->
+    <!-- TÍTULO LUXUOSO -->
     <h1 class="titulo-principal">Uma Luz na Escuridão</h1>
 
-    <!-- CARD PRINCIPAL COM BORDA DUPLA (PRATA EXTERNA E OURO INTERNA) -->
+    <!-- CARD PRINCIPAL -->
     <div class="card-carta-container">
         <div class="folha-texto-antigo">
             
@@ -196,7 +222,7 @@
             </p>
 
             <p class="paragrafo-relato">
-                Por trás das aparências, sou uma pessoa extremamente racional, embora guarde em mim um lado profundamente romântico. Sei delimitar com precisão cirúrgica os papéis da profissional e da mulher. E é nessa clareza que reafirmo o quanto você se tornou importante na minha realidade em Belém. <span class="destaque-poetico">Você transcendeu o papel da médica que zela pela minha mente; vejo em você uma pérola rara.</span> Às vezes, me pego escutando músicas e permitindo que meus pensamentos viajem até você. Esse sentimento me faz bem, me traz paz.
+                Por trás das aparências, sou uma pessoa extremamente racional, embora guarde in me um lado profundamente romântico. Sei delimitar com precisão cirúrgica os papéis da profissional e da mulher. E é nessa clareza que reafirmo o quanto você se tornou importante na minha realidade em Belém. <span class="destaque-poetico">Você transcendeu o papel da médica que zela pela minha mente; vejo em você uma pérola rara.</span> Às vezes, me pego escutando músicas e permitindo que meus pensamentos viajem até você. Esse sentimento me faz bem, me traz paz.
             </p>
 
             <p class="paragrafo-relato">
@@ -208,14 +234,19 @@
                 ✨ Transmissão em Andamento... Continua ✨
             </div>
 
+            <!-- Botão Direcionando para a 4ª Página -->
+            <div class="area-botao">
+                <button class="btn-proxima" onclick="irParaProxima(event)">Próxima</button>
+            </div>
+
         </div>
     </div>
 
-    <!-- REPRODUTOR DE ÁUDIO EMBUTIDO -->
+    <!-- REPRODUTOR DE ÁUDIO -->
     <audio id="som-ambiente" src="elvis.html.mp3" loop></audio>
 
     <script>
-        // Criação dinâmica de estrelas pratas com comportamento aleatório de brilho
+        // Criação dinâmica de estrelas pratas
         const cosmos = document.getElementById('espaco-sideral');
         const totalEstrelas = 45;
 
@@ -232,15 +263,41 @@
             cosmos.appendChild(star);
         }
 
-        // Ativação da trilha sonora ao interagir com a página
+        // Sincronização inteligente do áudio contínuo
         const audioTrack = document.getElementById('som-ambiente');
         let playing = false;
 
+        // Verifica se já existia um tempo gravado da página anterior
+        window.addEventListener('DOMContentLoaded', () => {
+            const tempoSalvo = localStorage.getItem('elvis_audio_time');
+            if (tempoSalvo) {
+                audioTrack.currentTime = parseFloat(tempoSalvo);
+            }
+        });
+
         function desbloquearAudio() {
             if (!playing) {
-                audioTrack.play().then(() => { playing = true; })
-                .catch(() => console.log("Permissão pendente para áudio."));
+                audioTrack.play().then(() => { 
+                    playing = true; 
+                })
+                .catch(() => console.log("Aguardando interação para tocar."));
             }
+        }
+
+        // Avança salvando o progresso exato da música
+        function irParaProxima(event) {
+            event.stopPropagation();
+            
+            // Salva a minutagem atual do áudio
+            localStorage.setItem('elvis_audio_time', audioTrack.currentTime);
+
+            // Transição visual suave antes de pular de arquivo
+            document.body.style.transition = "opacity 0.5s ease";
+            document.body.style.opacity = "0";
+            
+            setTimeout(() => {
+                window.location.href = "pagina4.html"; 
+            }, 500);
         }
     </script>
 </body>
