@@ -3,222 +3,327 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Uma Luz na Escuridão</title>
+    <title>Prontuário & Receita - Dra. Débora</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Orbitron:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <style>
         :root {
-            --azul-cosmos: #03081e;
+            --azul-cosmos: #01040a;
+            --preto-profundo: #020617;
             --prata-fino: linear-gradient(135deg, #bdc3c7, #ffffff, #95a5a6, #ffffff, #7f8c8d);
             --ouro-escuro: #614d1a;
-            --papel-antigo: #f7edd6;
-            --texto-cor: #1c160c;
+            --cor-prata: #e2e8f0;
+            --papel-antigo: #f5e6c4;
         }
 
         * { box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
 
-        body {
+        body, html {
             margin: 0; padding: 0;
             width: 100%; min-height: 100vh;
             background-color: var(--azul-cosmos);
-            font-family: 'Georgia', serif;
+            font-family: 'Lora', serif;
             display: flex;
-            flex-direction: column;
+            justify-content: center;
             align-items: center;
-            padding: 60px 20px;
             overflow-x: hidden;
+            overflow-y: auto;
             transition: opacity 0.8s ease;
+            padding: 40px 20px;
         }
 
-        #espaco-sideral {
+        /* FUNDO COSMOS COM ESTRELAS PULSANTES BRILHANTES */
+        #cenario-cosmos {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             z-index: -1;
-            background: radial-gradient(circle at center, #0a163a 0%, var(--azul-cosmos) 100%);
+            background: radial-gradient(circle at center, #0a1e3d 0%, var(--azul-cosmos) 100%);
         }
 
-        .estrela-pulsante {
+        .estrela-prata {
             position: absolute;
             background: #ffffff;
             border-radius: 50%;
-            opacity: 0.3;
-            animation: pulsar ease-in-out infinite;
+            box-shadow: 0 0 12px 3px #ffffff;
+            animation: pulsar 2.5s infinite ease-in-out;
         }
 
         @keyframes pulsar {
-            0%, 100% { opacity: 0.2; transform: scale(0.8); }
+            0%, 100% { opacity: 0.3; transform: scale(0.7); }
             50% { opacity: 1; transform: scale(1.4); }
         }
 
-        .painel-audio-premium {
+        /* PAINEL DE CONTROLE DE MÍDIA PREMIUM */
+        .painel-audio {
             position: fixed;
-            top: 20px;
-            right: 20px;
-            background: linear-gradient(135deg, #1e293b, #0f172a);
-            border: 1px solid #94a3b8;
+            top: 20px; right: 20px;
+            background: rgba(15, 23, 42, 0.9);
+            border: 1px solid var(--cor-prata);
             padding: 10px 16px;
             border-radius: 30px;
             display: flex;
             align-items: center;
             gap: 12px;
             z-index: 1000;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.5);
         }
 
-        .btn-controle-midia {
-            background: rgba(255, 255, 255, 0.1);
-            border: none;
-            color: #f8fafc;
+        .btn-audio {
+            background: none; border: none; cursor: pointer; color: white; font-size: 1.2rem;
+            display: flex; align-items: center; justify-content: center; padding: 0;
+        }
+
+        .slider-volume {
+            width: 75px;
             cursor: pointer;
-            width: 35px;
-            height: 35px;
-            border-radius: 50%;
+            accent-color: var(--cor-prata);
+        }
+
+        /* CONTAINER DO LAYOUT EM DUAS COLUNAS */
+        .layout-duas-colunas {
             display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .slider-volume-custom {
-            width: 70px;
-            cursor: pointer;
-        }
-
-        .efeito-luxo-entrada {
-            opacity: 0;
-            transform: translateY(20px);
-            animation: surgirSuave 1.5s ease-out forwards;
+            gap: 30px;
             width: 100%;
-            max-width: 800px;
+            max-width: 1200px;
+            justify-content: center;
+            align-items: stretch;
         }
 
-        @keyframes surgirSuave {
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .titulo-pagina {
-            font-size: 2.2rem;
-            letter-spacing: 7px;
-            text-transform: uppercase;
-            text-align: center;
-            margin-bottom: 40px;
-            background: linear-gradient(135deg, #e2e8f0, #ffffff, #94a3b8);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            filter: drop-shadow(2px 2px 0px var(--ouro-escuro));
-        }
-
-        .card-carta-container {
+        /* ENGENHARIA E DESIGN DOS CARDS COM EFEITO DE ZOOM */
+        .card-container {
+            flex: 1;
             background: var(--prata-fino);
-            padding: 3px;
-            border-radius: 24px;
-            outline: 2px solid var(--ouro-escuro);
-            outline-offset: 4px;
-            box-shadow: 0 30px 70px rgba(0, 0, 0, 0.85);
-            perspective: 1200px; /* Base essencial para o efeito futurista de rolagem */
+            padding: 4px;
+            border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+            transition: transform 0.5s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.5s ease;
         }
 
-        .folha-texto-antigo {
+        /* Efeito de super zoom sutil e elegante para PC e Mobile */
+        .card-container:hover {
+            transform: scale(1.03) translateY(-5px);
+            box-shadow: 0 30px 70px rgba(255, 255, 255, 0.15);
+        }
+
+        .conteudo-papel {
             background-color: var(--papel-antigo);
             background-image: url('https://www.transparenttextures.com/patterns/cream-paper.png');
-            border-radius: 21px;
-            padding: 60px 45px;
-            color: var(--texto-cor);
-            border: 2px solid var(--ouro-escuro);
+            border-radius: 16px;
+            padding: 40px;
+            /* Borda sutil de ouro escuro simulando contorno da página */
+            border: 3px double var(--ouro-escuro);
+            height: 100%;
             display: flex;
             flex-direction: column;
-            gap: 35px;
-        }
-
-        /* 🚀 EFEITO DE ROLAGEM FUTURISTA CINEMÁTICO */
-        .paragrafo-relato {
-            font-size: 1.15rem;
-            line-height: 1.9;
-            text-align: justify;
-            text-indent: 30px;
-            margin: 0;
-            opacity: 0.2;
-            transform: scale(0.92) rotateX(15deg) translateY(30px);
-            transform-origin: center top;
-            transition: all 0.8s cubic-bezier(0.25, 1, 0.5, 1);
-            filter: blur(2px);
-        }
-
-        /* Classe ativada via JavaScript quando o parágrafo entra no campo de visão */
-        .paragrafo-relato.em-foco {
-            opacity: 1;
-            transform: scale(1) rotateX(0deg) translateY(0);
-            filter: blur(0px);
-        }
-
-        .destaque-poetico {
-            font-style: italic;
-            font-weight: 600;
-            color: #3d3112;
             position: relative;
-            display: inline;
+            box-shadow: inset 0 0 40px rgba(97, 77, 26, 0.25);
         }
 
+        /* TÍTULOS EM LETRAS CHUMBADAS DE FERRO PRATA */
+        .titulo-chumbado {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.7rem;
+            text-align: center;
+            font-weight: 700;
+            letter-spacing: 5px;
+            margin-bottom: 30px;
+            color: #334155;
+            text-transform: uppercase;
+            text-shadow: 
+                -1px -1px 0 #ffffff, 
+                1px -1px 0 #ffffff, 
+                -1px 1px 0 #94a3b8, 
+                1px 1px 0 #64748b,
+                2px 2px 5px rgba(0,0,0,0.4);
+        }
+
+        .cabecalho-secao {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-family: 'Orbitron', sans-serif;
+            color: #1e293b;
+            font-weight: bold;
+            font-size: 1.05rem;
+            border-bottom: 2px solid var(--ouro-escuro);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .carimbo-diagnostico {
+            display: inline-block;
+            border: 3px double #b91c1c;
+            color: #b91c1c;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            font-size: 1.1rem;
+            padding: 8px 15px;
+            margin: 15px 0;
+            transform: rotate(-2deg);
+            text-transform: uppercase;
+            opacity: 0.85;
+            align-self: flex-start;
+        }
+
+        .texto-clinico {
+            flex-grow: 1;
+        }
+
+        .texto-clinico p, .lista-receita li {
+            line-height: 1.8;
+            color: #2c2519;
+            text-align: justify;
+            margin-bottom: 15px;
+            font-size: 1.05rem;
+        }
+
+        .texto-clinico strong {
+            color: #000000;
+        }
+
+        /* ESTRUTURAÇÃO DA LISTA DA RECEITA */
+        .lista-receita {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .lista-receita li {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            background: rgba(255, 255, 255, 0.25);
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid var(--ouro-escuro);
+        }
+
+        .icone-receita {
+            font-size: 1.4rem;
+            margin-top: 2px;
+        }
+
+        /* BOTÃO PRÓXIMA (ALINHADO À DIREITA NO FINAL DA RECEITA) */
         .area-botao {
             display: flex;
             justify-content: flex-end;
-            margin-top: 20px;
+            margin-top: auto;
+            padding-top: 25px;
         }
 
         .btn-proxima {
-            background: linear-gradient(135deg, #0f172a, #1e293b);
-            color: #ffffff;
+            background: #1e293b;
+            color: white;
             border: 1px solid var(--ouro-escuro);
-            padding: 16px 45px;
+            padding: 14px 35px;
             border-radius: 8px;
+            font-family: 'Orbitron', sans-serif;
             font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 2px;
             cursor: pointer;
-            transition: all 0.4s ease;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+            letter-spacing: 2px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            text-transform: uppercase;
         }
 
         .btn-proxima:hover {
             background: var(--ouro-escuro);
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(97, 77, 26, 0.5);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
         }
 
-        @media (max-width: 768px) {
-            .titulo-pagina { font-size: 1.5rem; }
-            .folha-texto-antigo { padding: 40px 20px; gap: 25px; }
-            .area-botao { justify-content: center; }
-            .btn-proxima { width: 100%; }
-            .paragrafo-relato { font-size: 1.05rem; }
+        /* RESPONSIVIDADE COMPLETA PARA CELULARES */
+        @media (max-width: 900px) {
+            .layout-duas-colunas {
+                flex-direction: column;
+                gap: 40px;
+            }
+            body {
+                padding: 80px 15px 40px 15px;
+            }
+            .conteudo-papel {
+                padding: 25px 20px;
+            }
+            .titulo-chumbado {
+                font-size: 1.4rem;
+            }
+            .area-botao {
+                justify-content: center;
+            }
+            .btn-proxima {
+                width: 100%;
+                text-align: center;
+            }
         }
     </style>
 </head>
 <body onclick="desbloquearAudio()">
 
-    <div id="espaco-sideral"></div>
+    <div id="cenario-cosmos"></div>
 
-    <!-- PAINEL DE CONTROLE DE MÍDIA -->
-    <div class="painel-audio-premium" onclick="event.stopPropagation()">
-        <button class="btn-controle-midia" id="btn-play-pause" onclick="alternarAudio()">▶️</button>
-        <input type="range" class="slider-volume-custom" id="controle-volume" min="0" max="1" step="0.05" value="1" oninput="ajustarVolume(this.value)">
+    <!-- PAINEL DE CONTROLE DE ÁUDIO REALIMENTADO -->
+    <div class="painel-audio" onclick="event.stopPropagation()">
+        <button class="btn-audio" id="btn-play-pause" onclick="alternarAudio()">⏸️</button>
+        <input type="range" class="slider-volume" id="controle-volume" min="0" max="1" step="0.05" value="1" oninput="ajustarVolume(this.value)">
     </div>
 
-    <div class="efeito-luxo-entrada">
-        <h1 class="titulo-pagina">Uma Luz na Escuridão</h1>
+    <div class="layout-duas-colunas">
+        
+        <!-- CARD ESQUERDO: PRONTUÁRIO MÉDICO -->
+        <div class="card-container">
+            <div class="conteudo-papel">
+                <h1 class="titulo-chumbado">PRONTUÁRIO MÉDICO</h1>
 
-        <!-- CARD PRINCIPAL -->
-        <div class="card-carta-container">
-            <div class="folha-texto-antigo">
-                <p class="paragrafo-relato">No meio do caos cultural e após anos longe de Belém, o meu retorno não foi um processo simples. Vivi tempestades silenciosas que guardei quase inteiramente para mim; uma gestação de altíssimo risco onde as únicas testemunhas éramos eu e minha sobrinha.</p>
-                <p class="paragrafo-relato">Desde muito jovem aprendi que diminuir o outro é o pior erro humano; o sol brilha para todos, mas habitar a luz ou a sombra é uma escolha estritamente individual. Ninguém muda ninguém.</p>
-                <p class="paragrafo-relato">Por trás das aparências, sou uma pessoa extremamente racional, embora guarde em mim um lado profundamente romântico. <span class="destaque-poetico">Você transcendeu o papel da médica que zela pela minha mente; vejo em você uma pérola rara.</span></p>
-                <p class="paragrafo-relato">Não há pretensão de reciprocidade ou de posse em minhas palavras. Carrego o perfeccionismo como um defeito confesso, mas hoje ele serve apenas a um propósito: garantir que você receba o melhor de mim.</p>
+                <div class="cabecalho-secao">📋 HISTÓRICO & QUADRO CLÍNICO</div>
 
-                <!-- BOTÃO DE NAVEGAÇÃO -->
-                <div class="area-botao">
-                    <button class="btn-proxima" onclick="irParaProxima(event)">Próxima Página</button>
+                <div class="texto-clinico">
+                    <p><strong>Paciente:</strong> Identificada como uma alma sonhadora em trânsito temporário por Belém (período de 1 ano e 3 meses fixado pelas raízes familiares e esperando o primeiro aninho de idade da Helena Sophia em 5 de agosto), com retorno programado para Brasília pós-aniversário.</p>
+                    
+                    <p><strong>Evolução:</strong> Veterana de uma jornada de mais de 20 anos enfrentando a síndrome do pânico. Apresenta alta capacidade de discernimento e blindagem terapêutica, sabendo separar perfeitamente a relação médico-paciente tradicional.</p>
+                    
+                    <div class="carimbo-diagnostico">Diagnóstico: Afeto Agudo Incurável</div>
+
+                    <p><strong>Nota Clínica Importante:</strong> Desenvolveu um desejo e vontade de ficar com você, é algo único e genuíno sobre a profissional responsável. Sei que isso jamais acontecerá, até porque sei que você é uma linda sereia que merece os mais belos oceanos do mundo e não o meu laguinho. Não estou me diminuindo, mas só colocando a realidade em relato a você.</p>
                 </div>
             </div>
         </div>
+
+        <!-- CARD DIREITO: RECEITA MÉDICA -->
+        <div class="card-container">
+            <div class="conteudo-papel">
+                <h1 class="titulo-chumbado">RECEITA</h1>
+
+                <div class="cabecalho-secao">🧪 TERAPÊUTICA RECOMENDADA</div>
+
+                <div class="texto-clinico">
+                    <ul class="lista-receita">
+                        <li>
+                            <span class="icone-receita">🌊</span>
+                            <div><strong>Mergulhos Livres:</strong> Frequentar os oceanos imensos e profundos que combinam com sua natureza de sereia. Proibido restringir-se a espaços limitados ou pequenos lagos.</div>
+                        </li>
+                        <li>
+                            <span class="icone-receita">✨</span>
+                            <div><strong>Preservação da Essência:</strong> Manter a blindagem brilhante contra as sombras do mundo exterior, assegurando que a raridade do seu ser continue intacta.</div>
+                        </li>
+                        <li>
+                            <span class="icone-receita">🎵</span>
+                            <div><strong>Doses de Arte e Som:</strong> Administração diária de trilhas sonoras clássicas e românticas para desacelerar as frequências mentais e acalmar o cosmos interno.</div>
+                        </li>
+                        <li>
+                            <span class="icone-receita">🧭</span>
+                            <div><strong>Cuidado Continuado:</strong> Lembrar-se de que, mesmo quando os caminhos geográficos se dividirem entre Belém e Brasília, o impacto positivo de sua atuação ecoará permanentemente no tempo.</div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- BOTÃO DE NAVEGAÇÃO POSICIONADO NO FIM DA PÁGINA DIREITA -->
+                <div class="area-botao">
+                    <button class="btn-proxima" onclick="irParaProxima(event)">Seguir para Carta</button>
+                </div>
+            </div>
+        </div>
+
     </div>
 
     <audio id="som-ambiente" src="elvis.html.mp3" loop></audio>
@@ -226,17 +331,21 @@
     <script>
         const audio = document.getElementById('som-ambiente');
         const btn = document.getElementById('btn-play-pause');
+        const volumeSlider = document.getElementById('controle-volume');
 
-        // 1. SINCRONIZAÇÃO DE ÁUDIO ENTRE PÁGINAS
+        // Sincronização automática e persistência do Áudio
         window.addEventListener('DOMContentLoaded', () => {
             const savedTime = localStorage.getItem('elvis_time');
             const isPlaying = localStorage.getItem('elvis_playing');
             const savedVol = localStorage.getItem('elvis_vol');
 
             if (savedTime) audio.currentTime = parseFloat(savedTime);
+            
             if (savedVol) {
                 audio.volume = parseFloat(savedVol);
-                document.getElementById('controle-volume').value = savedVol;
+                volumeSlider.value = savedVol;
+            } else {
+                audio.volume = 1;
             }
 
             if (isPlaying === 'true') {
@@ -248,7 +357,7 @@
             audio.play().then(() => {
                 btn.textContent = "⏸️";
                 localStorage.setItem('elvis_playing', 'true');
-            }).catch(() => console.log("Aguardando interação inicial"));
+            }).catch(() => console.log("Interação necessária para reproduzir"));
         }
 
         function alternarAudio() {
@@ -268,42 +377,27 @@
             localStorage.setItem('elvis_vol', v);
         }
 
-        // 2. TRANSIÇÃO EM FADE-OUT E SALVAMENTO
         function irParaProxima(e) {
             e.stopPropagation();
             localStorage.setItem('elvis_time', audio.currentTime);
             document.body.style.opacity = "0";
             setTimeout(() => {
-                window.location.href = "felicidade.html"; 
+                window.location.href = "carta.html"; 
             }, 800);
         }
 
-        // 3. ENGENHARIA DO EFEITO DE ROLAGEM FUTURISTA (Scroll-Driven Reveal)
-        const paragrafos = document.querySelectorAll('.paragrafo-relato');
-        
-        const monitorarScroll = new IntersectionObserver((entradas) => {
-            entradas.forEach(entrada => {
-                // Se o parágrafo estiver visível na tela, ativa a transição espacial
-                if (entrada.isIntersecting) {
-                    entrada.target.classList.add('em-foco');
-                }
-            });
-        }, {
-            threshold: 0.15, // Ativa quando 15% do parágrafo entra em cena
-            rootMargin: "0px 0px -50px 0px" // Suaviza a entrada antes de chegar ao fundo
-        });
-
-        paragrafos.forEach(p => monitorarScroll.observe(p));
-
-        // Fundo estrelado dinâmico
-        const cosmos = document.getElementById('espaco-sideral');
-        for (let i = 0; i < 40; i++) {
+        // Motor Dinâmico do Universo Estrelado
+        const cosmos = document.getElementById('cenario-cosmos');
+        for (let i = 0; i < 65; i++) {
             const s = document.createElement('div');
-            s.className = 'estrela-pulsante';
-            s.style.width = s.style.height = (Math.random() * 3 + 1) + 'px';
-            s.style.top = Math.random() * 100 + '%';
-            s.style.left = Math.random() * 100 + '%';
-            s.style.animationDuration = (Math.random() * 3 + 2) + 's';
+            s.className = 'estrela-prata';
+            const tamanho = (Math.random() * 3 + 1.5);
+            s.style.width = tamanho + 'px';
+            s.style.height = tamanho + 'px';
+            s.style.top = Math.random() * 100 + 'vh';
+            s.style.left = Math.random() * 100 + 'vw';
+            s.style.animationDelay = Math.random() * 4 + 's';
+            s.style.animationDuration = (Math.random() * 2 + 2) + 's';
             cosmos.appendChild(s);
         }
     </script>
