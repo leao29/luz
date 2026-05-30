@@ -27,11 +27,10 @@
             align-items: center;
             padding: 60px 20px;
             overflow-x: hidden;
-            opacity: 0; /* Começa invisível para o efeito fade-in */
-            transition: opacity 1.5s ease;
+            opacity: 0; /* Efeito de entrada suave */
+            transition: opacity 2s ease;
         }
 
-        /* FUNDO CÓSMICO */
         #fundo-cosmos {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -39,7 +38,6 @@
             background: radial-gradient(circle at center, #0a163a 0%, var(--azul-cosmos) 100%);
         }
 
-        /* TÍTULO SUPREMO EM JORNADA */
         .titulo-final {
             font-family: 'Cinzel', serif;
             font-size: 2.5rem;
@@ -54,7 +52,6 @@
             font-weight: 700;
         }
 
-        /* MOLDURA DE OURO COMPLETA */
         .card-principal {
             max-width: 800px;
             width: 100%;
@@ -75,7 +72,6 @@
             text-align: center;
         }
 
-        /* PAINEL DE AUDIO INLINE DISCRETO */
         .painel-musica-inline {
             background: rgba(3, 8, 30, 0.95);
             border: 1px solid var(--ouro-brilhante);
@@ -104,7 +100,6 @@
         .btn-controle:hover { background: var(--ouro-brilhante); }
         .vol-slider { cursor: pointer; accent-color: var(--ouro-brilhante); width: 100px; }
 
-        /* CARD INTERNO DO DESFECHO */
         .card-desfecho {
             background: #fdfbf7;
             border: 3px solid #cbd5e1;
@@ -120,7 +115,6 @@
             margin-bottom: 40px;
         }
 
-        /* CONSTELAÇÃO DE ENCERRAMENTO */
         .simbolo-destino {
             font-size: 3rem;
             color: var(--ouro-brilhante);
@@ -138,7 +132,6 @@
             margin-top: 20px;
         }
 
-        /* CRÉDITOS DA CAMINHADA */
         .creditos {
             font-family: 'Orbitron', sans-serif;
             font-size: 0.75rem;
@@ -165,14 +158,11 @@
 
     <div id="fundo-cosmos"></div>
 
-    <!-- TÍTULO DE ENCERRAMENTO -->
     <h1 class="titulo-final">O Destino Encontrado</h1>
 
-    <!-- CONTAINER DA MOLDURA -->
     <div class="card-principal">
         <div class="papel-antigo">
             
-            <!-- PAINEL DE CONTROLE DE MÚSICA -->
             <div class="painel-musica-inline" onclick="event.stopPropagation()">
                 <button class="btn-controle" id="playPause">PAUSE</button>
                 <div style="display:flex; align-items:center; gap:8px;">
@@ -182,42 +172,40 @@
                 </div>
             </div>
 
-            <!-- CONTEÚDO FINAL -->
             <div class="card-desfecho">
                 
                 <div class="simbolo-destino">✦</div>
 
                 <p class="texto-conclusao">
-                    A estrada longa ficou para trás e as dores do caminho transformaram-se em preciosas pérolas de sabedoria. Sob o manto infinito do cosmos, você compreendeu que cada curva perigosa, cada grão de areia e cada passo incerto faziam parte de um plano maior. Você não apenas cruzou o horizonte; você se tornou parte dele.
+                    A estrada longa ficou para trás e as dores do caminho transformaram-se em preciosas pérolas de sabedoria. Sob o manto infinito do cosmos, compreendemos que cada curva, cada grão de areia e cada passo incerto faziam parte de um plano maior. O horizonte não é mais um limite distante; agora, ele é o chão que você pisa com paz no coração.
                 </p>
 
                 <div class="mensagem-final">FIM DA JORNADA</div>
 
-                <div class="creditos">Obrigado por caminhar conosco</div>
+                <div class="creditos">Gratidão por cada passo compartilhado</div>
 
             </div>
 
         </div>
     </div>
 
-    <!-- ELEMENTO DE ÁUDIO REUTILIZADO -->
     <audio id="trilha" src="elvis.html.mp3" loop></audio>
 
     <script>
         const audio = document.getElementById('trilha');
         const btnPP = document.getElementById('playPause');
 
-        // Garante transição suave ao entrar e recupera a trilha sonora sem interrupção
         window.onload = () => {
-            // Efeito Fade-In da página inteira
+            // Inicia o fade-in da página
             document.body.style.opacity = '1';
 
-            // Resgata o tempo que parou em estrada.html
+            // Recupera o progresso exato da música vindo da página estrada.html
             const tempoSalvo = localStorage.getItem('musica_tempo');
             if (tempoSalvo) {
                 audio.currentTime = parseFloat(tempoSalvo);
             }
             
+            // Tenta dar o play automático (funciona se houver interação prévia)
             audio.play().then(() => {
                 btnPP.innerText = "PAUSE";
             }).catch(() => {
