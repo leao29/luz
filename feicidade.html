@@ -186,9 +186,9 @@
         </div>
     </div>
 
-    <!-- AQUI ESTÁ O SEGREDO: LEVA DIRETO PARA O FIM.HTML -->
+    <!-- BOTÃO CORRIGIDO PARA ENCAMINHAR PARA A ESTRADA -->
     <div class="painel-inferior">
-        <button class="btn-navegacao" onclick="irParaOFinal()">Seguir para o Desfecho</button>
+        <button class="btn-navegacao" onclick="irParaProxima()">Seguir para a Estrada</button>
     </div>
 
     <audio id="trilha" src="elvis.html.mp3" loop></audio>
@@ -224,12 +224,12 @@
         };
         function ajustarVol(v) { audio.volume = v; }
 
-        // Redireciona corretamente salvando a música
-        function irParaOFinal() {
+        // Redireciona corretamente salvando o tempo exato da música
+        function irParaProxima() {
             localStorage.setItem('musica_tempo', audio.currentTime);
             document.body.style.opacity = '0';
             setTimeout(() => {
-                window.location.href = 'fim.html';
+                window.location.href = 'estrada.html';
             }, 800);
         }
     </script>
