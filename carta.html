@@ -31,7 +31,6 @@
             transition: opacity 0.8s ease;
         }
 
-        /* FUNDO SIDERAL COM ESTRELAS */
         #espaco-sideral {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -52,7 +51,6 @@
             50% { opacity: 1; transform: scale(1.5); }
         }
 
-        /* PAINÉIS DE ÁUDIO (TOP E INFERIOR) */
         .painel-audio-premium {
             background: linear-gradient(135deg, #121824, #030712);
             border: 1px solid #475569;
@@ -64,14 +62,12 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.6);
         }
 
-        /* Painel fixado no topo */
         .painel-audio-premium.fixo-topo {
             position: fixed;
             top: 20px; right: 20px;
             z-index: 1000;
         }
 
-        /* Painel embutido no final da carta */
         .painel-audio-premium.fim-carta {
             align-self: center;
             margin-bottom: 5px;
@@ -110,7 +106,6 @@
 
         @keyframes surgirSuave { to { opacity: 1; transform: translateY(0); } }
 
-        /* TÍTULO EM LETRAS MAIÚSCULAS PRATA */
         .titulo-pagina {
             font-family: 'Cinzel', serif;
             font-size: 2.5rem;
@@ -125,7 +120,6 @@
             filter: drop-shadow(2px 3px 2px rgba(0, 0, 0, 0.9)) drop-shadow(0px 0px 4px var(--ouro-escuro));
         }
 
-        /* CONTAINER COM MOLDURA DOURADO ESCURO */
         .card-carta-container {
             background: var(--prata-fino);
             padding: 4px;
@@ -136,11 +130,8 @@
             transition: transform 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
         }
 
-        .card-carta-container:hover {
-            transform: scale(1.015);
-        }
+        .card-carta-container:hover { transform: scale(1.015); }
 
-        /* SIMULAÇÃO DE PAPEL ENVELHECIDO ESTILO CANVA */
         .folha-texto-antigo {
             background-color: #f3e5c8;
             background-image: 
@@ -158,7 +149,6 @@
             box-shadow: inset 0 0 50px rgba(74, 59, 19, 0.18);
         }
 
-        /* ROLAGEM FUTURISTA COM MATRIZ TRIDIMENSIONAL */
         .paragrafo-relato {
             font-size: 1.2rem;
             line-height: 1.95;
@@ -187,7 +177,6 @@
             display: block;
         }
 
-        /* BLOCO DE INTERAÇÃO DO FINAL */
         .bloco-finalizacao {
             display: flex;
             flex-direction: column;
@@ -197,12 +186,8 @@
             padding-top: 30px;
         }
 
-        .area-botao {
-            display: flex;
-            justify-content: flex-end;
-        }
+        .area-botao { display: flex; justify-content: flex-end; }
 
-        /* BOTÃO DOURADO FUTURISTA DE TRANSIÇÃO */
         .btn-proxima {
             background: linear-gradient(135deg, #111827, #1f2937);
             color: #e2e8f0;
@@ -222,18 +207,16 @@
         .btn-proxima:hover {
             background: var(--ouro-escuro);
             color: #ffffff;
-            border-color: #ffffff;
             transform: translateY(-3px);
             box-shadow: 0 10px 25px rgba(74, 59, 19, 0.6);
         }
 
         @media (max-width: 768px) {
             body { padding: 70px 15px 30px 15px; }
-            .titulo-pagina { font-size: 1.8rem; letter-spacing: 4px; margin-bottom: 35px; }
-            .folha-texto-antigo { padding: 40px 25px; gap: 30px; }
-            .paragrafo-relato { font-size: 1.08rem; line-height: 1.8; text-indent: 25px; }
-            .btn-proxima { width: 100%; text-align: center; }
-            .bloco-finalizacao { gap: 25px; }
+            .titulo-pagina { font-size: 1.8rem; }
+            .folha-texto-antigo { padding: 40px 25px; }
+            .paragrafo-relato { font-size: 1.08rem; }
+            .btn-proxima { width: 100%; }
         }
     </style>
 </head>
@@ -241,7 +224,6 @@
 
     <div id="espaco-sideral"></div>
 
-    <!-- PAINEL DE CONTROLE DE MÍDIA - FIXO NO TOPO -->
     <div class="painel-audio-premium fixo-topo" onclick="event.stopPropagation()">
         <button class="btn-controle-midia btn-play-topo" onclick="alternarAudio()">▶️</button>
         <input type="range" class="slider-volume-custom slider-vol-topo" min="0" max="1" step="0.05" value="1" oninput="ajustarVolume(this.value)">
@@ -257,21 +239,18 @@
 
                 <p class="paragrafo-relato">Sinto uma gratidão imensa por você ter me acolhido e me validado, não apenas como paciente, mas como mulher. Seu olhar fala muito para mim; nele encontrei uma fortaleza admirável, mas também vislumbrei fragilidades que o tornam ainda mais humano. Confesso que, muitas vezes, <strong>me perdi na profundidade desse olhar</strong>.</p>
                 
-                <p class="paragrafo-relato">A verdadeira felicidade não reside na ausência de problemas, mas na capacidade de encontrar serenidade mesmo quando o horizontee é incerto. Redescobrir meus passos sob sua orientação foi o primeiro grande marco dessa nova jornada.</p>
+                <p class="paragrafo-relato">A verdadeira felicidade não reside na ausência de problemas, mas na capacidade de encontrar serenidade mesmo quando o horizonte é incerto. Redescobrir meus passos sob sua orientação foi o primeiro grande marco dessa nova jornada.</p>
                 
                 <p class="paragrafo-relato">
                     <span class="destaque-poetico">Encontrar esse equilíbrio, dividindo minhas vulnerabilidades com quem soube proteger minha mente, trouxe uma paz que eu há muito não experimentava. Sigo em frente com o coração leve e a alma em paz.</span>
                 </p>
 
-                <!-- BLOCO INFERIOR DE INTERAÇÕES -->
                 <div class="bloco-finalizacao">
-                    <!-- PAINEL DE ÁUDIO REPLICADO NO FINAL DA CARTA -->
                     <div class="painel-audio-premium fim-carta" onclick="event.stopPropagation()">
                         <button class="btn-controle-midia btn-play-fim" onclick="alternarAudio()">▶️</button>
                         <input type="range" class="slider-volume-custom slider-vol-fim" min="0" max="1" step="0.05" value="1" oninput="ajustarVolume(this.value)">
                     </div>
 
-                    <!-- BOTÃO AJUSTADO PARA REDIRECIONAR PARA felicidade.html -->
                     <div class="area-botao">
                         <button class="btn-proxima" onclick="irParaProxima(event)">Concluir Jornada</button>
                     </div>
@@ -285,8 +264,6 @@
 
     <script>
         const audio = document.getElementById('som-ambiente');
-        
-        // Elementos dos dois painéis de controle
         const btnsPlay = [document.querySelector('.btn-play-topo'), document.querySelector('.btn-play-fim')];
         const slidersVol = [document.querySelector('.slider-vol-topo'), document.querySelector('.slider-vol-fim')];
 
@@ -339,7 +316,6 @@
 
         function irParaProxima(e) {
             e.stopPropagation();
-            // Guarda a minutagem exata do áudio antes de sair da página
             localStorage.setItem('elvis_time', audio.currentTime);
             document.body.style.opacity = "0";
             setTimeout(() => {
@@ -347,7 +323,7 @@
             }, 800);
         }
 
-        // CONTROLADOR DE ROLAGEM DINÂMICA
+        // INTERSECTION OBSERVER PARA EFEITO 3D NA ROLAGEM
         const paragrafos = document.querySelectorAll('.paragrafo-relato');
         const monitorarScroll = new IntersectionObserver((entradas) => {
             entradas.forEach(entrada => {
@@ -360,13 +336,12 @@
                 }
             });
         }, { 
-            rootMargin: "0px 0px -8% 0px",
-            threshold: 0.12 
+            rootMargin: "0px 0px -10% 0px",
+            threshold: 0.15 
         });
 
         paragrafos.forEach(p => monitorarScroll.observe(p));
 
-        // GERADOR DE ESTRELAS COSMOS
         const cosmos = document.getElementById('espaco-sideral');
         for (let i = 0; i < 50; i++) {
             const s = document.createElement('div');
