@@ -98,7 +98,6 @@
             transition: transform 0.5s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.5s ease;
         }
 
-        /* Efeito de super zoom sutil e elegante para PC e Mobile */
         .card-container:hover {
             transform: scale(1.03) translateY(-5px);
             box-shadow: 0 30px 70px rgba(255, 255, 255, 0.15);
@@ -109,7 +108,6 @@
             background-image: url('https://www.transparenttextures.com/patterns/cream-paper.png');
             border-radius: 16px;
             padding: 40px;
-            /* Borda sutil de ouro escuro simulando contorno da página */
             border: 3px double var(--ouro-escuro);
             height: 100%;
             display: flex;
@@ -178,16 +176,9 @@
             font-size: 1.05rem;
         }
 
-        .texto-clinico strong {
-            color: #000000;
-        }
+        .texto-clinico strong { color: #000000; }
 
-        /* ESTRUTURAÇÃO DA LISTA DA RECEITA */
-        .lista-receita {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
+        .lista-receita { list-style: none; padding: 0; margin: 0; }
 
         .lista-receita li {
             display: flex;
@@ -199,12 +190,8 @@
             border-left: 4px solid var(--ouro-escuro);
         }
 
-        .icone-receita {
-            font-size: 1.4rem;
-            margin-top: 2px;
-        }
+        .icone-receita { font-size: 1.4rem; margin-top: 2px; }
 
-        /* BOTÃO PRÓXIMA (ALINHADO À DIREITA NO FINAL DA RECEITA) */
         .area-botao {
             display: flex;
             justify-content: flex-end;
@@ -233,28 +220,13 @@
             transform: translateY(-2px);
         }
 
-        /* RESPONSIVIDADE COMPLETA PARA CELULARES */
         @media (max-width: 900px) {
-            .layout-duas-colunas {
-                flex-direction: column;
-                gap: 40px;
-            }
-            body {
-                padding: 80px 15px 40px 15px;
-            }
-            .conteudo-papel {
-                padding: 25px 20px;
-            }
-            .titulo-chumbado {
-                font-size: 1.4rem;
-            }
-            .area-botao {
-                justify-content: center;
-            }
-            .btn-proxima {
-                width: 100%;
-                text-align: center;
-            }
+            .layout-duas-colunas { flex-direction: column; gap: 40px; }
+            body { padding: 80px 15px 40px 15px; }
+            .conteudo-papel { padding: 25px 20px; }
+            .titulo-chumbado { font-size: 1.4rem; }
+            .area-botao { justify-content: center; }
+            .btn-proxima { width: 100%; text-align: center; }
         }
     </style>
 </head>
@@ -262,7 +234,6 @@
 
     <div id="cenario-cosmos"></div>
 
-    <!-- PAINEL DE CONTROLE DE ÁUDIO REALIMENTADO -->
     <div class="painel-audio" onclick="event.stopPropagation()">
         <button class="btn-audio" id="btn-play-pause" onclick="alternarAudio()">⏸️</button>
         <input type="range" class="slider-volume" id="controle-volume" min="0" max="1" step="0.05" value="1" oninput="ajustarVolume(this.value)">
@@ -270,54 +241,44 @@
 
     <div class="layout-duas-colunas">
         
-        <!-- CARD ESQUERDO: PRONTUÁRIO MÉDICO -->
         <div class="card-container">
             <div class="conteudo-papel">
                 <h1 class="titulo-chumbado">PRONTUÁRIO MÉDICO</h1>
-
                 <div class="cabecalho-secao">📋 HISTÓRICO & QUADRO CLÍNICO</div>
-
                 <div class="texto-clinico">
                     <p><strong>Paciente:</strong> Identificada como uma alma sonhadora em trânsito temporário por Belém (período de 1 ano e 3 meses fixado pelas raízes familiares e esperando o primeiro aninho de idade da Helena Sophia em 5 de agosto), com retorno programado para Brasília pós-aniversário.</p>
-                    
                     <p><strong>Evolução:</strong> Veterana de uma jornada de mais de 20 anos enfrentando a síndrome do pânico. Apresenta alta capacidade de discernimento e blindagem terapêutica, sabendo separar perfeitamente a relação médico-paciente tradicional.</p>
-                    
                     <div class="carimbo-diagnostico">Diagnóstico: Afeto Agudo Incurável</div>
-
-                    <p><strong>Nota Clínica Importante:</strong> Desenvolveu um desejo e vontade de ficar com você, é algo único e genuíno sobre a profissional responsável. Sei que isso jamais acontecerá, até porque sei que você é uma linda sereia que merece os mais belos oceanos do mundo e não o meu laguinho. Não estou me diminuindo, mas só colocando a realidade em relato a você.</p>
+                    <p><strong>Nota Clínica Importante:</strong> Desenvolveu um desejo e vontade de ficar com você, é algo único e genuíno sobre a profissional responsável. Sei que isso jamais acontecerá, até porque sei que você é uma linda sereia que merece os mais belos oceanos do mundo e não o meu laguinho.</p>
                 </div>
             </div>
         </div>
 
-        <!-- CARD DIREITO: RECEITA MÉDICA -->
         <div class="card-container">
             <div class="conteudo-papel">
                 <h1 class="titulo-chumbado">RECEITA</h1>
-
                 <div class="cabecalho-secao">🧪 TERAPÊUTICA RECOMENDADA</div>
-
                 <div class="texto-clinico">
                     <ul class="lista-receita">
                         <li>
                             <span class="icone-receita">🌊</span>
-                            <div><strong>Mergulhos Livres:</strong> Frequentar os oceanos imensos e profundos que combinam com sua natureza de sereia. Proibido restringir-se a espaços limitados ou pequenos lagos.</div>
+                            <div><strong>Mergulhos Livres:</strong> Frequentar os oceanos imensos e profundos que combinam com sua natureza de sereia. Proibido restringir-se a espaços limitados.</div>
                         </li>
                         <li>
                             <span class="icone-receita">✨</span>
-                            <div><strong>Preservação da Essência:</strong> Manter a blindagem brilhante contra as sombras do mundo exterior, assegurando que a raridade do seu ser continue intacta.</div>
+                            <div><strong>Preservação da Essência:</strong> Manter a blindagem brilhante contra as sombras do mundo exterior.</div>
                         </li>
                         <li>
                             <span class="icone-receita">🎵</span>
-                            <div><strong>Doses de Arte e Som:</strong> Administração diária de trilhas sonoras clássicas e românticas para desacelerar as frequências mentais e acalmar o cosmos interno.</div>
+                            <div><strong>Doses de Arte e Som:</strong> Administração diária de trilhas sonoras clássicas e românticas para acalmar o cosmos interno.</div>
                         </li>
                         <li>
                             <span class="icone-receita">🧭</span>
-                            <div><strong>Cuidado Continuado:</strong> Lembrar-se de que, mesmo quando os caminhos geográficos se dividirem entre Belém e Brasília, o impacto positivo de sua atuação ecoará permanentemente no tempo.</div>
+                            <div><strong>Cuidado Continuado:</strong> Lembrar-se de que o impacto positivo de sua atuação ecoará permanentemente no tempo.</div>
                         </li>
                     </ul>
                 </div>
 
-                <!-- BOTÃO DE NAVEGAÇÃO POSICIONADO NO FIM DA PÁGINA DIREITA -->
                 <div class="area-botao">
                     <button class="btn-proxima" onclick="irParaProxima(event)">Seguir para Carta</button>
                 </div>
@@ -333,7 +294,6 @@
         const btn = document.getElementById('btn-play-pause');
         const volumeSlider = document.getElementById('controle-volume');
 
-        // Sincronização automática e persistência do Áudio
         window.addEventListener('DOMContentLoaded', () => {
             const savedTime = localStorage.getItem('elvis_time');
             const isPlaying = localStorage.getItem('elvis_playing');
@@ -357,7 +317,7 @@
             audio.play().then(() => {
                 btn.textContent = "⏸️";
                 localStorage.setItem('elvis_playing', 'true');
-            }).catch(() => console.log("Interação necessária para reproduzir"));
+            }).catch(() => console.log("Interação necessária"));
         }
 
         function alternarAudio() {
@@ -377,6 +337,7 @@
             localStorage.setItem('elvis_vol', v);
         }
 
+        // FUNÇÃO DE TRANSIÇÃO PARA CARTA.HTML
         function irParaProxima(e) {
             e.stopPropagation();
             localStorage.setItem('elvis_time', audio.currentTime);
@@ -386,7 +347,6 @@
             }, 800);
         }
 
-        // Motor Dinâmico do Universo Estrelado
         const cosmos = document.getElementById('cenario-cosmos');
         for (let i = 0; i < 65; i++) {
             const s = document.createElement('div');
