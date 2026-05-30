@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>A Fábula da Ostra e a Pérola</title>
+    <title>O Encontro com o Destino - Fim</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Orbitron:wght@400;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -27,6 +27,8 @@
             align-items: center;
             padding: 60px 20px;
             overflow-x: hidden;
+            opacity: 0; /* Começa invisível para o efeito fade-in */
+            transition: opacity 1.5s ease;
         }
 
         /* FUNDO CÓSMICO */
@@ -37,22 +39,22 @@
             background: radial-gradient(circle at center, #0a163a 0%, var(--azul-cosmos) 100%);
         }
 
-        /* TÍTULO PRATA EM MAIÚSCULAS */
-        .titulo-prata {
+        /* TÍTULO SUPREMO EM JORNADA */
+        .titulo-final {
             font-family: 'Cinzel', serif;
-            font-size: 2.3rem;
+            font-size: 2.5rem;
             text-transform: uppercase;
-            letter-spacing: 4px;
+            letter-spacing: 6px;
             text-align: center;
             margin-bottom: 40px;
             background: var(--prata-metal);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            filter: drop-shadow(2px 4px 8px rgba(0, 0, 0, 0.8));
+            filter: drop-shadow(2px 4px 10px rgba(0, 0, 0, 0.9));
             font-weight: 700;
         }
 
-        /* CARD PRINCIPAL COM BORDAS DE OURO E PAPEL ANTIGO DO CANVA */
+        /* MOLDURA DE OURO COMPLETA */
         .card-principal {
             max-width: 800px;
             width: 100%;
@@ -60,26 +62,26 @@
             padding: 14px;
             border-radius: 20px;
             box-shadow: 0 30px 60px rgba(0,0,0,0.9), inset 0 0 20px rgba(140, 115, 51, 0.6);
-            position: relative;
         }
 
         .papel-antigo {
             background-color: #f5eed7;
             background-image: url('https://www.transparenttextures.com/patterns/cream-paper.png');
-            padding: 50px 40px;
+            padding: 60px 40px;
             color: var(--texto-cor);
             border-radius: 12px;
             border: 2px solid var(--ouro-brilhante);
             box-shadow: inset 0 0 40px rgba(74, 59, 19, 0.25);
+            text-align: center;
         }
 
-        /* CONTROLE DE MÚSICA INTEGRADO NO CARD */
+        /* PAINEL DE AUDIO INLINE DISCRETO */
         .painel-musica-inline {
             background: rgba(3, 8, 30, 0.95);
             border: 1px solid var(--ouro-brilhante);
             padding: 12px 25px;
             border-radius: 30px;
-            display: flex;
+            display: inline-flex;
             align-items: center;
             justify-content: center;
             gap: 15px;
@@ -102,151 +104,60 @@
         .btn-controle:hover { background: var(--ouro-brilhante); }
         .vol-slider { cursor: pointer; accent-color: var(--ouro-brilhante); width: 100px; }
 
-        /* CARD DA HISTÓRIA COM ROLAGEM FUTURISTA, ZOOM E BORDAS PRATEADAS */
-        .card-historia {
+        /* CARD INTERNO DO DESFECHO */
+        .card-desfecho {
             background: #fdfbf7;
-            border: 3px solid #cbd5e1; /* Bordas prateadas */
+            border: 3px solid #cbd5e1;
             border-radius: 15px;
-            padding: 40px 30px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1), inset 0 0 15px rgba(148, 163, 184, 0.2);
-            transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+            padding: 50px 30px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
         }
 
-        /* Efeito Zoom Interativo (PC e Celular) */
-        .card-historia:hover {
-            transform: scale(1.025);
-        }
-
-        /* Elementos da Rolagem Futurista 3D */
-        .paragrafo-futurista {
-            font-size: 1.15rem;
-            line-height: 1.8;
+        .texto-conclusao {
+            font-size: 1.25rem;
+            line-height: 2;
             text-align: justify;
-            margin-bottom: 25px;
-            opacity: 0;
-            filter: blur(6px);
-            transform: translateY(40px) scale(0.97);
-            transition: all 0.9s cubic-bezier(0.215, 0.610, 0.355, 1);
+            margin-bottom: 40px;
         }
 
-        .paragrafo-futurista.visivel {
-            opacity: 1;
-            filter: blur(0);
-            transform: translateY(0) scale(1);
+        /* CONSTELAÇÃO DE ENCERRAMENTO */
+        .simbolo-destino {
+            font-size: 3rem;
+            color: var(--ouro-brilhante);
+            margin: 30px 0;
+            filter: drop-shadow(0 0 8px rgba(140, 113, 51, 0.5));
+            animation: pulsar 3s infinite ease-in-out;
         }
 
-        .destaque-painel {
-            background: rgba(74, 59, 19, 0.05);
-            border-left: 4px solid var(--ouro-escuro);
-            padding: 15px 20px;
-            margin: 25px 0;
-            font-style: italic;
+        .mensagem-final {
+            font-family: 'Cinzel', serif;
+            font-size: 1.8rem;
+            letter-spacing: 4px;
+            color: var(--ouro-escuro);
+            font-weight: bold;
+            margin-top: 20px;
         }
 
-        /* SIMULAÇÃO DA IA DO CANVA - OSTRA ABRINDO E PÉROLA NEGRA */
-        .canva-ia-container {
-            margin-top: 50px;
-            text-align: center;
-            padding-top: 30px;
-            border-top: 1px dashed rgba(0,0,0,0.15);
-        }
-
-        .tag-ia {
+        /* CRÉDITOS DA CAMINHADA */
+        .creditos {
             font-family: 'Orbitron', sans-serif;
-            font-size: 0.7rem;
+            font-size: 0.75rem;
             color: #64748b;
             text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 20px;
-            display: block;
-        }
-
-        .ostra-box {
-            width: 140px;
-            height: 140px;
-            margin: 0 auto 20px;
-            position: relative;
-            cursor: pointer;
-        }
-
-        /* Concha Superior (Animação de abrir) */
-        .concha-superior {
-            width: 140px;
-            height: 70px;
-            background: #e2e8f0;
-            border: 3px solid #94a3b8;
-            border-radius: 70px 70px 0 0;
-            position: absolute;
-            top: 0;
-            z-index: 2;
-            transform-origin: bottom center;
-            transition: transform 1.2s ease-in-out;
-            box-shadow: inset 0 10px 15px rgba(255,255,255,0.6);
-        }
-
-        /* Concha Inferior */
-        .concha-inferior {
-            width: 140px;
-            height: 70px;
-            background: #cbd5e1;
-            border: 3px solid #94a3b8;
-            border-radius: 0 0 70px 70px;
-            position: absolute;
-            bottom: 0;
-            z-index: 1;
-            box-shadow: inset 0 -10px 15px rgba(0,0,0,0.1);
-        }
-
-        /* Pérola Negra Reluzente */
-        .perola-negra {
-            width: 32px;
-            height: 32px;
-            background: radial-gradient(circle at 30% 30%, #475569 0%, #1e293b 40%, #020617 100%);
-            border-radius: 50%;
-            position: absolute;
-            top: 55px;
-            left: 54px;
-            z-index: 1.5;
-            opacity: 0;
-            transform: scale(0.5);
-            transition: all 1s ease-in-out 0.4s;
-            box-shadow: 0 0 15px rgba(255, 255, 255, 0.3), inset -3px -3px 8px rgba(0,0,0,0.8);
-        }
-
-        /* Gatilho de Ativação quando visível ou ao passar o mouse */
-        .card-historia:hover .concha-superior, .ostra-box.ativa .concha-superior {
-            transform: rotateX(-100deg) translateY(-20px);
-        }
-
-        .card-historia:hover .perola-negra, .ostra-box.ativa .perola-negra {
-            opacity: 1;
-            transform: scale(1) translateY(-10px);
-        }
-
-        .fim-texto {
-            font-family: 'Cinzel', serif;
-            font-size: 1.4rem;
             letter-spacing: 3px;
-            color: var(--ouro-escuro);
-            margin: 20px 0 10px;
-            font-weight: bold;
+            margin-top: 50px;
         }
 
-        .citacao-final {
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: #0f172a;
-            max-width: 600px;
-            margin: 0 auto;
-            line-height: 1.6;
+        @keyframes pulsar {
+            0%, 100% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.1); opacity: 1; filter: drop-shadow(0 0 15px var(--ouro-brilhante)); }
         }
 
         @media (max-width: 600px) {
-            .titulo-prata { font-size: 1.5rem; letter-spacing: 2px; }
-            .papel-antigo { padding: 30px 15px; }
-            .card-historia { padding: 25px 15px; }
-            .paragrafo-futurista { font-size: 1.05rem; }
-            .citacao-final { font-size: 1.1rem; }
+            .titulo-final { font-size: 1.7rem; letter-spacing: 3px; }
+            .papel-antigo { padding: 40px 20px; }
+            .texto-conclusao { font-size: 1.1rem; line-height: 1.8; }
+            .mensagem-final { font-size: 1.4rem; }
         }
     </style>
 </head>
@@ -254,16 +165,16 @@
 
     <div id="fundo-cosmos"></div>
 
-    <!-- TÍTULO DA FÁBULA EM PRATA -->
-    <h1 class="titulo-prata">Fábula da Ostra e a Pérola</h1>
+    <!-- TÍTULO DE ENCERRAMENTO -->
+    <h1 class="titulo-final">O Destino Encontrado</h1>
 
-    <!-- CARD PRINCIPAL EM MOLDURA DE OURO -->
+    <!-- CONTAINER DA MOLDURA -->
     <div class="card-principal">
         <div class="papel-antigo">
             
-            <!-- PAINEL DE ÁUDIO (PLAY/PAUSE E VOLUME) -->
+            <!-- PAINEL DE CONTROLE DE MÚSICA -->
             <div class="painel-musica-inline" onclick="event.stopPropagation()">
-                <button class="btn-controle" id="playPause">PLAY</button>
+                <button class="btn-controle" id="playPause">PAUSE</button>
                 <div style="display:flex; align-items:center; gap:8px;">
                     <span style="color:white; font-size:12px;">🔈</span>
                     <input type="range" class="vol-slider" min="0" max="1" step="0.1" value="1" oninput="ajustarVol(this.value)">
@@ -271,67 +182,52 @@
                 </div>
             </div>
 
-            <!-- CARD INTERNO DA HISTÓRIA COM BORDA PRATEADA -->
-            <div class="card-historia">
+            <!-- CONTEÚDO FINAL -->
+            <div class="card-desfecho">
                 
-                <p class="paragrafo-futurista destaque-painel">“Uma ostra que não foi ferida não produz pérolas.”</p>
+                <div class="simbolo-destino">✦</div>
 
-                <p class="paragrafo-futurista">Pérolas são produtos da dor; resultados da entrada de uma substância estranha ou indesejável no interior da ostra, como um parasita ou grão de areia. Na parte interna da concha é encontrada uma substância lustrosa chamada nácar.</p>
+                <p class="texto-conclusao">
+                    A estrada longa ficou para trás e as dores do caminho transformaram-se em preciosas pérolas de sabedoria. Sob o manto infinito do cosmos, você compreendeu que cada curva perigosa, cada grão de areia e cada passo incerto faziam parte de um plano maior. Você não apenas cruzou o horizonte; você se tornou parte dele.
+                </p>
 
-                <p class="paragrafo-futurista">Quando um grão de areia a penetra, as células do nácar começam a trabalhar e cobrem o grão de areia com camadas e mais camadas, para proteger o corpo indefeso da ostra. Como resultado, uma linda pérola vai se formando. Uma ostra que não foi ferida, de modo algum produz pérolas, pois a pérola é uma ferida cicatrizada.</p>
+                <div class="mensagem-final">FIM DA JORNADA</div>
 
-                <p class="paragrafo-futurista">O mesmo pode acontecer conosco. Se você já se sentiu ferido pelas palavras rudes de alguém? Já foi acusado de ter dito coisas que não disse? Suas ideias já foram rejeitadas ou mal interpretadas? Você já sofreu o duro golpe do preconito? Já recebeu o troco da indiferença?</p>
-
-                <p class="paragrafo-futurista text-align: center; font-weight: bold; color: var(--ouro-brilhante);">Então, produza uma pérola! Cubra suas mágoas com várias camadas de AMOR.</p>
-
-                <p class="paragrafo-futurista">Infelizmente, são poucas as pessoas que se interessam por esse tipo de movimento. A maioria aprende apenas a cultivar ressentimentos, mágoas, deixando as feridas abertas e alimentando-as com vários tipos de sentimentos pequenos e, portanto, não permitindo que cicatrizem.</p>
-
-                <p class="paragrafo-futurista">Assim, na prática, o que vemos são muitas “Ostras Vazias”, não porque não tenham sido feridas, mas porque não souberam perdoar, compreender e transformar a dor em amor. Um sorriso, um olhar, um gesto, na maioria das vezes, vale mais do que mil palavras!</p>
-
-                <!-- FINAL INTERATIVO: OSTRA SE ABRINDO E REVELANDO PÉROLA NEGRA -->
-                <div class="canva-ia-container conteudo-futurista">
-                    <span class="tag-ia">Canva IA • Efeito Gerado</span>
-                    
-                    <div class="ostra-box" id="ostraElement" onclick="alternarOstra(event)">
-                        <div class="concha-superior"></div>
-                        <div class="perola-negra"></div>
-                        <div class="concha-inferior"></div>
-                    </div>
-
-                    <div class="fim-texto">FIM</div>
-                    <p class="citacao-final">“Uma ostra que não foi ferida não produz pérolas.”</p>
-                </div>
+                <div class="creditos">Obrigado por caminhar conosco</div>
 
             </div>
 
         </div>
     </div>
 
+    <!-- ELEMENTO DE ÁUDIO REUTILIZADO -->
     <audio id="trilha" src="elvis.html.mp3" loop></audio>
 
     <script>
-        // Intersection Observer para Rolagem Futurista
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visivel');
-                    // Ativa a animação da ostra automaticamente ao rolar até o fim
-                    if(entry.target.classList.contains('canva-ia-container')) {
-                        document.getElementById('ostraElement').classList.add('ativa');
-                    }
-                }
-            });
-        }, { threshold: 0.15 });
-
-        document.querySelectorAll('.paragrafo-futurista, .canva-ia-container').forEach(el => observer.observe(el));
-
-        // Controle de Áudio
         const audio = document.getElementById('trilha');
         const btnPP = document.getElementById('playPause');
 
+        // Garante transição suave ao entrar e recupera a trilha sonora sem interrupção
+        window.onload = () => {
+            // Efeito Fade-In da página inteira
+            document.body.style.opacity = '1';
+
+            // Resgata o tempo que parou em estrada.html
+            const tempoSalvo = localStorage.getItem('musica_tempo');
+            if (tempoSalvo) {
+                audio.currentTime = parseFloat(tempoSalvo);
+            }
+            
+            audio.play().then(() => {
+                btnPP.innerText = "PAUSE";
+            }).catch(() => {
+                btnPP.innerText = "PLAY";
+            });
+        };
+
         function iniciarAudio() {
             if (audio.paused) {
-                audio.play().catch(() => {});
+                audio.play();
                 btnPP.innerText = "PAUSE";
             }
         }
@@ -348,11 +244,6 @@
         };
 
         function ajustarVol(v) { audio.volume = v; }
-
-        function alternarOstra(e) {
-            e.stopPropagation();
-            document.getElementById('ostraElement').classList.toggle('ativa');
-        }
     </script>
 </body>
 </html>
