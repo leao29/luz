@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Em Busca do Horizonte</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Orbitron:wght@400;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --azul-cosmos: #03081e;
+            --ouro-escuro: #4a3b13;
+            --ouro-brilhante: #8c7333;
+            --prata-chumbado: linear-gradient(135deg, #708090 0%, #475569 50%, #1e293b 100%);
+            --texto-cor: #211a10;
+        }
+
+        * { box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            margin: 0; padding: 0;
+            width: 100%; min-height: 100vh;
+            background-color: var(--azul-cosmos);
+            font-family: 'Lora', serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 60px 20px;
+            overflow-x: hidden;
+        }
+
+        /* FUNDO COSMICO COM ESTRELAS PULSANTES */
+        #fundo-cosmos {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1;
+            background: radial-gradient(circle at center, #0a163a 0%, var(--azul-cosmos) 100%);
+        }
+
+        .estrela-prata {
+            position: absolute;
+            background: #e2e8f0;
+            border-radius: 50%;
+            opacity: 0.3;
+            box-shadow: 0 0 6px #fff;
+            animation: pulsar infinite ease-in-out;
+        }
+
+        @keyframes pulsar {
+            0%, 100% { opacity: 0.2; transform: scale(0.8); }
+            50% { opacity: 1; transform: scale(1.4); }
+        }
+
+        /* TÍTULO EM MAIÚSCULAS DE COR PRATA CHUMBADO METÁLICO */
+        .titulo-chumbado {
+            font-family: 'Cinzel', serif;
+            font-size: 2.5rem;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            text-align: center;
+            margin-bottom: 40px;
+            background: var(--prata-chumbado);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(2px 4px 10px rgba(0, 0, 0, 0.9));
+            font-weight: 700;
+        }
+
+        /* CARD OUTER COM BORDA OURO ESCURO E EFEITO ZOOM (PC E CELULAR) */
+        .card-outer {
+            max-width: 800px;
+            width: 100%;
+            background: var(--ouro-escuro);
+            padding: 16px;
+            border-radius: 20px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.9), inset 0 0 15px rgba(140, 115, 51, 0.5);
+            position: relative;
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.5s;
+        }
+
+        /* Efeito de Zoom Interativo no Card */
+        .card-outer:hover {
+            transform: scale(1.02);
+            box-shadow: 0 40px 80px rgba(0,0,0,0.95), 0 0 30px rgba(140, 115, 51, 0.4);
+        }
+
+        /* PAPEL ENVELHECIDO COM BORDAS EM ESTILO DE ROLO/PERGAMINHO */
+        .papel-envelhecido {
+            background-color: #f4ebd0;
+            background-image: 
+                radial-gradient(circle at 50% 50%, rgba(184, 134, 11, 0.08) 0%, transparent 100%),
+                url('https://www.transparenttextures.com/patterns/cream-paper.png');
+            padding: 50px 45px;
+            color: var(--texto-cor);
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+            
+            /* Efeito visual de rolo nas laterais (sombreamento interno e borda falsa) */
+            border-left: 18px solid #dbca9a;
+            border-right: 18px solid #dbca9a;
+            box-shadow: 
+                inset 15px 0 20px rgba(0, 0, 0, 0.15), 
+                inset -15px 0 20px rgba(0, 0, 0, 0.15),
+                inset 0 0 50px rgba(74, 59, 19, 0.2);
+        }
+
+        /* ROLAGEM FUTURISTA (ANIMAÇÃO 3D NOS BLOCOS DE TEXTO) */
+        .conteudo-futurista {
+            opacity: 0;
+            filter: blur(8px);
+            transform: translateY(50px) scale(0.96) rotateX(12deg);
+            transition: all 1s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        .conteudo-futurista.visivel {
+            opacity: 1;
+            filter: blur(0);
+            transform: translateY(0) scale(1) rotateX(0deg);
+        }
+
+        .texto-carta {
+            font-size: 1.15rem;
+            line-height: 1.8;
+            text-align: justify;
+            margin-bottom: 30px;
+        }
+
+        /* SEÇÃO DE MÚSICAS */
+        .secao-musicas {
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 2px dashed rgba(74, 59, 19, 0.2);
+            text-align: center;
+        }
+
+        .titulo-musicas {
+            font-family: 'Cinzel', serif;
+            font-size: 1.3rem;
+            color: #4a3b13;
+            margin-bottom: 25px;
+            letter-spacing: 2px;
+            font-weight: bold;
+        }
+
+        .lista-musicas {
+            font-size: 1.1rem;
+            line-height: 2.2;
+            color: #33290e;
+            font-weight: 500;
+        }
+
+        .separador-estrela {
+            color: #d4af37;
+            font-size: 1.2rem;
+            margin: 10px 0;
+            display: block;
+            text-shadow: 0 0 3px rgba(212, 175, 55, 0.5);
+        }
+
+        /* PAINEL DE CONTROLE DA MÚSICA ABAIXO */
+        .painel-inferior {
+            margin-top: 40px;
+            width: 100%;
+            max-width: 800px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .painel-musica {
+            background: rgba(3, 8, 30, 0.95);
+            border: 2px solid var(--ouro-brilhante);
+            padding: 15px 30px;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5), 0 0 15px rgba(140, 115, 51, 0.3);
+        }
+
+        .btn-controle {
+            background: var(--ouro-escuro);
+            border: 1px solid var(--ouro-brilhante);
+            color: #fff;
+            padding: 10px 24px;
+            border-radius: 25px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: 0.3s;
+            letter-spacing: 1px;
+        }
+
+        .btn-controle:hover {
+            background: var(--ouro-brilhante);
+            transform: scale(1.05);
+        }
+
+        .vol-slider {
+            cursor: pointer;
+            accent-color: var(--ouro-brilhante);
+            width: 120px;
+        }
+
+        @media (max-width: 600px) {
+            .titulo-chumbado { font-size: 1.6rem; letter-spacing: 3px; }
+            .papel-envelhecido { padding: 35px 20px; border-left: 10px solid #dbca9a; border-right: 10px solid #dbca9a; }
+            .texto-carta { font-size: 1.05rem; }
+            .painel-musica { flex-direction: column; border-radius: 20px; width: 100%; padding: 20px; }
+            .vol-slider { width: 100%; }
+        }
+    </style>
+</head>
+<body onclick="iniciarAudio()">
+
+    <div id="fundo-cosmos"></div>
+
+    <!-- TÍTULO PRATA CHUMBADO MAIÚSCULO -->
+    <h1 class="titulo-chumbado">Em Busca do Horizonte</h1>
+
+    <!-- CARD PRINCIPAL COM BORDA OURO ESCURO E PAPEL ESTILO ROLO -->
+    <div class="card-outer">
+        <div class="papel-envelhecido">
+            
+            <div class="texto-carta">
+                <p class="conteudo-futurista">Talvez a maior beleza da vida esteja na coragem de sermos vulneráveis, mesmo quando sabemos que o roteiro não prevê um final a dois. Escrevo estas linhas — as últimas sobre o que guardo aqui dentro — apenas para que você saiba que o desejo de viver pequenos momentos, ou a simples fantasia de uma dança ao seu lado, foram faíscas que trouxeram luz aos meus dias. Mas meu chão é firme: valorizo imensamente a médica ética e a mulher impecável que você é, e jamais permitiria que meu carinho se tornasse um peso ou um motivo de desconforto para você.</p>
+
+                <p class="conteudo-futurista">É a primeira vez que me vejo assim, traduzindo um sentimento que não exige nada em troca. Você não precisa sentir nada por mim; o que importa é o bem que esse afeto me faz. Se não posso ter o oceano, ainda assim serei grata por cada gota de atenção e cuidado que recebi. Suas lembranças e seu profissionalismo serão tesouros guardados com carinho na minha memória, mesmo quando os nossos caminhos seguirem direções opostas.</p>
+
+                <p class="conteudo-futurista">Gostaria apenas que, no futuro, ao pensar em mim, você se lembre de uma paciente que você lutou para ver livre do peso dos remédios. Embora a minha busca por estabilidade profissional às vezes tenha tornado esse caminho mais difícil, quero que saiba que continuarei lutando. Irei por mim, pela minha família e também por você, para honrar cada palavra de incentivo que recebi no seu consultório.</p>
+
+                <p class="conteudo-futurista">Encerro este assunto aqui, com o coração em paz e uma admiração que ultrapassa o consultório, guardando para sempre o brilho de quem você é na minha estrada.</p>
+            </div>
+
+            <!-- SEÇÃO DE MÚSICAS -->
+            <div class="secao-musicas conteudo-futurista">
+                <div class="titulo-musicas">Aqui vai algumas músicas que me lembram você</div>
+                <div class="lista-musicas">
+                    Elvis Presley - Can't Help Falling In Love
+                    <span class="separador-estrela">⭐</span>
+                    Adele - Set Fire To The Rain
+                    <span class="separador-estrela">⭐</span>
+                    Hoobastank - The Reason
+                    <span class="separador-estrela">⭐</span>
+                    Freddie Mercury & Montserrat Caballé - How Can I Go On
+                    <span class="separador-estrela">⭐</span>
+                    Céline Dion - A New Day Has Come
+                    <span class="separador-estrela">⭐</span>
+                    Céline Dion - The Power Of Love (from the 2007 DVD "Live In Las Vegas")
+                    <span class="separador-estrela">⭐</span>
+                    Whitney Houston & Mariah Carey - When You Believe
+                    <span class="separador-estrela">⭐</span>
+                    Whitney Houston - One Moment In Time
+                    <span class="separador-estrela">⭐</span>
+                    Evanescence - My Immortal
+                    <span class="separador-estrela">⭐</span>
+                    David Guetta - Titanium ft. Sia
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- PAINEL DE CONTROLE ABAIXO DO CARD -->
+    <div class="painel-inferior">
+        <div class="painel-musica" onclick="event.stopPropagation()">
+            <button class="btn-controle" id="playPause">PAUSE</button>
+            <div style="display:flex; align-items:center; gap:12px;">
+                <span style="color:white; font-size:14px;">🔈</span>
+                <input type="range" class="vol-slider" min="0" max="1" step="0.1" value="1" oninput="ajustarVol(this.value)">
+                <span style="color:white; font-size:14px;">🔊</span>
+            </div>
+        </div>
+    </div>
+
+    <audio id="trilha" src="elvis.html.mp3" loop></audio>
+
+    <script>
+        // Gerador de Estrelas Pratas no Fundo Cósmico
+        const cosmos = document.getElementById('fundo-cosmos');
+        for (let i = 0; i < 75; i++) {
+            const e = document.createElement('div');
+            e.className = 'estrela-prata';
+            const size = Math.random() * 3.5 + 1;
+            e.style.width = size + 'px'; e.style.height = size + 'px';
+            e.style.top = Math.random() * 100 + '%'; e.style.left = Math.random() * 100 + '%';
+            e.style.animationDuration = (Math.random() * 3 + 2.5) + 's';
+            cosmos.appendChild(e);
+        }
+
+        // Intersection Observer para a Rolagem Futurista suave
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visivel');
+                }
+            });
+        }, { threshold: 0.12 });
+
+        document.querySelectorAll('.conteudo-futurista').forEach(el => observer.observe(el));
+
+        // Gerenciamento Avançado de Áudio
+        const audio = document.getElementById('trilha');
+        const btnPP = document.getElementById('playPause');
+
+        function iniciarAudio() {
+            if (audio.paused) {
+                audio.play();
+                btnPP.innerText = "PAUSE";
+            }
+        }
+
+        btnPP.onclick = (e) => {
+            e.stopPropagation();
+            if (audio.paused) {
+                audio.play();
+                btnPP.innerText = "PAUSE";
+            } else {
+                audio.pause();
+                btnPP.innerText = "PLAY";
+            }
+        };
+
+        function ajustarVol(v) {
+            audio.volume = v;
+        }
+    </script>
+</body>
+</html>
