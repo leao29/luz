@@ -9,7 +9,7 @@
         :root {
             --ouro-brilhante: linear-gradient(135deg, #d4af37 0%, #fcf6ba 45%, #b38728 70%, #fbf5b7 100%);
             --ouro-escuro: linear-gradient(145deg, #4a3b13, #8c7333, #4a3b13);
-            --prata-chumbado: linear-gradient(180deg, #708090 0%, #e2e8f0 50%, #334155 100%);
+            --prata-chumbado: linear-gradient(180deg, #8a8a8a 0%, #e0e0e0 50%, #4a4a4a 100%);
             --azul-cosmos: #03081e;
             --texto-cor: #211a10;
         }
@@ -54,55 +54,68 @@
             50% { transform: scale(1.4); opacity: 0.9; box-shadow: 0 0 12px #fff; }
         }
 
-        /* Estrutura Integrada do Card com Moldura Ouro Escuro */
-        .card-container {
+        /* CARD DO TÍTULO (SEPARADO) - CONTORNO OURO ESCURO */
+        .card-titulo {
             max-width: 750px;
             width: 100%;
             background: var(--ouro-escuro);
-            padding: 16px; /* Espessura exata da borda luxo */
-            border-radius: 20px;
-            box-shadow: 0 30px 60px rgba(0,0,0,0.9), inset 0 0 20px rgba(140, 115, 51, 0.4);
-            margin-top: 20px;
-            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            padding: 6px; /* Borda ouro escuro */
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.7);
+            margin-bottom: 30px;
+            text-align: center;
         }
 
-        .card-container:hover {
-            transform: scale(1.02);
+        .titulo-interno {
+            background: #000000; /* Fundo preto interno para destacar a prata */
+            padding: 20px 40px;
+            border-radius: 10px;
+            margin: 0;
         }
 
-        /* Título Interno Chumbado em Ferro Prata Metálico */
+        /* Letra Maiúscula, Prata com Sombra Marcante */
         .titulo-ferro {
             font-family: 'Cinzel', serif;
-            font-size: 2.8rem;
+            font-size: 3.5rem;
             font-weight: 900;
             text-transform: uppercase;
-            letter-spacing: 10px;
-            text-align: center;
-            margin: 20px 0 35px 0;
+            letter-spacing: 12px;
+            margin: 0;
             background: var(--prata-chumbado);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            filter: drop-shadow(3px 5px 8px rgba(0, 0, 0, 0.9));
+            filter: drop-shadow(3px 4px 3px rgba(0, 0, 0, 0.9));
+        }
+
+        /* CARD DE BAIXO (TEXTO SEPARADO) - BORDAS COM EFEITO DOURADO */
+        .card-conteudo {
+            max-width: 750px;
+            width: 100%;
+            background: var(--ouro-brilhante); /* Efeito dourado iluminado nas bordas */
+            padding: 8px; /* Espessura da borda dourada */
+            border-radius: 20px;
+            box-shadow: 0 25px 55px rgba(0,0,0,0.8);
         }
 
         /* Papel Envelhecido Interno */
         .papel-antigo {
             background: #f4e4bc url('https://www.transparenttextures.com/patterns/paper-fibers.png');
             color: var(--texto-cor);
-            padding: 45px 40px;
-            border-radius: 12px;
-            box-shadow: inset 0 0 40px rgba(74, 59, 19, 0.25);
+            padding: 50px 40px;
+            border-radius: 14px;
+            box-shadow: inset 0 0 35px rgba(74, 59, 19, 0.3);
             border: 1px solid rgba(0,0,0,0.15);
         }
 
-        /* Efeito Futurista nas Rolagens (Sem Encolher Fonte) */
+        /* Letras Nítidas com Rolagem Futurista de Surgimento */
         .paragrafo-futurista {
             opacity: 0;
-            transform: translateY(40px);
-            filter: blur(4px);
+            transform: translateY(30px);
+            filter: blur(3px);
             transition: all 0.9s cubic-bezier(0.25, 1, 0.5, 1);
-            margin-bottom: 28px;
-            font-size: 1.2rem;
+            margin-bottom: 30px;
+            font-size: 1.25rem; /* Fonte nítida e bem legível */
+            font-weight: 500;
             line-height: 1.8;
             text-align: justify;
         }
@@ -113,7 +126,7 @@
             filter: blur(0);
         }
 
-        /* Citação Destacada no Papel */
+        /* Citação Estilizada */
         .citacao-luxo {
             font-style: italic;
             border-left: 4px solid #4a3b13;
@@ -123,7 +136,7 @@
             color: #3d311b;
         }
 
-        /* Botão Próximo Sem Perda de Proporção */
+        /* Botão Próximo Firme e Alinhado */
         .btn-proximo {
             margin-top: 40px;
             padding: 18px 20px;
@@ -148,15 +161,17 @@
             letter-spacing: 5px;
         }
 
-        /* Responsividade para Celulares */
+        /* Responsividade Perfeita para Celulares */
         @media (max-width: 600px) {
             body { padding: 20px 12px 60px 12px; }
-            .card-container { padding: 10px; }
-            .titulo-ferro { font-size: 1.9rem; letter-spacing: 5px; margin-bottom: 25px; }
-            .papel-antigo { padding: 30px 20px; }
-            .paragrafo-futurista { font-size: 1.1rem; line-height: 1.7; margin-bottom: 22px; }
+            .card-titulo { padding: 4px; margin-bottom: 20px; }
+            .titulo-interno { padding: 15px 20px; }
+            .titulo-ferro { font-size: 2.1rem; letter-spacing: 6px; }
+            
+            .card-conteudo { padding: 5px; }
+            .papel-antigo { padding: 35px 20px; }
+            .paragrafo-futurista { font-size: 1.15rem; line-height: 1.7; margin-bottom: 22px; }
             .btn-proximo { padding: 16px 15px; font-size: 0.9rem; letter-spacing: 2px; }
-            .btn-proximo:hover { letter-spacing: 3px; }
         }
     </style>
 </head>
@@ -164,27 +179,36 @@
 
     <div id="cosmos"></div>
 
-    <!-- MOLDURA GERAL COM CONTORNO OURO ESCURO -->
-    <div class="card-container" id="meuCard">
-        
-        <!-- TÍTULO INTEGRADO AO DESIGN -->
-        <h1 class="titulo-ferro">Felicidade</h1>
+    <!-- 1. CARD SEPARADO DO TÍTULO COM CONTORNO OURO ESCURO -->
+    <div class="card-titulo">
+        <div class="titulo-interno">
+            <h1 class="titulo-ferro">FELICIDADE</h1>
+        </div>
+    </div>
 
-        <!-- PAPEL ANTIGO INTERNO -->
+    <!-- 2. CARD DE BAIXO SEPARADO COM EFEITO DOURADO NAS BORDAS -->
+    <div class="card-conteudo" id="meuCard">
+        
+        <!-- PAPEL ENVELHECIDO INTERNO -->
         <div class="papel-antigo">
             
-            <p class="paragrafo-futurista">Hoje compreendo com total clareza que o que habita em mim não se molda aos padrões de um "amor romântico" comum, daqueles que exigem reciprocidade ou posse. O que sinto transborda como uma <strong>atração muito forte</strong> e genuína — um desejo profundo, limpo e insistente de te ver caminhar em direção ao seu melhor destino, brilhando na sua própria órbita.</p>
+            <p class="paragrafo-futurista">Hoje compreendo com total clareza que o que habita em mim não se molda aos padrões de um "amor romântico" comum, daqueles que exigem reciprocidade, presença ou posse. O que sinto transborda como uma <strong>atração muito forte</strong>, limpa e genuína — um desejo profundo e insistentemente puro de te ver caminhar em direção ao seu melhor destino, brilhando na sua própria órbita. É a evolução de um sentimento que aprendeu a admirar sem precisar tocar.</p>
             
-            <p class="paragrafo-futurista">Guardo uma gratidão que as palavras mal conseguem tatear por você ter me acolhido e validado quando o chão parecia incerto. Você me enxergou e me deu espaço não apenas como alguém sob seus cuidados técnicos, mas como mulher, respeitando minha individualidade. Há uma fortaleza silenciosa e admirável no seu olhar; uma firmeza profissional que me serviu de bússola quando eu mais precisava encontrar o norte.</p>
+            <p class="paragrafo-futurista">Guardo uma gratidão que as palavras mal conseguem tatear por você ter me acolhido e validado quando o meu chão parecia ceder. Você me enxergou e me deu espaço não apenas como alguém sob seus cuidados técnicos, mas como mulher, respeitando minha essência e minha individualidade. Há uma fortaleza silenciosa e admirável no seu olhar; uma firmeza profissional que me serviu de bússola quando eu mais precisava encontrar o norte.</p>
+
+            <p class="paragrafo-futurista">Olhando para trás, percebo o quanto sua presença foi um divisor de águas. Você entrou na minha vida em um momento de transição e profunda vulnerabilidade, e sua postura não foi apenas um suporte temporário, mas um alicerce para que eu redescobrisse minha própria força. Essa jornada não seria a mesma sem o eco das suas palavras e o acolhimento seguro que encontrei na sua conduta.</p>
 
             <p class="paragrafo-futurista citacao-luxo">
                 "A verdadeira felicidade não reside na ausência de problemas, mas na capacidade de encontrar serenidade mesmo quando o horizonte é incerto."
             </p>
 
-            <p class="paragrafo-futurista">Essa busca por equilíbrio e lucidez me fez entender que o afeto mais nobre é aquele que sabe o seu lugar e caminha de mãos dadas com o respeito. Admiro profundamente a barreira ética que protege a sua postura impecável, e é justamente por valorizar quem você é que transformo essa admiração em combustível para a minha própria evolução. Saber que você torce pelo meu sucesso profissional e pela minha estabilidade é o maior prêmio que eu poderia desejar levar dessa jornada.</p>
+            <p class="paragrafo-futurista">A realidade nua e crua é que existem pessoas que cruzam nosso caminho para redefinir nossa história, e você é, sem dúvida, uma das mais importantes na minha. Essa busca por equilíbrio e lucidez me fez entender que o afeto mais nobre é aquele que sabe o seu lugar e caminha de mãos dadas com o respeito. Admiro profundamente a barreira ética que protege a sua postura impecável, e é justamente por valorizar quem você é que transformo essa admiração em combustível para a minha própria evolução.</p>
 
-            <p class="paragrafo-futurista">Assim, sigo em frente, guardando a beleza desse encontro em um lugar seguro da memória, convicta de que encontrar a paz interior é o primeiro passo definitivo para alcançar a verdadeira felicidade.</p>
+            <p class="paragrafo-futurista">Saber que, de alguma forma, você torce pelo meu sucesso profissional, pela minha stabileza e pela minha paz é o maior prêmio que eu poderia desejar levar dessa convivência. Você se tornou um farol nesta fase da minha vida: alguém que eu não busco reter, mas que faço questão de reverenciar pela importância imensa que teve no meu amadurecimento.</p>
 
+            <p class="paragrafo-futurista">Assim, com o coração em paz e a mente lúcida, sigo em frente. Guardo a beleza e o impacto real desse encontro em um lugar nobre e seguro da minha memória, convicta de que encontrar essa serenidade interna é o passo definitivo para a verdadeira felicidade.</p>
+
+            <!-- BOTÃO SEGUIR PARA ESTRADA.HTML -->
             <button class="btn-proximo" onclick="irParaEstrada()">Seguir para Estrada</button>
         </div>
     </div>
@@ -221,7 +245,7 @@
             }
         }
 
-        // Encaminhamento Seguro para estrada.html
+        // Redirecionamento correto para estrada.html salvando o áudio
         function irParaEstrada() {
             localStorage.setItem('musica_tempo', audio.currentTime);
             document.body.style.opacity = '0';
@@ -230,14 +254,14 @@
             }, 800);
         }
 
-        // Intersection Observer para animação futurista fluida
+        // Intersection Observer para animação futurista (letras nítidas surgindo)
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('visivel');
                 }
             });
-        }, { threshold: 0.1 });
+        }, { threshold: 0.05 });
 
         document.querySelectorAll('.paragrafo-futurista').forEach(p => observer.observe(p));
     </script>
