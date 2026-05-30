@@ -281,7 +281,7 @@
         </div>
     </div>
 
-    <!-- BOTÃO ATUALIZADO PARA CONDUZIR AO FINAL DA SEQUÊNCIA -->
+    <!-- PAINEL E BOTÃO DIRECIONADOS PARA FINAL.HTML -->
     <div class="painel-inferior">
         <div class="painel-musica" onclick="event.stopPropagation()">
             <button class="btn-controle" id="playPause">PAUSE</button>
@@ -326,12 +326,11 @@
         const btnPP = document.getElementById('playPause');
 
         window.onload = () => {
-            document.body.style.opacity = '1'; // Correção: garante que a tela apareça com fade-in
+            document.body.style.opacity = '1';
             const tempoSalvo = localStorage.getItem('musica_tempo');
             if (tempoSalvo) {
                 audio.currentTime = parseFloat(tempoSalvo);
             }
-            // Tenta reproduzir automaticamente caso o navegador permita
             audio.play().then(() => { btnPP.innerText = "PAUSE"; }).catch(() => {
                 btnPP.innerText = "PLAY";
             });
@@ -359,12 +358,12 @@
             audio.volume = v;
         }
 
-        // Modificado para salvar o áudio e redirecionar para a última página: fim.html
+        // CORREÇÃO ESSENCIAL: Redireciona corretamente salvando o tempo para o arquivo final.html
         function irParaProxima() {
             localStorage.setItem('musica_tempo', audio.currentTime);
             document.body.style.opacity = '0';
             setTimeout(() => {
-                window.location.href = 'fim.html';
+                window.location.href = 'final.html';
             }, 800);
         }
     </script>
