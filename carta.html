@@ -28,6 +28,7 @@
             padding: 80px 20px;
             overflow-x: hidden;
             overflow-y: auto;
+            opacity: 0; /* Começa invisível para o efeito fade-in */
             transition: opacity 0.8s ease;
         }
 
@@ -239,7 +240,7 @@
 
                 <p class="paragrafo-relato">Sinto uma gratidão imensa por você ter me acolhido e me validado, não apenas como paciente, mas como mulher. Seu olhar fala muito para mim; nele encontrei uma fortaleza admirável, mas também vislumbrei fragilidades que o tornam ainda mais humano. Confesso que, muitas vezes, <strong>me perdi na profundidade desse olhar</strong>.</p>
                 
-                <p class="paragrafo-relato">A verdadeira felicidade não reside na ausência de problemas, mas na capacidade de encontrar serenidade mesmo quando o horizonte é incerto. Redescobrir meus passos sob sua orientação foi o primeiro grande marco dessa nova jornada.</p>
+                <p class="paragrafo-relato">A verdadeira felicidade não reside na ausência de problemas, mas na capacidade de encontrar serenidade mesmo quando o horizonete é incerto. Redescobrir meus passos sob sua orientação foi o primeiro grande marco dessa nova jornada.</p>
                 
                 <p class="paragrafo-relato">
                     <span class="destaque-poetico">Encontrar esse equilíbrio, dividindo minhas vulnerabilidades com quem soube proteger minha mente, trouxe uma paz que eu há muito não experimentava. Sigo em frente com o coração leve e a alma em paz.</span>
@@ -252,7 +253,7 @@
                     </div>
 
                     <div class="area-botao">
-                        <button class="btn-proxima" onclick="irParaProxima(event)">Concluir Jornada</button>
+                        <button class="btn-proxima" onclick="irParaProxima(event)">Continuar para a Estrada</button>
                     </div>
                 </div>
 
@@ -268,11 +269,14 @@
         const slidersVol = [document.querySelector('.slider-vol-topo'), document.querySelector('.slider-vol-fim')];
 
         window.addEventListener('DOMContentLoaded', () => {
-            const savedTime = localStorage.getItem('elvis_time');
-            const isPlaying = localStorage.getItem('elvis_playing');
+            // Garante exibição da opacidade ao carregar
+            document.body.style.opacity = "1";
+
+            const savedTime = localStorage.getItem('musica_tempo');
+            const isPlaying = localStorage.getItem('musica_playing');
             const savedVol = localStorage.getItem('elvis_vol');
 
-            if (savedTime) audio.currentTime = parseFloat(savedTime);
+            if (tempoSalvo) audio.currentTime = parseFloat(savedTime);
             if (savedVol) {
                 audio.volume = parseFloat(savedVol);
                 slidersVol.forEach(slider => slider.value = savedVol);
@@ -292,7 +296,7 @@
         function desbloquearAudio() {
             audio.play().then(() => {
                 atualizarInterfacePlay(false);
-                localStorage.setItem('elvis_playing', 'true');
+                localStorage.setItem('musica_playing', 'true');
             }).catch(() => {});
         }
 
@@ -300,11 +304,11 @@
             if (audio.paused) {
                 audio.play();
                 atualizarInterfacePlay(false);
-                localStorage.setItem('elvis_playing', 'true');
+                localStorage.setItem('musica_playing', 'true');
             } else {
                 audio.pause();
                 atualizarInterfacePlay(true);
-                localStorage.setItem('elvis_playing', 'false');
+                localStorage.setItem('musica_playing', 'false');
             }
         }
 
@@ -314,12 +318,13 @@
             localStorage.setItem('elvis_vol', v);
         }
 
+        // Correção do destino: Envia para estrada.html e preserva o estado da música
         function irParaProxima(e) {
             e.stopPropagation();
-            localStorage.setItem('elvis_time', audio.currentTime);
+            localStorage.setItem('musica_tempo', audio.currentTime);
             document.body.style.opacity = "0";
             setTimeout(() => {
-                window.location.href = "felicidade.html"; 
+                window.location.href = "estrada.html"; 
             }, 800);
         }
 
