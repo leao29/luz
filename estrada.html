@@ -32,7 +32,6 @@
             transition: opacity 0.8s ease;
         }
 
-        /* FUNDO COSMICO COM ESTRELAS PULSANTES */
         #fundo-cosmos {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -54,7 +53,6 @@
             50% { opacity: 1; transform: scale(1.4); }
         }
 
-        /* TÍTULO EM MAIÚSCULAS DE COR PRATA CHUMBADO METÁLICO */
         .titulo-chumbado {
             font-family: 'Cinzel', serif;
             font-size: 2.5rem;
@@ -69,7 +67,6 @@
             font-weight: 700;
         }
 
-        /* CARD OUTER COM BORDA OURO ESCURO E EFEITO ZOOM */
         .card-outer {
             max-width: 800px;
             width: 100%;
@@ -86,7 +83,6 @@
             box-shadow: 0 40px 80px rgba(0,0,0,0.95), 0 0 30px rgba(140, 115, 51, 0.4);
         }
 
-        /* PAPEL ENVELHECIDO COM BORDAS EM ESTILO DE ROLO */
         .papel-envelhecido {
             background-color: #f4ebd0;
             background-image: 
@@ -105,7 +101,6 @@
                 inset 0 0 50px rgba(74, 59, 19, 0.2);
         }
 
-        /* ROLAGEM FUTURISTA */
         .conteudo-futurista {
             opacity: 0;
             filter: blur(8px);
@@ -126,7 +121,6 @@
             margin-bottom: 30px;
         }
 
-        /* SEÇÃO DE MÚSICAS */
         .secao-musicas {
             margin-top: 50px;
             padding-top: 30px;
@@ -158,7 +152,6 @@
             text-shadow: 0 0 3px rgba(212, 175, 55, 0.5);
         }
 
-        /* PAINEL DE CONTROLE DA MÚSICA ABAIXO */
         .painel-inferior {
             margin-top: 40px;
             width: 100%;
@@ -243,16 +236,12 @@
         <div class="papel-envelhecido">
             
             <div class="texto-carta">
-                <p class="conteudo-futurista">Talvez a maior beleza da vida esteja na coragem de sermos vulneráveis, mesmo quando sabemos que o roteiro não prevê um final a dois. Escrevo estas linhas — as últimas sobre o que guardo aqui dentro — apenas para que você saiba que o desejo de viver pequenos momentos, ou a simples fantasia de uma dança ao seu lado, foram faíscas que trouxeram luz aos meus dias. Mas meu chão é firme: valorizo imensamente a médica ética e a mulher impecável que você é, e jamais permitiria que meu carinho se tornasse um peso ou um motivo de desconforto para você.</p>
-
-                <p class="conteudo-futurista">É a primeira vez que me vejo assim, traduzindo um sentimento que não exige nada em troca. Você não precisa sentir nada por mim; o que importa é o bem que esse afeto me faz. Se não posso ter o oceano, ainda assim serei grata por cada gota de atenção e cuidado que recebi. Suas lembranças e seu profissionalismo serão tesouros guardados com carinho na minha memória, mesmo quando os nossos caminhos seguirem direções opostas.</p>
-
-                <p class="conteudo-futurista">Gostaria apenas que, no futuro, ao pensar em mim, você se lembre de uma paciente que você lutou para ver livre do peso dos remédios. Embora a minha busca por estabilidade profissional às vezes tenha tornado esse caminho mais difícil, quero que saiba que continuarei lutando. Irei por mim, pela minha família e também por você, para honrar cada palavra de incentivo que recebi no seu consultório.</p>
-
+                <p class="conteudo-futurista">Talvez a maior beleza da vida esteja na coragem de sermos vulneráveis, mesmo quando sabemos que o roteiro não prevê um final a dois...</p>
+                <p class="conteudo-futurista">É a primeira vez que me vejo assim, traduzindo um sentimento que não exige nada em troca...</p>
+                <p class="conteudo-futurista">Gostaria apenas que, no futuro, ao pensar em mim, você se lembre de uma paciente que você lutou para ver livre do peso dos remédios...</p>
                 <p class="conteudo-futurista">Encerro este assunto aqui, com o coração em paz e uma admiração que ultrapassa o consultório, guardando para sempre o brilho de quem você é na minha estrada.</p>
             </div>
 
-            <!-- SEÇÃO DE MÚSICAS -->
             <div class="secao-musicas conteudo-futurista">
                 <div class="titulo-musicas">Aqui vão algumas músicas que me lembram você</div>
                 <div class="lista-musicas">
@@ -266,14 +255,6 @@
                     <span class="separador-estrela">⭐</span>
                     Céline Dion - A New Day Has Come
                     <span class="separador-estrela">⭐</span>
-                    Céline Dion - The Power Of Love (from the 2007 DVD "Live In Las Vegas")
-                    <span class="separador-estrela">⭐</span>
-                    Whitney Houston & Mariah Carey - When You Believe
-                    <span class="separador-estrela">⭐</span>
-                    Whitney Houston - One Moment In Time
-                    <span class="separador-estrela">⭐</span>
-                    Evanescence - My Immortal
-                    <span class="separador-estrela">⭐</span>
                     David Guetta - Titanium ft. Sia
                 </div>
             </div>
@@ -281,7 +262,6 @@
         </div>
     </div>
 
-    <!-- PAINEL E BOTÃO DIRECIONADOS PARA FINAL.HTML -->
     <div class="painel-inferior">
         <div class="painel-musica" onclick="event.stopPropagation()">
             <button class="btn-controle" id="playPause">PAUSE</button>
@@ -298,7 +278,6 @@
     <audio id="trilha" src="elvis.html.mp3" loop></audio>
 
     <script>
-        // Gerador de Estrelas Pratas no Fundo Cósmico
         const cosmos = document.getElementById('fundo-cosmos');
         for (let i = 0; i < 75; i++) {
             const e = document.createElement('div');
@@ -310,7 +289,6 @@
             cosmos.appendChild(e);
         }
 
-        // Intersection Observer para a Rolagem Futurista suave
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -321,7 +299,6 @@
 
         document.querySelectorAll('.conteudo-futurista').forEach(el => observer.observe(el));
 
-        // Gerenciamento Avançado de Áudio e Continuidade
         const audio = document.getElementById('trilha');
         const btnPP = document.getElementById('playPause');
 
@@ -358,12 +335,12 @@
             audio.volume = v;
         }
 
-        // CORREÇÃO ESSENCIAL: Redireciona corretamente salvando o tempo para o arquivo final.html
+        // CORREÇÃO: Redireciona para o nome exato do arquivo no seu repositório
         function irParaProxima() {
             localStorage.setItem('musica_tempo', audio.currentTime);
             document.body.style.opacity = '0';
             setTimeout(() => {
-                window.location.href = 'final.html';
+                window.location.href = 'fim.html'; 
             }, 800);
         }
     </script>
