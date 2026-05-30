@@ -28,7 +28,7 @@
             padding: 80px 20px;
             overflow-x: hidden;
             overflow-y: auto;
-            opacity: 0; /* Começa invisível para o efeito fade-in */
+            opacity: 0;
             transition: opacity 0.8s ease;
         }
 
@@ -269,14 +269,14 @@
         const slidersVol = [document.querySelector('.slider-vol-topo'), document.querySelector('.slider-vol-fim')];
 
         window.addEventListener('DOMContentLoaded', () => {
-            // Garante exibição da opacidade ao carregar
             document.body.style.opacity = "1";
 
             const savedTime = localStorage.getItem('musica_tempo');
             const isPlaying = localStorage.getItem('musica_playing');
             const savedVol = localStorage.getItem('elvis_vol');
 
-            if (tempoSalvo) audio.currentTime = parseFloat(savedTime);
+            // Correção da variável inexistente 'tempoSalvo' para 'savedTime'
+            if (savedTime) audio.currentTime = parseFloat(savedTime);
             if (savedVol) {
                 audio.volume = parseFloat(savedVol);
                 slidersVol.forEach(slider => slider.value = savedVol);
@@ -302,9 +302,10 @@
 
         function alternarAudio() {
             if (audio.paused) {
-                audio.play();
-                atualizarInterfacePlay(false);
-                localStorage.setItem('musica_playing', 'true');
+                audio.play().then(() => {
+                    atualizarInterfacePlay(false);
+                    localStorage.setItem('musica_playing', 'true');
+                });
             } else {
                 audio.pause();
                 atualizarInterfacePlay(true);
@@ -318,7 +319,6 @@
             localStorage.setItem('elvis_vol', v);
         }
 
-        // Correção do destino: Envia para estrada.html e preserva o estado da música
         function irParaProxima(e) {
             e.stopPropagation();
             localStorage.setItem('musica_tempo', audio.currentTime);
@@ -328,7 +328,6 @@
             }, 800);
         }
 
-        // INTERSECTION OBSERVER PARA EFEITO 3D NA ROLAGEM
         const paragrafos = document.querySelectorAll('.paragrafo-relato');
         const monitorarScroll = new IntersectionObserver((entradas) => {
             entradas.forEach(entrada => {
