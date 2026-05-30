@@ -28,6 +28,7 @@
             align-items: center;
             padding: 60px 20px;
             overflow-x: hidden;
+            opacity: 0;
             transition: opacity 0.8s ease;
         }
 
@@ -280,7 +281,7 @@
         </div>
     </div>
 
-    <!-- PAINEL DE CONTROLE E NAVEGAÇÃO ABAIXO DO CARD -->
+    <!-- BOTÃO ATUALIZADO PARA CONDUZIR AO FINAL DA SEQUÊNCIA -->
     <div class="painel-inferior">
         <div class="painel-musica" onclick="event.stopPropagation()">
             <button class="btn-controle" id="playPause">PAUSE</button>
@@ -291,7 +292,7 @@
             </div>
         </div>
 
-        <button class="btn-navegacao" onclick="irParaProxima()">Seguir para Felicidade</button>
+        <button class="btn-navegacao" onclick="irParaProxima()">Chegar ao Destino Final</button>
     </div>
 
     <audio id="trilha" src="elvis.html.mp3" loop></audio>
@@ -325,12 +326,13 @@
         const btnPP = document.getElementById('playPause');
 
         window.onload = () => {
+            document.body.style.opacity = '1'; // Correção: garante que a tela apareça com fade-in
             const tempoSalvo = localStorage.getItem('musica_tempo');
             if (tempoSalvo) {
                 audio.currentTime = parseFloat(tempoSalvo);
             }
             // Tenta reproduzir automaticamente caso o navegador permita
-            audio.play().catch(() => {
+            audio.play().then(() => { btnPP.innerText = "PAUSE"; }).catch(() => {
                 btnPP.innerText = "PLAY";
             });
         };
@@ -357,11 +359,12 @@
             audio.volume = v;
         }
 
+        // Modificado para salvar o áudio e redirecionar para a última página: fim.html
         function irParaProxima() {
             localStorage.setItem('musica_tempo', audio.currentTime);
             document.body.style.opacity = '0';
             setTimeout(() => {
-                window.location.href = 'felicidade.html';
+                window.location.href = 'fim.html';
             }, 800);
         }
     </script>
