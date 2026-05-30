@@ -4,14 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Dra. Débora - Confidencial</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Lora:ital,wght@0,400;0,700;1,400&family=Orbitron:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght=700&family=Lora:ital,wght=0,400;0,700;1,400&family=Orbitron:wght=700&display=swap" rel="stylesheet">
     <style>
         :root {
             --preto-profundo: #01040a;
             --azul-noite: #03081e;
             --vermelho-carimbo: #8b0000;
-            --papel-antigo: #e8dcc4;
+            --papel-antigo: #e3d4b6;
             --ouro-escuro: #5c4718;
+            --prata-luxo: linear-gradient(135deg, #94a3b8, #ffffff, #cbd5e1, #ffffff, #64748b);
         }
 
         * { box-sizing: border-box; }
@@ -27,7 +28,7 @@
             overflow: hidden;
         }
 
-        /* FUNDO COSMOS COM ESTRELAS PRATAS BRILHANTES E PULSANTES */
+        /* FUNDO COSMOS COM ESTRELAS PRATAS BRILHANTES */
         #cenario-cosmos {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -60,35 +61,56 @@
             z-index: 10;
         }
 
-        /* CARD DO ENVELOPE ESTILO CANVA COM MOLDURA OURO ESCURO */
+        /* CARD DO ENVELOPE COM BORDA PRATEADA DE LUXO */
         .card-envelope {
             width: 100%;
             height: 500px;
-            border-radius: 14px;
+            border-radius: 18px;
             padding: 4px;
-            background: var(--ouro-escuro);
-            box-shadow: 0 25px 60px rgba(0,0,0,0.85);
-            transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            background: var(--prata-luxo);
+            box-shadow: 0 25px 60px rgba(0,0,0,0.85), 0 0 20px rgba(255,255,255,0.1);
+            transition: transform 0.5s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.5s ease;
         }
 
-        /* Zoom Sutil no Card do Envelope */
         .card-envelope:hover {
-            transform: scale(1.03);
+            transform: scale(1.04) translateY(-5px);
+            box-shadow: 0 35px 75px rgba(0,0,0,0.95), 0 0 30px rgba(255,255,255,0.2);
         }
 
+        /* PAPEL COM APARÊNCIA ENVELHECIDA PROFUNDA */
         .envelope-papel {
             position: relative;
             width: 100%;
             height: 100%;
             background-color: var(--papel-antigo);
-            background-image: url('https://www.transparenttextures.com/patterns/parchment.png');
-            border-radius: 10px;
+            background-image: url('https://www.transparenttextures.com/patterns/cream-paper.png');
+            border-radius: 14px;
             display: flex;
             flex-direction: column;
             align-items: center;
             padding: 40px 30px;
-            border: 1px solid rgba(0,0,0,0.15);
-            box-shadow: inset 0 0 40px rgba(92, 71, 24, 0.2);
+            border: 2px solid var(--ouro-escuro);
+            box-shadow: inset 0 0 50px rgba(74, 56, 20, 0.35);
+            overflow: hidden;
+        }
+
+        /* ESTRELA CÓSMICA PULSANTE CENTRALIZADA NO CARD */
+        .estrela-card-central {
+            position: absolute;
+            top: 25%;
+            width: 120px;
+            height: 120px;
+            background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(226,232,240,0.8) 20%, rgba(255,255,255,0) 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 1;
+            mix-blend-mode: screen;
+            animation: superPulso 4s infinite ease-in-out;
+        }
+
+        @keyframes superPulso {
+            0%, 100> { transform: scale(0.8); opacity: 0.4; filter: blur(2px); }
+            50% { transform: scale(1.3); opacity: 0.9; filter: blur(0px); }
         }
 
         /* TEXTOS E CARIMBOS */
@@ -99,6 +121,7 @@
             margin-bottom: 25px;
             text-align: center;
             text-shadow: 1px 1px 2px rgba(255,255,255,0.6);
+            z-index: 2;
         }
 
         .carimbo-vazado {
@@ -114,15 +137,17 @@
             text-transform: uppercase;
             letter-spacing: 5px;
             mix-blend-mode: multiply;
+            z-index: 2;
         }
 
         .bloco-identificacao {
             margin-top: auto;
             text-align: center;
             width: 100%;
-            border-top: 1px dashed rgba(92, 71, 24, 0.3);
+            border-top: 1px dashed rgba(92, 71, 24, 0.4);
             padding-top: 15px;
             padding-bottom: 40px;
+            z-index: 2;
         }
 
         .label-paciente {
@@ -142,7 +167,7 @@
             font-size: 1.05rem;
         }
 
-        /* LACRE DE CERA CHUMBADO COM SÍMBOLO PSIQUIÁTRICO (Ψ) */
+        /* LACRE DE CERA CHUMBADO */
         .lacre-cera {
             position: absolute;
             bottom: -35px;
@@ -167,7 +192,7 @@
             text-shadow: 1px 1px 1px rgba(255,255,255,0.15);
         }
 
-        /* CARD DO BOTÃO FUTURISTA COM BORDA OURO ESCURO */
+        /* CARD DO BOTÃO FUTURISTA */
         .card-botao {
             margin-top: 65px;
             padding: 3px;
@@ -177,7 +202,6 @@
             transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
         }
 
-        /* Zoom Sutil no Card do Botão */
         .card-botao:hover {
             transform: scale(1.06);
         }
@@ -218,6 +242,9 @@
         
         <div class="card-envelope">
             <div class="envelope-papel">
+                <!-- Estrela prata pulsante de fundo interna ao card -->
+                <div class="estrela-card-central"></div>
+
                 <div class="nome-debora">Dra. Débora</div>
                 
                 <div class="carimbo-vazado">CONFIDENCIAL</div>
@@ -236,13 +263,13 @@
         </div>
     </div>
 
-    <audio id="musica-elvis" src="elvis.mp3" loop></audio>
+    <!-- Ajustado para a extensão exata do seu repositório GitHub -->
+    <audio id="musica-elvis" src="elvis.html.mp3" loop></audio>
     
-    <!-- Lembre-se de checar a extensão (.htm ou .html) no seu repositório do GitHub -->
     <iframe id="prontuario-frame" src="prontuario.htm"></iframe>
 
     <script>
-        // Gerador de estrelas pratas
+        // Gerador de estrelas pratas para o fundo cósmico geral
         const cosmos = document.getElementById('cenario-cosmos');
         for (let i = 0; i < 75; i++) {
             const estrela = document.createElement('div');
@@ -259,7 +286,14 @@
 
         function iniciarExperiencia() {
             const audio = document.getElementById('musica-elvis');
-            audio.play().catch(e => console.log("Erro ao reproduzir áudio:", e));
+            
+            // Inicia e sincroniza o estado no localStorage para as próximas páginas
+            audio.play().then(() => {
+                localStorage.setItem('elvis_playing', 'true');
+                localStorage.setItem('elvis_time', audio.currentTime);
+            }).catch(e => {
+                console.log("Erro ao reproduzir áudio:", e);
+            });
 
             document.getElementById('painel-principal').style.opacity = '0';
             document.getElementById('painel-principal').style.transition = 'opacity 1s ease';
