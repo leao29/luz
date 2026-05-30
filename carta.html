@@ -49,11 +49,9 @@
             50% { opacity: 1; transform: scale(1.4); }
         }
 
-        /* PAINEL DE CONTROLE DE ÁUDIO - MANTIDO PARA REPRODUÇÃO CONTÍNUA */
         .painel-audio-premium {
             position: fixed;
-            top: 20px;
-            right: 20px;
+            top: 20px; right: 20px;
             background: linear-gradient(135deg, #1e293b, #0f172a);
             border: 1px solid #94a3b8;
             padding: 10px 16px;
@@ -70,18 +68,14 @@
             border: none;
             color: #f8fafc;
             cursor: pointer;
-            width: 35px;
-            height: 35px;
+            width: 35px; height: 35px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
-        .slider-volume-custom {
-            width: 70px;
-            cursor: pointer;
-        }
+        .slider-volume-custom { width: 70px; cursor: pointer; }
 
         .efeito-luxo-entrada {
             opacity: 0;
@@ -91,9 +85,7 @@
             max-width: 800px;
         }
 
-        @keyframes surgirSuave {
-            to { opacity: 1; transform: translateY(0); }
-        }
+        @keyframes surgirSuave { to { opacity: 1; transform: translateY(0); } }
 
         .titulo-pagina {
             font-size: 2.2rem;
@@ -129,7 +121,6 @@
             gap: 35px;
         }
 
-        /* EFEITO DE ROLAGEM FUTURISTA CINEMÁTICO */
         .paragrafo-relato {
             font-size: 1.15rem;
             line-height: 1.9;
@@ -172,7 +163,6 @@
             letter-spacing: 2px;
             cursor: pointer;
             transition: all 0.4s ease;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
         }
 
         .btn-proxima:hover {
@@ -184,9 +174,7 @@
         @media (max-width: 768px) {
             .titulo-pagina { font-size: 1.5rem; }
             .folha-texto-antigo { padding: 40px 20px; gap: 25px; }
-            .area-botao { justify-content: center; }
             .btn-proxima { width: 100%; }
-            .paragrafo-relato { font-size: 1.05rem; }
         }
     </style>
 </head>
@@ -194,7 +182,6 @@
 
     <div id="espaco-sideral"></div>
 
-    <!-- PAINEL DE CONTROLE DE MÍDIA COMPATÍVEL -->
     <div class="painel-audio-premium" onclick="event.stopPropagation()">
         <button class="btn-controle-midia" id="btn-play-pause" onclick="alternarAudio()">▶️</button>
         <input type="range" class="slider-volume-custom" id="controle-volume" min="0" max="1" step="0.05" value="1" oninput="ajustarVolume(this.value)">
@@ -203,18 +190,17 @@
     <div class="efeito-luxo-entrada">
         <h1 class="titulo-pagina">Felicidade</h1>
 
-        <!-- CARD PRINCIPAL -->
         <div class="card-carta-container">
             <div class="folha-texto-antigo">
                 
-                <!-- Insira seus novos parágrafos aqui para a página Felicidade -->
-                <p class="paragrafo-relato">A verdadeira felicidade não reside na ausência de problemas, mas sim na capacidade de encontrar serenidade quando o horizonte parece incerto. Redescobrir meus passos e alinhar meus pensamentos foi o primeiro grande marco dessa nova jornada.</p>
-                
-                <p class="paragrafo-relato">Com o tempo, compreendi que as respostas que tanto buscamos do lado de fora já estão consolidadas no nosso íntimo, aguardando o momento correto de florescer sob a luz da razão e do afeto sincero.</p>
-                
-                <p class="paragrafo-relato"><span class="destaque-poetico">Encontrar esse equilíbrio dividindo minhas vulnerabilidades com quem sabe proteger minha mente trouxe uma paz que eu há muito não experimentava.</span></p>
+                <p class="paragrafo-relato">Hoje compreendo que o que sinto não é um "amor romântico" comum, mas uma <strong>atração muito forte</strong> — um desejo genuíno e profundo de te ver bem. Respeito imensamente seus limites e a sua privacidade; jamais faria você se sentir desconfortável ou precisar "pisar em ovos" ao meu lado.</p>
 
-                <!-- BOTÃO DE NAVEGAÇÃO DA PRÓXIMA ETAPA -->
+                <p class="paragrafo-relato">Sinto uma gratidão imensa por você ter me acolhido e me validado, não apenas como paciente, mas como mulher. Seu olhar fala muito para mim; nele encontrei uma fortaleza admirável, mas também vislumbrei fragilidades que o tornam ainda mais humano. Confesso que, muitas vezes, <strong>me perdi na profundidade desse olhar</strong>.</p>
+                
+                <p class="paragrafo-relato">A verdadeira felicidade não reside na ausência de problemas, mas na capacidade de encontrar serenidade mesmo quando o horizonte é incerto. Redescobrir meus passos sob sua orientação foi o primeiro grande marco dessa nova jornada.</p>
+                
+                <p class="paragrafo-relato"><span class="destaque-poetico">Encontrar esse equilíbrio, dividindo minhas vulnerabilidades com quem soube proteger minha mente, trouxe uma paz que eu há muito não experimentava. Sigo em frente com o coração leve e a alma em paz.</span></p>
+
                 <div class="area-botao">
                     <button class="btn-proxima" onclick="irParaProxima(event)">Concluir Jornada</button>
                 </div>
@@ -222,14 +208,12 @@
         </div>
     </div>
 
-    <!-- O MESMO ARQUIVO DE ÁUDIO DE ORIGEM -->
     <audio id="som-ambiente" src="elvis.html.mp3" loop></audio>
 
     <script>
         const audio = document.getElementById('som-ambiente');
         const btn = document.getElementById('btn-play-pause');
 
-        // 1. SINCRONIZAÇÃO ABSOLUTA E RETOMADA DO ÁUDIO SEM CORTES
         window.addEventListener('DOMContentLoaded', () => {
             const savedTime = localStorage.getItem('elvis_time');
             const isPlaying = localStorage.getItem('elvis_playing');
@@ -241,7 +225,6 @@
                 document.getElementById('controle-volume').value = savedVol;
             }
 
-            // Se vinha tocando da página anterior, força o desbloqueio contínuo
             if (isPlaying === 'true') {
                 desbloquearAudio();
             }
@@ -251,7 +234,7 @@
             audio.play().then(() => {
                 btn.textContent = "⏸️";
                 localStorage.setItem('elvis_playing', 'true');
-            }).catch(() => console.log("Aguardando clique na tela para persistência de áudio"));
+            }).catch(() => {});
         }
 
         function alternarAudio() {
@@ -271,36 +254,30 @@
             localStorage.setItem('elvis_vol', v);
         }
 
-        // 2. DIRECIONAMENTO PARA A PRÓXIMA PÁGINA (Se houver uma terceira, mude o destino abaixo)
         function irParaProxima(e) {
             e.stopPropagation();
             localStorage.setItem('elvis_time', audio.currentTime);
             document.body.style.opacity = "0";
             setTimeout(() => {
-                // Altere aqui se for criar uma página final (ex: "fim.html") ou se encerra aqui
                 window.location.href = "final.html"; 
             }, 800);
         }
 
-        // 3. ATIVADOR DE ROLAGEM ESPACIAL (3D Matrix Reveal)
+        // Monitor de Scroll para o efeito Matrix
         const paragrafos = document.querySelectorAll('.paragrafo-relato');
-        
         const monitorarScroll = new IntersectionObserver((entradas) => {
             entradas.forEach(entrada => {
                 if (entrada.isIntersecting) {
                     entrada.target.classList.add('em-foco');
                 }
             });
-        }, {
-            threshold: 0.12,
-            rootMargin: "0px 0px -40px 0px"
-        });
+        }, { threshold: 0.15 });
 
         paragrafos.forEach(p => monitorarScroll.observe(p));
 
-        // Universo de estrelas dinâmico de fundo
+        // Estrelas
         const cosmos = document.getElementById('espaco-sideral');
-        for (let i = 0; i < 40; i++) {
+        for (let i = 0; i < 45; i++) {
             const s = document.createElement('div');
             s.className = 'estrela-pulsante';
             s.style.width = s.style.height = (Math.random() * 3 + 1) + 'px';
