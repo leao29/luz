@@ -4,18 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Prontuário & Receita - Dra. Débora</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Orbitron:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <!-- Fontes Importadas de Alta Elegância -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Orbitron:wght@400;700;900&family=Lora:ital,wght@0,400;0,700;1,400&family=Great+Vibes&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    
     <style>
         :root {
-            --azul-cosmos: #01040a;
-            --preto-profundo: #020617;
-            --prata-fino: linear-gradient(135deg, #bdc3c7, #ffffff, #95a5a6, #ffffff, #7f8c8d);
+            --azul-cosmos: #02040a;
+            --preto-profundo: #010204;
+            --prata-fino: linear-gradient(135deg, #cbd5e1, #ffffff, #94a3b8, #ffffff, #64748b);
             --ouro-escuro: #614d1a;
+            --ouro-brilhante: #d4af37;
             --cor-prata: #e2e8f0;
             --papel-antigo: #f5e6c4;
         }
 
-        * { box-sizing: border-box; }
+        * { 
+            box-sizing: border-box; 
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
 
         body, html {
             margin: 0; padding: 0;
@@ -27,111 +38,210 @@
             align-items: center;
             overflow-x: hidden;
             overflow-y: auto;
-            transition: opacity 0.8s ease;
-            padding: 40px 20px;
         }
 
-        /* FUNDO COSMOS COM ESTRELAS PULSANTES BRILHANTES */
+        /* Barra de rolagem prata ultra-fina e minimalista */
+        ::-webkit-scrollbar {
+            width: 4px;
+            height: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(1, 4, 10, 0.4);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, rgba(226, 232, 240, 0.1), rgba(148, 163, 184, 0.3), rgba(226, 232, 240, 0.1));
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(226, 232, 240, 0.5);
+        }
+
+        /* Fundo Cosmos com Nebulosas e Profundidade */
         #cenario-cosmos {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             z-index: -1;
-            background: radial-gradient(circle at center, #0a1e3d 0%, var(--azul-cosmos) 100%);
+            background: radial-gradient(circle at 50% 50%, #081226 0%, var(--azul-cosmos) 100%);
         }
 
         .estrela-prata {
             position: absolute;
             background: #ffffff;
             border-radius: 50%;
-            box-shadow: 0 0 12px 3px #ffffff;
-            animation: pulsar 2.5s infinite ease-in-out;
+            box-shadow: 0 0 8px 1px #ffffff;
+            animation: pulsar sutil infinite ease-in-out;
+            pointer-events: none;
         }
 
         @keyframes pulsar {
-            0%, 100% { opacity: 0.3; transform: scale(0.7); }
-            50% { opacity: 1; transform: scale(1.4); }
+            0%, 100% { opacity: 0.2; transform: scale(0.8); }
+            50% { opacity: 0.9; transform: scale(1.2); }
         }
 
-        /* PAINEL DE CONTROLE DE MÍDIA PREMIUM */
+        /* Partículas finas de poeira cósmica ao mover o mouse */
+        .particula-brilho {
+            position: absolute;
+            pointer-events: none;
+            background: radial-gradient(circle, rgba(212,175,55,0.8) 0%, rgba(212,175,55,0) 70%);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            animation: fadeParticula 1.4s forwards ease-out;
+            z-index: 9999;
+        }
+
+        @keyframes fadeParticula {
+            0% { transform: translate(-50%, -50%) scale(1); opacity: 0.8; }
+            100% { transform: translate(-50%, -120%) scale(0.1); opacity: 0; }
+        }
+
         .painel-audio {
             position: fixed;
-            top: 20px; right: 20px;
-            background: rgba(15, 23, 42, 0.9);
-            border: 1px solid var(--cor-prata);
-            padding: 10px 16px;
-            border-radius: 30px;
+            top: 25px; right: 25px;
+            background: rgba(5, 8, 16, 0.75);
+            border: 1px solid rgba(226, 232, 240, 0.15);
+            padding: 8px 14px;
+            border-radius: 40px;
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
             z-index: 1000;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+            backdrop-filter: blur(15px);
+            transition: all 0.4s ease;
+        }
+
+        .painel-audio:hover {
+            border-color: rgba(212, 175, 55, 0.3);
+            box-shadow: 0 10px 35px rgba(212, 175, 55, 0.08);
         }
 
         .btn-audio {
-            background: none; border: none; cursor: pointer; color: white; font-size: 1.2rem;
+            background: none; border: none; cursor: pointer; color: #cbd5e1; font-size: 0.85rem;
             display: flex; align-items: center; justify-content: center; padding: 0;
+            transition: all 0.3s;
+            letter-spacing: 1px;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .btn-audio:hover {
+            color: var(--ouro-brilhante);
+            text-shadow: 0 0 8px rgba(212, 175, 55, 0.6);
         }
 
         .slider-volume {
-            width: 75px;
+            width: 60px;
+            height: 3px;
             cursor: pointer;
-            accent-color: var(--cor-prata);
+            accent-color: var(--ouro-brilhante);
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+            outline: none;
+            transition: all 0.3s;
         }
 
-        /* CONTAINER DO LAYOUT EM DUAS COLUNAS */
-        .layout-duas-colunas {
-            display: flex;
-            gap: 30px;
-            width: 100%;
-            max-width: 1200px;
-            justify-content: center;
-            align-items: stretch;
+        .slider-volume:hover {
+            background: rgba(255, 255, 255, 0.25);
         }
 
-        /* ENGENHARIA E DESIGN DOS CARDS COM EFEITO DE ZOOM */
+        .fade-screen {
+            transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .screen-hidden {
+            display: none !important;
+            opacity: 0;
+            transform: scale(0.96);
+        }
+
         .card-container {
-            flex: 1;
-            background: var(--prata-fino);
-            padding: 4px;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
             border-radius: 20px;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+            background: #0b0f19;
             transition: transform 0.5s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.5s ease;
         }
 
         .card-container:hover {
-            transform: scale(1.03) translateY(-5px);
-            box-shadow: 0 30px 70px rgba(255, 255, 255, 0.15);
+            transform: scale(1.015) translateY(-4px);
+            box-shadow: 0 25px 60px rgba(212, 175, 55, 0.08);
+        }
+
+        /* Pseudo-elemento que cria a linha de luz dourada correndo infinitamente ao redor do card */
+        .card-container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(
+                from 0deg,
+                transparent 35%,
+                rgba(212, 175, 55, 0.1) 40%,
+                var(--ouro-brilhante) 48%,
+                #ffffff 50%,
+                var(--ouro-brilhante) 52%,
+                rgba(97, 77, 26, 0.2) 60%,
+                transparent 70%
+            );
+            animation: rodarBorda 6s linear infinite;
+            z-index: 1;
+        }
+
+        @keyframes rodarBorda {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Camada que recobre o fundo, deixando apenas a linha de luz fina correr */
+        .card-interior-moldura {
+            position: absolute;
+            inset: 3px;
+            background: var(--prata-fino);
+            border-radius: 17px;
+            z-index: 2;
+            padding: 3px;
+            display: flex;
+            flex-direction: column;
+            height: calc(100% - 6px);
+            width: calc(100% - 6px);
         }
 
         .conteudo-papel {
             background-color: var(--papel-antigo);
             background-image: url('https://www.transparenttextures.com/patterns/cream-paper.png');
-            border-radius: 16px;
-            padding: 40px;
-            border: 3px double var(--ouro-escuro);
-            height: 100%;
+            border-radius: 14px;
+            padding: 35px;
+            border: 2px double rgba(97, 77, 26, 0.8);
+            flex-grow: 1;
             display: flex;
             flex-direction: column;
+            justify-content: space-between;
             position: relative;
-            box-shadow: inset 0 0 40px rgba(97, 77, 26, 0.25);
+            box-shadow: inset 0 0 35px rgba(97, 77, 26, 0.2);
+            z-index: 3;
+            height: 100%;
         }
 
-        /* TÍTULOS EM LETRAS CHUMBADAS DE FERRO PRATA */
+        /* Títulos e Tipografia Imperial */
         .titulo-chumbado {
             font-family: 'Orbitron', sans-serif;
-            font-size: 1.7rem;
+            font-size: 1.5rem;
             text-align: center;
-            font-weight: 700;
-            letter-spacing: 5px;
-            margin-bottom: 30px;
-            color: #334155;
+            font-weight: 900;
+            letter-spacing: 4px;
+            margin-bottom: 25px;
+            color: #1e293b;
             text-transform: uppercase;
             text-shadow: 
                 -1px -1px 0 #ffffff, 
                 1px -1px 0 #ffffff, 
                 -1px 1px 0 #94a3b8, 
                 1px 1px 0 #64748b,
-                2px 2px 5px rgba(0,0,0,0.4);
+                2px 2px 4px rgba(0,0,0,0.25);
         }
 
         .cabecalho-secao {
@@ -139,12 +249,12 @@
             align-items: center;
             gap: 10px;
             font-family: 'Orbitron', sans-serif;
-            color: #1e293b;
+            color: #0f172a;
             font-weight: bold;
-            font-size: 1.05rem;
+            font-size: 0.9rem;
             border-bottom: 2px solid var(--ouro-escuro);
-            padding-bottom: 10px;
-            margin-bottom: 20px;
+            padding-bottom: 8px;
+            margin-bottom: 18px;
             text-transform: uppercase;
             letter-spacing: 1px;
         }
@@ -155,211 +265,189 @@
             color: #b91c1c;
             font-family: 'Courier New', monospace;
             font-weight: bold;
-            font-size: 1.1rem;
-            padding: 8px 15px;
+            font-size: 0.95rem;
+            padding: 5px 12px;
             margin: 15px 0;
             transform: rotate(-2deg);
             text-transform: uppercase;
-            opacity: 0.85;
+            opacity: 0.95;
             align-self: flex-start;
+            box-shadow: 0 0 4px rgba(185, 28, 28, 0.1);
         }
-
-        .texto-clinico {
-            flex-grow: 1;
-        }
-
-        .texto-clinico p, .lista-receita li {
-            line-height: 1.8;
-            color: #2c2519;
-            text-align: justify;
-            margin-bottom: 15px;
-            font-size: 1.05rem;
-        }
-
-        .texto-clinico strong { color: #000000; }
-
-        .lista-receita { list-style: none; padding: 0; margin: 0; }
 
         .lista-receita li {
             display: flex;
             align-items: flex-start;
             gap: 12px;
-            background: rgba(255, 255, 255, 0.25);
-            padding: 15px;
+            background: rgba(255, 255, 255, 0.45);
+            padding: 12px 14px;
             border-radius: 8px;
             border-left: 4px solid var(--ouro-escuro);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            transition: all 0.3s;
         }
 
-        .icone-receita { font-size: 1.4rem; margin-top: 2px; }
+        .lista-receita li:hover {
+            background: rgba(255, 255, 255, 0.7);
+            transform: translateX(3px);
+        }
 
-        .area-botao {
+        .envelope-wrapper {
+            perspective: 1000px;
+            cursor: pointer;
+            transition: transform 0.5s ease;
+        }
+
+        .envelope {
+            position: relative;
+            width: 320px;
+            height: 220px;
+            background: #cdb4db;
+            border-radius: 0 0 8px 8px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.7);
+            transition: transform 0.5s ease;
+        }
+
+        .envelope-aba {
+            position: absolute;
+            top: 0; left: 0;
+            width: 0; height: 0;
+            border-left: 160px solid transparent;
+            border-right: 160px solid transparent;
+            border-top: 120px solid #b392ac;
+            transform-origin: top;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.3s, z-index 0.1s 0.5s;
+            z-index: 4;
+        }
+
+        .envelope-corpo {
+            position: absolute;
+            bottom: 0; left: 0;
+            width: 0; height: 0;
+            border-left: 160px solid #ffafcc;
+            border-right: 160px solid #ffafcc;
+            border-bottom: 110px solid #ffc8dd;
+            border-radius: 0 0 8px 8px;
+            z-index: 3;
+        }
+
+        .carta-pargaminho-interna {
+            position: absolute;
+            bottom: 10px; left: 15px;
+            width: 290px;
+            height: 180px;
+            background: var(--papel-antigo);
+            border-radius: 4px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.6s, z-index 0.1s 0.6s;
+            z-index: 2;
+            padding: 10px;
+            overflow: hidden;
+            border: 1px solid var(--ouro-escuro);
+        }
+
+        .envelope-wrapper.aberto .envelope-aba {
+            transform: rotateX(180deg);
+            z-index: 1;
+        }
+
+        .envelope-wrapper.aberto .carta-pargaminho-interna {
+            transform: translateY(-130px) scale(1.05);
+            z-index: 5;
+        }
+
+        .lacre-cera {
+            position: absolute;
+            top: 100px; left: 140px;
+            width: 40px; height: 40px;
+            background: radial-gradient(circle, #b91c1c 0%, #7f1d1d 100%);
+            border-radius: 50%;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.6), inset 0 0 5px rgba(255,255,255,0.4);
+            z-index: 10;
             display: flex;
-            justify-content: flex-end;
-            margin-top: auto;
-            padding-top: 25px;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            transition: all 0.5s ease;
         }
 
-        .btn-proxima {
-            background: #1e293b;
+        .envelope-wrapper.aberto .lacre-cera {
+            transform: translateY(50px) scale(0);
+            opacity: 0;
+        }
+
+        /* Carta Completa e Assinatura */
+        .papel-carta-real {
+            background-color: var(--papel-antigo);
+            background-image: url('https://www.transparenttextures.com/patterns/cream-paper.png');
+            box-shadow: inset 0 0 60px rgba(97, 77, 26, 0.2), 0 15px 45px rgba(0,0,0,0.8);
+            border: 4px double var(--ouro-escuro);
+            font-family: 'Lora', serif;
+            max-width: 750px;
+            width: 100%;
+        }
+
+        .assinatura-vintage {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2.6rem;
+            color: #451a03;
+        }
+
+        .btn-premium {
+            background: #151d2a;
             color: white;
             border: 1px solid var(--ouro-escuro);
-            padding: 14px 35px;
+            padding: 14px 30px;
             border-radius: 8px;
             font-family: 'Orbitron', sans-serif;
             font-weight: bold;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             letter-spacing: 2px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
             text-transform: uppercase;
         }
 
-        .btn-proxima:hover {
+        .btn-premium:hover {
             background: var(--ouro-escuro);
-            box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+            box-shadow: 0 0 25px rgba(212, 175, 55, 0.35);
             transform: translateY(-2px);
-        }
-
-        @media (max-width: 900px) {
-            .layout-duas-colunas { flex-direction: column; gap: 40px; }
-            body { padding: 80px 15px 40px 15px; }
-            .conteudo-papel { padding: 25px 20px; }
-            .titulo-chumbado { font-size: 1.4rem; }
-            .area-botao { justify-content: center; }
-            .btn-proxima { width: 100%; text-align: center; }
         }
     </style>
 </head>
-<body onclick="desbloquearAudio()">
+<body onclick="interacaoInicialCorpo()">
 
+    <!-- Fundo Estrelado -->
     <div id="cenario-cosmos"></div>
 
     <div class="painel-audio" onclick="event.stopPropagation()">
-        <button class="btn-audio" id="btn-play-pause" onclick="alternarAudio()">⏸️</button>
-        <input type="range" class="slider-volume" id="controle-volume" min="0" max="1" step="0.05" value="1" oninput="ajustarVolume(this.value)">
+        <button class="btn-audio" id="btn-play-pause" onclick="alternarAudio()" title="Play/Pause">SINFONIA II</button>
+        <span class="w-[1px] h-[12px] bg-slate-800"></span>
+        <input type="range" class="slider-volume" id="controle-volume" min="0" max="1" step="0.05" value="0.25" oninput="ajustarVolume(this.value)" title="Volume Sutil">
+        <span class="text-[8px] font-mono text-slate-500 tracking-[0.15em] select-none hidden sm:inline" id="status-audio">MEDITAÇÃO ATIVA</span>
     </div>
 
-    <div class="layout-duas-colunas">
+    <div id="tela-prontuario" class="fade-screen flex flex-col md:flex-row gap-8 w-full max-w-6xl justify-center items-stretch my-8 px-4">
         
-        <div class="card-container">
-            <div class="conteudo-papel">
-                <h1 class="titulo-chumbado">PRONTUÁRIO MÉDICO</h1>
-                <div class="cabecalho-secao">📋 HISTÓRICO & QUADRO CLÍNICO</div>
-                <div class="texto-clinico">
-                    <p><strong>Paciente:</strong> Identificada como uma alma sonhadora em trânsito temporário por Belém (período de 1 ano e 3 meses fixado pelas raízes familiares e esperando o primeiro aninho de idade da Helena Sophia em 5 de agosto), com retorno programado para Brasília pós-aniversário.</p>
-                    <p><strong>Evolução:</strong> Veterana de uma jornada de mais de 20 anos enfrentando a síndrome do pânico. Apresenta alta capacidade de discernimento e blindagem terapêutica, sabendo separar perfeitamente a relação médico-paciente tradicional.</p>
-                    <div class="carimbo-diagnostico">Diagnóstico: Afeto Agudo Incurável</div>
-                    <p><strong>Nota Clínica Importante:</strong> Desenvolveu um desejo e vontade de ficar com você, é algo único e genuíno sobre a profissional responsável. Sei que isso jamais acontecerá, até porque sei que você é uma linda sereia que merece os mais belos oceanos do mundo e não o meu laguinho.</p>
+        <!-- Prontuário Card -->
+        <div class="card-container flex-1 min-h-[620px]">
+            <div class="card-interior-moldura">
+                <div class="conteudo-papel">
+                    <div>
+                        <h1 class="titulo-chumbado">PRONTUÁRIO MÉDICO</h1>
+                        <div class="cabecalho-secao">📋 HISTÓRICO & QUADRO CLÍNICO</div>
+                        
+                        <div class="texto-clinico text-slate-800 leading-relaxed text-justify space-y-4 text-sm sm:text-base">
+                            <p><strong>Paciente:</strong> Identificada como uma alma sonhadora em trânsito temporário por Belém (período de 1 ano e 3 meses fixado pelas raízes familiares, com o doce marco do primeiro aninho de idade da pequena <strong>Helena Sophia em 5 de agosto</strong>), com retorno programado para Brasília pós-aniversário.</p>
+                            <p><strong>Evolução:</strong> Veterana de uma jornada de mais de 20 anos enfrentando a síndrome do pânico. Apresenta notável inteligência emocional e blindagem terapêutica, sabendo honrar com perfeição a ética e a beleza do espaço clínico tradicional.</p>
+                            
+                            <div class="carimbo-diagnostico">Diagnóstico: Afeto Agudo Incurável</div>
+                            
+                            <p class="italic text-slate-700 border-l-2 border-amber-800 pl-4 bg-amber-50/50 py-2 rounded-r">
+                                "Desenvolveu um profundo respeito e uma admiração genuína pela profissional e mulher excepcional que você é. Há um vislumbre límpido de que você é uma linda sereia, destinada aos mais deslumbrantes oceanos deste mundo, livre em sua imensidão majestosa."
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-
-        <div class="card-container">
-            <div class="conteudo-papel">
-                <h1 class="titulo-chumbado">RECEITA</h1>
-                <div class="cabecalho-secao">🧪 TERAPÊUTICA RECOMENDADA</div>
-                <div class="texto-clinico">
-                    <ul class="lista-receita">
-                        <li>
-                            <span class="icone-receita">🌊</span>
-                            <div><strong>Mergulhos Livres:</strong> Frequentar os oceanos imensos e profundos que combinam com sua natureza de sereia. Proibido restringir-se a espaços limitados.</div>
-                        </li>
-                        <li>
-                            <span class="icone-receita">✨</span>
-                            <div><strong>Preservação da Essência:</strong> Manter a blindagem brilhante contra as sombras do mundo exterior.</div>
-                        </li>
-                        <li>
-                            <span class="icone-receita">🎵</span>
-                            <div><strong>Doses de Arte e Som:</strong> Administração diária de trilhas sonoras clássicas e românticas para acalmar o cosmos interno.</div>
-                        </li>
-                        <li>
-                            <span class="icone-receita">🧭</span>
-                            <div><strong>Cuidado Continuado:</strong> Lembrar-se de que o impacto positivo de sua atuação ecoará permanentemente no tempo.</div>
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="area-botao">
-                    <button class="btn-proxima" onclick="irParaProxima(event)">Seguir para Carta</button>
-                </div>
-            </div>
-        </div>
-
-    </div>
-
-    <audio id="som-ambiente" src="elvis.html.mp3" loop></audio>
-
-    <script>
-        const audio = document.getElementById('som-ambiente');
-        const btn = document.getElementById('btn-play-pause');
-        const volumeSlider = document.getElementById('controle-volume');
-
-        window.addEventListener('DOMContentLoaded', () => {
-            const savedTime = localStorage.getItem('elvis_time');
-            const isPlaying = localStorage.getItem('elvis_playing');
-            const savedVol = localStorage.getItem('elvis_vol');
-
-            if (savedTime) audio.currentTime = parseFloat(savedTime);
-            
-            if (savedVol) {
-                audio.volume = parseFloat(savedVol);
-                volumeSlider.value = savedVol;
-            } else {
-                audio.volume = 1;
-            }
-
-            if (isPlaying === 'true') {
-                desbloquearAudio();
-            }
-        });
-
-        function desbloquearAudio() {
-            audio.play().then(() => {
-                btn.textContent = "⏸️";
-                localStorage.setItem('elvis_playing', 'true');
-            }).catch(() => console.log("Interação necessária"));
-        }
-
-        function alternarAudio() {
-            if (audio.paused) {
-                audio.play();
-                btn.textContent = "⏸️";
-                localStorage.setItem('elvis_playing', 'true');
-            } else {
-                audio.pause();
-                btn.textContent = "▶️";
-                localStorage.setItem('elvis_playing', 'false');
-            }
-        }
-
-        function ajustarVolume(v) {
-            audio.volume = v;
-            localStorage.setItem('elvis_vol', v);
-        }
-
-        // FUNÇÃO DE TRANSIÇÃO PARA CARTA.HTML
-        function irParaProxima(e) {
-            e.stopPropagation();
-            localStorage.setItem('elvis_time', audio.currentTime);
-            document.body.style.opacity = "0";
-            setTimeout(() => {
-                window.location.href = "carta.html"; 
-            }, 800);
-        }
-
-        const cosmos = document.getElementById('cenario-cosmos');
-        for (let i = 0; i < 65; i++) {
-            const s = document.createElement('div');
-            s.className = 'estrela-prata';
-            const tamanho = (Math.random() * 3 + 1.5);
-            s.style.width = tamanho + 'px';
-            s.style.height = tamanho + 'px';
-            s.style.top = Math.random() * 100 + 'vh';
-            s.style.left = Math.random() * 100 + 'vw';
-            s.style.animationDelay = Math.random() * 4 + 's';
-            s.style.animationDuration = (Math.random() * 2 + 2) + 's';
-            cosmos.appendChild(s);
-        }
-    </script>
-</body>
-</html>
