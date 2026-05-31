@@ -4,133 +4,493 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Para Dra. Debora</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Great+Vibes&family=Playfair+Display:ital,wght@1,500&display=swap" rel="stylesheet">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
     
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; user-select: none; -webkit-user-select: none; }
-        body, html { width: 100%; height: 100%; overflow: hidden; background-color: #030107; font-family: 'Playfair Display', serif; }
-
-        .star { position: absolute; background-color: #ffffff; border-radius: 50%; box-shadow: 0 0 8px rgba(255, 255, 255, 0.8), 0 0 15px rgba(180, 200, 255, 0.5); animation: twinkle 3.5s infinite ease-in-out alternate; }
-        @keyframes twinkle { 0% { opacity: 0.2; transform: scale(0.7); } 50% { opacity: 1; transform: scale(1.3); box-shadow: 0 0 12px rgba(255, 255, 255, 1), 0 0 20px rgba(212, 175, 55, 0.6); } 100% { opacity: 0.2; transform: scale(0.7); } }
-
-        .card-frame { position: relative; z-index: 10; background: linear-gradient(135deg, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c); background-size: 300% 300%; animation: goldenFlow 4s ease infinite, goldGlow 3s infinite ease-in-out alternate; transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.4s ease, opacity 0.8s ease; }
-        @keyframes goldenFlow { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
-        @keyframes goldGlow { 0% { box-shadow: 0 10px 30px rgba(170, 119, 28, 0.5); } 100% { box-shadow: 0 15px 50px rgba(252, 246, 186, 0.8); } }
-
-        .audio-panel { background: rgba(10, 6, 18, 0.85); backdrop-filter: blur(12px); border: 1px solid rgba(212, 175, 55, 0.4); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6); transition: opacity 0.5s ease, transform 0.5s ease; }
-        .vol-slider { -webkit-appearance: none; appearance: none; background: rgba(255, 255, 255, 0.2); border-radius: 2px; outline: none; }
-        .vol-slider::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 12px; height: 12px; border-radius: 50%; background: #d4af37; cursor: pointer; box-shadow: 0 0 6px rgba(212, 175, 55, 0.8); }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            user-select: none;
+            -webkit-user-select: none;
+        }
         
-        .iframe-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 40; opacity: 0; pointer-events: none; transition: opacity 1.5s ease-in-out; }
-        .iframe-container.active { opacity: 1; pointer-events: auto; }
+        body, html {
+            width: 100%;
+            height: 100%;
+            overflow: hidden; /* Trava totalmente qualquer rolagem */
+            background-color: #030107;
+            font-family: 'Playfair Display', serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            perspective: 1000px;
+        }
+
+        .cosmic-bg {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            pointer-events: none;
+            overflow: hidden;
+            background: radial-gradient(circle at center, #0a041f 0%, #030107 100%);
+        }
+
+        .star {
+            position: absolute;
+            background-color: #ffffff;
+            border-radius: 50%;
+            box-shadow: 0 0 6px rgba(255, 255, 255, 0.7), 0 0 12px rgba(200, 220, 255, 0.3);
+            animation: twinkle 4s infinite ease-in-out alternate;
+        }
+
+        @keyframes twinkle {
+            0% { opacity: 0.15; transform: scale(0.8); }
+            50% { opacity: 0.9; transform: scale(1.2); box-shadow: 0 0 10px rgba(255, 255, 255, 0.9), 0 0 15px rgba(212, 175, 55, 0.4); }
+            100% { opacity: 0.15; transform: scale(0.8); }
+        }
+
+        .card-frame {
+            position: relative;
+            z-index: 10;
+            width: 92vw;
+            max-width: 850px;
+            aspect-ratio: 1000 / 563; /* Mantém a proporção exata solicitada */
+            border-radius: 24px;
+            padding: 4px; /* Espessura delicada do contorno de ouro */
+            background: linear-gradient(135deg, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+            background-size: 300% 300%;
+            animation: goldenFlow 6s ease infinite, goldGlow 4s infinite ease-in-out alternate;
+            transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.4s ease, opacity 0.8s ease;
+        }
+
+        @keyframes goldenFlow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes goldGlow {
+            0% { box-shadow: 0 8px 30px rgba(170, 119, 28, 0.3); }
+            100% { box-shadow: 0 12px 45px rgba(252, 246, 186, 0.5); }
+        }
+
+        @media (min-aspect-ratio: 1000/563) {
+            .card-frame {
+                width: auto;
+                height: 75vh;
+                aspect-ratio: 1000 / 563;
+            }
+        }
+
+        .card-frame:hover {
+            transform: scale(1.01) translateY(-2px);
+        }
+
+        .card-inner {
+            width: 100%;
+            height: 100%;
+            border-radius: 21px;
+            overflow: hidden;
+            position: relative;
+            background: radial-gradient(circle at center, #261d15 0%, #0d0703 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: clamp(15px, 3.5vw, 35px);
+            border: 1px solid rgba(191, 149, 63, 0.15);
+        }
+
+        .card-header {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .luxury-tag {
+            color: #bf953f;
+            opacity: 0.5;
+            font-family: 'Cinzel', serif;
+            font-size: clamp(8px, 1.1vw, 11px);
+            letter-spacing: 3px;
+        }
+
+        /* Carimbo CONFIDENCIAL Renovado - Máxima Legibilidade e Sofisticação */
+        .stamp-confidential {
+            border: 2px solid #ff3b30; /* Vermelho vibrante de selo real */
+            color: #ff3b30;
+            font-family: 'Cinzel', serif;
+            font-weight: 700; /* Letras mais grossas e visíveis */
+            font-size: clamp(9px, 1.3vw, 12px);
+            padding: 3px 12px;
+            transform: rotate(-6deg) translateY(-2px); /* Inclinação charmosa de carimbo manual */
+            border-radius: 4px;
+            letter-spacing: 4px;
+            background: rgba(255, 59, 48, 0.08); /* Fundo sutil para destacar sobre o papel escuro */
+            text-shadow: 0 0 4px rgba(255, 59, 48, 0.4); /* Leve brilho de tinta fresca */
+            box-shadow: inset 0 0 4px rgba(255, 59, 48, 0.2), 0 2px 8px rgba(0,0,0,0.4);
+        }
+
+        .envelope-body {
+            text-align: center;
+            margin: auto 0;
+            display: flex;
+            flex-direction: column;
+            gap: clamp(6px, 1.2vw, 14px);
+        }
+
+        .title-recipient {
+            font-family: 'Great Vibes', cursive;
+            font-size: clamp(34px, 5.8vw, 62px);
+            background: linear-gradient(180deg, #ffffff 0%, #e5e7eb 40%, #9ca3af 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0px 2px 4px rgba(0,0,0,0.6));
+            letter-spacing: 1px;
+            display: inline-block;
+        }
+
+        .subtitle-sender {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: clamp(13px, 2vw, 21px); /* Aumentado sutilmente para perfeita legibilidade */
+            background: linear-gradient(180deg, #ffffff 0%, #d1d5db 50%, #9ca3af 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0px 2px 3px rgba(0,0,0,0.7));
+            letter-spacing: 1px;
+            opacity: 0.95;
+            display: inline-block;
+        }
+
+        .seal-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: clamp(4px, 0.8vw, 15px) 0;
+        }
+
+        .wax-seal {
+            width: clamp(65px, 9.5vw, 85px);
+            height: clamp(65px, 9.5vw, 85px);
+            /* Degradê realista simulando ferro fundido escuro/chumbo polido */
+            background: radial-gradient(circle at 30% 30%, #525255 0%, #29292d 55%, #0e0e12 100%);
+            border-radius: 48% 52% 45% 55% / 52% 47% 53% 48%; /* Formato orgânico artesanal de metal derretido */
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 
+                0 10px 25px rgba(0, 0, 0, 0.75),
+                inset 2px 2px 5px rgba(255, 255, 255, 0.25), /* Brilho metálico superior */
+                inset -3px -3px 8px rgba(0, 0, 0, 0.9); /* Sombra de profundidade do metal */
+            border: 1.5px solid #1a1a1e;
+            transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.4s ease;
+        }
+
+        /* Fio de prata sutil gravado no metal interno do selo */
+        .wax-seal::before {
+            content: '';
+            position: absolute;
+            inset: 7px;
+            border-radius: 50%;
+            border: 1px solid rgba(229, 231, 235, 0.25); /* Prata fina */
+            box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.7);
+            pointer-events: none;
+        }
+
+        /* Sombra externa sutil de chapa de ferro quente */
+        .wax-seal::after {
+            content: '';
+            position: absolute;
+            inset: -5px;
+            border-radius: 53% 47% 55% 45% / 46% 54% 48% 52%;
+            background: radial-gradient(circle at center, rgba(41, 41, 45, 0.3) 0%, rgba(14, 14, 18, 0.5) 80%, rgba(0, 0, 0, 0.6) 100%);
+            z-index: -1;
+            box-shadow: 
+                0 3px 8px rgba(0, 0, 0, 0.5),
+                inset 1px 1px 3px rgba(255, 255, 255, 0.1);
+        }
+
+        .wax-seal:hover {
+            transform: scale(1.05) rotate(3deg);
+            box-shadow: 
+                0 12px 30px rgba(0, 0, 0, 0.9),
+                0 0 15px rgba(100, 100, 110, 0.3);
+        }
+
+        /* Símbolo Psiquiátrico Psi em prata metálica brilhante e super legível */
+        .psychiatry-symbol {
+            width: 38%;
+            height: 38%;
+            color: #f3f4f6; /* Prata acetinada de alta visibilidade */
+            filter: drop-shadow(1px 2px 3px rgba(0, 0, 0, 0.9));
+            z-index: 2;
+        }
+
+        .action-button-container {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            padding-bottom: 5px;
+        }
+
+        .btn-luxury {
+            background: rgba(15, 10, 5, 0.4);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            
+            /* Tipografia sutil e sofisticada (Mais fina e delicada) */
+            color: #fbf5b7;
+            font-family: 'Cinzel', serif;
+            font-weight: 500;
+            font-size: clamp(11px, 1.6vw, 14px); /* Aumentado sutilmente para perfeita harmonia */
+            letter-spacing: 4.5px;
+            text-transform: uppercase;
+            
+            padding: clamp(10px, 1.5vw, 14px) clamp(26px, 4.5vw, 46px); /* Ajustado levemente para acompanhar o novo tamanho */
+            border-radius: 40px;
+            cursor: pointer;
+            outline: none;
+            position: relative;
+            overflow: hidden;
+            
+            /* Borda fina de Ouro real que pulsa */
+            border: 1px solid rgba(191, 149, 63, 0.4);
+            
+            /* Efeitos de sombra e ouro dourado integrados */
+            box-shadow: 
+                0 4px 15px rgba(0,0,0,0.4),
+                inset 0 1px 2px rgba(252, 246, 186, 0.1);
+            
+            /* Animação constante de pulso dourado suave */
+            animation: goldAuraPulse 3s infinite ease-in-out;
+            transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        .btn-luxury::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -150%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(252, 246, 186, 0.25), transparent);
+            transform: skewX(-20deg);
+            animation: goldShimmerSweep 5s infinite ease-in-out;
+        }
+
+        /* Animação para varredura de luz dourada constante */
+        @keyframes goldShimmerSweep {
+            0% { left: -150%; }
+            30% { left: 150%; }
+            100% { left: 150%; }
+        }
+
+        /* Animação para a aura dourada de luxo pulsante na borda do botão */
+        @keyframes goldAuraPulse {
+            0% {
+                border-color: rgba(191, 149, 63, 0.4);
+                box-shadow: 0 4px 15px rgba(0,0,0,0.4), 0 0 5px rgba(191, 149, 63, 0.15), inset 0 1px 2px rgba(252, 246, 186, 0.1);
+            }
+            50% {
+                border-color: rgba(252, 246, 186, 0.85);
+                box-shadow: 0 4px 20px rgba(0,0,0,0.4), 0 0 15px rgba(252, 246, 186, 0.35), inset 0 1px 3px rgba(252, 246, 186, 0.15);
+            }
+            100% {
+                border-color: rgba(191, 149, 63, 0.4);
+                box-shadow: 0 4px 15px rgba(0,0,0,0.4), 0 0 5px rgba(191, 149, 63, 0.15), inset 0 1px 2px rgba(252, 246, 186, 0.1);
+            }
+        }
+
+        .btn-luxury:hover {
+            border-color: rgba(252, 246, 186, 1);
+            color: #ffffff;
+            letter-spacing: 5px; /* Abre levemente as letras com extrema elegância */
+            transform: translateY(-1px);
+        }
+
+        .btn-luxury:active {
+            transform: scale(0.98) translateY(0);
+        }
+
+        .audio-controls-panel {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            background: rgba(10, 6, 18, 0.9);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(212, 175, 55, 0.35);
+            padding: 10px 18px;
+            border-radius: 40px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            z-index: 50;
+            opacity: 0;
+            transform: scale(0.9);
+            pointer-events: none;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+        }
+
+        .audio-controls-panel.visible {
+            opacity: 1;
+            transform: scale(1);
+            pointer-events: auto;
+        }
+
+        .btn-play-pause {
+            background: none;
+            border: none;
+            color: #d4af37;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            outline: none;
+            font-family: 'Cinzel', serif;
+            transition: color 0.3s;
+        }
+
+        .btn-play-pause:hover {
+            color: #fbf5b7;
+        }
+
+        .vol-separator {
+            color: rgba(212, 175, 55, 0.25);
+            font-size: 11px;
+        }
+
+        .vol-slider {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 75px;
+            height: 3px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 2px;
+            outline: none;
+        }
+
+        .vol-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #d4af37;
+            cursor: pointer;
+            box-shadow: 0 0 6px rgba(212, 175, 55, 0.6);
+        }
     </style>
 </head>
-<body class="flex justify-center items-center h-screen w-screen relative">
+<body class="relative">
 
-    <div class="absolute inset-0 z-0 pointer-events-none overflow-hidden" style="background: radial-gradient(circle at center, #0c0622 0%, #020106 100%);">
-        <div class="absolute inset-0" id="starsContainer"></div>
+    <div class="cosmic-bg">
+        <div class="stars-container" id="starsContainer"></div>
     </div>
 
-    <div id="mainCard" class="card-frame w-[92vw] max-w-[850px] aspect-[1000/563] rounded-[24px] p-[5px] md:h-[75vh] md:w-auto md:aspect-[1000/563]">
-        <div class="w-full h-full bg-[#030105] rounded-[19px] relative overflow-hidden flex justify-center items-center">
+    <div id="mainCard" class="card-frame">
+        <div class="card-inner">
             
-            <div id="svgEnvelope" class="absolute inset-0 w-full h-full flex flex-col justify-between p-6 md:p-10 z-10 bg-gradient-to-br from-[#1c140d] via-[#090604] to-[#120c08] transition-opacity duration-700">
-                <div class="flex justify-between items-start w-full">
-                    <div class="text-[#bf953f] opacity-40 font-serif text-xs">⭐ LUXURY CARD</div>
-                    <div class="border-4 border-[#8a1515] text-[#8a1515] font-sans font-extrabold text-[10px] md:text-sm px-2 py-1 rotate-12 rounded tracking-widest uppercase shadow-lg bg-black/40">
-                        CONFIDENCIAL
-                    </div>
-                </div>
+            <!-- Linha superior do card -->
+            <div class="card-header">
+                <div class="luxury-tag">⭐ LUXURY INVITATION</div>
+                <div class="stamp-confidential">CONFIDENCIAL</div>
+            </div>
 
-                <div class="text-center my-auto flex flex-col gap-3">
-                    <h1 class="font-['Great_Vibes'] text-4xl md:text-6xl text-[#fbf5b7] drop-shadow-[0_2px_10px_rgba(0,0,0,0.9)]">
-                        Dra. Debora
-                    </h1>
-                    <p class="font-['Playfair_Display'] italic text-sm md:text-lg text-[#bf953f] drop-shadow-[0_1px_5px_rgba(0,0,0,0.8)]">
-                        Paciente: A que jamais esquecerá você
-                    </p>
-                </div>
+            <!-- Corpo de caligrafia do envelope -->
+            <div class="envelope-body">
+                <h1 class="title-recipient">Dra. Debora</h1>
+                <p class="subtitle-sender">Paciente: A que jamais esquecerá você</p>
+            </div>
 
-                <div class="flex justify-center items-center mb-6">
-                    <div class="w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-[#6b0f0f] to-[#3a0606] rounded-full border-2 border-[#bf953f] flex items-center justify-center shadow-[0_5px_15px_rgba(0,0,0,0.6)] animate-pulse">
-                        <svg class="w-10 h-10 md:w-12 md:h-12 text-[#C0C0C0]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M12 2v6m-3-6v8a3 3 0 0 0 6 0V2M9 22h6"/>
-                        </svg>
-                    </div>
+            <!-- Selo de cera com símbolo psiquiátrico oficial -->
+            <div class="seal-container">
+                <div class="wax-seal" title="Lacre Real de Cera Psiquiátrica">
+                    <svg class="psychiatry-symbol" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 3v17" />
+                        <path d="M8 20h8" />
+                        <path d="M6 6v3a6 6 0 0 0 12 0V6" />
+                    </svg>
                 </div>
+            </div>
 
-                <button onclick="irParaProntuario()" 
-                        class="mx-auto mb-8 px-8 py-3 bg-gradient-to-r from-[#bf953f] via-[#fcf6ba] to-[#bf953f] text-[#030105] font-['Playfair_Display'] font-bold rounded-full shadow-[0_4px_15px_rgba(191,149,63,0.4)] hover:shadow-[0_6px_20px_rgba(252,246,186,0.6)] hover:scale-105 transition-all duration-300">
+            <!-- Botão de ação refinado e delicado com efeito ouro -->
+            <div class="action-button-container">
+                <button onclick="irParaProntuario()" class="btn-luxury">
                     Aperte com carinho
                 </button>
             </div>
 
-            <img id="cardImg" class="w-full h-full object-cover block opacity-0 absolute inset-0 z-20 transition-opacity duration-1000 ease-in-out">
         </div>
     </div>
 
-    <div class="iframe-container" id="iframeWrapper">
-        <iframe id="prontuarioFrame" class="w-full h-full border-none" src="about:blank"></iframe>
+    <div class="audio-controls-panel" id="customControls">
+        <button class="btn-play-pause" id="playPauseBtn" onclick="togglePlay()">⏸ Pausar</button>
+        <span class="vol-separator">|</span>
+        <input type="range" class="vol-slider" id="volumeControl" min="0" max="1" step="0.1" value="0.8" oninput="ajustarVolume(this.value)">
     </div>
 
-    <div class="audio-panel fixed bottom-6 right-6 px-5 py-3 rounded-full flex items-center gap-4 z-50 opacity-0 scale-90 pointer-events-none transition-all duration-500" id="customControls">
-        <button class="bg-transparent border-none text-[#d4af37] text-sm font-bold cursor-pointer outline-none hover:text-[#fbf5b7] flex items-center gap-1" id="playPauseBtn" onclick="togglePlay()">
-            ⏸ Pausar
-        </button>
-        <span class="text-[#bf953f]/60 text-xs">|</span>
-        <input type="range" class="vol-slider w-16 md:w-20 h-1" id="volumeControl" min="0" max="1" step="0.1" value="0.8" oninput="ajustarVolume(this.value)">
-    </div>
-
+    <!-- Reprodutor de áudio local do seu repositório -->
     <audio id="musica" loop preload="auto">
         <source src="elvis.html.mp3" type="audio/mpeg">
     </audio>
 
     <script>
         const starsContainer = document.getElementById('starsContainer');
-        for (let i = 0; i < 60; i++) {
+        const totalStars = 55;
+
+        for (let i = 0; i < totalStars; i++) {
             const star = document.createElement('div');
             star.className = 'star';
-            const size = Math.random() * 2.5 + 1.2;
-            star.style.width = `${size}px`; star.style.height = `${size}px`;
-            star.style.top = `${Math.random() * 100}%`; star.style.left = `${Math.random() * 100}%`;
-            star.style.animationDelay = `${Math.random() * 3.5}s`;
+            const size = Math.random() * 2.2 + 1.2;
+            star.style.width = `${size}px`;
+            star.style.height = `${size}px`;
+            star.style.top = `${Math.random() * 100}%`;
+            star.style.left = `${Math.random() * 100}%`;
+            star.style.animationDelay = `${Math.random() * 4}s`;
             star.style.animationDuration = `${Math.random() * 2 + 2.5}s`;
             starsContainer.appendChild(star);
         }
 
-        const img = document.getElementById('cardImg');
-        const svgEnvelope = document.getElementById('svgEnvelope');
-        const timestamp = new Date().getTime();
-        const urlPrincipal = `https://raw.githubusercontent.com/leao29/luz/main/image_f768d7.png?v=${timestamp}`;
-        img.src = urlPrincipal;
-
-        img.onload = function() { img.classList.add('opacity-100'); svgEnvelope.style.opacity = '0'; setTimeout(() => svgEnvelope.style.display = 'none', 700); };
-
         const som = document.getElementById('musica');
         const painel = document.getElementById('customControls');
-        const frameWrapper = document.getElementById('iframeWrapper');
-        const prontuarioFrame = document.getElementById('prontuarioFrame');
         const mainCard = document.getElementById('mainCard');
 
         function irParaProntuario() {
+            // Inicializa volume confortável e reproduz a música
             som.volume = 0.8;
-            som.play().catch(() => console.log("Áudio iniciado."));
-            painel.classList.remove('opacity-0', 'scale-90', 'pointer-events-none');
-            painel.classList.add('opacity-100', 'scale-100');
-            prontuarioFrame.src = "prontuario.htm";
+            som.play().catch(() => console.log("Áudio iniciado com sucesso."));
+
+            // Mostra os controles discretos no canto
+            painel.classList.add('visible');
+
+            // Animação de fade-out luxuosa antes de redirecionar
+            mainCard.style.opacity = '0';
+            mainCard.style.transform = 'scale(0.92) rotateY(-3deg)';
+
+            // Transiciona para o prontuário após 2.2 segundos de som tocando
             setTimeout(() => {
-                mainCard.style.opacity = '0';
-                mainCard.style.transform = 'scale(0.9) rotateY(-5deg)';
-                frameWrapper.classList.add('active');
-            }, 2500); 
+                window.location.href = "prontuario.htm";
+            }, 2200); 
         }
 
         function togglePlay() {
-            if (som.paused) { som.play(); document.getElementById('playPauseBtn').innerHTML = "⏸ Pausar"; }
-            else { som.pause(); document.getElementById('playPauseBtn').innerHTML = "▶️ Tocar"; }
+            if (som.paused) {
+                som.play();
+                document.getElementById('playPauseBtn').innerHTML = "⏸ Pausar";
+            } else {
+                som.pause();
+                document.getElementById('playPauseBtn').innerHTML = "▶️ Tocar";
+            }
         }
-        function ajustarVolume(valor) { som.volume = valor; }
+
+        function ajustarVolume(valor) {
+            som.volume = valor;
+        }
     </script>
 </body>
 </html>
