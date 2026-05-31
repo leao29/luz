@@ -5,23 +5,47 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Felicidade - Luxo e Cosmos</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Orbitron:wght@400;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    
     <style>
         :root {
             --ouro-brilhante: linear-gradient(135deg, #d4af37 0%, #fcf6ba 45%, #b38728 70%, #fbf5b7 100%);
-            --ouro-escuro: linear-gradient(145deg, #4a3b13, #8c7333, #4a3b13);
-            --prata-chumbado: linear-gradient(180deg, #8a8a8a 0%, #e0e0e0 50%, #4a4a4a 100%);
-            --azul-cosmos: #03081e;
-            --texto-cor: #211a10;
+            --ouro-solido: #d4af37;
+            --ouro-suave: #f5e4bc;
+            --azul-cosmos: #02040a;
+            --texto-glowing: #f8fafc;
         }
 
-        * { box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
+        * { 
+            box-sizing: border-box; 
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        html { 
+            scroll-behavior: smooth; 
+        }
+
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(2, 4, 10, 0.15);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(192, 192, 192, 0.65), rgba(255, 255, 255, 0.15));
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.3), rgba(220, 220, 220, 0.85), rgba(255, 255, 255, 0.3));
+        }
 
         body {
             margin: 0; padding: 0;
             width: 100%; min-height: 100vh;
             background-color: var(--azul-cosmos);
-            color: white;
+            color: var(--texto-glowing);
             font-family: 'Lora', serif;
             display: flex;
             flex-direction: column;
@@ -29,93 +53,182 @@
             padding: 40px 20px 80px 20px;
             overflow-x: hidden;
             opacity: 0;
-            transition: opacity 0.8s ease;
+            transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        /* Fundo Cósmico Fixo */
         #cosmos {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             z-index: -1;
-            background: radial-gradient(circle at center, #0a163a 0%, var(--azul-cosmos) 100%);
+            background: radial-gradient(circle at center, #09122c 0%, var(--azul-cosmos) 100%);
         }
 
+        /* Estrelas menores e mais nítidas */
         .estrela {
             position: absolute;
-            background: #e2e8f0;
+            background: #ffffff;
             border-radius: 50%;
-            opacity: 0.4;
-            box-shadow: 0 0 6px #fff;
+            box-shadow: 0 0 10px #ffffff;
             animation: pulsar-prata infinite ease-in-out;
+            pointer-events: none;
         }
 
         @keyframes pulsar-prata {
-            0%, 100% { transform: scale(0.8); opacity: 0.2; }
-            50% { transform: scale(1.4); opacity: 0.9; box-shadow: 0 0 12px #fff; }
+            0%, 100% { transform: scale(0.6); opacity: 0.1; }
+            50% { transform: scale(1.2); opacity: 0.95; box-shadow: 0 0 14px #ffffff; }
         }
 
-        /* CARD DO TÍTULO (SEPARADO) - CONTORNO OURO ESCURO */
+        /* Partículas de poeira dourada ao mover */
+        .particula-ouro {
+            position: absolute;
+            pointer-events: none;
+            background: radial-gradient(circle, rgba(255,246,186,0.9) 0%, rgba(212,175,55,0) 70%);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            animation: fadeParticula 1.5s forwards ease-out;
+            z-index: 9999;
+        }
+
+        @keyframes fadeParticula {
+            0% { transform: translate(-50%, -50%) scale(1); opacity: 0.9; }
+            100% { transform: translate(-50%, -100%) scale(0.1); opacity: 0; }
+        }
+
+        .painel-audio {
+            position: fixed;
+            top: 25px; right: 25px;
+            background: rgba(2, 4, 10, 0.4);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            padding: 8px 16px;
+            border-radius: 40px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            z-index: 1000;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+            backdrop-filter: blur(12px);
+            transition: all 0.4s ease;
+        }
+
+        .painel-audio:hover {
+            border-color: rgba(212, 175, 55, 0.5);
+            box-shadow: 0 10px 35px rgba(212, 175, 55, 0.2);
+        }
+
+        .btn-audio {
+            background: none; border: none; cursor: pointer; color: #f5e4bc; font-size: 0.75rem;
+            display: flex; align-items: center; justify-content: center; padding: 0;
+            transition: all 0.3s;
+            letter-spacing: 2px;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+        }
+
+        .btn-audio:hover {
+            color: #ffffff;
+            text-shadow: 0 0 10px rgba(212, 175, 55, 0.8);
+        }
+
+        .slider-volume {
+            width: 55px;
+            height: 2px;
+            cursor: pointer;
+            accent-color: #d4af37;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 2px;
+            outline: none;
+            transition: all 0.3s;
+        }
+
+        .card-container-luxo {
+            position: relative;
+            overflow: hidden;
+            border-radius: 20px;
+            padding: 2px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+            transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.6s ease;
+        }
+
+        .card-container-luxo:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 30px 60px rgba(212, 175, 55, 0.15);
+        }
+
+        /* Efeito de luz dourada contornando continuamente */
+        .card-container-luxo::before {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: conic-gradient(from 0deg, transparent 30%, #d4af37 45%, #ffffff 50%, #d4af37 55%, transparent 70%);
+            animation: rodarBorda 8s linear infinite;
+            z-index: 1;
+        }
+
+        @keyframes rodarBorda {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Interior do Card - Totalmente Translúcido */
+        .card-interior {
+            position: relative;
+            border-radius: 18px;
+            z-index: 2;
+            background: rgba(3, 7, 20, 0.55);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            width: 100%; height: 100%;
+            overflow: hidden;
+        }
+
+        /* Título compactado e perfeitamente ajustado */
         .card-titulo {
-            max-width: 750px;
-            width: 100%;
-            background: var(--ouro-escuro);
-            padding: 6px; /* Borda ouro escuro */
-            border-radius: 15px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.7);
-            margin-bottom: 30px;
-            text-align: center;
+            width: fit-content;
+            max-width: 95%;
+            margin: 0 auto 35px auto;
         }
 
         .titulo-interno {
-            background: #000000; /* Fundo preto interno para destacar a prata */
-            padding: 20px 40px;
-            border-radius: 10px;
-            margin: 0;
+            padding: 12px 28px;
+            text-align: center;
         }
 
-        /* Letra Maiúscula, Prata com Sombra Marcante */
         .titulo-ferro {
             font-family: 'Cinzel', serif;
-            font-size: 3.5rem;
+            font-size: 2.2rem;
             font-weight: 900;
             text-transform: uppercase;
             letter-spacing: 12px;
             margin: 0;
-            background: var(--prata-chumbado);
+            background: var(--ouro-brilhante);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            filter: drop-shadow(3px 4px 3px rgba(0, 0, 0, 0.9));
+            filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.8));
         }
 
-        /* CARD DE BAIXO (TEXTO SEPARADO) - BORDAS COM EFEITO DOURADO */
+        /* Card de Conteúdo Principal */
         .card-conteudo {
             max-width: 750px;
             width: 100%;
-            background: var(--ouro-brilhante); /* Efeito dourado iluminado nas bordas */
-            padding: 8px; /* Espessura da borda dourada */
-            border-radius: 20px;
-            box-shadow: 0 25px 55px rgba(0,0,0,0.8);
         }
 
-        /* Papel Envelhecido Interno */
-        .papel-antigo {
-            background: #f4e4bc url('https://www.transparenttextures.com/patterns/paper-fibers.png');
-            color: var(--texto-cor);
-            padding: 50px 40px;
-            border-radius: 14px;
-            box-shadow: inset 0 0 35px rgba(74, 59, 19, 0.3);
-            border: 1px solid rgba(0,0,0,0.15);
+        /* Ajustes no texto para altíssima visibilidade sobre fundo translúcido */
+        .conteudo-texto {
+            color: #f1f5f9;
+            padding: 45px 35px;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9);
         }
 
-        /* Letras Nítidas com Rolagem Futurista de Surgimento */
+        /* Parágrafos Dinâmicos de Revelação Fluida */
         .paragrafo-futurista {
             opacity: 0;
-            transform: translateY(30px);
-            filter: blur(3px);
-            transition: all 0.9s cubic-bezier(0.25, 1, 0.5, 1);
-            margin-bottom: 30px;
-            font-size: 1.25rem; /* Fonte nítida e bem legível */
-            font-weight: 500;
+            transform: translateY(20px);
+            filter: blur(2px);
+            transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+            margin-bottom: 26px;
+            font-size: 1.18rem;
+            font-weight: 400;
             line-height: 1.8;
             text-align: justify;
         }
@@ -126,135 +239,366 @@
             filter: blur(0);
         }
 
-        /* Citação Estilizada */
-        .citacao-luxo {
-            font-style: italic;
-            border-left: 4px solid #4a3b13;
-            padding-left: 20px;
-            margin: 35px 0;
+        .paragrafo-futurista strong {
+            color: #fef08a;
             font-weight: 600;
-            color: #3d311b;
         }
 
-        /* Botão Próximo Firme e Alinhado */
+        /* Citação de Relevo Luxuosa */
+        .citacao-luxo {
+            font-style: italic;
+            border-left: 3px solid #d4af37;
+            padding-left: 20px;
+            margin: 35px 0;
+            font-weight: 500;
+            color: #fef08a;
+            background: rgba(212, 175, 55, 0.08);
+            padding-top: 12px;
+            padding-bottom: 12px;
+            border-radius: 0 8px 8px 0;
+        }
+
         .btn-proximo {
             margin-top: 40px;
-            padding: 18px 20px;
+            padding: 16px 20px;
             font-family: 'Orbitron', sans-serif;
-            background: #000000;
-            color: #d4af37;
+            background: rgba(2, 4, 10, 0.9);
+            color: #f5e4bc;
             border: 2px solid #d4af37;
+            border-radius: 8px;
             cursor: pointer;
             text-transform: uppercase;
-            letter-spacing: 4px;
-            transition: all 0.4s ease;
+            letter-spacing: 8px;
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
             width: 100%;
-            font-size: 1rem;
+            font-size: 1.1rem;
             font-weight: 700;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.35), inset 0 0 10px rgba(212, 175, 55, 0.25);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-proximo::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+            transition: all 0.6s;
+        }
+
+        .btn-proximo:hover::before {
+            left: 100%;
         }
 
         .btn-proximo:hover {
             background: #d4af37;
-            color: black;
-            box-shadow: 0 0 25px #fcf6ba;
-            letter-spacing: 5px;
+            color: #02040a;
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.85);
+            border-color: #ffffff;
+            transform: translateY(-2px);
         }
 
-        /* Responsividade Perfeita para Celulares */
         @media (max-width: 600px) {
-            body { padding: 20px 12px 60px 12px; }
-            .card-titulo { padding: 4px; margin-bottom: 20px; }
-            .titulo-interno { padding: 15px 20px; }
-            .titulo-ferro { font-size: 2.1rem; letter-spacing: 6px; }
-            
-            .card-conteudo { padding: 5px; }
-            .papel-antigo { padding: 35px 20px; }
-            .paragrafo-futurista { font-size: 1.15rem; line-height: 1.7; margin-bottom: 22px; }
-            .btn-proximo { padding: 16px 15px; font-size: 0.9rem; letter-spacing: 2px; }
+            body { padding: 40px 14px 60px 14px; }
+            .card-titulo { margin-bottom: 25px; }
+            .titulo-interno { padding: 10px 22px; }
+            .titulo-ferro { font-size: 1.7rem; letter-spacing: 8px; }
+            .conteudo-texto { padding: 35px 20px; }
+            .paragrafo-futurista { font-size: 1.1rem; line-height: 1.7; margin-bottom: 20px; }
+            .btn-proximo { padding: 14px 15px; font-size: 0.95rem; letter-spacing: 5px; }
+            .painel-audio { top: 15px; right: 15px; padding: 6px 12px; }
         }
     </style>
 </head>
-<body onclick="iniciarAudio()">
+<body onclick="desbloquearAudioUnificado()">
 
+    <!-- Cenário Cósmico Fixo de Fundo -->
     <div id="cosmos"></div>
 
-    <!-- 1. CARD SEPARADO DO TÍTULO COM CONTORNO OURO ESCURO -->
-    <div class="card-titulo">
-        <div class="titulo-interno">
-            <h1 class="titulo-ferro">FELICIDADE</h1>
+    <!-- Painel de Áudio Premium e Discreto -->
+    <div class="painel-audio" onclick="event.stopPropagation()">
+        <button class="btn-audio" id="btn-play-pause" onclick="alternarAudio()" title="Sinfonia">MEDITAÇÃO</button>
+        <span class="w-[1px] h-[12px] bg-slate-800"></span>
+        <input type="range" class="slider-volume" id="controle-volume" min="0" max="1" step="0.05" value="0.15" oninput="ajustarVolume(this.value)" title="Volume Delicado">
+    </div>
+
+    <!-- 1. CARD DO TÍTULO COMPACTADO E BORDADO DE LUZ -->
+    <div class="card-container-luxo card-titulo">
+        <div class="card-interior">
+            <div class="titulo-interno">
+                <h1 class="titulo-ferro">FELICIDADE</h1>
+            </div>
         </div>
     </div>
 
-    <!-- 2. CARD DE BAIXO SEPARADO COM EFEITO DOURADO NAS BORDAS -->
-    <div class="card-conteudo" id="meuCard">
-        
-        <!-- PAPEL ENVELHECIDO INTERNO -->
-        <div class="papel-antigo">
-            
-            <p class="paragrafo-futurista">Hoje compreendo com total clareza que o que habita em mim não se molda aos padrões de um "amor romântico" comum, daqueles que exigem reciprocidade, presença ou posse. O que sinto transborda como uma <strong>atração muito forte</strong>, limpa e genuína — um desejo profundo e insistentemente puro de te ver caminhar em direção ao seu melhor destino, brilhando na sua própria órbita. É a evolução de um sentimento que aprendeu a admirar sem precisar tocar.</p>
-            
-            <p class="paragrafo-futurista">Guardo uma gratidão que as palavras mal conseguem tatear por você ter me acolhido e validado quando o meu chão parecia ceder. Você me enxergou e me deu espaço não apenas como alguém sob seus cuidados técnicos, mas como mulher, respeitando minha essência e minha individualidade. Há uma fortaleza silenciosa e admirável no seu olhar; uma firmeza profissional que me serviu de bússola quando eu mais precisava encontrar o norte.</p>
+    <!-- 2. CARD DE CONTEÚDO TOTALMENTE TRANSLÚCIDO E EM PRIMEIRA PESSOA -->
+    <div class="card-container-luxo card-conteudo" id="meuCard">
+        <div class="card-interior">
+            <div class="conteudo-texto">
+                
+                <p class="paragrafo-futurista">Hoje compreendo com total clareza que o que habita em mim não se molda aos padrões de um "amor romântico" comum, daqueles que exigem reciprocidade, presença ou posse. O que sinto transborda como uma <strong>atração muito forte</strong>, limpa e genuína — um desejo profundo e insistentemente puro de te ver caminhar em direção ao seu melhor destino, brilhando na sua própria órbita. É a evolução de um sentimento que aprendeu a admirar sem precisar tocar.</p>
+                
+                <p class="paragrafo-futurista">Guardo uma gratidão que as palavras mal conseguem tatear por você ter me acolhido e validado quando o meu chão parecia ceder. Você me enxergou e me deu espaço não apenas como alguém sob seus cuidados técnicos, mas como mulher, respeitando minha essência e minha individualidade. Há uma fortaleza silenciosa e admirável no seu olhar; uma firmeza profissional que me serviu de bússola quando eu mais precisava encontrar o norte.</p>
 
-            <p class="paragrafo-futurista">Olhando para trás, percebo o quanto sua presença foi um divisor de águas. Você entrou na minha vida em um momento de transição e profunda vulnerabilidade, e sua postura não foi apenas um suporte temporário, mas um alicerce para que eu redescobrisse minha própria força. Essa jornada não seria a mesma sem o eco das suas palavras e o acolhimento seguro que encontrei na sua conduta.</p>
+                <p class="paragrafo-futurista">Olhando para trás, percebo o quanto sua presença foi um divisor de águas. Você entrou na minha vida em um momento de transição e profunda vulnerabilidade, e sua postura não foi apenas um suporte temporário, mas um alicerce para que eu redescobrisse minha própria força. Essa jornada não seria a mesma sem o eco das suas palavras e o acolhimento seguro que encontrei na sua conduta.</p>
 
-            <p class="paragrafo-futurista citacao-luxo">
-                "A verdadeira felicidade não reside na ausência de problemas, mas na capacidade de encontrar serenidade mesmo quando o horizonte é incerto."
-            </p>
+                <p class="paragrafo-futurista citacao-luxo">
+                    "A verdadeira felicidade não reside na ausência de problemas, mas na capacidade de encontrar serenidade mesmo quando o horizonte é incerto."
+                </p>
 
-            <p class="paragrafo-futurista">A realidade nua e crua é que existem pessoas que cruzam nosso caminho para redefinir nossa história, e você é, sem dúvida, uma das mais importantes na minha. Essa busca por equilíbrio e lucidez me fez entender que o afeto mais nobre é aquele que sabe o seu lugar e caminha de mãos dadas com o respeito. Admiro profundamente a barreira ética que protege a sua postura impecável, e é justamente por valorizar quem você é que transformo essa admiração em combustível para a minha própria evolução.</p>
+                <p class="paragrafo-futurista">A realidade nua e crua é que existem pessoas que cruzam nosso caminho para redefinir nossa história, e você é, sem dúvida, uma das mais importantes na minha. Essa busca por equilíbrio e lucidez me fez entender que o afeto mais nobre é aquele que sabe o seu lugar e caminha de mãos dadas com o respeito. Admiro profundamente a barreira ética que protege a sua postura impecável, e é justamente por valorizar quem você é que transformo essa admiração em combustível para a minha própria evolução.</p>
 
-            <p class="paragrafo-futurista">Saber que, de alguma forma, você torce pelo meu sucesso profissional, pela minha stabileza e pela minha paz é o maior prêmio que eu poderia desejar levar dessa convivência. Você se tornou um farol nesta fase da minha vida: alguém que eu não busco reter, mas que faço questão de reverenciar pela importância imensa que teve no meu amadurecimento.</p>
+                <p class="paragrafo-futurista">Saber que, de alguma forma, você torce pelo meu sucesso profissional, pela minha estabilidade e pela minha paz é o maior prêmio que eu poderia desejar levar dessa convivência. Você se tornou um farol nesta fase da minha vida: alguém que eu não busco reter, mas que faço questão de reverenciar pela importância imensa que teve no meu amadurecimento.</p>
 
-            <p class="paragrafo-futurista">Assim, com o coração em paz e a mente lúcida, sigo em frente. Guardo a beleza e o impacto real desse encontro em um lugar nobre e seguro da minha memória, convicta de que encontrar essa serenidade interna é o passo definitivo para a verdadeira felicidade.</p>
+                <p class="paragrafo-futurista">Assim, com o coração em paz e a mente lúcida, sigo em frente. Guardo a beleza e o impacto real desse encontro em um lugar nobre e seguro da minha memória, convicta de que encontrar essa serenidade interna é o passo definitivo para a verdadeira felicidade.</p>
 
-            <!-- BOTÃO SEGUIR PARA ESTRADA.HTML -->
-            <button class="btn-proximo" onclick="irParaEstrada()">Seguir para Estrada</button>
+                <!-- BOTÃO PRÓXIMA DE ESTRADA.HTML COM DESIGN SUPERIOR E VISIBILIDADE -->
+                <button class="btn-proximo" onclick="irParaEstrada(event)">PRÓXIMA</button>
+            </div>
         </div>
     </div>
 
     <audio id="musica" src="elvis.html.mp3" loop></audio>
 
     <script>
-        // Transição suave ao carregar a página
+        const audio = document.getElementById('musica');
+        const btn = document.getElementById('btn-play-pause');
+        const volumeSlider = document.getElementById('controle-volume');
+
+        let audioContext = null;
+        let ambientSynthInterval = null;
+        let synthOscillators = [];
+        let delayNode = null;
+        let masterGain = null;
+        let isSynthPlaying = false;
+        let audioPlayAttempted = false;
+
+        // Transição suave ao carregar
         window.onload = () => {
             document.body.style.opacity = '1';
+
+            // Carrega estado e tempo de reprodução salvos para persistência ininterrupta
+            const savedTime = localStorage.getItem('musica_tempo');
+            const isPlaying = localStorage.getItem('musica_playing');
+            const savedVol = localStorage.getItem('musica_vol');
+
+            if (savedTime) {
+                audio.currentTime = parseFloat(savedTime);
+            }
+            
+            const volumeInicial = savedVol ? parseFloat(savedVol) : 0.15;
+            audio.volume = volumeInicial;
+            volumeSlider.value = volumeInicial;
+
+            if (isPlaying === 'true') {
+                desbloquearAudioUnificado();
+            }
         };
 
-        // Criar estrelas pulsantes cósmicas
+        function iniciarSintetizador() {
+            // Se o áudio físico estiver ativo, NUNCA inicia o sintetizador para evitar sobreposições
+            if (!audio.paused || isSynthPlaying) return;
+
+            try {
+                const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+                audioContext = new AudioContextClass();
+
+                masterGain = audioContext.createGain();
+                masterGain.gain.setValueAtTime(volumeSlider.value * 0.08, audioContext.currentTime);
+
+                delayNode = audioContext.createDelay(1.0);
+                delayNode.delayTime.setValueAtTime(0.8, audioContext.currentTime);
+
+                const delayFeedback = audioContext.createGain();
+                delayFeedback.gain.setValueAtTime(0.3, audioContext.currentTime);
+
+                masterGain.connect(audioContext.destination);
+                masterGain.connect(delayNode);
+                delayNode.connect(delayFeedback);
+                delayFeedback.connect(delayNode);
+                delayNode.connect(masterGain);
+
+                tocarProgressaoDeAcordes();
+                ambientSynthInterval = setInterval(tocarProgressaoDeAcordes, 10000);
+                isSynthPlaying = true;
+                btn.textContent = "MEDITAÇÃO (SYNTH)";
+            } catch (e) {
+                console.warn("Web Audio indisponível", e);
+            }
+        }
+
+        function pararSintetizador() {
+            if (ambientSynthInterval) {
+                clearInterval(ambientSynthInterval);
+                ambientSynthInterval = null;
+            }
+            synthOscillators.forEach(osc => {
+                try { osc.stop(); } catch(e) {}
+            });
+            synthOscillators = [];
+            isSynthPlaying = false;
+        }
+
+        const notasAcordes = [
+            [130.81, 164.81, 196.00, 246.94], // Cmaj7
+            [110.00, 130.81, 164.81, 220.00], // Am9
+            [87.31, 130.81, 174.61, 220.00],  // Fmaj7
+            [98.00, 146.83, 196.00, 246.94]   // G6
+        ];
+        let indiceAcorde = 0;
+
+        function tocarProgressaoDeAcordes() {
+            if (!audioContext || audioContext.state === 'suspended' || !isSynthPlaying) return;
+
+            const agora = audioContext.currentTime;
+            const frequencias = notasAcordes[indiceAcorde];
+
+            frequencias.forEach((freq, index) => {
+                const osc = audioContext.createOscillator();
+                const gain = audioContext.createGain();
+
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(freq, agora);
+                osc.detune.setValueAtTime((Math.random() - 0.5) * 4, agora);
+
+                gain.gain.setValueAtTime(0, agora);
+                gain.gain.linearRampToValueAtTime(0.01, agora + 3.5 + index * 0.3);
+                gain.gain.exponentialRampToValueAtTime(0.0001, agora + 9.5);
+
+                osc.connect(gain);
+                gain.connect(masterGain);
+
+                osc.start(agora);
+                osc.stop(agora + 10);
+                synthOscillators.push(osc);
+            });
+
+            // Pequenas estrelas brilhando acusticamente de forma esporádica
+            if (Math.random() > 0.6) {
+                const sparkle = audioContext.createOscillator();
+                const sparkGain = audioContext.createGain();
+                sparkle.type = 'sine';
+                const altas = [523.25, 587.33, 659.25, 783.99, 880.00];
+                const freqAlta = altas[Math.floor(Math.random() * altas.length)];
+                sparkle.frequency.setValueAtTime(freqAlta, agora + 3);
+
+                sparkGain.gain.setValueAtTime(0, agora + 3);
+                sparkGain.gain.linearRampToValueAtTime(0.004, agora + 4.5);
+                sparkGain.gain.exponentialRampToValueAtTime(0.0001, agora + 7);
+
+                sparkle.connect(sparkGain);
+                sparkGain.connect(masterGain);
+                sparkle.start(agora + 3);
+                sparkle.stop(agora + 7.2);
+            }
+
+            indiceAcorde = (indiceAcorde + 1) % notasAcordes.length;
+        }
+
+        function desbloquearAudioUnificado() {
+            if (audioPlayAttempted) return;
+            audioPlayAttempted = true;
+
+            // Tentativa primária: áudio físico
+            audio.play().then(() => {
+                // Sucesso! Garantir que o sintetizador nunca inicie ou seja silenciado
+                pararSintetizador();
+                btn.textContent = "MEDITAÇÃO";
+                localStorage.setItem('musica_playing', 'true');
+            }).catch(() => {
+                // Se falhar (arquivo ausente ou bloqueado), entra o backup sintetizado
+                iniciarSintetizador();
+                if (audioContext && audioContext.state === 'suspended') {
+                    audioContext.resume();
+                }
+                localStorage.setItem('musica_playing', 'true');
+            });
+        }
+
+        function alternarAudio() {
+            if (!audio.paused) {
+                audio.pause();
+                btn.textContent = "MUTADO";
+                localStorage.setItem('musica_playing', 'false');
+            } else if (isSynthPlaying) {
+                if (audioContext) audioContext.suspend();
+                pararSintetizador();
+                btn.textContent = "MUTADO";
+                localStorage.setItem('musica_playing', 'false');
+            } else {
+                audioPlayAttempted = false;
+                desbloquearAudioUnificado();
+            }
+        }
+
+        function ajustarVolume(v) {
+            audio.volume = v;
+            localStorage.setItem('musica_vol', v);
+            if (masterGain && audioContext) {
+                masterGain.gain.setValueAtTime(parseFloat(v) * 0.08, audioContext.currentTime);
+            }
+        }
+
+        function irParaEstrada(e) {
+            if (e) e.stopPropagation();
+            // Preserva tempo de reprodução para manter fluidez em estrada.html
+            localStorage.setItem('musica_tempo', audio.currentTime);
+            localStorage.setItem('musica_playing', (!audio.paused || isSynthPlaying) ? 'true' : 'false');
+            document.body.style.opacity = '0';
+            setTimeout(() => {
+                window.location.href = "estrada.html";
+            }, 1000);
+        }
+
         const cosmos = document.getElementById('cosmos');
-        for (let i = 0; i < 65; i++) {
+        const numEstrelas = window.innerWidth < 640 ? 55 : 95;
+
+        for (let i = 0; i < numEstrelas; i++) {
             const estrela = document.createElement('div');
             estrela.className = 'estrela';
-            const size = Math.random() * 3.5 + 1;
+            const size = Math.random() * 2.0 + 0.7;
             estrela.style.width = size + 'px';
             estrela.style.height = size + 'px';
             estrela.style.top = Math.random() * 100 + '%';
             estrela.style.left = Math.random() * 100 + '%';
+            estrela.style.animationDelay = Math.random() * 4 + 's';
             estrela.style.animationDuration = (Math.random() * 3 + 2.5) + 's';
             cosmos.appendChild(estrela);
         }
 
-        // Sistema de Áudio Persistente
-        const audio = document.getElementById('musica');
-        function iniciarAudio() {
-            if (audio.paused) {
-                const tempoSalvo = localStorage.getItem('musica_tempo');
-                if (tempoSalvo) audio.currentTime = parseFloat(tempoSalvo);
-                audio.play().catch(() => {});
-            }
-        }
+        // Criação de partículas douradas delicadas sob o mouse
+        function criarBrilho(x, y) {
+            const part = document.createElement('div');
+            part.className = 'particula-ouro';
+            const tamanho = Math.random() * 6 + 2;
+            part.style.width = tamanho + 'px';
+            part.style.height = tamanho + 'px';
+            part.style.left = x + 'px';
+            part.style.top = (y + window.scrollY) + 'px';
+            document.body.appendChild(part);
 
-        // Redirecionamento correto para estrada.html salvando o áudio
-        function irParaEstrada() {
-            localStorage.setItem('musica_tempo', audio.currentTime);
-            document.body.style.opacity = '0';
             setTimeout(() => {
-                window.location.href = "estrada.html";
-            }, 800);
+                part.remove();
+            }, 1500);
         }
 
-        // Intersection Observer para animação futurista (letras nítidas surgindo)
+        window.addEventListener('mousemove', (e) => {
+            if (Math.random() > 0.88) {
+                criarBrilho(e.clientX, e.clientY);
+            }
+        });
+
+        window.addEventListener('touchmove', (e) => {
+            if (Math.random() > 0.88 && e.touches.length > 0) {
+                criarBrilho(e.touches[0].clientX, e.touches[0].clientY);
+            }
+        });
+
+        // Intersection Observer para revelação elegante de parágrafos
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
