@@ -2,9 +2,8 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <!-- Metatags para forçar o navegador a buscar a versão mais recente -->
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate, max-age=0">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
     <title>Em Busca do Horizonte</title>
@@ -17,6 +16,12 @@
         }
 
         * { box-sizing: border-box; }
+
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--cosmos-fundo); }
+        ::-webkit-scrollbar-thumb { background: #64748b; border-radius: 3px; border: 1px solid #1e293b; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--prata-fino); }
+
         body {
             margin: 0; padding: 60px 20px;
             background-color: var(--cosmos-fundo);
@@ -24,31 +29,32 @@
             font-family: 'Lora', serif;
             min-height: 100vh;
             display: flex; flex-direction: column; align-items: center;
+            overflow-x: hidden;
         }
 
         .fundo-cosmos { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; background: radial-gradient(circle at center, #0a1e3d 0%, var(--cosmos-fundo) 100%); }
+        .estrela { position: absolute; background: var(--prata-fino); border-radius: 50%; animation: brilhar 3s infinite; }
+        @keyframes brilhar { 0%, 100% { opacity: 0.2; transform: scale(1); } 50% { opacity: 0.9; transform: scale(1.2); } }
 
-        /* Audio minimalista luxuoso */
         .audio-container {
             position: fixed; top: 20px; right: 20px; z-index: 1000;
-            display: flex; align-items: center; gap: 10px;
+            display: flex; align-items: center; gap: 10px; background: rgba(0,0,0,0.3);
+            padding: 8px 12px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.1);
+            backdrop-filter: blur(5px);
         }
         .btn-audio {
-            background: rgba(255, 255, 255, 0.05); border: 1px solid var(--ouro-ativo);
-            color: var(--ouro-ativo); width: 40px; height: 40px; border-radius: 50%;
+            background: transparent; border: 1px solid var(--ouro-ativo);
+            color: var(--ouro-ativo); width: 30px; height: 30px; border-radius: 50%;
             cursor: pointer; display: flex; align-items: center; justify-content: center;
-            backdrop-filter: blur(10px); transition: 0.3s; font-family: 'Cinzel';
+            transition: 0.3s; font-family: 'Cinzel';
         }
         .btn-audio:hover { background: var(--ouro-ativo); color: var(--cosmos-fundo); }
-        .vol-slider { width: 60px; accent-color: var(--ouro-ativo); cursor: pointer; }
 
         h1 { font-family: 'Cinzel', serif; font-size: 2rem; margin-bottom: 50px; letter-spacing: 4px; color: var(--prata-fino); text-align: center; }
 
-        /* Borda dourada viva */
         .carta-wrapper {
             position: relative; max-width: 700px; width: 100%;
             padding: 2px; border-radius: 20px; overflow: hidden;
-            background: linear-gradient(to right, var(--cosmos-fundo), var(--cosmos-fundo));
         }
         .carta-wrapper::before {
             content: ""; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
@@ -63,12 +69,11 @@
             position: relative; z-index: 1;
         }
 
-        /* Grid de 2 colunas com efeito zoom */
         .grid-musicas { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; max-width: 700px; width: 100%; margin-top: 50px; }
         .card-musica {
             background: rgba(255,255,255,0.03); padding: 20px; border-radius: 12px;
             border: 1px solid rgba(255,255,255,0.1); text-decoration: none; color: var(--prata-fino);
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
         .card-musica:hover { border-color: var(--ouro-ativo); background: rgba(255,255,255,0.08); transform: scale(1.05); }
         .card-musica strong { display: block; margin-bottom: 5px; font-family: 'Cinzel', serif; color: var(--ouro-ativo); font-size: 0.85rem; }
@@ -85,11 +90,10 @@
     </style>
 </head>
 <body>
-    <div class="fundo-cosmos"></div>
+    <div class="fundo-cosmos" id="cosmos"></div>
 
     <div class="audio-container">
         <button class="btn-audio" id="btn-audio">♪</button>
-        <input type="range" class="vol-slider" id="vol-slider" min="0" max="1" step="0.1" value="0.3">
     </div>
 
     <h1>Em Busca do Horizonte</h1>
@@ -98,7 +102,7 @@
         <div class="carta-container">
             <p>Talvez a maior beleza da vida esteja na coragem de sermos vulneráveis, mesmo quando sabemos que o roteiro não prevê um final a dois...</p>
             <p>É a primeira vez que me vejo assim, traduzindo um sentimento que não exige nada em troca.</p>
-            <p>Nas consultas, o silêncio entre as palavras carregava o peso de quem enxerga além do diagnóstico. , que deveria ser apenas um símbolo de cura, tornou-se para mim um cenário onde aprendi, nas entrelinhas, o valor da sua dedicação. Sua humanidade foi o meu melhor remédio, uma bússola para as minhas incertezas, e a clareza com que você conduz nossas sessões é o que me devolve o chão toda vez que sinto que vou flutuar para longe de mim mesma.</p>
+            <p>Nas consultas, o silêncio entre as palavras carregava o peso de quem enxerga além do diagnóstico. O jaleco, que deveria ser apenas um símbolo de cura, tornou-se para mim um cenário onde aprendi, nas entrelinhas, o valor da sua dedicação. Sua humanidade foi o meu melhor remédio, uma bússola para as minhas incertezas, e a clareza com que você conduz nossas sessões é o que me devolve o chão toda vez que sinto que vou flutuar para longe de mim mesma.</p>
             <p>Gostaria apenas que, no futuro, ao pensar em mim, você se lembre de uma paciente que você lutou para ver livre do peso dos remédios.</p>
             <p>Encerro este assunto aqui, com o coração em paz e uma admiração que ultrapassa o consultório, guardando para sempre o brilho de quem você é na minha estrada.</p>
         </div>
@@ -122,7 +126,26 @@
     <script>
         const audio = document.getElementById('audio');
         const btn = document.getElementById('btn-audio');
-        const slider = document.getElementById('vol-slider');
+        const cosmos = document.getElementById('cosmos');
+
+        // Criando estrelas prateadas
+        for(let i=0; i<80; i++) {
+            const star = document.createElement('div');
+            star.className = 'estrela';
+            const s = Math.random() * 2 + 1;
+            star.style.width = s + 'px'; star.style.height = s + 'px';
+            star.style.top = Math.random() * 100 + '%'; star.style.left = Math.random() * 100 + '%';
+            star.style.animationDelay = Math.random() * 3 + 's';
+            cosmos.appendChild(star);
+        }
+
+        // Tentativa de autoplay (seguindo regras do navegador)
+        window.addEventListener('load', () => {
+            audio.volume = 0.4;
+            audio.play().catch(() => {
+                console.log("Interação necessária para autoplay.");
+            });
+        });
 
         btn.addEventListener('click', () => {
             if (audio.paused) {
@@ -132,10 +155,6 @@
                 audio.pause();
                 btn.textContent = '♪';
             }
-        });
-
-        slider.addEventListener('input', (e) => {
-            audio.volume = e.target.value;
         });
     </script>
 </body>
