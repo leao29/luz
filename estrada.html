@@ -2,95 +2,111 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Metatags agressivas contra cache -->
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate, max-age=0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <!-- Metatags para forçar o navegador a buscar a versão mais recente -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
     <title>Em Busca do Horizonte</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Lora:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
-    
     <style>
         :root {
-            --fundo-profundo: #01040a;
-            --ouro: #d4af37;
-            --prata: #e2e8f0;
-            --transparente: rgba(255, 255, 255, 0.03);
+            --cosmos-fundo: #01040a;
+            --ouro-ativo: #d4af37;
+            --prata-fino: #e2e8f0;
         }
 
         * { box-sizing: border-box; }
         body {
-            margin: 0; padding: 40px 20px;
-            background: var(--fundo-profundo);
-            color: var(--prata);
+            margin: 0; padding: 60px 20px;
+            background-color: var(--cosmos-fundo);
+            color: var(--prata-fino);
             font-family: 'Lora', serif;
-            display: flex; flex-direction: column; align-items: center;
             min-height: 100vh;
+            display: flex; flex-direction: column; align-items: center;
         }
 
-        .cosmos { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; background: radial-gradient(circle at center, #0a1e3d 0%, var(--fundo-profundo) 100%); }
+        .fundo-cosmos { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; background: radial-gradient(circle at center, #0a1e3d 0%, var(--cosmos-fundo) 100%); }
 
-        h1 { font-family: 'Cinzel', serif; font-size: 2.5rem; margin-bottom: 40px; color: var(--prata); text-align: center; }
-
-        /* Carta com borda ouro */
-        .carta-container {
-            position: relative; max-width: 600px; width: 100%; background: var(--fundo-profundo);
-            padding: 2px; border-radius: 18px; overflow: hidden; margin-bottom: 40px;
-            transition: transform 0.4s ease;
+        /* Audio minimalista luxuoso */
+        .audio-container {
+            position: fixed; top: 20px; right: 20px; z-index: 1000;
+            display: flex; align-items: center; gap: 10px;
         }
-        .carta-container::before {
+        .btn-audio {
+            background: rgba(255, 255, 255, 0.05); border: 1px solid var(--ouro-ativo);
+            color: var(--ouro-ativo); width: 40px; height: 40px; border-radius: 50%;
+            cursor: pointer; display: flex; align-items: center; justify-content: center;
+            backdrop-filter: blur(10px); transition: 0.3s; font-family: 'Cinzel';
+        }
+        .btn-audio:hover { background: var(--ouro-ativo); color: var(--cosmos-fundo); }
+        .vol-slider { width: 60px; accent-color: var(--ouro-ativo); cursor: pointer; }
+
+        h1 { font-family: 'Cinzel', serif; font-size: 2rem; margin-bottom: 50px; letter-spacing: 4px; color: var(--prata-fino); text-align: center; }
+
+        /* Borda dourada viva */
+        .carta-wrapper {
+            position: relative; max-width: 700px; width: 100%;
+            padding: 2px; border-radius: 20px; overflow: hidden;
+            background: linear-gradient(to right, var(--cosmos-fundo), var(--cosmos-fundo));
+        }
+        .carta-wrapper::before {
             content: ""; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
-            background: conic-gradient(transparent, var(--ouro), transparent 25%);
+            background: conic-gradient(transparent, var(--ouro-ativo), transparent 25%);
             animation: rodar 4s linear infinite;
         }
         @keyframes rodar { 100% { transform: rotate(360deg); } }
-        .carta-interior { background: var(--fundo-profundo); padding: 30px; border-radius: 16px; position: relative; z-index: 1; }
 
-        .container-musicas {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-            max-width: 600px;
-            width: 100%;
+        .carta-container {
+            background: var(--cosmos-fundo); padding: 40px; border-radius: 18px;
+            line-height: 1.8; font-size: 1.15rem; text-align: justify;
+            position: relative; z-index: 1;
         }
 
+        /* Grid de 2 colunas com efeito zoom */
+        .grid-musicas { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; max-width: 700px; width: 100%; margin-top: 50px; }
         .card-musica {
-            background: var(--transparente); 
-            padding: 20px; 
-            border-radius: 12px;
-            border: 1px solid var(--prata); 
-            text-decoration: none; 
-            color: var(--prata);
-            transition: 0.3s;
+            background: rgba(255,255,255,0.03); padding: 20px; border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.1); text-decoration: none; color: var(--prata-fino);
+            transition: all 0.3s ease;
         }
-        .card-musica:hover { transform: scale(1.05); border-color: var(--ouro); background: rgba(255,255,255,0.08); }
-        .card-musica strong { display: block; margin-bottom: 5px; font-family: 'Cinzel', serif; color: var(--ouro); font-size: 0.9rem; }
-        .card-musica p { font-size: 0.8rem; margin: 0; }
+        .card-musica:hover { border-color: var(--ouro-ativo); background: rgba(255,255,255,0.08); transform: scale(1.05); }
+        .card-musica strong { display: block; margin-bottom: 5px; font-family: 'Cinzel', serif; color: var(--ouro-ativo); font-size: 0.85rem; }
+        .card-musica p { font-size: 0.75rem; margin: 0; opacity: 0.8; }
 
-        .btn-destino {
-            margin-top: 40px; padding: 15px 40px; background: transparent; color: var(--prata);
-            border: 1px solid var(--prata); border-radius: 50px; cursor: pointer;
-            text-transform: uppercase; letter-spacing: 2px; transition: 0.3s;
+        .btn-fim {
+            margin-top: 60px; margin-bottom: 60px;
+            padding: 15px 40px; border: 1px solid var(--ouro-ativo);
+            background: transparent; color: var(--ouro-ativo);
+            border-radius: 30px; cursor: pointer; font-family: 'Cinzel';
+            transition: 0.3s; text-transform: uppercase; letter-spacing: 2px;
         }
-        .btn-destino:hover { background: var(--prata); color: var(--fundo-profundo); }
+        .btn-fim:hover { background: var(--ouro-ativo); color: var(--cosmos-fundo); }
     </style>
 </head>
 <body>
-    <div class="cosmos"></div>
+    <div class="fundo-cosmos"></div>
+
+    <div class="audio-container">
+        <button class="btn-audio" id="btn-audio">♪</button>
+        <input type="range" class="vol-slider" id="vol-slider" min="0" max="1" step="0.1" value="0.3">
+    </div>
+
     <h1>Em Busca do Horizonte</h1>
 
-    <div class="carta-container">
-        <div class="carta-interior">
+    <div class="carta-wrapper">
+        <div class="carta-container">
             <p>Talvez a maior beleza da vida esteja na coragem de sermos vulneráveis, mesmo quando sabemos que o roteiro não prevê um final a dois...</p>
-            <p>É a primeira vez que me vejo assim, traduzindo um sentimento que não exige nada em troca...</p>
-            <p>Gostaria apenas que, no futuro, ao pensar em mim, você se lembre de uma paciente que você lutou para ver livre do peso dos remédios...</p>
+            <p>É a primeira vez que me vejo assim, traduzindo um sentimento que não exige nada em troca.</p>
+            <p>Nas consultas, o silêncio entre as palavras carregava o peso de quem enxerga além do diagnóstico. , que deveria ser apenas um símbolo de cura, tornou-se para mim um cenário onde aprendi, nas entrelinhas, o valor da sua dedicação. Sua humanidade foi o meu melhor remédio, uma bússola para as minhas incertezas, e a clareza com que você conduz nossas sessões é o que me devolve o chão toda vez que sinto que vou flutuar para longe de mim mesma.</p>
+            <p>Gostaria apenas que, no futuro, ao pensar em mim, você se lembre de uma paciente que você lutou para ver livre do peso dos remédios.</p>
             <p>Encerro este assunto aqui, com o coração em paz e uma admiração que ultrapassa o consultório, guardando para sempre o brilho de quem você é na minha estrada.</p>
         </div>
     </div>
 
-    <div class="container-musicas">
+    <div class="grid-musicas">
         <a class="card-musica" href="https://youtu.be/G0WTFfZqjz0" target="_blank"><strong>Can't Help Falling In Love</strong><p>Essa música seria a qual amaria dançar com você.</p></a>
-        <a class="card-musica" href="https://youtu.be/Ri7-vnrJD3k" target="_blank"><strong>Set Fire To The Rain</strong><p>Tenho tatuado no braço, acho surreal e mágico.</p></a>
+        <a class="card-musica" href="https://youtu.be/Ri7-vnrJD3k" target="_blank"><strong>Set Fire To The Rain</strong><p>Tatuado no braço, algo surreal e mágico.</p></a>
         <a class="card-musica" href="https://youtu.be/fV4DiAyExN0" target="_blank"><strong>The Reason</strong><p>Maturidade da relação e aprendizado.</p></a>
         <a class="card-musica" href="https://youtu.be/ksNoe8W2jTc" target="_blank"><strong>How Can I Go On</strong><p>Imagino eu e você vendo essa ópera.</p></a>
         <a class="card-musica" href="https://youtu.be/0xEB1wIy4OE" target="_blank"><strong>The Power Of Love</strong><p>Um dos meus sonhos em Las Vegas.</p></a>
@@ -99,6 +115,28 @@
         <a class="card-musica" href="https://youtu.be/u9Dg-g7t2l4" target="_blank"><strong>The Sound Of Silence</strong><p>A profundidade do silêncio.</p></a>
     </div>
 
-    <button class="btn-destino" onclick="window.location.href='fim.html'">Chegar ao Destino Final</button>
+    <button class="btn-fim" onclick="window.location.href='fim.html'">Seguir para o Destino Final</button>
+
+    <audio id="audio" src="elvis.html.mp3" loop></audio>
+
+    <script>
+        const audio = document.getElementById('audio');
+        const btn = document.getElementById('btn-audio');
+        const slider = document.getElementById('vol-slider');
+
+        btn.addEventListener('click', () => {
+            if (audio.paused) {
+                audio.play();
+                btn.textContent = '||';
+            } else {
+                audio.pause();
+                btn.textContent = '♪';
+            }
+        });
+
+        slider.addEventListener('input', (e) => {
+            audio.volume = e.target.value;
+        });
+    </script>
 </body>
 </html>
