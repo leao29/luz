@@ -12,14 +12,21 @@
         :root {
             --cosmos-fundo: #01040a;
             --ouro-ativo: #d4af37;
+            --ouro-escuro: #8c6d23;
             --prata-fino: #e2e8f0;
+            --prata-luxo: #cbd5e1;
         }
 
         * { box-sizing: border-box; }
 
-        ::-webkit-scrollbar { width: 6px; }
+        /* Barra de rolagem prata luxuosa e elegante */
+        ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: var(--cosmos-fundo); }
-        ::-webkit-scrollbar-thumb { background: #64748b; border-radius: 3px; border: 1px solid #1e293b; }
+        ::-webkit-scrollbar-thumb { 
+            background: linear-gradient(180deg, #475569, var(--prata-luxo), #475569); 
+            border-radius: 4px; 
+            border: 2px solid var(--cosmos-fundo); 
+        }
         ::-webkit-scrollbar-thumb:hover { background: var(--prata-fino); }
 
         body {
@@ -36,46 +43,63 @@
         .estrela { position: absolute; background: var(--prata-fino); border-radius: 50%; animation: brilhar 3s infinite; }
         @keyframes brilhar { 0%, 100% { opacity: 0.2; transform: scale(1); } 50% { opacity: 0.9; transform: scale(1.2); } }
 
+        /* Painel de controle de áudio luxuoso */
         .audio-container {
             position: fixed; top: 20px; right: 20px; z-index: 1000;
-            display: flex; align-items: center; gap: 10px; background: rgba(0,0,0,0.3);
-            padding: 8px 12px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.1);
-            backdrop-filter: blur(5px);
+            display: flex; align-items: center; gap: 8px; background: rgba(1, 4, 10, 0.75);
+            padding: 6px 14px; border-radius: 25px; border: 1px solid var(--ouro-escuro);
+            backdrop-filter: blur(8px); box-shadow: 0 4px 20px rgba(0,0,0,0.5);
         }
         .btn-audio {
-            background: transparent; border: 1px solid var(--ouro-ativo);
-            color: var(--ouro-ativo); width: 30px; height: 30px; border-radius: 50%;
+            background: transparent; border: 1px solid transparent;
+            color: var(--ouro-ativo); font-size: 0.9rem; padding: 5px;
             cursor: pointer; display: flex; align-items: center; justify-content: center;
-            transition: 0.3s; font-family: 'Cinzel';
+            transition: 0.3s; font-family: 'Cinzel'; min-width: 28px;
         }
-        .btn-audio:hover { background: var(--ouro-ativo); color: var(--cosmos-fundo); }
+        .btn-audio:hover { color: var(--prata-fino); text-shadow: 0 0 5px var(--ouro-ativo); }
+        .divisor-audio { width: 1px; height: 14px; background: rgba(212, 175, 55, 0.3); }
 
-        h1 { font-family: 'Cinzel', serif; font-size: 2rem; margin-bottom: 50px; letter-spacing: 4px; color: var(--prata-fino); text-align: center; }
+        h1 { font-family: 'Cinzel', serif; font-size: 2rem; margin-bottom: 50px; letter-spacing: 4px; color: var(--prata-fino); text-align: center; text-shadow: 0 2px 10px rgba(255,255,255,0.1); }
 
+        /* Wrapper da carta com efeito de zoom suave */
         .carta-wrapper {
             position: relative; max-width: 700px; width: 100%;
-            padding: 2px; border-radius: 20px; overflow: hidden;
+            padding: 3px; border-radius: 20px; overflow: hidden;
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.7);
         }
+        /* Efeito de zoom elegante no hover */
+        .carta-wrapper:hover {
+            transform: scale(1.03);
+        }
+        /* Borda de ouro escuro correndo um atrás do outro */
         .carta-wrapper::before {
             content: ""; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
-            background: conic-gradient(transparent, var(--ouro-ativo), transparent 25%);
-            animation: rodar 4s linear infinite;
+            background: conic-gradient(
+                transparent, 
+                var(--ouro-escuro), 
+                transparent 20%, 
+                transparent 50%, 
+                var(--ouro-ativo), 
+                transparent 70%
+            );
+            animation: rodar 6s linear infinite;
         }
         @keyframes rodar { 100% { transform: rotate(360deg); } }
 
         .carta-container {
-            background: var(--cosmos-fundo); padding: 40px; border-radius: 18px;
+            background: #020712; padding: 40px; border-radius: 17px;
             line-height: 1.8; font-size: 1.15rem; text-align: justify;
-            position: relative; z-index: 1;
+            position: relative; z-index: 1; border: 1px solid rgba(255,255,255,0.02);
         }
 
         .grid-musicas { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; max-width: 700px; width: 100%; margin-top: 50px; }
         .card-musica {
             background: rgba(255,255,255,0.03); padding: 20px; border-radius: 12px;
-            border: 1px solid rgba(255,255,255,0.1); text-decoration: none; color: var(--prata-fino);
+            border: 1px solid rgba(255,255,255,0.08); text-decoration: none; color: var(--prata-fino);
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
-        .card-musica:hover { border-color: var(--ouro-ativo); background: rgba(255,255,255,0.08); transform: scale(1.05); }
+        .card-musica:hover { border-color: var(--ouro-ativo); background: rgba(255,255,255,0.08); transform: scale(1.05); box-shadow: 0 5px 15px rgba(0,0,0,0.4); }
         .card-musica strong { display: block; margin-bottom: 5px; font-family: 'Cinzel', serif; color: var(--ouro-ativo); font-size: 0.85rem; }
         .card-musica p { font-size: 0.75rem; margin: 0; opacity: 0.8; }
 
@@ -86,14 +110,18 @@
             border-radius: 30px; cursor: pointer; font-family: 'Cinzel';
             transition: 0.3s; text-transform: uppercase; letter-spacing: 2px;
         }
-        .btn-fim:hover { background: var(--ouro-ativo); color: var(--cosmos-fundo); }
+        .btn-fim:hover { background: var(--ouro-ativo); color: var(--cosmos-fundo); box-shadow: 0 0 15px rgba(214,175,55,0.4); }
     </style>
 </head>
 <body>
     <div class="fundo-cosmos" id="cosmos"></div>
 
+    <!-- Container de Áudio Luxuoso com Controles de Volume -->
     <div class="audio-container">
-        <button class="btn-audio" id="btn-audio">♪</button>
+        <button class="btn-audio" id="btn-audio" title="Play/Pause">||</button>
+        <div class="divisor-audio"></div>
+        <button class="btn-audio" id="btn-vol-down" title="Diminuir Volume">−</button>
+        <button class="btn-audio" id="btn-vol-up" title="Aumentar Volume">+</button>
     </div>
 
     <h1>Em Busca do Horizonte</h1>
@@ -125,36 +153,69 @@
 
     <script>
         const audio = document.getElementById('audio');
-        const btn = document.getElementById('btn-audio');
+        const btnPlay = document.getElementById('btn-audio');
+        const btnVolUp = document.getElementById('btn-vol-up');
+        const btnVolDown = document.getElementById('btn-vol-down');
         const cosmos = document.getElementById('cosmos');
 
         // Criando estrelas prateadas
         for(let i=0; i<80; i++) {
             const star = document.createElement('div');
-            star.className = 'estrela';
             const s = Math.random() * 2 + 1;
+            star.className = 'estrela';
             star.style.width = s + 'px'; star.style.height = s + 'px';
             star.style.top = Math.random() * 100 + '%'; star.style.left = Math.random() * 100 + '%';
             star.style.animationDelay = Math.random() * 3 + 's';
             cosmos.appendChild(star);
         }
 
-        // Tentativa de autoplay (seguindo regras do navegador)
+        // Configuração inicial do áudio
         window.addEventListener('load', () => {
             audio.volume = 0.4;
-            audio.play().catch(() => {
-                console.log("Interação necessária para autoplay.");
+            audio.play().then(() => {
+                btnPlay.textContent = '||';
+            }).catch(() => {
+                btnPlay.textContent = '♪';
+                console.log("Interação necessária para iniciar o áudio.");
             });
         });
 
-        btn.addEventListener('click', () => {
+        // Controle de Play / Pause
+        btnPlay.addEventListener('click', () => {
             if (audio.paused) {
                 audio.play();
-                btn.textContent = '||';
+                btnPlay.textContent = '||';
             } else {
                 audio.pause();
-                btn.textContent = '♪';
+                btnPlay.textContent = '♪';
             }
+        });
+
+        // Aumentar Volume
+        btnVolUp.addEventListener('click', () => {
+            if (audio.volume < 0.9) {
+                audio.volume = parseFloat((audio.volume + 0.1).toFixed(1));
+            } else {
+                audio.volume = 1.0;
+            }
+        });
+
+        // Diminuir Volume
+        btnVolDown.addEventListener('click', () => {
+            if (audio.volume > 0.1) {
+                audio.volume = parseFloat((audio.volume - 0.1).toFixed(1));
+            } else {
+                audio.volume = 0.0;
+            }
+        });
+
+        // Pausar o áudio da página quando clicar em qualquer card do YouTube
+        const linksMusica = document.querySelectorAll('.card-musica');
+        linksMusica.forEach(link => {
+            link.addEventListener('click', () => {
+                audio.pause();
+                btnPlay.textContent = '♪';
+            });
         });
     </script>
 </body>
