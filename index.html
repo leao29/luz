@@ -19,7 +19,7 @@
         body, html {
             width: 100%;
             height: 100%;
-            overflow: hidden; /* Trava totalmente qualquer rolagem */
+            overflow: hidden; 
             background-color: #030107;
             font-family: 'Playfair Display', serif;
             display: flex;
@@ -56,9 +56,9 @@
             z-index: 10;
             width: 92vw;
             max-width: 850px;
-            aspect-ratio: 1000 / 563; /* Mantém a proporção exata solicitada */
+            aspect-ratio: 1000 / 563;
             border-radius: 24px;
-            padding: 4px; /* Espessura delicada do contorno de ouro */
+            padding: 4px;
             background: linear-gradient(135deg, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
             background-size: 300% 300%;
             animation: goldenFlow 6s ease infinite, goldGlow 4s infinite ease-in-out alternate;
@@ -117,19 +117,18 @@
             letter-spacing: 3px;
         }
 
-        /* Carimbo CONFIDENCIAL Renovado - Máxima Legibilidade e Sofisticação */
         .stamp-confidential {
-            border: 2px solid #ff3b30; /* Vermelho vibrante de selo real */
+            border: 2px solid #ff3b30;
             color: #ff3b30;
             font-family: 'Cinzel', serif;
-            font-weight: 700; /* Letras mais grossas e visíveis */
+            font-weight: 700;
             font-size: clamp(9px, 1.3vw, 12px);
             padding: 3px 12px;
-            transform: rotate(-6deg) translateY(-2px); /* Inclinação charmosa de carimbo manual */
+            transform: rotate(-6deg) translateY(-2px);
             border-radius: 4px;
             letter-spacing: 4px;
-            background: rgba(255, 59, 48, 0.08); /* Fundo sutil para destacar sobre o papel escuro */
-            text-shadow: 0 0 4px rgba(255, 59, 48, 0.4); /* Leve brilho de tinta fresca */
+            background: rgba(255, 59, 48, 0.08);
+            text-shadow: 0 0 4px rgba(255, 59, 48, 0.4);
             box-shadow: inset 0 0 4px rgba(255, 59, 48, 0.2), 0 2px 8px rgba(0,0,0,0.4);
         }
 
@@ -155,7 +154,7 @@
         .subtitle-sender {
             font-family: 'Playfair Display', serif;
             font-style: italic;
-            font-size: clamp(13px, 2vw, 21px); /* Aumentado sutilmente para perfeita legibilidade */
+            font-size: clamp(13px, 2vw, 21px);
             background: linear-gradient(180deg, #ffffff 0%, #d1d5db 50%, #9ca3af 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -175,33 +174,27 @@
         .wax-seal {
             width: clamp(65px, 9.5vw, 85px);
             height: clamp(65px, 9.5vw, 85px);
-            /* Degradê realista simulando ferro fundido escuro/chumbo polido */
             background: radial-gradient(circle at 30% 30%, #525255 0%, #29292d 55%, #0e0e12 100%);
-            border-radius: 48% 52% 45% 55% / 52% 47% 53% 48%; /* Formato orgânico artesanal de metal derretido */
+            border-radius: 48% 52% 45% 55% / 52% 47% 53% 48%;
             position: relative;
             display: flex;
             justify-content: center;
             align-items: center;
-            box-shadow: 
-                0 10px 25px rgba(0, 0, 0, 0.75),
-                inset 2px 2px 5px rgba(255, 255, 255, 0.25), /* Brilho metálico superior */
-                inset -3px -3px 8px rgba(0, 0, 0, 0.9); /* Sombra de profundidade do metal */
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.75), inset 2px 2px 5px rgba(255, 255, 255, 0.25), inset -3px -3px 8px rgba(0, 0, 0, 0.9);
             border: 1.5px solid #1a1a1e;
             transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.4s ease;
         }
 
-        /* Fio de prata sutil gravado no metal interno do selo */
         .wax-seal::before {
             content: '';
             position: absolute;
             inset: 7px;
             border-radius: 50%;
-            border: 1px solid rgba(229, 231, 235, 0.25); /* Prata fina */
+            border: 1px solid rgba(229, 231, 235, 0.25);
             box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.7);
             pointer-events: none;
         }
 
-        /* Sombra externa sutil de chapa de ferro quente */
         .wax-seal::after {
             content: '';
             position: absolute;
@@ -209,23 +202,18 @@
             border-radius: 53% 47% 55% 45% / 46% 54% 48% 52%;
             background: radial-gradient(circle at center, rgba(41, 41, 45, 0.3) 0%, rgba(14, 14, 18, 0.5) 80%, rgba(0, 0, 0, 0.6) 100%);
             z-index: -1;
-            box-shadow: 
-                0 3px 8px rgba(0, 0, 0, 0.5),
-                inset 1px 1px 3px rgba(255, 255, 255, 0.1);
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.5), inset 1px 1px 3px rgba(255, 255, 255, 0.1);
         }
 
         .wax-seal:hover {
             transform: scale(1.05) rotate(3deg);
-            box-shadow: 
-                0 12px 30px rgba(0, 0, 0, 0.9),
-                0 0 15px rgba(100, 100, 110, 0.3);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.9), 0 0 15px rgba(100, 100, 110, 0.3);
         }
 
-        /* Símbolo Psiquiátrico Psi em prata metálica brilhante e super legível */
         .psychiatry-symbol {
             width: 38%;
             height: 38%;
-            color: #f3f4f6; /* Prata acetinada de alta visibilidade */
+            color: #f3f4f6;
             filter: drop-shadow(1px 2px 3px rgba(0, 0, 0, 0.9));
             z-index: 2;
         }
@@ -241,31 +229,20 @@
             background: rgba(15, 10, 5, 0.4);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
-            
-            /* Tipografia sutil e sofisticada (Mais fina e delicada) */
             color: #fbf5b7;
             font-family: 'Cinzel', serif;
             font-weight: 500;
-            font-size: clamp(11px, 1.6vw, 14px); /* Aumentado sutilmente para perfeita harmonia */
+            font-size: clamp(11px, 1.6vw, 14px);
             letter-spacing: 4.5px;
             text-transform: uppercase;
-            
-            padding: clamp(10px, 1.5vw, 14px) clamp(26px, 4.5vw, 46px); /* Ajustado levemente para acompanhar o novo tamanho */
+            padding: clamp(10px, 1.5vw, 14px) clamp(26px, 4.5vw, 46px);
             border-radius: 40px;
             cursor: pointer;
             outline: none;
             position: relative;
             overflow: hidden;
-            
-            /* Borda fina de Ouro real que pulsa */
             border: 1px solid rgba(191, 149, 63, 0.4);
-            
-            /* Efeitos de sombra e ouro dourado integrados */
-            box-shadow: 
-                0 4px 15px rgba(0,0,0,0.4),
-                inset 0 1px 2px rgba(252, 246, 186, 0.1);
-            
-            /* Animação constante de pulso dourado suave */
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4), inset 0 1px 2px rgba(252, 246, 186, 0.1);
             animation: goldAuraPulse 3s infinite ease-in-out;
             transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
         }
@@ -282,38 +259,23 @@
             animation: goldShimmerSweep 5s infinite ease-in-out;
         }
 
-        /* Animação para varredura de luz dourada constante */
         @keyframes goldShimmerSweep {
             0% { left: -150%; }
             30% { left: 150%; }
             100% { left: 150%; }
         }
 
-        /* Animação para a aura dourada de luxo pulsante na borda do botão */
         @keyframes goldAuraPulse {
-            0% {
-                border-color: rgba(191, 149, 63, 0.4);
-                box-shadow: 0 4px 15px rgba(0,0,0,0.4), 0 0 5px rgba(191, 149, 63, 0.15), inset 0 1px 2px rgba(252, 246, 186, 0.1);
-            }
-            50% {
-                border-color: rgba(252, 246, 186, 0.85);
-                box-shadow: 0 4px 20px rgba(0,0,0,0.4), 0 0 15px rgba(252, 246, 186, 0.35), inset 0 1px 3px rgba(252, 246, 186, 0.15);
-            }
-            100% {
-                border-color: rgba(191, 149, 63, 0.4);
-                box-shadow: 0 4px 15px rgba(0,0,0,0.4), 0 0 5px rgba(191, 149, 63, 0.15), inset 0 1px 2px rgba(252, 246, 186, 0.1);
-            }
+            0% { border-color: rgba(191, 149, 63, 0.4); box-shadow: 0 4px 15px rgba(0,0,0,0.4), 0 0 5px rgba(191, 149, 63, 0.15); }
+            50% { border-color: rgba(252, 246, 186, 0.85); box-shadow: 0 4px 20px rgba(0,0,0,0.4), 0 0 15px rgba(252, 246, 186, 0.35); }
+            100% { border-color: rgba(191, 149, 63, 0.4); box-shadow: 0 4px 15px rgba(0,0,0,0.4), 0 0 5px rgba(191, 149, 63, 0.15); }
         }
 
         .btn-luxury:hover {
             border-color: rgba(252, 246, 186, 1);
             color: #ffffff;
-            letter-spacing: 5px; /* Abre levemente as letras com extrema elegância */
+            letter-spacing: 5px;
             transform: translateY(-1px);
-        }
-
-        .btn-luxury:active {
-            transform: scale(0.98) translateY(0);
         }
 
         .audio-controls-panel {
@@ -352,16 +314,6 @@
             cursor: pointer;
             outline: none;
             font-family: 'Cinzel', serif;
-            transition: color 0.3s;
-        }
-
-        .btn-play-pause:hover {
-            color: #fbf5b7;
-        }
-
-        .vol-separator {
-            color: rgba(212, 175, 55, 0.25);
-            font-size: 11px;
         }
 
         .vol-slider {
@@ -382,11 +334,10 @@
             border-radius: 50%;
             background: #d4af37;
             cursor: pointer;
-            box-shadow: 0 0 6px rgba(212, 175, 55, 0.6);
         }
     </style>
 </head>
-<body class="relative">
+<body>
 
     <div class="cosmic-bg">
         <div class="stars-container" id="starsContainer"></div>
@@ -394,22 +345,18 @@
 
     <div id="mainCard" class="card-frame">
         <div class="card-inner">
-            
-            <!-- Linha superior do card -->
             <div class="card-header">
                 <div class="luxury-tag">⭐ LUXURY INVITATION</div>
                 <div class="stamp-confidential">CONFIDENCIAL</div>
             </div>
 
-            <!-- Corpo de caligrafia do envelope -->
             <div class="envelope-body">
                 <h1 class="title-recipient">Dra. Debora</h1>
                 <p class="subtitle-sender">Paciente: A que jamais esquecerá você</p>
             </div>
 
-            <!-- Selo de cera com símbolo psiquiátrico oficial -->
             <div class="seal-container">
-                <div class="wax-seal" title="Lacre Real de Cera Psiquiátrica">
+                <div class="wax-seal">
                     <svg class="psychiatry-symbol" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M12 3v17" />
                         <path d="M8 20h8" />
@@ -418,32 +365,26 @@
                 </div>
             </div>
 
-            <!-- Botão de ação refinado e delicado com efeito ouro -->
             <div class="action-button-container">
                 <button onclick="irParaProntuario()" class="btn-luxury">
                     Aperte com carinho
                 </button>
             </div>
-
         </div>
     </div>
 
     <div class="audio-controls-panel" id="customControls">
         <button class="btn-play-pause" id="playPauseBtn" onclick="togglePlay()">⏸ Pausar</button>
-        <span class="vol-separator">|</span>
         <input type="range" class="vol-slider" id="volumeControl" min="0" max="1" step="0.1" value="0.8" oninput="ajustarVolume(this.value)">
     </div>
 
-    <!-- Reprodutor de áudio local do seu repositório -->
     <audio id="musica" loop preload="auto">
-        <source src="elvis.html.mp3" type="audio/mpeg">
+        <source src="elvis.jtml.mp3" type="audio/mpeg">
     </audio>
 
     <script>
         const starsContainer = document.getElementById('starsContainer');
-        const totalStars = 55;
-
-        for (let i = 0; i < totalStars; i++) {
+        for (let i = 0; i < 55; i++) {
             const star = document.createElement('div');
             star.className = 'star';
             const size = Math.random() * 2.2 + 1.2;
@@ -452,7 +393,6 @@
             star.style.top = `${Math.random() * 100}%`;
             star.style.left = `${Math.random() * 100}%`;
             star.style.animationDelay = `${Math.random() * 4}s`;
-            star.style.animationDuration = `${Math.random() * 2 + 2.5}s`;
             starsContainer.appendChild(star);
         }
 
@@ -461,18 +401,13 @@
         const mainCard = document.getElementById('mainCard');
 
         function irParaProntuario() {
-            // Inicializa volume confortável e reproduz a música
             som.volume = 0.8;
-            som.play().catch(() => console.log("Áudio iniciado com sucesso."));
-
-            // Mostra os controles discretos no canto
+            som.play().catch(() => console.log("Áudio iniciado."));
             painel.classList.add('visible');
-
-            // Animação de fade-out luxuosa antes de redirecionar
             mainCard.style.opacity = '0';
             mainCard.style.transform = 'scale(0.92) rotateY(-3deg)';
 
-            // Transiciona para o prontuário após 2.2 segundos de som tocando
+            // Link mantido como prontuario.htm
             setTimeout(() => {
                 window.location.href = "prontuario.htm";
             }, 2200); 
