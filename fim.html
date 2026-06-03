@@ -43,13 +43,13 @@
             position: absolute;
             background: white;
             border-radius: 50%;
-            opacity: 0.4;
+            opacity: 0.3;
             animation: brilho infinite ease-in-out;
         }
 
         @keyframes brilho {
             0%, 100% { opacity: 0.1; transform: scale(1); }
-            50% { opacity: 0.6; transform: scale(1.4); }
+            50% { opacity: 0.5; transform: scale(1.3); }
         }
 
         /* PAINEL DE MÚSICA */
@@ -65,13 +65,7 @@
             align-items: center;
             gap: 12px;
             z-index: 100;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.5), inset 0 0 10px rgba(197, 168, 92, 0.2);
-            transition: all 0.3s ease;
-        }
-        
-        .painel-musica-fixo:hover {
-            border-color: var(--ouro-brilhante);
-            box-shadow: 0 4px 25px rgba(197, 168, 92, 0.3);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
         }
 
         .btn-controle {
@@ -90,17 +84,13 @@
         .btn-controle:hover { 
             background: var(--ouro-brilhante); 
             color: var(--azul-cosmos);
-            box-shadow: 0 0 8px var(--ouro-brilhante);
         }
         
         .vol-slider { 
             cursor: pointer; 
             accent-color: var(--ouro-brilhante); 
             width: 70px; 
-            opacity: 0.7;
-            transition: opacity 0.3s;
         }
-        .vol-slider:hover { opacity: 1; }
 
         .titulo-final {
             font-family: 'Cinzel', serif;
@@ -133,20 +123,12 @@
             position: absolute;
             top: -50%; left: -50%;
             width: 200%; height: 200%;
-            background: conic-gradient(
-                transparent, 
-                var(--ouro-escuro) 25%, 
-                var(--ouro-brilhante) 50%, 
-                var(--ouro-escuro) 75%, 
-                transparent 100%
-            );
-            animation: rodarOuro 6s linear infinite;
+            background: conic-gradient(transparent, var(--ouro-escuro) 25%, var(--ouro-brilhante) 50%, var(--ouro-escuro) 75%, transparent 100%);
+            animation: rodarOuro 8s linear infinite;
             z-index: 1;
         }
 
-        @keyframes rodarOuro {
-            100% { transform: rotate(360deg); }
-        }
+        @keyframes rodarOuro { 100% { transform: rotate(360deg); } }
 
         .papel-interno {
             position: relative;
@@ -166,131 +148,91 @@
             backdrop-filter: blur(5px);
         }
 
-        /* --- NOVO CENÁRIO DA OSTRA TRIDIMENSIONAL E TEXTURIZADA --- */
+        /* --- DESIGN DE ALTA SOFISTICAÇÃO (CENÁRIO DA OSTRA) --- */
         .cenario-ostra {
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 250px;
-            margin: 20px 0 35px 0;
-            perspective: 1000px;
+            height: 280px;
+            margin: 10px 0 30px 0;
             position: relative;
         }
 
-        .ostra {
+        /* Container da Ostra Mágica */
+        .ostra-container {
             position: relative;
             width: 180px;
-            height: 140px;
+            height: 160px;
             cursor: pointer;
-            transform-style: preserve-3d;
-            transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
-        }
-        
-        .ostra:hover {
-            transform: scale(1.04);
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
-        /* Concha Superior: Reconstruída com relevos, ranhuras e sombras volumétricas */
-        .concha-superior {
+        /* Concha Superior Delicada VETORIAL SVG */
+        .concha-sup-svg {
             position: absolute;
-            top: 0; left: 0; width: 100%; height: 55%;
-            background: 
-                repeating-linear-gradient(90deg, transparent, transparent 14px, rgba(0,0,0,0.2) 15px, rgba(255,255,255,0.04) 16px),
-                linear-gradient(to bottom, rgba(255,255,255,0.05) 0%, transparent 40%, rgba(0,0,0,0.5) 100%),
-                linear-gradient(135deg, #4e5d6c 0%, #2c3a47 40%, #16222f 75%, #090f16 100%);
-            border: 2.5px solid #576574;
-            border-bottom: 4px solid #1e272e;
-            border-radius: 90px 90px 40px 40px;
+            top: 25px;
+            width: 160px;
+            height: 100px;
             z-index: 3;
             transform-origin: bottom center;
-            transition: transform 1.8s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 
-                inset 0 8px 16px rgba(255,255,255,0.12), 
-                inset 0 -12px 25px rgba(0,0,0,0.75),
-                0 -6px 15px rgba(0,0,0,0.6);
+            transition: transform 1.5s cubic-bezier(0.25, 1, 0.5, 1);
+            filter: drop-shadow(0 -4px 8px rgba(0,0,0,0.5));
         }
 
-        /* Textura áspera e ranhuras orgânicas circulares adicionais */
-        .concha-superior::before {
-            content: '';
+        /* Quando a ostra é aberta, a concha de cima levanta com extrema elegância */
+        .ostra-container.aberta .concha-sup-svg {
+            transform: rotateX(-110deg) translateY(-35px) scaleY(0.95);
+        }
+
+        /* Concha Inferior Fina e Interno de Madrepérola */
+        .concha-inf-svg {
             position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            border-radius: inherit;
-            background: radial-gradient(ellipse at 50% 100%, transparent 35%, rgba(0,0,0,0.25) 50%, rgba(255,255,255,0.03) 53%, transparent 65%);
-            pointer-events: none;
-        }
-
-        .ostra.aberta .concha-superior {
-            transform: rotateX(-125deg) translateY(-25px);
-        }
-
-        /* Concha Inferior: Cama côncava com efeito de madrepérola realitsta */
-        .concha-inferior {
-            position: absolute;
-            bottom: 0; left: 0; width: 100%; height: 52%;
-            background: 
-                linear-gradient(to bottom, rgba(0,0,0,0.4) 0%, transparent 25%),
-                radial-gradient(circle at 50% 45%, #ffffff 0%, #e2e8f0 20%, #94a3b8 55%, #334155 85%, #0f172a 100%);
-            border: 2.5px solid #3b4856;
-            border-top: 1px solid #64748b;
-            border-radius: 40px 40px 90px 90px;
+            bottom: 15px;
+            width: 160px;
+            height: 100px;
             z-index: 1;
-            box-shadow: 
-                inset 0 -10px 30px rgba(0,0,0,0.85), 
-                inset 0 12px 20px rgba(255,255,255,0.4),
-                0 12px 28px rgba(0,0,0,0.65);
+            filter: drop-shadow(0 8px 15px rgba(0,0,0,0.6));
         }
 
-        /* Sombra interna para dar efeito de profundidade à concha inferior */
-        .concha-inferior::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            border-radius: inherit;
-            background: radial-gradient(circle at 50% 50%, transparent 40%, rgba(0,0,0,0.3) 80%);
-            pointer-events: none;
-        }
-
-        /* Pérola Negra de Alta Definição */
+        /* Pérola Negra de Alta Joalheria */
         .perola-negra {
             position: absolute;
-            bottom: 18%; left: 50%;
-            width: 32px; height: 32px;
-            background: radial-gradient(circle at 35% 30%, #ffffff 0%, #cbd5e1 12%, #475569 45%, #0f172a 80%, #000000 100%);
+            bottom: 45px;
+            left: 50%;
+            width: 28px;
+            height: 28px;
+            background: radial-gradient(circle at 35% 30%, #ffffff 0%, #cbd5e1 15%, #475569 50%, #1e293b 85%, #020617 100%);
             border-radius: 50%;
             z-index: 2;
             transform: translateX(-50%) scale(0);
-            transition: transform 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) 0.6s, bottom 1.5s cubic-bezier(0.25, 1, 0.5, 1);
-            box-shadow: 0 5px 12px rgba(0,0,0,0.85), inset -2px -2px 6px rgba(0,0,0,0.9);
-            cursor: pointer;
+            transition: transform 1s cubic-bezier(0.34, 1.56, 0.64, 1) 0.4s, bottom 1.5s cubic-bezier(0.25, 1, 0.5, 1);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.7), inset -2px -2px 5px rgba(0,0,0,0.8);
         }
 
-        .ostra.aberta .perola-negra {
+        /* Revela a pérola no centro ao abrir */
+        .ostra-container.aberta .perola-negra {
             transform: translateX(-50%) scale(1);
         }
 
-        /* EFEITO DE FLUTUAÇÃO COM BRILHO PRATEADO SUAVE E RELUZENTE (Atrativo e Sofisticado) */
-        .perola-negra.libertada {
-            bottom: 145px;
-            transform: translateX(-50%) scale(1.45);
-            animation: flutuarEBrilharAtrativo 4s infinite ease-in-out;
-            z-index: 99;
+        /* ESTADO FLUTUANTE: A pérola sai para cima e brilha em prata sutil e delicado */
+        .ostra-container.aberta .perola-negra.flutuando {
+            bottom: 150px;
+            transform: translateX(-50%) scale(1.3);
+            animation: flutuarEmanarPrata 4.5s infinite ease-in-out;
+            z-index: 9;
         }
 
-        @keyframes flutuarEBrilharAtrativo {
+        /* Brilho de prata sutil, luxuoso e pulsante, sem ser extravagante */
+        @keyframes flutuarEmanarPrata {
             0%, 100% {
-                transform: translateX(-50%) scale(1.45) translateY(0px);
-                filter: drop-shadow(0 0 12px rgba(226, 232, 240, 0.5)) drop-shadow(0 0 25px rgba(255, 255, 255, 0.25));
-                box-shadow: 
-                    0 10px 20px rgba(0,0,0,0.45),
-                    inset -1px -1px 5px rgba(0,0,0,0.9);
+                transform: translateX(-50%) scale(1.3) translateY(0px);
+                filter: drop-shadow(0 0 12px rgba(226, 232, 240, 0.4)) drop-shadow(0 0 25px rgba(255, 255, 255, 0.2));
             }
             50% {
-                transform: translateX(-50%) scale(1.45) translateY(-10px);
-                filter: drop-shadow(0 0 20px rgba(226, 232, 240, 0.7)) drop-shadow(0 0 40px rgba(255, 255, 255, 0.35));
-                box-shadow: 
-                    0 22px 28px rgba(0,0,0,0.35),
-                    inset -1px -1px 5px rgba(0,0,0,0.9);
+                transform: translateX(-50%) scale(1.3) translateY(-12px);
+                filter: drop-shadow(0 0 20px rgba(241, 245, 249, 0.6)) drop-shadow(0 0 35px rgba(255, 255, 255, 0.35));
             }
         }
 
@@ -302,7 +244,6 @@
             color: #cbd5e1;
         }
 
-        /* FRASE DE SUPERAÇÃO MELHORADA */
         .texto-desfecho-italico {
             font-family: 'Lora', serif;
             font-style: italic;
@@ -313,8 +254,6 @@
             border-top: 1px solid rgba(197, 168, 92, 0.15);
             margin-top: 35px;
             text-align: center;
-            font-weight: 400;
-            letter-spacing: 0.5px;
         }
 
         .mensagem-final {
@@ -324,7 +263,6 @@
             color: var(--ouro-brilhante);
             font-weight: bold;
             margin-top: 35px;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
         }
 
         .creditos {
@@ -340,12 +278,11 @@
             .titulo-final { font-size: 1.8rem; letter-spacing: 4px; }
             .papel-interno { padding: 35px 20px; }
             .texto-conclusao { font-size: 1rem; line-height: 1.7; }
-            .texto-desfecho-italico { font-size: 1.15rem; }
             .mensagem-final { font-size: 1.3rem; }
-            .painel-musica-fixo { top: 10px; right: 10px; padding: 6px 12px; }
-            .cenario-ostra { height: 230px; }
-            .ostra { width: 155px; height: 120px; }
-            .perola-negra.libertada { bottom: 125px; }
+            .cenario-ostra { height: 250px; }
+            .ostra-container { width: 150px; height: 130px; }
+            .concha-sup-svg, .concha-inf-svg { width: 130px; height: 85px; }
+            .ostra-container.aberta .perola-negra.flutuando { bottom: 130px; }
         }
     </style>
 </head>
@@ -358,7 +295,7 @@
         <button class="btn-controle" id="playPause">PAUSE</button>
         <div style="display:flex; align-items:center; gap:6px;">
             <span style="color:var(--ouro-brilhante); font-size:10px;">🔈</span>
-            <input type="range" class="vol-slider" min="0" max="1" step="0.05" value="1" oninput="ajustarVol(this.value)">
+            <input type="range" class="vol-slider" id="volumeSlider" min="0" max="1" step="0.05" value="0.5" oninput="ajustarVol(this.value)">
             <span style="color:var(--ouro-brilhante); font-size:10px;">🔊</span>
         </div>
     </div>
@@ -370,12 +307,41 @@
             
             <div class="card-desfecho">
                 
-                <!-- Cenário Interativo Tridimensional Fiel -->
+                <!-- Cenário Interativo Sofisticado e Mágico -->
                 <div class="cenario-ostra">
-                    <div class="ostra" id="ostraAnimada" onclick="alternarOstra(event)">
-                        <div class="concha-superior"></div>
-                        <div class="perola-negra" id="perolaMagica" onclick="libertarPerola(event)"></div>
-                        <div class="concha-inferior"></div>
+                    <div class="ostra-container" id="ostraMagica" onclick="cliqueOstra()">
+                        
+                        <!-- Concha Superior Vetorial Realista e Delicada -->
+                        <svg class="concha-sup-svg" viewBox="0 0 100 65" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M50 2C22 2 5 15 5 35C5 45 15 55 50 62C85 55 95 45 95 35C95 15 78 2 50 2Z" fill="url(#gradienteConcha)" stroke="#475569" stroke-width="0.7"/>
+                            <!-- Linhas finas de crescimento texturizado aristocrático -->
+                            <path d="M50 62C50 40 40 10 30 5M50 62C53 40 65 10 70 5M50 62C45 35 18 20 12 18M50 62C55 35 82 20 88 18" stroke="rgba(255,255,255,0.08)" stroke-width="0.5"/>
+                            <defs>
+                                <linearGradient id="gradienteConcha" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" stop-color="#2d3748"/>
+                                    <stop offset="50%" stop-color="#1a202c"/>
+                                    <stop offset="100%" stop-color="#0f172a"/>
+                                </linearGradient>
+                            </defs>
+                        </svg>
+
+                        <!-- A Joia Interna -->
+                        <div class="perola-negra" id="perolaMagica"></div>
+
+                        <!-- Concha Inferior Côncava de Madrepérola Fina -->
+                        <svg class="concha-inf-svg" viewBox="0 0 100 65" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M50 63C22 63 5 50 5 30C5 20 20 4 50 2C80 4 95 20 95 30C95 50 78 63 50 63Z" fill="url(#gradienteMadreperola)" stroke="#334155" stroke-width="0.7"/>
+                            <path d="M50 2C42 20 25 35 10 38M50 2C58 20 75 35 90 38" stroke="rgba(255,255,255,0.15)" stroke-width="0.4"/>
+                            <defs>
+                                <radialGradient id="gradienteMadreperola" cx="50%" cy="30%" r="50%">
+                                    <stop offset="0%" stop-color="#ffffff"/>
+                                    <stop offset="35%" stop-color="#f1f5f9"/>
+                                    <stop offset="70%" stop-color="#cbd5e1"/>
+                                    <stop offset="100%" stop-color="#1e293b"/>
+                                </radialGradient>
+                            </defs>
+                        </svg>
+
                     </div>
                 </div>
 
@@ -406,65 +372,48 @@
     <script>
         const audio = document.getElementById('trilha');
         const btnPP = document.getElementById('playPause');
-        const ostra = document.getElementById('ostraAnimada');
+        const ostraContainer = document.getElementById('ostraMagica');
         const perola = document.getElementById('perolaMagica');
+        const volumeSlider = document.getElementById('volumeSlider');
 
-        // Gerar estrelas/partículas de fundo
-        const cosmos = document.getElementById('fundo-cosmos');
-        const fragmentoEstrelas = document.createDocumentFragment();
-        for (let i = 0; i < 70; i++) {
-            const estrela = document.createElement('div');
-            estrela.className = 'estrela';
-            const tamanho = Math.random() * 3 + 0.5;
-            estrela.style.width = tamanho + 'px';
-            estrela.style.height = tamanho + 'px';
-            estrela.style.top = Math.random() * 100 + '%';
-            estrela.style.left = Math.random() * 100 + '%';
-            estrela.style.animationDuration = (Math.random() * 4 + 2) + 's';
-            fragmentoEstrelas.appendChild(estrela);
-        }
-        cosmos.appendChild(fragmentoEstrelas);
-
+        // Configuração Estrita de Inicialização
         window.onload = () => {
             document.body.style.opacity = '1';
 
-            // Sincronização do áudio
+            // Configura estritamente o volume inicial para a METADE (0.5)
+            audio.volume = 0.5;
+            volumeSlider.value = 0.5;
+
             const tempoSalvo = localStorage.getItem('musica_tempo');
-            if (tempoSalvo) {
-                audio.currentTime = parseFloat(tempoSalvo);
-            }
+            if (tempoSalvo) { audio.currentTime = parseFloat(tempoSalvo); }
             
             audio.play().then(() => {
                 btnPP.innerText = "PAUSE";
             }).catch(() => {
                 btnPP.innerText = "PLAY";
             });
-
-            // Abertura elegante e automática da ostra após carregamento
-            setTimeout(() => {
-                ostra.classList.add('aberta');
-            }, 1400);
         };
 
+        // Salva progresso da música
         setInterval(() => {
-            if (!audio.paused) {
-                localStorage.setItem('musica_tempo', audio.currentTime);
-            }
+            if (!audio.paused) { localStorage.setItem('musica_tempo', audio.currentTime); }
         }, 1000);
 
-        function alternarOstra(e) {
-            e.stopPropagation();
-            if (perola.classList.contains('libertada')) {
-                perola.classList.remove('libertada');
-            }
-            ostra.classList.toggle('aberta');
-        }
-
-        // Faz a pérola subir, parar flutuando fixamente e começar a reluzir de forma atrativa
-        function libertarPerola(e) {
-            e.stopPropagation(); 
-            if (ostra.classList.contains('aberta')) {
-                perola.classList.toggle('libertada');
+        // Lógica de Ativação Única e Delicada ao Clicar na Ostra
+        function cliqueOstra() {
+            if (!ostraContainer.classList.contains('aberta')) {
+                // Abre a concha elegantemente
+                ostraContainer.classList.add('aberta');
+                // Após uma fração de segundo, a pérola flutua majestosamente
+                setTimeout(() => {
+                    perola.classList.add('flutuando');
+                }, 300);
+            } else {
+                // Se clicar novamente, fecha de forma sutil
+                perola.classList.remove('flutuando');
+                setTimeout(() => {
+                    ostraContainer.classList.remove('aberta');
+                }, 400);
             }
         }
 
@@ -487,6 +436,22 @@
         };
 
         function ajustarVol(v) { audio.volume = v; }
+
+        // Criação sutil do fundo estrelado
+        const cosmos = document.getElementById('fundo-cosmos');
+        const fragmento = document.createDocumentFragment();
+        for (let i = 0; i < 60; i++) {
+            const estrela = document.createElement('div');
+            estrela.className = 'estrela';
+            const tam = Math.random() * 2 + 0.5;
+            estrela.style.width = tam + 'px';
+            estrela.style.height = tam + 'px';
+            estrela.style.top = Math.random() * 100 + '%';
+            estrela.style.left = Math.random() * 100 + '%';
+            estrela.style.animationDuration = (Math.random() * 5 + 3) + 's';
+            fragmento.appendChild(estrela);
+        }
+        cosmos.appendChild(fragmento);
     </script>
 </body>
 </html>
