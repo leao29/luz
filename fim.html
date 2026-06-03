@@ -166,20 +166,20 @@
             backdrop-filter: blur(5px);
         }
 
-        /* --- CENÁRIO REFEITO: OSTRA REALISTA E PÉROLA PRATEADA --- */
+        /* --- DESIGN ULTRA REALISTA DA OSTRA E DA PÉROLA --- */
         .cenario-ostra {
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 240px;
+            height: 260px;
             margin: 10px 0 30px 0;
-            perspective: 1000px;
+            perspective: 1200px;
             position: relative;
         }
 
         .ostra {
             position: relative;
-            width: 160px;
+            width: 170px;
             height: 140px;
             cursor: pointer;
             transform-style: preserve-3d;
@@ -187,124 +187,103 @@
         }
         
         .ostra:hover {
-            transform: scale(1.03) rotateY(2deg);
+            transform: scale(1.02);
         }
 
-        /* Concha Superior Realista */
+        /* Formato Orgânico de Concha Real (Superior) */
         .concha-superior {
             position: absolute;
-            top: 0; left: 0; width: 100%; height: 55%;
+            top: 0; left: 0; width: 100%; height: 60%;
             background: 
-                linear-gradient(to bottom, rgba(0,0,0,0.4), transparent),
-                linear-gradient(135deg, #475569 0%, #334155 30%, #1e293b 70%, #0f172a 100%);
-            border: 2px solid #64748b;
-            border-radius: 80px 80px 30px 30px;
+                linear-gradient(to bottom, rgba(0,0,0,0.5), transparent),
+                linear-gradient(135deg, #576574 0%, #222f3e 50%, #101721 100%);
+            /* Desenho recortado que imita as ondulações naturais das bordas de uma ostra */
+            clip-path: polygon(50% 0%, 75% 5%, 93% 20%, 100% 50%, 85% 85%, 50% 100%, 15% 85%, 0% 50%, 7% 20%, 25% 5%);
             z-index: 3;
             transform-origin: bottom center;
             transition: transform 1.8s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 
-                inset 0 6px 12px rgba(255,255,255,0.15), 
-                inset 0 -10px 20px rgba(0,0,0,0.6),
-                0 -5px 15px rgba(0,0,0,0.5);
+            box-shadow: inset 0 8px 16px rgba(255,255,255,0.1), inset 0 -12px 24px rgba(0,0,0,0.7);
         }
 
-        /* Textura de ranhuras reais da concha */
-        .concha-superior::after, .concha-inferior::after {
+        /* Linhas e sulcos de crescimento ásperos da concha */
+        .concha-superior::after {
             content: '';
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: repeating-linear-gradient(90deg, transparent, transparent 12px, rgba(0,0,0,0.15) 13px, rgba(255,255,255,0.05) 14px);
-            border-radius: inherit;
+            background: 
+                radial-gradient(ellipse at 50% 100%, transparent 40%, rgba(0,0,0,0.3) 50%, rgba(255,255,255,0.05) 55%, transparent 60%),
+                repeating-radial-gradient(circle at 50% 0%, transparent, transparent 15px, rgba(0,0,0,0.2) 16px, rgba(0,0,0,0.3) 18px);
+            opacity: 0.85;
             pointer-events: none;
         }
 
         .ostra.aberta .concha-superior {
-            transform: rotateX(-120deg) translateY(-18px);
+            transform: rotateX(-125deg) translateY(-25px);
         }
 
-        /* Concha Inferior Realista (Cama de Madrepérola) */
+        /* Concha Inferior Realista com Berço de Nácar Natural */
         .concha-inferior {
             position: absolute;
-            bottom: 0; left: 0; width: 100%; height: 50%;
+            bottom: 0; left: 0; width: 100%; height: 55%;
             background: 
-                radial-gradient(circle at center, #e2e8f0 0%, #94a3b8 40%, #475569 70%, #1e293b 100%);
-            border: 2px solid #475569;
-            border-radius: 30px 30px 80px 80px;
+                radial-gradient(circle at 50% 40%, #f1f5f9 0%, #cbd5e1 25%, #64748b 60%, #1e293b 100%);
+            clip-path: polygon(50% 0%, 85% 15%, 100% 50%, 93% 80%, 75% 95%, 50% 100%, 25% 95%, 7% 80%, 0% 50%, 15% 15%);
             z-index: 1;
-            box-shadow: 
-                inset 0 -8px 15px rgba(0,0,0,0.7), 
-                inset 0 8px 20px rgba(255,255,255,0.4),
-                0 10px 25px rgba(0,0,0,0.6);
+            box-shadow: inset 0 -10px 30px rgba(0,0,0,0.8), inset 0 10px 25px rgba(255,255,255,0.5);
         }
 
-        /* Pérola Negra Irradiante */
-        .perola-negra {
-            position: absolute;
-            bottom: 20%; left: 50%;
-            width: 32px; height: 32px;
-            background: radial-gradient(circle at 35% 35%, #94a3b8 0%, #334155 25%, #0f172a 65%, #020617 100%);
-            border-radius: 50%;
-            z-index: 2;
-            transform: translateX(-50%) scale(0);
-            transition: transform 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) 0.6s;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.9), inset -3px -3px 8px rgba(0,0,0,0.8);
-            cursor: pointer;
-        }
-
-        .perola-negra::before {
+        /* Brilho Irregular de Madrepérola no interior da concha inferior */
+        .concha-inferior::after {
             content: '';
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, transparent 50%, rgba(0,0,0,0.2) 100%);
+            pointer-events: none;
+        }
+
+        /* Pérola Negra Metálica Luxuosa */
+        .perola-negra {
+            position: absolute;
+            bottom: 22%; left: 50%;
+            width: 30px; height: 30px;
+            background: radial-gradient(circle at 35% 30%, #f8fafc 0%, #94a3b8 15%, #334155 50%, #0f172a 85%, #020617 100%);
             border-radius: 50%;
-            background: transparent;
-            box-shadow: 0 0 0px 0px rgba(255,255,255,0);
-            transition: all 0.5s ease;
+            z-index: 2;
+            transform: translateX(-50%) scale(0);
+            transition: transform 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) 0.6s, bottom 1.5s cubic-bezier(0.25, 1, 0.5, 1);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.9), inset -2px -2px 6px rgba(0,0,0,0.85);
+            cursor: pointer;
         }
 
         .ostra.aberta .perola-negra {
             transform: translateX(-50%) scale(1);
         }
 
-        /* ANIMAÇÃO AVANÇADA: Flutuação com Brilho Prateado Pulsante e Radiante */
+        /* EFEITO REFEITO: Pérola libertada fixa-se no topo flutuando com Brilho Prateado sutil e contínuo */
         .perola-negra.libertada {
-            animation: libertarEFlutuar 6s infinite ease-in-out forwards;
+            bottom: 140px;
+            transform: translateX(-50%) scale(1.5);
+            animation: flutuarEBrilhar 4s infinite ease-in-out;
             z-index: 99;
         }
 
-        @keyframes libertarEFlutuar {
-            0% {
-                bottom: 20%;
-                transform: translateX(-50%) scale(1);
-                box-shadow: 0 0 15px rgba(255,255,255,0.2), 0 4px 10px rgba(0,0,0,0.9), inset -3px -3px 8px rgba(0,0,0,0.8);
-            }
-            30% {
-                bottom: 135px;
-                transform: translateX(-50%) scale(1.6);
+        /* Animação de flutuação suave + pulso prateado atrativo e não extravagante */
+        @keyframes flutuarEBrilhar {
+            0%, 100% {
+                transform: translateX(-50%) scale(1.5) translateY(0px);
                 box-shadow: 
-                    0 0 30px 10px rgba(226, 232, 240, 0.6), 
-                    0 0 60px 25px rgba(255, 255, 255, 0.4), 
-                    inset -1px -1px 6px rgba(0,0,0,0.9);
+                    0 0 20px 4px rgba(226, 232, 240, 0.4), 
+                    0 0 40px 10px rgba(255, 255, 255, 0.2), 
+                    0 10px 20px rgba(0,0,0,0.4),
+                    inset -1px -1px 5px rgba(0,0,0,0.9);
             }
             50% {
-                bottom: 150px;
-                transform: translateX(-50%) scale(1.65);
+                transform: translateX(-50%) scale(1.5) translateY(-8px);
                 box-shadow: 
-                    0 0 45px 20px rgba(226, 232, 240, 0.8), 
-                    0 0 90px 45px rgba(255, 255, 255, 0.5), 
-                    inset -1px -1px 6px rgba(0,0,0,0.9);
-            }
-            70% {
-                bottom: 135px;
-                transform: translateX(-50%) scale(1.6);
-                box-shadow: 
-                    0 0 30px 10px rgba(226, 232, 240, 0.6), 
-                    0 0 60px 25px rgba(255, 255, 255, 0.4), 
-                    inset -1px -1px 6px rgba(0,0,0,0.9);
-            }
-            100% {
-                bottom: 20%;
-                transform: translateX(-50%) scale(1);
-                box-shadow: 0 0 15px rgba(255,255,255,0.2), 0 4px 10px rgba(0,0,0,0.9), inset -3px -3px 8px rgba(0,0,0,0.8);
+                    0 0 30px 8px rgba(226, 232, 240, 0.55), 
+                    0 0 55px 16px rgba(255, 255, 255, 0.3), 
+                    0 18px 25px rgba(0,0,0,0.3),
+                    inset -1px -1px 5px rgba(0,0,0,0.9);
             }
         }
 
@@ -316,7 +295,7 @@
             color: #cbd5e1;
         }
 
-        /* NOVO DESIGN DA FRASE DE SUPERAÇÃO MELHORADA */
+        /* FRASE DE SUPERAÇÃO MELHORADA */
         .texto-desfecho-italico {
             font-family: 'Lora', serif;
             font-style: italic;
@@ -357,8 +336,9 @@
             .texto-desfecho-italico { font-size: 1.15rem; }
             .mensagem-final { font-size: 1.3rem; }
             .painel-musica-fixo { top: 10px; right: 10px; padding: 6px 12px; }
-            .cenario-ostra { height: 210px; }
-            .ostra { width: 140px; height: 120px; }
+            .cenario-ostra { height: 230px; }
+            .ostra { width: 145px; height: 120px; }
+            .perola-negra.libertada { bottom: 120px; }
         }
     </style>
 </head>
@@ -383,7 +363,7 @@
             
             <div class="card-desfecho">
                 
-                <!-- Cenário Interativo Melhorado -->
+                <!-- Cenário Interativo Realista Reconstruído -->
                 <div class="cenario-ostra">
                     <div class="ostra" id="ostraAnimada" onclick="alternarOstra(event)">
                         <div class="concha-superior"></div>
@@ -393,14 +373,14 @@
                 </div>
 
                 <p class="texto-conclusao">
-                    Existe uma célebre fábula sobre a ostra: para que uma pérola nasça, é preciso que um grão de areia entre em seu interior e cause uma ferida profunda. A ostra não destrói o invasor; em vez disso, ela o envolve cuidadosamente com camadas de nácar brilhante, transformando a dor e o incômodo em uma joia rara.
+                    Existe uma célebre fábula sobre a ostra: para que uma pérola nasça, é preciso que um grão de areia entre em seu interior e cause uma ferida profunda. A ostra não destrói o invasor; invez disso, ela o envolve cuidadosamente com camadas de nácar brilhante, transformando a dor e o incômodo em uma joia rara.
                 </p>
                 
                 <p class="texto-conclusao">
                     A estrada longa ficou para trás e as dores do caminho transformaram-se em preciosas pérolas de sabedoria. Sob o manto infinito do cosmos, compreendemos que cada curva, cada grão de areia e cada passo incerto faziam parte de um plano maior. O horizonte não é mais um limite distante; agora, ele é o chão que você pisa com paz no coração, carregando a beleza da sua própria pérola negra.
                 </p>
 
-                <!-- Frase de Superação Clara, Direta e Compreensível incorporada aqui -->
+                <!-- Frase de Superação -->
                 <p class="texto-desfecho-italico">
                     "Ser forte é entender que os golpes da vida acontecem, mas a pérola negra prova que a dor não te venceu: ela foi engolida, dominada e transformada em poder."
                 </p>
@@ -422,7 +402,7 @@
         const ostra = document.getElementById('ostraAnimada');
         const perola = document.getElementById('perolaMagica');
 
-        // Gerar partículas de luz marinha e estrelas no fundo cosmos
+        // Gerar estrelas/partículas de fundo
         const cosmos = document.getElementById('fundo-cosmos');
         const fragmentoEstrelas = document.createDocumentFragment();
         for (let i = 0; i < 70; i++) {
@@ -453,7 +433,7 @@
                 btnPP.innerText = "PLAY";
             });
 
-            // Abertura automática elegante da ostra
+            // Abertura elegante automática da ostra
             setTimeout(() => {
                 ostra.classList.add('aberta');
             }, 1400);
@@ -473,7 +453,7 @@
             ostra.classList.toggle('aberta');
         }
 
-        // Ativa e desativa a flutuação mágica e o reflexo de prata irradiante
+        // Faz a pérola subir, parar flutuando fixamente e começar a reluzir suavemente
         function libertarPerola(e) {
             e.stopPropagation(); 
             if (ostra.classList.contains('aberta')) {
