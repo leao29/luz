@@ -2,291 +2,491 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>O Destino Encontrado</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Lora:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>O Encontro com o Destino - Fim</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Orbitron:wght@400;600&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
     <style>
         :root {
-            --cosmos-fundo: #01040a;
-            --ouro-ativo: #d4af37;
-            --ouro-escuro: #8c6d23;
-            --prata-luxo: #cbd5e1;
-            --prata-brilho: rgba(226, 232, 240, 0.8);
+            --azul-cosmos: #020617;
+            --azul-card: #050b1e;
+            --ouro-escuro: #4a3b13;
+            --ouro-brilhante: #c5a85c;
+            --texto-claro: #f1f5f9;
+            --texto-ouro: #e2c792;
         }
 
         * { box-sizing: border-box; }
-
-        /* Barra de rolagem prata luxuosa, sutil e elegante */
-        ::-webkit-scrollbar { width: 5px; }
-        ::-webkit-scrollbar-track { background: var(--cosmos-fundo); }
-        ::-webkit-scrollbar-thumb { 
-            background: linear-gradient(180deg, transparent, var(--prata-luxo), transparent); 
-            border-radius: 10px;
-        }
+        html { scroll-behavior: smooth; }
 
         body {
-            margin: 0; padding: 80px 20px;
-            background-color: var(--cosmos-fundo);
-            color: #94a3b8;
+            margin: 0; padding: 0;
+            width: 100%; min-height: 100vh;
+            background-color: var(--azul-cosmos);
             font-family: 'Lora', serif;
-            min-height: 100vh;
-            display: flex; flex-direction: column; align-items: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 80px 20px 40px 20px;
             overflow-x: hidden;
+            opacity: 0;
+            transition: opacity 2s ease;
         }
 
-        #fundo-cosmos { 
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
-            z-index: -1; background: radial-gradient(circle at center, #0a1e3d 0%, var(--cosmos-fundo) 100%); 
+        #fundo-cosmos {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -2;
+            background: radial-gradient(circle at center, #0a1931 0%, #040d21 60%, var(--azul-cosmos) 100%);
         }
-        .estrela { position: absolute; background: #fff; border-radius: 50%; opacity: 0.3; animation: cintilar 3s infinite ease-in-out; }
-        @keyframes cintilar { 0%, 100% { opacity: 0.1; } 50% { opacity: 0.5; } }
 
-        /* CONTROLES DE ÁUDIO NO TOPO DIREITO — SINGELO, LUXUOSO E ELEGANTE */
-        .audio-container-lux {
-            position: fixed; top: 25px; right: 40px; z-index: 1000;
-            display: flex; align-items: center; gap: 12px;
-            background: transparent; padding: 5px;
+        .estrela {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            opacity: 0.4;
+            animation: brilho infinite ease-in-out;
         }
-        .btn-audio-lux {
-            background: transparent; border: none;
-            color: var(--ouro-ativo); font-family: 'Cinzel', serif; font-size: 0.7rem; 
-            letter-spacing: 2px; cursor: pointer; text-transform: uppercase;
-            transition: 0.4s ease; opacity: 0.6;
+
+        @keyframes brilho {
+            0%, 100% { opacity: 0.1; transform: scale(1); }
+            50% { opacity: 0.6; transform: scale(1.4); }
         }
-        .btn-audio-lux:hover { opacity: 1; text-shadow: 0 0 8px var(--ouro-ativo); }
+
+        /* PAINEL DE MÚSICA */
+        .painel-musica-fixo {
+            position: fixed;
+            top: 20px; right: 20px;
+            background: rgba(5, 11, 30, 0.85);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--ouro-escuro);
+            padding: 8px 16px;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            z-index: 100;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5), inset 0 0 10px rgba(197, 168, 92, 0.2);
+            transition: all 0.3s ease;
+        }
         
-        .vol-slider-lux {
-            -webkit-appearance: none; width: 60px; height: 1px;
-            background: rgba(214, 175, 55, 0.2); outline: none; transition: 0.3s;
-        }
-        .vol-slider-lux::-webkit-slider-thumb {
-            -webkit-appearance: none; width: 5px; height: 5px;
-            background: var(--ouro-ativo); border-radius: 50%; cursor: pointer;
-            box-shadow: 0 0 6px var(--ouro-ativo);
+        .painel-musica-fixo:hover {
+            border-color: var(--ouro-brilhante);
+            box-shadow: 0 4px 25px rgba(197, 168, 92, 0.3);
         }
 
-        /* CARTA COM BORDA DE OURO ESCURO - EFEITO DE CORRER UM ATRÁS DO OUTRO */
-        .carta-wrapper {
-            position: relative; max-width: 750px; width: 100%;
-            padding: 2px; border-radius: 24px; overflow: hidden;
-            box-shadow: 0 25px 65px rgba(0,0,0,0.85);
+        .btn-controle {
+            background: transparent;
+            border: 1px solid var(--ouro-brilhante);
+            color: var(--ouro-brilhante);
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.7rem;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: 0.3s;
         }
-        .carta-wrapper::before {
-            content: ""; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+
+        .btn-controle:hover { 
+            background: var(--ouro-brilhante); 
+            color: var(--azul-cosmos);
+            box-shadow: 0 0 8px var(--ouro-brilhante);
+        }
+        
+        .vol-slider { 
+            cursor: pointer; 
+            accent-color: var(--ouro-brilhante); 
+            width: 70px; 
+            opacity: 0.7;
+            transition: opacity 0.3s;
+        }
+        .vol-slider:hover { opacity: 1; }
+
+        .titulo-final {
+            font-family: 'Cinzel', serif;
+            font-size: 2.8rem;
+            text-transform: uppercase;
+            letter-spacing: 8px;
+            text-align: center;
+            margin-bottom: 30px;
+            background: linear-gradient(135deg, #fff 0%, #cbd5e1 50%, #94a3b8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 2px 8px rgba(0,0,0,0.8));
+            font-weight: 700;
+        }
+
+        /* CARD PRINCIPAL */
+        .card-principal {
+            max-width: 750px;
+            width: 100%;
+            position: relative;
+            background: var(--azul-card);
+            border-radius: 24px;
+            padding: 3px;
+            overflow: hidden;
+            box-shadow: 0 40px 80px rgba(0,0,0,0.8);
+        }
+
+        .card-principal::before {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
             background: conic-gradient(
                 transparent, 
-                var(--ouro-escuro), 
-                transparent 15%, 
-                transparent 50%, 
-                var(--ouro-ativo), 
-                transparent 65%
+                var(--ouro-escuro) 25%, 
+                var(--ouro-brilhante) 50%, 
+                var(--ouro-escuro) 75%, 
+                transparent 100%
             );
-            animation: girarBordaOuro 5s linear infinite;
-        }
-        @keyframes girarBordaOuro { 100% { transform: rotate(360deg); } }
-
-        .carta-container {
-            background: #020612; padding: 55px 45px; border-radius: 22px;
-            position: relative; z-index: 1; text-align: center;
+            animation: rodarOuro 6s linear infinite;
+            z-index: 1;
         }
 
-        h1 {
-            font-family: 'Cinzel', serif; font-size: 1.9rem; letter-spacing: 8px;
-            margin-bottom: 45px; color: var(--prata-luxo); font-weight: 400;
-            text-shadow: 0 2px 15px rgba(255,255,255,0.05);
+        @keyframes rodarOuro {
+            100% { transform: rotate(360deg); }
         }
 
-        /* --- CENÁRIO DA OSTRA REALISTA --- */
+        .papel-interno {
+            position: relative;
+            z-index: 2;
+            background: radial-gradient(circle at top, #091333 0%, var(--azul-card) 100%);
+            padding: 50px 35px;
+            color: var(--texto-claro);
+            border-radius: 22px;
+            text-align: center;
+        }
+
+        .card-desfecho {
+            background: rgba(2, 6, 23, 0.4);
+            border: 1px solid rgba(197, 168, 92, 0.2);
+            border-radius: 16px;
+            padding: 40px 25px;
+            backdrop-filter: blur(5px);
+        }
+
+        /* --- NOVO CENÁRIO DA OSTRA TRIDIMENSIONAL E TEXTURIZADA --- */
         .cenario-ostra {
-            height: 260px; display: flex; justify-content: center; align-items: flex-end; padding-bottom: 20px; margin-bottom: 35px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 250px;
+            margin: 20px 0 35px 0;
+            perspective: 1000px;
+            position: relative;
+        }
+
+        .ostra {
+            position: relative;
+            width: 180px;
+            height: 140px;
+            cursor: pointer;
+            transform-style: preserve-3d;
+            transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
         }
         
-        .ostra {
-            position: relative; width: 150px; height: 130px; cursor: pointer;
-            perspective: 1200px;
+        .ostra:hover {
+            transform: scale(1.04);
         }
 
-        .concha {
-            position: absolute; width: 100%; height: 100%;
-            left: 0; background-size: 100% 100%;
-            transition: transform 2.5s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        /* Concha Superior (Tampa estriada) */
-        .concha.superior {
-            top: -5px; z-index: 3; transform-origin: bottom center;
-            border-radius: 50% 50% 15% 15% / 70% 70% 25% 25%;
+        /* Concha Superior: Reconstruída com relevos, ranhuras e sombras volumétricas */
+        .concha-superior {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 55%;
             background: 
-                linear-gradient(to right, transparent 48%, rgba(255,255,255,0.04) 49%, rgba(0,0,0,0.4) 50%, transparent 52%),
-                linear-gradient(15deg, transparent 30%, rgba(255,255,255,0.03) 50%, transparent 70%),
-                radial-gradient(ellipse at bottom, #2d3748 10%, #1a202c 50%, #0f172a 100%);
+                repeating-linear-gradient(90deg, transparent, transparent 14px, rgba(0,0,0,0.2) 15px, rgba(255,255,255,0.04) 16px),
+                linear-gradient(to bottom, rgba(255,255,255,0.05) 0%, transparent 40%, rgba(0,0,0,0.5) 100%),
+                linear-gradient(135deg, #4e5d6c 0%, #2c3a47 40%, #16222f 75%, #090f16 100%);
+            border: 2.5px solid #576574;
+            border-bottom: 4px solid #1e272e;
+            border-radius: 90px 90px 40px 40px;
+            z-index: 3;
+            transform-origin: bottom center;
+            transition: transform 1.8s cubic-bezier(0.4, 0, 0.2, 1);
             box-shadow: 
-                inset 0 8px 15px rgba(255,255,255,0.1),
-                inset 0 -10px 20px rgba(0,0,0,0.6),
-                0 6px 15px rgba(0,0,0,0.5);
+                inset 0 8px 16px rgba(255,255,255,0.12), 
+                inset 0 -12px 25px rgba(0,0,0,0.75),
+                0 -6px 15px rgba(0,0,0,0.6);
         }
 
-        .concha.superior::before {
-            content: ''; position: absolute; width: 100%; height: 100%; top: 0; left: 0;
+        /* Textura áspera e ranhuras orgânicas circulares adicionais */
+        .concha-superior::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
             border-radius: inherit;
-            background: repeating-linear-gradient(90deg, transparent, transparent 12px, rgba(0,0,0,0.25) 13px, rgba(255,255,255,0.03) 14px);
-            opacity: 0.8;
+            background: radial-gradient(ellipse at 50% 100%, transparent 35%, rgba(0,0,0,0.25) 50%, rgba(255,255,255,0.03) 53%, transparent 65%);
+            pointer-events: none;
         }
 
-        /* Concha Inferior */
-        .concha.inferior {
-            bottom: -5px; z-index: 1;
-            border-radius: 15% 15% 50% 50% / 25% 25% 70% 70%;
-            background: radial-gradient(ellipse at top, #1e293b 20%, #0f172a 60%, #020617 100%);
-            box-shadow: inset 0 -5px 15px rgba(0,0,0,0.8), inset 0 10px 20px rgba(255,255,255,0.05);
+        .ostra.aberta .concha-superior {
+            transform: rotateX(-125deg) translateY(-25px);
         }
 
-        .ostra.aberta .concha.superior {
-            transform: rotateX(-115deg) translateZ(15px);
+        /* Concha Inferior: Cama côncava com efeito de madrepérola realitsta */
+        .concha-inferior {
+            position: absolute;
+            bottom: 0; left: 0; width: 100%; height: 52%;
+            background: 
+                linear-gradient(to bottom, rgba(0,0,0,0.4) 0%, transparent 25%),
+                radial-gradient(circle at 50% 45%, #ffffff 0%, #e2e8f0 20%, #94a3b8 55%, #334155 85%, #0f172a 100%);
+            border: 2.5px solid #3b4856;
+            border-top: 1px solid #64748b;
+            border-radius: 40px 40px 90px 90px;
+            z-index: 1;
+            box-shadow: 
+                inset 0 -10px 30px rgba(0,0,0,0.85), 
+                inset 0 12px 20px rgba(255,255,255,0.4),
+                0 12px 28px rgba(0,0,0,0.65);
         }
 
-        /* --- PÉROLA NEGRA EXCLUSIVA COM LUZ PRATA --- */
+        /* Sombra interna para dar efeito de profundidade à concha inferior */
+        .concha-inferior::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            border-radius: inherit;
+            background: radial-gradient(circle at 50% 50%, transparent 40%, rgba(0,0,0,0.3) 80%);
+            pointer-events: none;
+        }
+
+        /* Pérola Negra de Alta Definição */
         .perola-negra {
-            position: absolute; bottom: 35px; left: 50%; width: 30px; height: 30px;
-            /* Corpo Negro Fino e Acetinado */
-            background: radial-gradient(circle at 35% 35%, #2c3e50 0%, #0f172a 60%, #020617 100%);
-            border-radius: 50%; z-index: 2;
+            position: absolute;
+            bottom: 18%; left: 50%;
+            width: 32px; height: 32px;
+            background: radial-gradient(circle at 35% 30%, #ffffff 0%, #cbd5e1 12%, #475569 45%, #0f172a 80%, #000000 100%);
+            border-radius: 50%;
+            z-index: 2;
             transform: translateX(-50%) scale(0);
-            transition: transform 2s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.9);
+            transition: transform 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) 0.6s, bottom 1.5s cubic-bezier(0.25, 1, 0.5, 1);
+            box-shadow: 0 5px 12px rgba(0,0,0,0.85), inset -2px -2px 6px rgba(0,0,0,0.9);
+            cursor: pointer;
         }
 
         .ostra.aberta .perola-negra {
             transform: translateX(-50%) scale(1);
         }
 
-        /* Efeito de Flutuar Acima da Ostra com Brilho Prateado */
-        .perola-negra.flutuando {
-            animation: flutuarEfeitoPrata 5s infinite ease-in-out forwards;
-            border: 0.5px solid rgba(255, 255, 255, 0.1);
+        /* EFEITO DE FLUTUAÇÃO COM BRILHO PRATEADO SUAVE E RELUZENTE (Atrativo e Sofisticado) */
+        .perola-negra.libertada {
+            bottom: 145px;
+            transform: translateX(-50%) scale(1.45);
+            animation: flutuarEBrilharAtrativo 4s infinite ease-in-out;
+            z-index: 99;
         }
 
-        @keyframes flutuarEfeitoPrata {
-            0%, 100% { 
-                bottom: 35px; 
-                transform: translateX(-50%) scale(1);
-                filter: drop-shadow(0 0 8px rgba(226, 232, 240, 0.3));
+        @keyframes flutuarEBrilharAtrativo {
+            0%, 100% {
+                transform: translateX(-50%) scale(1.45) translateY(0px);
+                filter: drop-shadow(0 0 12px rgba(226, 232, 240, 0.5)) drop-shadow(0 0 25px rgba(255, 255, 255, 0.25));
+                box-shadow: 
+                    0 10px 20px rgba(0,0,0,0.45),
+                    inset -1px -1px 5px rgba(0,0,0,0.9);
             }
-            50% { 
-                /* Sobe para ficar flutuando perfeitamente por cima da concha aberta */
-                bottom: 150px; 
-                transform: translateX(-50%) scale(1.3);
-                /* Efeito exclusivo de Luz Prata Líquida e Luxuosa */
-                filter: drop-shadow(0 0 25px rgba(226, 232, 240, 0.85));
-                box-shadow: 0 0 20px rgba(226, 232, 240, 0.2);
+            50% {
+                transform: translateX(-50%) scale(1.45) translateY(-10px);
+                filter: drop-shadow(0 0 20px rgba(226, 232, 240, 0.7)) drop-shadow(0 0 40px rgba(255, 255, 255, 0.35));
+                box-shadow: 
+                    0 22px 28px rgba(0,0,0,0.35),
+                    inset -1px -1px 5px rgba(0,0,0,0.9);
             }
         }
 
-        .texto { font-size: 1.05rem; line-height: 1.95; margin-bottom: 28px; text-align: justify; color: #94a3b8; }
-        .texto::first-letter { font-family: 'Cinzel'; font-size: 1.3rem; color: var(--ouro-ativo); }
-
-        .citacao-ouro {
-            font-style: italic; color: var(--ouro-ativo); font-size: 1.15rem;
-            margin-top: 50px; text-align: center; border-top: 1px solid rgba(214, 175, 55, 0.15);
-            padding-top: 35px; line-height: 1.6;
+        .texto-conclusao {
+            font-size: 1.15rem;
+            line-height: 1.9;
+            text-align: justify;
+            margin-bottom: 25px;
+            color: #cbd5e1;
         }
 
-        .fim-jornada { font-family: 'Cinzel'; font-size: 0.75rem; letter-spacing: 5px; margin-top: 45px; opacity: 0.35; }
+        /* FRASE DE SUPERAÇÃO MELHORADA */
+        .texto-desfecho-italico {
+            font-family: 'Lora', serif;
+            font-style: italic;
+            font-size: 1.3rem;
+            line-height: 1.8;
+            color: var(--texto-ouro);
+            padding: 25px 20px 10px 20px;
+            border-top: 1px solid rgba(197, 168, 92, 0.15);
+            margin-top: 35px;
+            text-align: center;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+        }
+
+        .mensagem-final {
+            font-family: 'Cinzel', serif;
+            font-size: 1.8rem;
+            letter-spacing: 6px;
+            color: var(--ouro-brilhante);
+            font-weight: bold;
+            margin-top: 35px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
+
+        .creditos {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.7rem;
+            color: #475569;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            margin-top: 40px;
+        }
+
+        @media (max-width: 600px) {
+            .titulo-final { font-size: 1.8rem; letter-spacing: 4px; }
+            .papel-interno { padding: 35px 20px; }
+            .texto-conclusao { font-size: 1rem; line-height: 1.7; }
+            .texto-desfecho-italico { font-size: 1.15rem; }
+            .mensagem-final { font-size: 1.3rem; }
+            .painel-musica-fixo { top: 10px; right: 10px; padding: 6px 12px; }
+            .cenario-ostra { height: 230px; }
+            .ostra { width: 155px; height: 120px; }
+            .perola-negra.libertada { bottom: 125px; }
+        }
     </style>
 </head>
-<body onclick="garantirMusica()">
+<body onclick="iniciarAudio()">
 
     <div id="fundo-cosmos"></div>
 
-    <div class="audio-container-lux" onclick="event.stopPropagation()">
-        <button class="btn-audio-lux" id="playPauseBtn">Pause</button>
-        <input type="range" class="vol-slider-lux" id="volumeSlider" min="0" max="1" step="0.01" value="0.5">
-    </div>
-
-    <div class="carta-wrapper">
-        <div class="carta-container">
-            <h1>O Destino Encontrado</h1>
-
-            <div class="cenario-ostra">
-                <div class="ostra" id="ostraCompleta" onclick="controlarOstra(event)">
-                    <div class="concha superior"></div>
-                    <div class="perola-negra" id="perolaJoia"></div>
-                    <div class="concha inferior"></div>
-                </div>
-            </div>
-
-            <p class="texto">
-                Existe uma célebre fábula sobre a ostra: para que uma pérola nasça, é preciso que um grão de areia entre em seu interior e cause uma ferida profunda. A ostra não destrói o invasor; em vez disso, ela o envolve cuidadosamente com camadas de nácar, transformando a dor em uma joia rara.
-            </p>
-
-            <p class="texto">
-                As dores do caminho transformaram-se em preciosas pérolas de sabedoria. Sob o manto infinito do cosmos, o horizonte agora é o chão que você pisa com paz no coração.
-            </p>
-
-            <p class="citacao-ouro">
-                "A pérola negra prova que a dor não te venceu: ela foi transformada em poder."
-            </p>
-
-            <div class="fim-jornada">— FIM —</div>
+    <!-- CONTROLE FLUTUANTE DE ÁUDIO -->
+    <div class="painel-musica-fixo" onclick="event.stopPropagation()">
+        <button class="btn-controle" id="playPause">PAUSE</button>
+        <div style="display:flex; align-items:center; gap:6px;">
+            <span style="color:var(--ouro-brilhante); font-size:10px;">🔈</span>
+            <input type="range" class="vol-slider" min="0" max="1" step="0.05" value="1" oninput="ajustarVol(this.value)">
+            <span style="color:var(--ouro-brilhante); font-size:10px;">🔊</span>
         </div>
     </div>
 
-    <audio id="musicaFundo" src="elvis.html.mp3" loop></audio>
+    <h1 class="titulo-final">O Destino Encontrado</h1>
+
+    <div class="card-principal">
+        <div class="papel-interno">
+            
+            <div class="card-desfecho">
+                
+                <!-- Cenário Interativo Tridimensional Fiel -->
+                <div class="cenario-ostra">
+                    <div class="ostra" id="ostraAnimada" onclick="alternarOstra(event)">
+                        <div class="concha-superior"></div>
+                        <div class="perola-negra" id="perolaMagica" onclick="libertarPerola(event)"></div>
+                        <div class="concha-inferior"></div>
+                    </div>
+                </div>
+
+                <p class="texto-conclusao">
+                    Existe uma célebre fábula sobre a ostra: para que uma pérola nasça, é preciso que um grão de areia entre em seu interior e cause uma ferida profunda. A ostra não destrói o invasor; em vez disso, ela o envolve cuidadosamente com camadas de nácar brilhante, transformando a dor e o incômodo em uma joia rara.
+                </p>
+                
+                <p class="texto-conclusao">
+                    A estrada longa ficou para trás e as dores do caminho transformaram-se em preciosas pérolas de sabedoria. Sob o manto infinito do cosmos, compreendemos que cada curva, cada grão de areia e cada passo incerto faziam parte de um plano maior. O horizonte não é mais um limite distante; agora, ele é o chão que você pisa com paz no coração, carregando a beleza da sua própria pérola negra.
+                </p>
+
+                <!-- Frase de Superação -->
+                <p class="texto-desfecho-italico">
+                    "Ser forte é entender que os golpes da vida acontecem, mas a pérola negra prova que a dor não te venceu: ela foi engolida, dominada e transformada em poder."
+                </p>
+
+                <div class="mensagem-final">FIM DA JORNADA</div>
+
+                <div class="creditos">Gratidão por cada passo compartilhado</div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <audio id="trilha" src="elvis.html.mp3" loop></audio>
 
     <script>
-        const som = document.getElementById('musicaFundo');
-        const btnPP = document.getElementById('playPauseBtn');
-        const sliderVol = document.getElementById('volumeSlider');
-        const ostraObj = document.getElementById('ostraCompleta');
-        const perolaObj = document.getElementById('perolaJoia');
+        const audio = document.getElementById('trilha');
+        const btnPP = document.getElementById('playPause');
+        const ostra = document.getElementById('ostraAnimada');
+        const perola = document.getElementById('perolaMagica');
 
-        window.addEventListener('DOMContentLoaded', () => {
-            som.volume = 0.5;
-            sliderVol.value = 0.5;
+        // Gerar estrelas/partículas de fundo
+        const cosmos = document.getElementById('fundo-cosmos');
+        const fragmentoEstrelas = document.createDocumentFragment();
+        for (let i = 0; i < 70; i++) {
+            const estrela = document.createElement('div');
+            estrela.className = 'estrela';
+            const tamanho = Math.random() * 3 + 0.5;
+            estrela.style.width = tamanho + 'px';
+            estrela.style.height = tamanho + 'px';
+            estrela.style.top = Math.random() * 100 + '%';
+            estrela.style.left = Math.random() * 100 + '%';
+            estrela.style.animationDuration = (Math.random() * 4 + 2) + 's';
+            fragmentoEstrelas.appendChild(estrela);
+        }
+        cosmos.appendChild(fragmentoEstrelas);
 
-            const tempoPassado = localStorage.getItem('musica_tempo');
-            if (tempoPassado) som.currentTime = parseFloat(tempoPassado);
+        window.onload = () => {
+            document.body.style.opacity = '1';
 
-            som.play().then(() => { btnPP.innerText = "Pause"; })
-                      .catch(() => { btnPP.innerText = "Play"; });
+            // Sincronização do áudio
+            const tempoSalvo = localStorage.getItem('musica_tempo');
+            if (tempoSalvo) {
+                audio.currentTime = parseFloat(tempoSalvo);
+            }
+            
+            audio.play().then(() => {
+                btnPP.innerText = "PAUSE";
+            }).catch(() => {
+                btnPP.innerText = "PLAY";
+            });
 
-            // Inicia fechada, aguardando o clique para a revelação mágica
-        });
+            // Abertura elegante e automática da ostra após carregamento
+            setTimeout(() => {
+                ostra.classList.add('aberta');
+            }, 1400);
+        };
 
-        function controlarOstra(e) {
+        setInterval(() => {
+            if (!audio.paused) {
+                localStorage.setItem('musica_tempo', audio.currentTime);
+            }
+        }, 1000);
+
+        function alternarOstra(e) {
             e.stopPropagation();
-            if (ostraObj.classList.contains('aberta')) {
-                perolaObj.classList.remove('flutuando');
-                ostraObj.classList.remove('aberta');
-            } else {
-                ostraObj.classList.add('aberta');
-                // Pequeno delay elegante para a pérola começar a subir com a luz prata
-                setTimeout(() => {
-                    perolaObj.classList.add('flutuando');
-                }, 400);
+            if (perola.classList.contains('libertada')) {
+                perola.classList.remove('libertada');
+            }
+            ostra.classList.toggle('aberta');
+        }
+
+        // Faz a pérola subir, parar flutuando fixamente e começar a reluzir de forma atrativa
+        function libertarPerola(e) {
+            e.stopPropagation(); 
+            if (ostra.classList.contains('aberta')) {
+                perola.classList.toggle('libertada');
             }
         }
 
-        function garantirMusica() { if (som.paused) { som.play(); btnPP.innerText = "Pause"; } }
+        function iniciarAudio() {
+            if (audio.paused) {
+                audio.play();
+                btnPP.innerText = "PAUSE";
+            }
+        }
 
         btnPP.onclick = (e) => {
             e.stopPropagation();
-            if (som.paused) { som.play(); btnPP.innerText = "Pause"; }
-            else { som.pause(); btnPP.innerText = "Play"; }
+            if (audio.paused) {
+                audio.play();
+                btnPP.innerText = "PAUSE";
+            } else {
+                audio.pause();
+                btnPP.innerText = "PLAY";
+            }
         };
 
-        sliderVol.oninput = (e) => { som.volume = e.target.value; };
-
-        const cosmosBox = document.getElementById('fundo-cosmos');
-        for (let i = 0; i < 65; i++) {
-            const star = document.createElement('div');
-            star.className = 'estrela';
-            const tamanho = Math.random() * 2;
-            star.style.width = tamanho + 'px'; star.style.height = tamanho + 'px';
-            star.style.top = Math.random() * 100 + '%'; star.style.left = Math.random() * 100 + '%';
-            star.style.animationDuration = (Math.random() * 3 + 2) + 's';
-            cosmosBox.appendChild(star);
-        }
+        function ajustarVol(v) { audio.volume = v; }
     </script>
 </body>
 </html>
