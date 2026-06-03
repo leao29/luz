@@ -124,30 +124,19 @@
             font-weight: 700;
         }
 
-        /* CARD PRINCIPAL COM SUPORTE A TRANSFORMAÇÃO EM LIVRO */
+        /* CARD PRINCIPAL SEM O EFEITO DE OURO GIRATÓRIO */
         .card-principal {
             max-width: 750px;
             width: 100%;
             position: relative;
             background: var(--azul-card);
             border-radius: 24px;
-            padding: 3px;
+            padding: 1px;
             box-shadow: 0 40px 80px rgba(0,0,0,0.8);
             transition: transform 2s cubic-bezier(0.66, 0, 0.34, 1), width 2s ease, max-width 2s ease, border-radius 2s ease;
             transform-style: preserve-3d;
+            border: 1px solid rgba(197, 168, 92, 0.2); /* Uma borda sutil e estática para acabamento */
         }
-
-        .card-principal::before {
-            content: '';
-            position: absolute;
-            top: -50%; left: -50%;
-            width: 200%; height: 200%;
-            background: conic-gradient(transparent, var(--ouro-escuro) 25%, var(--ouro-brilhante) 50%, var(--ouro-escuro) 75%, transparent 100%);
-            animation: rodarOuro 12s linear infinite;
-            z-index: 1;
-        }
-
-        @keyframes rodarOuro { 100% { transform: rotate(360deg); } }
 
         .papel-interno {
             position: relative;
