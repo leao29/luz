@@ -93,7 +93,7 @@
             position: relative; z-index: 1; border: 1px solid rgba(255,255,255,0.02);
         }
 
-        /* Novo Card de Instrução/Dedicação */
+        /* Card de Instrução/Dedicação */
         .card-instrucao {
             max-width: 700px; width: 100%;
             margin-top: 40px; margin-bottom: 10px;
@@ -153,7 +153,6 @@
         </div>
     </div>
 
-    <!-- Novo card adicionado entre a carta e os links de música -->
     <div class="card-instrucao">
         <p>“Toque em cada uma destas canções... Desejo, do fundo do meu coração, que através de cada acorde você consiga sentir exatamente o que sinto quando penso em você.”.</p>
     </div>
@@ -169,7 +168,8 @@
         <a class="card-musica" href="https://youtu.be/u9Dg-g7t2l4" target="_blank"><strong>The Sound Of Silence</strong><p>A profundidade do silêncio.</p></a>
     </div>
 
-    <button class="btn-fim" onclick="window.location.href='fim.html'">Seguir para o Destino Final</button>
+    <!-- Redirecionamento configurado para salvar o estado exato da trilha antes da transição -->
+    <button class="btn-fim" id="btn-ir-fim">Seguir para o Destino Final</button>
 
     <audio id="audio" src="elvis.html.mp3" loop></audio>
 
@@ -178,6 +178,7 @@
         const btnPlay = document.getElementById('btn-audio');
         const btnVolUp = document.getElementById('btn-vol-up');
         const btnVolDown = document.getElementById('btn-vol-down');
+        const btnIrFim = document.getElementById('btn-ir-fim');
         const cosmos = document.getElementById('cosmos');
 
         // Criando estrelas prateadas
@@ -191,15 +192,33 @@
             cosmos.appendChild(star);
         }
 
-        // Configuração inicial do áudio
+        // Recupera tempo salvo (caso volte para esta página) ou inicia do zero
         window.addEventListener('load', () => {
             audio.volume = 0.4;
+            const tempoSalvo = localStorage.getItem('musica_tempo');
+            if (tempoSalvo) {
+                audio.currentTime = parseFloat(tempoSalvo);
+            }
+
             audio.play().then(() => {
                 btnPlay.textContent = '||';
             }).catch(() => {
                 btnPlay.textContent = '♪';
                 console.log("Interação necessária para iniciar o áudio.");
             });
+        });
+
+        // Atualiza constantemente o tempo no localStorage enquanto a música toca
+        setInterval(() => {
+            if (!audio.paused) {
+                localStorage.setItem('musica_tempo', audio.currentTime);
+            }
+        }, 1000);
+
+        // Ação ao clicar no botão de ir para a tela final
+        btnIrFim.addEventListener('click', () => {
+            localStorage.setItem('musica_tempo', audio.currentTime);
+            window.location.href = 'fim.html';
         });
 
         // Controle de Play / Pause
@@ -231,12 +250,13 @@
             }
         });
 
-        // Pausar o áudio da página quando clicar em qualquer card do YouTube
+        // Pausar o áudio de fundo quando clicar em links externos do YouTube para não encavalar o som
         const linksMusica = document.querySelectorAll('.card-musica');
         linksMusica.forEach(link => {
             link.addEventListener('click', () => {
                 audio.pause();
                 btnPlay.textContent = '♪';
+                localStorage.setItem('musica_tempo', audio.currentTime);
             });
         });
     </script>
