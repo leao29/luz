@@ -13,7 +13,6 @@
             --ouro-brilhante: #c5a85c;
             --texto-claro: #f1f5f9;
             --texto-ouro: #e2c792;
-            --prata-brilhante: rgba(226, 232, 240, 0.8);
         }
 
         * { box-sizing: border-box; }
@@ -154,8 +153,8 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            height: 320px;
-            margin: 10px 0 30px 0;
+            height: 310px;
+            margin: 10px 0 20px 0;
             position: relative;
         }
 
@@ -234,23 +233,26 @@
             }
         }
 
-        /* INSTRUÇÃO DE TOQUE */
+        /* TEXTO DE INSTRUÇÃO MELHORADO COM ALTO CONTRASTE */
         .instrucao-toque {
-            margin-top: 20px;
+            margin-top: 25px;
             font-family: 'Orbitron', sans-serif;
-            font-size: 0.75rem;
-            color: var(--texto-ouro);
+            font-size: 0.8rem;
+            color: var(--ouro-brilhante);
             letter-spacing: 2px;
             text-transform: uppercase;
-            opacity: 0.8;
-            animation: brilhoTexto 2s infinite ease-in-out;
+            font-weight: 600;
+            display: block !important;
+            visibility: visible !important;
+            opacity: 0.9;
+            animation: brilhoTexto 2.5s infinite ease-in-out;
             pointer-events: none;
-            transition: opacity 0.5s ease;
+            transition: opacity 0.4s ease;
         }
 
         @keyframes brilhoTexto {
-            0%, 100% { opacity: 0.4; text-shadow: 0 0 0px transparent; }
-            50% { opacity: 1; text-shadow: 0 0 8px var(--ouro-brilhante); }
+            0%, 100% { opacity: 0.5; text-shadow: 0 0 2px rgba(197, 168, 92, 0.3); }
+            50% { opacity: 1; text-shadow: 0 0 12px var(--ouro-brilhante); }
         }
 
         .texto-conclusao {
@@ -322,6 +324,7 @@
                 
                 <div class="cenario-ostra">
                     <div class="ostra-container" id="ostraMagica" onclick="cliqueOstra()">
+                        <!-- Concha Superior SVG -->
                         <svg class="concha-sup-svg" viewBox="0 0 100 65" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M50 2C22 2 5 15 5 35C5 45 15 55 50 62C85 55 95 45 95 35C95 15 78 2 50 2Z" fill="url(#gradienteConcha)" stroke="#475569" stroke-width="0.7"/>
                             <path d="M50 62C50 40 40 10 30 5M50 62C53 40 65 10 70 5M50 62C45 35 18 20 12 18M50 62C55 35 82 20 88 18" stroke="rgba(255,255,255,0.08)" stroke-width="0.5"/>
@@ -336,6 +339,7 @@
 
                         <div class="perola-negra" id="perolaMagica"></div>
 
+                        <!-- Concha Inferior SVG -->
                         <svg class="concha-inf-svg" viewBox="0 0 100 65" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M50 63C22 63 5 50 5 30C5 20 20 4 50 2C80 4 95 20 95 30C95 50 78 63 50 63Z" fill="url(#gradienteMadreperola)" stroke="#334155" stroke-width="0.7"/>
                             <path d="M50 2C42 20 25 35 10 38M50 2C58 20 75 35 90 38" stroke="rgba(255,255,255,0.15)" stroke-width="0.4"/>
@@ -349,11 +353,12 @@
                             </defs>
                         </svg>
                     </div>
-                    <div class="instrucao-toque" id="textoInstrucao">Toque na ostra para revelar sua joia</div>
+                    <!-- TEXTO REPOSICIONADO E ESTRUTURADO -->
+                    <div class="instrucao-toque" id="textoInstrucao">Aperte na ostra para revelar a pérola</div>
                 </div>
 
                 <p class="texto-conclusao">
-                    Existe uma célebre fábula sobre a ostra: para que uma pérola nasça, é preciso que um grão de areia entre em seu interior e cause uma ferida profunda. A ostra não destrói o invasor; em vez disso, ela o envolve cuidadosamente com camadas de nácar brilhante, transformando a dor e o incômodo em uma joia rara.
+                    Existe uma célebre fábula sobre a ostra: para que uma pérola nasça, é preciso que um grão de areia entre em seu interior e cause uma ferida profunda. A ostra não destrói o invasor; in vez disso, ela o envolve cuidadosamente com camadas de nácar brilhante, transformando a dor e o incômodo em uma joia rara.
                 </p>
                 
                 <p class="texto-conclusao">
@@ -402,7 +407,7 @@
         function cliqueOstra() {
             if (!ostraContainer.classList.contains('aberta')) {
                 ostraContainer.classList.add('aberta');
-                instrucao.style.opacity = "0"; // Esconde o texto ao abrir
+                instrucao.style.opacity = "0"; // Esconde o texto ao abrir para dar foco à pérola
                 setTimeout(() => {
                     perola.classList.add('flutuando');
                 }, 300);
@@ -410,7 +415,7 @@
                 perola.classList.remove('flutuando');
                 setTimeout(() => {
                     ostraContainer.classList.remove('aberta');
-                    instrucao.style.opacity = "0.8"; // Mostra o texto ao fechar
+                    instrucao.style.opacity = "0.9"; // Traz o texto de volta ao fechar
                 }, 400);
             }
         }
