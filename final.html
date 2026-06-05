@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Final </title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #030308;
+            /* Fundo Cósmico */
+            background-image: 
+                radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 40px),
+                radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 30px),
+                radial-gradient(white, rgba(255,255,255,.1) 2px, transparent 40px);
+            background-size: 550px 550px, 350px 350px, 250px 250px;
+            background-position: 0 0, 40px 60px, 130px 270px;
+            animation: estrelasPulsantes 4s infinite alternate ease-in-out;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+            padding: 20px;
+        }
+
+        /* Animação das estrelas prateadas do fundo */
+        @keyframes estrelasPulsantes {
+            0% { opacity: 0.6; }
+            100% { opacity: 1; filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.8)); }
+        }
+
+        /* Elemento da Ostra Negra (Débora) Flutuante */
+        .ostra-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 20px;
+            animation: flutuarOstra 5s infinite ease-in-out;
+            position: relative;
+        }
+
+        .ostra-imagem {
+            width: 180px; /* Ajuste o tamanho conforme sua imagem do Canva */
+            height: auto;
+            filter: drop-shadow(0 0 15px rgba(212, 212, 212, 0.6));
+        }
+
+        /* Brilhos Prateados ao redor da ostra */
+        .ostra-container::before, .ostra-container::after {
+            content: '✦';
+            position: absolute;
+            color: #e6e6e6;
+            font-size: 20px;
+            animation: brilhoPrata 2s infinite alternate;
+        }
+        .ostra-container::before { top: -10px; left: -10px; animation-delay: 0.5s; }
+        .ostra-container::after { bottom: 10px; right: -10px; }
+
+        @keyframes flutuarOstra {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+
+        @keyframes brilhoPrata {
+            0% { opacity: 0.3; transform: scale(0.8) rotate(0deg); }
+            100% { opacity: 1; transform: scale(1.2) rotate(45deg); filter: drop-shadow(0 0 8px #fff); }
+        }
+
+        /* Card Luxuoso Azul Escuro Quase Preto */
+        .card-final {
+            background: linear-gradient(135deg, #050510, #0a0a1a);
+            border-radius: 20px;
+            padding: 40px;
+            width: 100%;
+            max-width: 550px;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+            overflow: hidden;
+        }
+
+        /* Bordas Neon Suaves e Delicadas que se perseguem */
+        .card-final::before, .card-final::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            border-radius: 20px;
+            padding: 2px; /* Espessura da borda */
+            background: linear-gradient(90deg, transparent, #00f0ff, #ff0077, transparent);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            animation: moverBorda 4s linear infinite;
+        }
+        .card-final::after {
+            animation-delay: -2s; /* Faz uma linha correr atrás da outra */
+        }
+
+        @keyframes moverBorda {
+            0% { filter: hue-rotate(0deg) blur(1px); background-position: 0% 50%; }
+            100% { filter: hue-rotate(360deg) blur(1px); background-position: 200% 50%; }
+        }
+
+        /* Elementos Visuais Realistas de Psiquiatria e Coração */
+        .visuais-container {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .imagem-realista {
+            width: 110px;
+            height: 110px;
+            object-fit: contain;
+        }
+
+        /* Animação do Coração Pulsante Realista */
+        .coracao-pulsante {
+            animation: pulsoRealista 1.2s infinite cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        @keyframes pulsoRealista {
+            0% { transform: scale(1); }
+            25% { transform: scale(1.08); }
+            40% { transform: scale(1.02); }
+            60% { transform: scale(1.15); }
+            100% { transform: scale(1); }
+        }
+
+        /* Frase do Card */
+        .texto-frase {
+            font-size: 1.15rem;
+            line-height: 1.6;
+            color: #f0f0f5;
+            margin-bottom: 30px;
+            font-style: italic;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.6);
+        }
+
+        /* Player de Música Luxuoso e Sutil de Prata */
+        .player-musica {
+            background: rgba(230, 230, 235, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 30px;
+            padding: 10px 20px;
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 4px 15px rgba(255,255,255,0.05);
+        }
+
+        .btn-audio {
+            background: none;
+            border: none;
+            color: #d4d4d4;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .btn-audio:hover {
+            color: #ffffff;
+            text-shadow: 0 0 8px #ffffff;
+        }
+
+        .controle-volume {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 80px;
+            height: 4px;
+            background: #444;
+            border-radius: 2px;
+            outline: none;
+            transition: background 0.3s;
+        }
+        .controle-volume::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #d4d4d4;
+            box-shadow: 0 0 5px #fff;
+            cursor: pointer;
+        }
+
+        /* Texto FIM - Letra Maiúscula Chumbada de Ferro Cor Prata */
+        .texto-fim {
+            margin-top: 40px;
+            font-size: 3.5rem;
+            font-weight: 900;
+            letter-spacing: 8px;
+            color: #737373; /* Cor base chumbo */
+            background: linear-gradient(180deg, #b3b3b3 0%, #595959 50%, #262626 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(2px 2px 1px rgba(0,0,0,0.8)) drop-shadow(0px 0px 10px rgba(255,255,255,0.1));
+            text-transform: uppercase;
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Ostra Negra Flutuante (Débora) com Brilhos -->
+    <div class="ostra-container">
+        <!-- Substitua pelo link da imagem da ostra feita no Canva -->
+        <img src="ostra-negra.png" alt="Ostra Negra Débora" class="ostra-imagem">
+    </div>
+
+    <!-- Card Principal -->
+    <div class="card-final">
+        
+        <!-- Elementos Visuais Reais -->
+        <div class="visuais-container">
+            <!-- Mente Psiquiatria Realista do Canva -->
+            <img src="mente-psiquiatria.png" alt="Mente Psiquiatria Realista" class="imagem-realista">
+            
+            <!-- Coração Realista Pulsante do Canva (Dica: salve como GIF no canva se quiser animação interna da imagem, ou use o pulso do código) -->
+            <img src="coracao-realista.png" alt="Coração Realista" class="imagem-realista coracao-pulsante">
+        </div>
+
+        <!-- Frase Solicitada -->
+        <p class="texto-frase">
+            "Por mais que possamos não ter tudo que queremos, que saibamos aprender a apreciar a beleza e com sutileza com as pessoas que são muito importantes em nossas vidas e uma delas agora é Você."
+        </p>
+
+        <!-- Player Luxuoso Prata com o arquivo elvis.html.mp3 -->
+        <div class="player-musica">
+            <button class="btn-audio" id="playBtn">▶ Play</button>
+            <input type="range" class="controle-volume" id="volumeControl" min="0" max="1" step="0.05" value="0.5">
+            <audio id="musicaElvis" src="elvis.html.mp3" loop></audio>
+        </div>
+
+    </div>
+
+    <!-- Texto FIM estilo Ferro Chumbado Prata -->
+    <h1 class="texto-fim">FIM</h1>
+
+    <script>
+        const audio = document.getElementById('musicaElvis');
+        const playBtn = document.getElementById('playBtn');
+        const volumeControl = document.getElementById('volumeControl');
+
+        // Configura volume inicial sutil
+        audio.volume = 0.5;
+
+        // Função sutil para dar Play/Pause
+        playBtn.addEventListener('click', () => {
+            if (audio.paused) {
+                audio.play();
+                playBtn.innerHTML = "❚❚ Pause";
+            } else {
+                audio.pause();
+                playBtn.innerHTML = "▶ Play";
+            }
+        });
+
+        // Controle de aumentar e diminuir o som sutilmente
+        volumeControl.addEventListener('input', (e) => {
+            audio.volume = e.target.value;
+        });
+    </script>
+</body>
+</html>
