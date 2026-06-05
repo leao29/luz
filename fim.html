@@ -14,8 +14,6 @@
             --texto-claro: #f1f5f9;
             --texto-ouro: #e2c792;
             --madre-perola: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(203,213,225,0.05) 50%, rgba(197,168,92,0.05) 100%);
-            --prata-ferro: #70777a;
-            --prata-brilhante: #e2e8f0;
         }
 
         * { box-sizing: border-box; }
@@ -61,7 +59,7 @@
 
         @keyframes brilho {
             0%, 100% { opacity: 0.1; transform: scale(1); }
-            50% { opacity: 0.8; transform: scale(1.5); filter: drop-shadow(0 0 4px #fff); }
+            50% { opacity: 0.6; transform: scale(1.4); }
         }
 
         @keyframes cadente {
@@ -126,33 +124,18 @@
             font-weight: 700;
         }
 
-        /* CARD PRINCIPAL COM BORDA DOURADA CORRENDO */
+        /* CARD PRINCIPAL SEM O EFEITO DE OURO GIRATÓRIO */
         .card-principal {
             max-width: 750px;
             width: 100%;
             position: relative;
             background: var(--azul-card);
             border-radius: 24px;
-            padding: 3px;
+            padding: 1px;
             box-shadow: 0 40px 80px rgba(0,0,0,0.8);
             transition: transform 2s cubic-bezier(0.66, 0, 0.34, 1), width 2s ease, max-width 2s ease, border-radius 2s ease;
             transform-style: preserve-3d;
-            overflow: hidden;
-        }
-
-        /* Efeito Luxuoso de Borda Correndo */
-        .card-principal::before {
-            content: '';
-            position: absolute;
-            top: -50%; left: -50%;
-            width: 200%; height: 200%;
-            background: conic-gradient(from 0deg, transparent 20%, var(--ouro-brilhante) 40%, #fff 50%, var(--ouro-brilhante) 60%, transparent 80%);
-            animation: bordaCorrendo 6s linear infinite;
-            z-index: 1;
-        }
-
-        @keyframes bordaCorrendo {
-            100% { transform: rotate(360deg); }
+            border: 1px solid rgba(197, 168, 92, 0.2); /* Uma borda sutil e estática para acabamento */
         }
 
         .papel-interno {
@@ -166,11 +149,11 @@
             transition: opacity 1.5s ease;
         }
 
-        /* CAPA DO LIVRO FECHADO (DESFECHO FINAL) */
+        /* CAPA DO LIVRO FECHADO (ESCONDIDA INICIALMENTE) */
         .capa-livro {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle at center, #060b19 0%, #02040a 100%);
+            background: linear-gradient(135deg, #030712 0%, #0f172a 100%);
             border: 6px double var(--ouro-brilhante);
             border-radius: 12px;
             z-index: 10;
@@ -184,7 +167,6 @@
             pointer-events: none;
             transition: opacity 1s ease;
             box-shadow: inset 0 0 50px rgba(0,0,0,0.9);
-            padding: 30px;
         }
 
         .capa-livro::after {
@@ -223,93 +205,6 @@
             padding: 40px 25px;
             backdrop-filter: blur(5px);
             background-image: var(--madre-perola);
-        }
-
-        /* --- ARVORE GEOLOGICA DA MENTE E CORAÇÃO REALISTA --- */
-        .container-simbolos-psique {
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 20px;
-            margin: 30px 0;
-            padding: 20px;
-            background: rgba(5, 11, 30, 0.5);
-            border-radius: 20px;
-            border: 1px solid rgba(197, 168, 92, 0.1);
-        }
-
-        .visual-box {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            width: 220px;
-        }
-
-        .legenda-visual {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 0.65rem;
-            color: var(--texto-ouro);
-            margin-top: 15px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-        }
-
-        /* Árvore Geológica da Mente (Estilo Canva/Cristal) */
-        .arvore-mente-svg {
-            width: 140px;
-            height: 140px;
-            filter: drop-shadow(0 0 8px rgba(197, 168, 92, 0.3));
-        }
-
-        .brilho-sutil {
-            animation: brilhoFino 4s infinite ease-in-out;
-        }
-
-        @keyframes brilhoFino {
-            0%, 100% { opacity: 0.4; }
-            50% { opacity: 0.9; filter: drop-shadow(0 0 6px rgba(255,255,255,0.8)); }
-        }
-
-        /* Coração Quase Real que Pulsa */
-        .coracao-realista-svg {
-            width: 110px;
-            height: 110px;
-            animation: pulsoCardiaco Real 1.2s infinite cubic-bezier(0.25, 0.8, 0.25, 1);
-            filter: drop-shadow(0 0 12px rgba(239, 68, 68, 0.25));
-        }
-
-        @keyframes pulsoCardiacoReal {
-            0% { transform: scale(1); }
-            14% { transform: scale(1.12); }
-            28% { transform: scale(1.03); }
-            42% { transform: scale(1.18); }
-            70% { transform: scale(1); }
-        }
-
-        /* FRASE DA JORNADA INTERNA */
-        .frase-dedicatoria-luxo {
-            font-family: 'Lora', serif;
-            font-style: italic;
-            font-size: 1.25rem;
-            line-height: 1.8;
-            color: #f8fafc;
-            text-align: center;
-            margin: 35px auto;
-            max-width: 620px;
-            padding: 20px;
-            border-left: 2px solid var(--ouro-brilhante);
-            border-right: 2px solid var(--ouro-brilhante);
-            background: rgba(197, 168, 92, 0.03);
-            border-radius: 8px;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
-        }
-
-        .destaque-voce {
-            color: var(--texto-ouro);
-            font-weight: 600;
-            font-family: 'Cinzel', serif;
-            letter-spacing: 1px;
         }
 
         /* --- ÁREA DA OSTRA --- */
@@ -440,35 +335,11 @@
             letter-spacing: 3px;
         }
 
-        /* BOTÃO CHUMBADO DE FERRO PRATA (FIM DA HISTÓRIA) */
-        .btn-fim-historia {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 0.9rem;
-            color: #111827;
-            background: linear-gradient(135deg, #bdc3c7, #7f8c8d, #34495e);
-            border: 2px solid #95a5a6;
-            padding: 14px 40px;
-            border-radius: 4px;
-            cursor: pointer;
-            letter-spacing: 3px;
-            font-weight: 700;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.6), inset 0 1px 2px rgba(255,255,255,0.4);
-            text-transform: uppercase;
-            transition: all 0.3s ease;
-            text-shadow: 1px 1px 2px rgba(255,255,255,0.2);
-        }
-
-        .btn-fim-historia:hover {
-            background: linear-gradient(135deg, #e2e8f0, #94a3b8, #475569);
-            box-shadow: 0 0 25px rgba(226, 232, 240, 0.4);
-            transform: scale(1.02);
-        }
-
         /* ESTADOS DE TRANSIÇÃO DO LIVRO FECHANDO */
         .card-principal.livro-fechado {
             transform: rotateY(-180deg);
-            max-width: 500px;
-            min-height: 620px;
+            max-width: 450px;
+            height: 600px;
             border-radius: 12px;
         }
 
@@ -513,48 +384,12 @@
             margin-top: 40px;
         }
 
-        /* PÉROLA NEGRA DA CÉLEBRE DÉBORA NA TELA FINAL */
-        .exibicao-debora {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            margin: 20px 0;
-            position: relative;
-        }
-
-        .perola-flutuante-final {
-            width: 55px;
-            height: 55px;
-            background: radial-gradient(circle at 35% 30%, #ffffff 0%, #94a3b8 15%, #475569 50%, #1e293b 85%, #020617 100%);
-            border-radius: 50%;
-            box-shadow: 0 0 30px rgba(255,255,255,0.4), inset -4px -4px 10px rgba(0,0,0,0.9);
-            animation: flutuarEmanarPrata 4s infinite ease-in-out;
-            margin-bottom: 15px;
-        }
-
-        .letra-fim-chumbado {
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 900;
-            font-size: 2.5rem;
-            color: #475569;
-            letter-spacing: 6px;
-            text-align: center;
-            background: linear-gradient(135deg, #7f8c8d 0%, #34495e 50%, #111827 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            filter: drop-shadow(1px 1px 1px rgba(255,255,255,0.1)) drop-shadow(0 4px 6px rgba(0,0,0,0.7));
-            margin: 15px 0 0 0;
-        }
-
         @media (max-width: 600px) {
             .titulo-final { font-size: 1.8rem; letter-spacing: 4px; }
             .papel-interno { padding: 35px 20px; }
             .texto-conclusao { font-size: 1rem; line-height: 1.7; }
             .ostra-container.aberta .perola-negra.flutuando { bottom: 130px; }
             .instrucao-toque { font-size: 0.7rem; letter-spacing: 1px; }
-            .container-simbolos-psique { flex-direction: column; gap: 30px; }
-            .frase-dedicatoria-luxo { font-size: 1.05rem; }
         }
     </style>
 </head>
@@ -575,19 +410,12 @@
 
     <div class="card-principal" id="livroContainer">
         
-        <!-- FACE DE TRÁS: CAPA DO LIVRO LUXUOSO (TELA DE ENCERRAMENTO) -->
+        <!-- FACE DE TRÁS: CAPA DO LIVRO LUXUOSO -->
         <div class="capa-livro">
             <div class="brasao-ouro">D</div>
-            <h2 style="font-family:'Cinzel',serif; color:var(--ouro-brilhante); letter-spacing:4px; margin:0 0 5px 0; font-size:1.6rem; text-align:center;">DRA. DÉBORA</h2>
-            <p style="font-family:'Orbitron',sans-serif; color:#64748b; font-size:0.7rem; letter-spacing:3px; margin-bottom: 25px;">A JORNADA CONCLUÍDA</p>
-            
-            <!-- Representação Simbólica Final de Débora -->
-            <div class="exibicao-debora">
-                <div class="perola-flutuante-final"></div>
-                <div class="letra-fim-chumbado">FIM</div>
-            </div>
-
-            <button class="btn-controle" style="margin-top:30px; font-size:0.8rem; padding:8px 20px;" onclick="reabrirLivro(event)">REABRIR LIVRO</button>
+            <h2 style="font-family:'Cinzel',serif; color:var(--ouro-brilhante); letter-spacing:4px; margin:0 0 10px 0; font-size:1.6rem; text-align:center; padding:0 20px;">DRA. DÉBORA</h2>
+            <p style="font-family:'Orbitron',sans-serif; color:#64748b; font-size:0.7rem; letter-spacing:3px;">A JORNADA CONCLUÍDA</p>
+            <button class="btn-controle" style="margin-top:40px; font-size:0.8rem; padding:8px 20px;" onclick="reabrirLivro(event)">REABRIR LIVRO</button>
         </div>
 
         <!-- FACE DA FRENTE: CONTEÚDO ATUAL -->
@@ -632,82 +460,12 @@
                     <div class="instrucao-toque" id="textoInstrucao">Aperte na ostra para a pérola sair</div>
                 </div>
 
-                <!-- Painel de Símbolos Psíquicos (Árvore Geológica da Mente e Coração) -->
-                <div class="container-simbolos-psique">
-                    <div class="visual-box">
-                        <!-- Desenho Vetorial Elegante da Árvore Geológica de Conexões de Mente -->
-                        <svg class="arvore-mente-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <!-- Camadas Geológicas da Base Conectadas -->
-                            <path d="M20 85 C 35 80, 65 80, 80 85" stroke="url(#ouroGlow)" stroke-width="2" stroke-linecap="round"/>
-                            <path d="M15 90 C 35 86, 65 86, 85 90" stroke="#4a3b13" stroke-width="1.5"/>
-                            <!-- Tronco Estruturado -->
-                            <path d="M50 85 L50 55 C48 50, 52 50, 50 55" stroke="url(#ouroGlow)" stroke-width="4" stroke-linecap="round"/>
-                            <!-- Ramificações Sinápticas Cristalinas da Psique -->
-                            <path d="M50 65 Q35 55, 25 45" stroke="url(#ramificacaoGradiente)" stroke-width="2" stroke-linecap="round"/>
-                            <path d="M50 58 Q65 50, 75 42" stroke="url(#ramificacaoGradiente)" stroke-width="2" stroke-linecap="round"/>
-                            <path d="M50 50 Q45 35, 50 20" stroke="url(#ramificacaoGradiente)" stroke-width="2.5"/>
-                            <path d="M25 45 Q15 45, 12 35" stroke="#cbd5e1" stroke-width="1" opacity="0.7"/>
-                            <path d="M25 45 Q30 30, 35 25" stroke="#cbd5e1" stroke-width="1" opacity="0.7"/>
-                            <path d="M75 42 Q85 35, 88 25" stroke="#cbd5e1" stroke-width="1" opacity="0.7"/>
-                            <!-- Nós de Brilhos Discretos de Canva -->
-                            <circle cx="50" cy="20" r="3.5" fill="#fff" class="brilho-sutil"/>
-                            <circle cx="25" cy="45" r="2.5" fill="var(--ouro-brilhante)" class="brilho-sutil"/>
-                            <circle cx="75" cy="42" r="2.5" fill="var(--ouro-brilhante)" class="brilho-sutil"/>
-                            <circle cx="35" cy="25" r="2" fill="#fff" opacity="0.8"/>
-                            <circle cx="12" cy="35" r="1.5" fill="var(--texto-ouro)" opacity="0.9"/>
-                            <circle cx="88" cy="25" r="2" fill="#fff" opacity="0.8"/>
-                            <defs>
-                                <linearGradient id="ouroGlow" x1="0%" y1="0%" x2="100%" y2="0%">
-                                    <stop offset="0%" stop-color="#4a3b13"/>
-                                    <stop offset="50%" stop-color="#c5a85c"/>
-                                    <stop offset="100%" stop-color="#4a3b13"/>
-                                </linearGradient>
-                                <linearGradient id="ramificacaoGradiente" x1="0%" y1="100%" x2="0%" y2="0%">
-                                    <stop offset="0%" stop-color="#c5a85c"/>
-                                    <stop offset="100%" stop-color="#ffffff"/>
-                                </linearGradient>
-                            </defs>
-                        </svg>
-                        <div class="legenda-visual">Mente e Profissão</div>
-                    </div>
-
-                    <div class="visual-box">
-                        <!-- Desenho Vetorial Anatômico Quase Real do Coração -->
-                        <svg class="coracao-realista-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <!-- Corpo Muscular Principal -->
-                            <path d="M50 82 C20 62, 12 40, 26 22 C38 6, 48 18, 50 24 C52 18, 62 6, 74 22 C88 40, 80 62, 50 82 Z" fill="url(#gradienteCoracaoReal)" stroke="#7f1d1d" stroke-width="1"/>
-                            <!-- Vasos Superiores (Aorta/Artérias) -->
-                            <path d="M44 22 L42 10 C42 8, 47 8, 47 10 L48 20" fill="#1e3a8a" stroke="#1d4ed8" stroke-width="1"/>
-                            <path d="M52 21 L55 7 C55 5, 62 6, 60 9 L57 21" fill="#991b1b" stroke="#b91c1c" stroke-width="1.5"/>
-                            <path d="M58 22 L65 11 C66 9, 70 12, 68 14 L62 24" fill="#991b1b" stroke="#b91c1c" stroke-width="1"/>
-                            <!-- Detalhes de Textura e Brilhos Anatômicos Discretos -->
-                            <path d="M32 30 C26 38, 30 52, 44 68" stroke="rgba(255,255,255,0.15)" stroke-width="1.5" stroke-linecap="round"/>
-                            <circle cx="70" cy="35" r="1" fill="#fff" opacity="0.6"/>
-                            <circle cx="35" cy="55" r="1.5" fill="#fff" opacity="0.4" class="brilho-sutil"/>
-                            <defs>
-                                <radialGradient id="gradienteCoracaoReal" cx="45%" cy="35%" r="60%">
-                                    <stop offset="0%" stop-color="#f87171"/>
-                                    <stop offset="40%" stop-color="#dc2626"/>
-                                    <stop offset="85%" stop-color="#7f1d1d"/>
-                                    <stop offset="100%" stop-color="#450a0a"/>
-                                </radialGradient>
-                            </defs>
-                        </svg>
-                        <div class="legenda-visual">O Coração Pulsante</div>
-                    </div>
-                </div>
-
-                <!-- Nova Frase Marcante Solicitada -->
-                <div class="frase-dedicatoria-luxo">
-                    "Por mais que nem sempre possamos ter exatamente o que queremos, que saibamos apreciar a beleza da jornada e dar sempre o nosso melhor para quem é especial. Que nesse momento é <span class="destaque-voce">você</span>."
-                </div>
-
                 <p class="texto-conclusao">
                     Existe uma célebre fábula sobre a ostra: para que uma pérola nasça, é preciso que um grão de areia entre em seu interior e cause uma ferida profunda. A ostra não destrói o invasor; em vez disso, ela o envolve cuidadosamente com camadas de nácar brilhante, transformando a dor e o incômodo em uma joia rara.
                 </p>
                 
                 <p class="texto-conclusao">
-                    A estrada longa ficou para trás e as dores do caminho transformaram-se em preciosas pérolas de sabedoria. Sob o manto infinito do cosmos, compreendemos que cada curva, cada grão de areia e cada passo incerto faziam parte de um plano maior. O horizonete não é mais um limite distante; agora, ele é o chão que você pisa com paz no coração, carregando a beleza da sua própria pérola negra.
+                    A estrada longa ficou para trás e as dores do caminho transformaram-se em preciosas pérolas de sabedoria. Sob o manto infinito do cosmos, compreendemos que cada curva, cada grão de areia e cada passo incerto faziam parte de um plano maior. O horizonte não é mais um limite distante; agora, ele é o chão que você pisa com paz no coração, carregando a beleza da sua própria pérola negra.
                 </p>
 
                 <p class="texto-desfecho-italico">
@@ -716,9 +474,9 @@
 
                 <div class="mensagem-final">FIM DA JORNADA</div>
                 
-                <!-- BOTÃO DE FECHAR O LIVRO (CHUMBADO DE FERRO PRATA) -->
+                <!-- BOTÃO DE FECHAR O LIVRO (APARECE DEPOIS) -->
                 <div class="container-botao-livro" id="btnLivroContainer">
-                    <button class="btn-fim-historia" onclick="fecharLivro(event)">FIM DA HISTÓRIA</button>
+                    <button class="btn-fechar-livro" onclick="fecharLivro(event)">FECHAR O LIVRO DA JORNADA</button>
                 </div>
 
                 <div class="creditos">Gratidão por cada passo compartilhado</div>
@@ -786,7 +544,6 @@
             mainTitle.style.transform = "scale(0.9)";
             mainTitle.style.opacity = "0.5";
             mainTitle.style.transition = "all 2s ease";
-            // O fundo musical continua ativo e os controles seguem operacionais conforme solicitado
         }
 
         function reabrirLivro(e) {
@@ -816,23 +573,20 @@
 
         function ajustarVol(v) { audio.volume = v; }
 
-        // GERADOR CÓSMICO: ESTRELAS INCANDECENTES E CADENTES
+        // GERADOR CÓSMICO: ESTRELAS E CADENTES
         const cosmos = document.getElementById('fundo-cosmos');
         const fragmento = document.createDocumentFragment();
         
-        // Estrelas fixas pulsantes quase reais e incandescentes
-        for (let i = 0; i < 75; i++) {
+        // Estrelas fixas pulsantes
+        for (let i = 0; i < 65; i++) {
             const estrela = document.createElement('div');
             estrela.className = 'estrela';
-            const tam = Math.random() * 2.5 + 0.5;
+            const tam = Math.random() * 2 + 0.5;
             estrela.style.width = tam + 'px';
             estrela.style.height = tam + 'px';
             estrela.style.top = Math.random() * 100 + '%';
             estrela.style.left = Math.random() * 100 + '%';
-            estrela.style.animationDuration = (Math.random() * 4 + 2) + 's';
-            // Variação sutil de cor incandescente (brancas a levemente azuladas/douradas)
-            const cores = ['#fff', '#fff', '#f8fafc', '#e2e8f0', '#fef08a'];
-            estrela.style.background = cores[Math.floor(Math.random() * cores.length)];
+            estrela.style.animationDuration = (Math.random() * 5 + 3) + 's';
             fragmento.appendChild(estrela);
         }
 
@@ -850,3 +604,4 @@
     </script>
 </body>
 </html>
+
