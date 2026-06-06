@@ -3,617 +3,436 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Prontuário & Receita - Dra. Débora</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Orbitron:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-    
+    <title>A Capa Final - Dra. Débora</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Orbitron:wght@400;600&family=Lora:ital,wght=0,400;0,600;1,400&display=swap" rel="stylesheet">
     <style>
         :root {
-            --azul-cosmos: #01040a;
-            --preto-profundo: #020617;
-            --ouro-escuro: #614d1a;
-            --cor-prata: #e2e8f0;
-            --papel-translúcido: rgba(4, 7, 24, 0.45); /* Efeito de vidro escuro de luxo */
+            --azul-cosmos: #020617;
+            --azul-capa: #03081e;
+            --ouro-escuro: #4a3b13;
+            --ouro-brilhante: #c5a85c;
+            --texto-claro: #f1f5f9;
+            --texto-ouro: #e2c792;
+            --prata-brilhante: #f8fafc;
+            --prata-sombra: #475569;
         }
 
-        * { 
-            box-sizing: border-box; 
-            -webkit-tap-highlight-color: transparent;
-        }
+        * { box-sizing: border-box; }
 
-        /* */
-        /* BARRA DE ROLAGEM PRATA - ULTRA SUTIL, REFINADA E VISÍVEL */
-        ::-webkit-scrollbar {
-            width: 5px;
-            height: 5px;
-        }
-        ::-webkit-scrollbar-track {
-            background: rgba(1, 4, 10, 0.1);
-        }
-        ::-webkit-scrollbar-thumb {
-            background: linear-gradient(180deg, rgba(226, 232, 240, 0.25), rgba(226, 232, 240, 0.6), rgba(226, 232, 240, 0.25));
-            border: 1px solid rgba(226, 232, 240, 0.2);
-            border-radius: 10px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: linear-gradient(180deg, rgba(226, 232, 240, 0.4), rgba(226, 232, 240, 0.9), rgba(226, 232, 240, 0.4));
-        }
-
-        body, html {
+        body {
             margin: 0; padding: 0;
             width: 100%; min-height: 100vh;
             background-color: var(--azul-cosmos);
-            color: white;
-            font-family: 'Lora', serif;
+            font-family: 'Cinzel', serif;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
-            overflow-x: hidden;
-            overflow-y: auto;
-            transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+            justify-content: center;
             padding: 40px 20px;
+            overflow-x: hidden;
+            perspective: 2000px;
         }
 
-        #cenario-cosmos {
+        #fundo-cosmos {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            z-index: -1;
-            background: radial-gradient(circle at center, #0a1e3d 0%, var(--azul-cosmos) 100%);
+            z-index: -2;
+            background: radial-gradient(circle at center, #0a1931 0%, #040d21 60%, var(--azul-cosmos) 100%);
         }
 
-        .estrela-prata {
+        .estrela {
             position: absolute;
-            background: #ffffff;
+            background: white;
             border-radius: 50%;
-            box-shadow: 0 0 10px 2px #ffffff;
-            animation: pulsar 3s infinite ease-in-out;
-            pointer-events: none;
+            opacity: 0.3;
+            animation: brilho infinite ease-in-out;
         }
 
-        @keyframes pulsar {
-            0%, 100% { opacity: 0.15; transform: scale(0.6); }
-            50% { opacity: 0.95; transform: scale(1.3); box-shadow: 0 0 14px 4px #ffffff; }
+        @keyframes brilho {
+            0%, 100% { opacity: 0.1; transform: scale(1); }
+            50% { opacity: 0.6; transform: scale(1.4); }
         }
 
-        /* */
-        /* PAINEL DE ÁUDIO MINIMALISTA E DELICADO */
-        .painel-audio {
+        /* PAINEL DE MÚSICA */
+        .painel-musica-fixo {
             position: fixed;
-            top: 25px; right: 25px;
-            background: rgba(1, 4, 10, 0.65);
-            border: 1px solid rgba(212, 175, 55, 0.25);
+            top: 20px; right: 20px;
+            background: rgba(5, 11, 30, 0.85);
+            backdrop-filter: blur(15px);
+            border: 1px solid var(--ouro-escuro);
             padding: 8px 16px;
-            border-radius: 40px;
+            border-radius: 30px;
             display: flex;
             align-items: center;
             gap: 12px;
-            z-index: 1000;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            transition: all 0.4s ease;
+            z-index: 100;
+            box-shadow: 0 4px 30px rgba(0,0,0,0.5);
         }
 
-        .painel-audio:hover {
-            border-color: rgba(212, 175, 55, 0.5);
-            box-shadow: 0 10px 35px rgba(212, 175, 55, 0.2);
-        }
-
-        .btn-audio {
-            background: none; border: none; cursor: pointer; color: #f5e4bc; font-size: 0.75rem;
-            display: flex; align-items: center; justify-content: center; padding: 0;
-            transition: all 0.3s;
-            letter-spacing: 2px;
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 700;
-        }
-
-        .btn-audio:hover {
-            color: #ffffff;
-            text-shadow: 0 0 10px rgba(212, 175, 55, 0.8);
-        }
-
-        .slider-volume {
-            width: 60px;
-            height: 2px;
-            cursor: pointer;
-            accent-color: #d4af37;
-            background: rgba(255, 255, 255, 0.15);
-            border-radius: 2px;
-            outline: none;
-            transition: all 0.3s;
-        }
-
-        /* */
-        /* FORÇA UM CARD AO LADO DO OUTRO EM QUALQUER DISPOSITIVO */
-        .layout-duas-colunas {
-            display: flex;
-            flex-direction: row; /* Lado a lado absoluto */
-            gap: 25px;
-            width: 100%;
-            max-width: 1200px;
-            justify-content: center;
-            align-items: stretch; /* Garante alturas idênticas para ambos os cards */
-        }
-
-        /* */
-        /* DESIGN DOS CARDS COM EFEITO DE LUZ CORRIDA SUTIL EXCLUSIVAMENTE NA BORDA */
-        .card-container-luxo {
-            position: relative;
-            overflow: hidden;
+        .btn-controle {
+            background: transparent;
+            border: 1px solid var(--ouro-brilhante);
+            color: var(--ouro-brilhante);
+            padding: 4px 14px;
             border-radius: 20px;
-            background: rgba(1, 4, 10, 0.35);
-            border: 1px solid rgba(212, 175, 55, 0.15); /* Borda estática ultra fina de repouso */
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
-            display: flex;
-            flex: 1 1 0px; /* Divide o espaço de forma milimetricamente idêntica */
-            min-width: 0; /* Evita quebras de layout flexbox */
-            transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.6s ease;
-        }
-
-        .card-container-luxo:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 30px 60px rgba(212, 175, 55, 0.12);
-            border-color: rgba(212, 175, 55, 0.3);
-        }
-
-        /* Linhas de brilho que correm estritamente ao longo da borda, sem entrar atrás do texto */
-        .border-line {
-            position: absolute;
-            background: linear-gradient(90deg, transparent, #d4af37, #ffffff, #d4af37, transparent);
-            z-index: 5;
-            pointer-events: none;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.7rem;
+            cursor: pointer;
         }
         
-        .border-top {
-            top: 0; left: -100%; width: 100%; height: 2px;
-            animation: run-top 6s linear infinite;
-        }
-        .border-right {
-            top: -100%; right: 0; width: 2px; height: 100%;
-            animation: run-right 6s linear infinite;
-            animation-delay: 1.5s;
-        }
-        .border-bottom {
-            bottom: 0; right: -100%; width: 100%; height: 2px;
-            animation: run-bottom 6s linear infinite;
-            animation-delay: 3s;
-        }
-        .border-left {
-            bottom: -100%; left: 0; width: 2px; height: 100%;
-            animation: run-left 6s linear infinite;
-            animation-delay: 4.5s;
+        .vol-slider { width: 70px; accent-color: var(--ouro-brilhante); }
+
+        /* PÉROLA NEGRA MENOR COM BRILHO PRATEADO INTENSO */
+        .container-perola-interna {
+            margin: 5px 0 25px 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            height: 80px;
         }
 
-        @keyframes run-top {
-            0% { left: -100%; }
-            50%, 100% { left: 100%; }
-        }
-        @keyframes run-right {
-            0% { top: -100%; }
-            50%, 100% { top: 100%; }
-        }
-        @keyframes run-bottom {
-            0% { right: -100%; }
-            50%, 100% { right: 100%; }
-        }
-        @keyframes run-left {
-            0% { bottom: -100%; }
-            50%, 100% { bottom: 100%; }
-        }
-
-        /* */
-        /* CONTEÚDO TRANSLÚCIDO PARA INTEGRAÇÃO COM O ESPAÇO */
-        .conteudo-papel {
+        .perola-negra {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            /* Degradê simulando pérola negra com forte iluminação refletiva branca/prata */
+            background: radial-gradient(circle at 30% 30%, #ffffff 0%, #cbd5e1 15%, #334155 45%, #0f172a 75%, #020617 100%);
+            box-shadow: 
+                0 0 25px rgba(255, 255, 255, 0.8),
+                0 0 10px rgba(203, 213, 225, 0.4),
+                inset -4px -4px 12px rgba(0,0,0,0.95),
+                inset 6px 6px 10px rgba(255,255,255,0.6);
             position: relative;
             z-index: 2;
-            background-color: var(--papel-translúcido);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-radius: 19px;
-            padding: 40px;
-            border: 1px dashed rgba(212, 175, 55, 0.15);
-            height: 100%;
+            animation: flutuarPerolaAvançado 4s infinite ease-in-out;
+        }
+
+        .sombra-perola {
+            width: 32px;
+            height: 6px;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 50%;
+            filter: blur(3px);
+            position: absolute;
+            bottom: 12px;
+            animation: sombraPerolaAvançado 4s infinite ease-in-out;
+            z-index: 1;
+        }
+
+        @keyframes flutuarPerolaAvançado {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes sombraPerolaAvançado {
+            0%, 100% { transform: scale(1); opacity: 0.7; }
+            50% { transform: scale(0.7); opacity: 0.2; filter: blur(4px); }
+        }
+
+        /* ESTRUTURA DO CARD DE LUXO */
+        .capa-livro {
+            max-width: 620px;
             width: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between; /* Garante que o botão fique alinhado na base */
-            box-shadow: inset 0 0 30px rgba(212, 175, 55, 0.05);
-        }
-
-        .titulo-chumbado {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.5rem;
-            text-align: center;
-            font-weight: 700;
-            letter-spacing: 4px;
-            margin-bottom: 25px;
-            color: #ffffff;
-            text-transform: uppercase;
-            text-shadow: 
-                -1px -1px 0 rgba(212, 175, 55, 0.4), 
-                1px -1px 0 rgba(212, 175, 55, 0.4), 
-                -1px 1px 0 rgba(0, 0, 0, 0.8), 
-                1px 1px 0 rgba(0, 0, 0, 0.8),
-                2px 2px 10px rgba(0,0,0,0.6);
-        }
-
-        .cabecalho-secao {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-family: 'Orbitron', sans-serif;
-            color: #f5e4bc;
-            font-weight: bold;
-            font-size: 0.95rem;
-            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
-            padding-bottom: 10px;
-            margin-bottom: 20px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .carimbo-diagnostico {
-            display: inline-block;
-            border: 2px double #f87171;
-            color: #f87171;
-            font-family: 'Courier New', monospace;
-            font-weight: bold;
-            font-size: 0.95rem;
-            padding: 6px 12px;
-            margin: 15px 0;
-            transform: rotate(-1.5deg);
-            text-transform: uppercase;
-            opacity: 0.9;
-            align-self: flex-start;
-            background: rgba(0, 0, 0, 0.4);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-        }
-
-        .texto-clinico {
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .texto-clinico p, .lista-receita li {
-            line-height: 1.7;
-            color: #e2e8f0;
-            text-align: justify;
-            margin-bottom: 15px;
-            font-size: 0.98rem;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.6);
-        }
-
-        .texto-clinico strong { color: #f5e4bc; }
-
-        .lista-receita { list-style: none; padding: 0; margin: 0; }
-
-        .lista-receita li {
-            display: flex;
-            align-items: flex-start;
-            gap: 12px;
-            background: rgba(255, 255, 255, 0.04);
-            padding: 15px;
-            border-radius: 8px;
-            border-left: 4px solid #d4af37;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-        }
-
-        .icone-receita { font-size: 1.2rem; margin-top: 1px; }
-
-        /* */
-        /* BOTÃO PRÓXIMA DE ALTA COSTURA COM AURA OURO */
-        .area-botao {
-            display: flex;
-            justify-content: flex-end;
-            margin-top: auto;
-            padding-top: 25px;
-        }
-
-        .btn-proxima {
-            background: #000000;
-            color: #d4af37;
-            border: 2px solid #d4af37;
-            padding: 14px 40px;
-            border-radius: 8px;
-            font-family: 'Orbitron', sans-serif;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.4s ease;
-            letter-spacing: 4px;
-            text-transform: uppercase;
-            box-shadow: 0 0 15px rgba(212, 175, 55, 0.3), inset 0 0 10px rgba(212, 175, 55, 0.1);
+            background: linear-gradient(135deg, #050c24 0%, #020511 100%);
+            border-radius: 16px;
+            padding: 45px 30px;
+            box-shadow: -15px 30px 60px rgba(0,0,0,0.9), inset 5px 0 15px rgba(255,255,255,0.03);
+            border: 2px solid var(--ouro-escuro);
             position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transform-origin: left center;
+            transform: rotateY(45deg) scale(0.95);
+            opacity: 0;
+            transition: transform 1.8s cubic-bezier(0.16, 1, 0.3, 1), opacity 1s ease;
         }
 
-        .btn-proxima:hover {
-            background: #d4af37;
-            color: #000000;
-            box-shadow: 0 0 30px rgba(212, 175, 55, 0.9);
-            border-color: #ffffff;
-            transform: translateY(-2px);
+        .capa-livro.revelada {
+            transform: rotateY(0deg) scale(1);
+            opacity: 1;
         }
 
-        /* RESPONSIVIDADE ADAPTATIVA: MANTÉM LADO A LADO E AJUSTA TAMANHOS */
-        @media (max-width: 900px) {
-            body { padding: 80px 10px 40px 10px; }
-            .layout-duas-colunas { gap: 12px; }
-            .conteudo-papel { padding: 20px 15px; }
-            .titulo-chumbado { font-size: 1.1rem; letter-spacing: 2px; margin-bottom: 15px; }
-            .cabecalho-secao { font-size: 0.8rem; padding-bottom: 6px; margin-bottom: 12px; }
-            .texto-clinico p, .lista-receita li { font-size: 0.82rem; line-height: 1.5; margin-bottom: 10px; }
-            .carimbo-diagnostico { font-size: 0.75rem; padding: 4px 8px; margin: 8px 0; }
-            .btn-proxima { padding: 12px 20px; font-size: 0.8rem; letter-spacing: 2px; width: 100%; text-align: center; }
-            .lista-receita li { padding: 10px; gap: 8px; }
+        /* Moldura de Ouro Barroca */
+        .moldura-barroca {
+            position: absolute;
+            top: 15px; bottom: 15px; left: 15px; right: 15px;
+            border: 1px solid rgba(197, 168, 92, 0.3);
+            border-radius: 12px;
+            pointer-events: none;
+        }
+
+        .moldura-barroca::before {
+            content: '';
+            position: absolute;
+            top: 8px; bottom: 8px; left: 8px; right: 8px;
+            border: 2px solid var(--ouro-brilhante);
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(197, 168, 92, 0.2);
+        }
+
+        .canto-decorativo {
+            position: absolute;
+            width: 25px; height: 25px;
+            border: 2px solid var(--ouro-brilhante);
+            border-radius: 50%;
+        }
+        .canto-tl { top: 20px; left: 20px; border-right: transparent; border-bottom: transparent; }
+        .canto-tr { top: 20px; right: 20px; border-left: transparent; border-bottom: transparent; }
+        .canto-bl { bottom: 20px; left: 20px; border-right: transparent; border-top: transparent; }
+        .canto-br { bottom: 20px; right: 20px; border-left: transparent; border-top: transparent; }
+
+        .conteudo-capa {
+            z-index: 2;
+            text-align: center;
+            width: 100%;
+        }
+
+        /* CONTAINER DOS SIMBOLOS */
+        .grid-simbolos {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 50px;
+            margin-bottom: 30px;
+        }
+
+        /* Cabeça de Psiquiatria Estilo Vetor Canva Premium */
+        .cabeca-psiquiatria {
+            width: 95px; height: 95px;
+            filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.3)) drop-shadow(0 0 20px rgba(197, 168, 92, 0.6));
+        }
+
+        .luz-pulsante {
+            animation: brilhoCelular 2s infinite ease-in-out;
+        }
+        .luz-atrasada {
+            animation: brilhoCelular 2s infinite ease-in-out 1s;
+        }
+
+        @keyframes brilhoCelular {
+            0%, 100% { opacity: 0.5; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.4); }
+        }
+
+        /* Coração Pulsante Realista */
+        .coracao-pulsante {
+            width: 65px; height: 65px;
+            animation: pulsarCoracao 1.2s infinite cubic-bezier(0.25, 0.8, 0.25, 1);
+            filter: drop-shadow(0 0 15px rgba(256, 256, 256, 0.5));
+        }
+
+        @keyframes pulsarCoracao {
+            0% { transform: scale(1); }
+            30% { transform: scale(1.12); }
+            45% { transform: scale(1.05); }
+            60% { transform: scale(1.18); }
+            100% { transform: scale(1); }
+        }
+
+        .titulo-capa {
+            font-size: 2.2rem;
+            letter-spacing: 4px;
+            background: linear-gradient(135deg, #ffffff 0%, #e2c792 50%, #c5a85c 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin: 15px 0 12px 0;
+            font-weight: 700;
+            line-height: 1.3;
+        }
+
+        .sub-titulo-capa {
+            font-family: 'Lora', serif;
+            font-style: italic;
+            font-size: 1.05rem;
+            color: #94a3b8;
+            letter-spacing: 1px;
+            max-width: 530px;
+            margin: 0 auto 35px auto;
+            line-height: 1.6;
+        }
+
+        .texto-agradecimento {
+            font-family: 'Lora', serif;
+            font-size: 1.05rem;
+            line-height: 1.9;
+            color: #cbd5e1;
+            max-width: 520px;
+            margin: 0 auto 35px auto;
+            text-align: center;
+        }
+        
+        .texto-agradecimento span {
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        .autor {
+            font-size: 1.3rem;
+            color: #ffffff;
+            letter-spacing: 4px;
+            border-top: 1px solid rgba(197, 168, 92, 0.2);
+            padding-top: 15px;
+            display: inline-block;
+        }
+
+        @media (max-width: 600px) {
+            .capa-livro { padding: 35px 15px; }
+            .titulo-capa { font-size: 1.6rem; }
+            .texto-agradecimento { font-size: 0.95rem; line-height: 1.7; }
+            .grid-simbolos { gap: 25px; }
+            .cabeca-psiquiatria, .coracao-pulsante { transform: scale(0.85); }
         }
     </style>
 </head>
-<body onclick="desbloquearAudioUnificado()">
+<body>
 
-    <!-- Cenário de Estrelas Prateadas -->
-    <div id="cenario-cosmos"></div>
+    <div id="fundo-cosmos"></div>
 
-    <div class="painel-audio" onclick="event.stopPropagation()">
-        <button class="btn-audio" id="btn-play-pause" onclick="alternarAudio()" title="Sinfonia">MEDITAÇÃO</button>
-        <span style="width: 1px; height: 12px; background: rgba(255,255,255,0.15)"></span>
-        <input type="range" class="slider-volume" id="controle-volume" min="0" max="1" step="0.05" value="0.15" oninput="ajustarVolume(this.value)" title="Volume Delicado">
+    <!-- PAINEL DE CONTROLE DE ÁUDIO -->
+    <div class="painel-musica-fixo">
+        <button class="btn-controle" id="playPause">PAUSE</button>
+        <div style="display:flex; align-items:center; gap:6px;">
+            <span style="color:var(--ouro-brilhante); font-size:10px;">🔈</span>
+            <input type="range" class="vol-slider" id="volumeSlider" min="0" max="1" step="0.05" value="0.5" oninput="ajustarVol(this.value)">
+            <span style="color:var(--ouro-brilhante); font-size:10px;">🔊</span>
+        </div>
     </div>
 
-    <!-- -->
-    <div class="layout-duas-colunas">
+    <!-- CARD PRINCIPAL LUXUOSO -->
+    <div class="capa-livro" id="capaFisica">
+        <div class="moldura-barroca"></div>
+        <div class="canto-decorativo canto-tl"></div>
+        <div class="canto-decorativo canto-tr"></div>
+        <div class="canto-decorativo canto-bl"></div>
+        <div class="canto-decorativo canto-br"></div>
         
-        <!-- CARD 1: PRONTUÁRIO MÉDICO (Primeira Pessoa Singular Feminina) -->
-        <div class="card-container-luxo">
-            <!-- Linhas de brilho sutis nas bordas -->
-            <span class="border-line border-top"></span>
-            <span class="border-line border-right"></span>
-            <span class="border-line border-bottom"></span>
-            <span class="border-line border-left"></span>
-
-            <div class="conteudo-papel">
-                <h1 class="titulo-chumbado">PRONTUÁRIO MÉDICO</h1>
-                <div class="cabecalho-secao">📋 HISTÓRICO & QUADRO CLÍNICO</div>
-                <div class="texto-clinico">
-                    <p><strong>Paciente:</strong> Me identifico como uma alma sonhadora em trânsito temporário por Belém (período de 1 ano e 3 meses fixado pelas minhas raízes familiares e esperando o primeiro aninho de idade da Helena Sophia em 5 de agosto), com retorno programado para Brasília pós-aniversário.</p>
-                    <p><strong>Evolução:</strong> Sou veterana de uma jornada de mais de 20 anos enfrentando a síndrome do pânico. Apresento alta capacidade de discernimento e blindagem terapêutica, sabendo separar perfeitamente a nossa relação.</p>
-                    
-                    <div class="carimbo-diagnostico">Diagnóstico: Afeto Agudo Incurável</div>
-                    
-                    <p><strong>Nota Clínica Importante:</strong> Desenvolvi um desejo e uma vontade genuína de estar ao seu lado; algo único e precioso sobre a profissional impecável que você é. Sei que isso jamais acontecerá, até porque reconheço que você é uma linda sereia que merece os mais belos e imensos oceanos do mundo, e não o meu humilde laguinho.Não me depreciando , mas sabendo que essa possibilidade é impossivel , não para mim que já estou infeitiçada por você , mas por você ja ter alguém e ser uma pessoa que não sente o mesmo por mim . E está tudo bem ! Até porque o que sinto me fortalece e me amadurece como ser humano.Guardarei no coração e na minha mente</p>
-                </div>
+        <div class="conteudo-capa">
+            
+            <!-- PÉROLA NEGRA BRILHANTE E REFINADA -->
+            <div class="container-perola-interna">
+                <div class="perola-negra"></div>
+                <div class="sombra-perola"></div>
             </div>
-        </div>
 
-        <!-- CARD 2: RECEITA -->
-        <div class="card-container-luxo">
-            <!-- Linhas de brilho sutis nas bordas -->
-            <span class="border-line border-top"></span>
-            <span class="border-line border-right"></span>
-            <span class="border-line border-bottom"></span>
-            <span class="border-line border-left"></span>
+            <!-- SIMBOLOS VETORIAIS ESTILO CANVA -->
+            <div class="grid-simbolos">
+                
+                <!-- Perfil Clínico + Árvore de Conexões Iluminada -->
+                <svg class="cabeca-psiquiatria" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Linha do contorno da mente elegante e contínua -->
+                    <path d="M30 80 C32 73, 35 68, 40 64 C32 56, 30 46, 30 36 C30 16, 46 10, 60 10 C76 10, 82 22, 80 40 C78 46, 81 50, 79 54 C76 60, 70 64, 68 70 C66 76, 63 80, 60 80" stroke="url(#ouroCanva)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    
+                    <!-- Tronco Central -->
+                    <path d="M52 68 L52 46" stroke="url(#ouroCanva)" stroke-width="3" stroke-linecap="round"/>
+                    
+                    <!-- Galhos Cristalinos -->
+                    <path d="M52 56 Q38 52, 42 40" stroke="#f1f5f9" stroke-width="1.5" stroke-linecap="round"/>
+                    <path d="M52 50 Q66 46, 72 38" stroke="url(#ouroCanva)" stroke-width="1.5" stroke-linecap="round"/>
+                    <path d="M52 46 Q42 30, 46 22" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round"/>
+                    <path d="M52 46 Q64 32, 68 26" stroke="url(#ouroCanva)" stroke-width="1.5" stroke-linecap="round"/>
+                    
+                    <!-- Pontos de Brilho de Alta Intensidade -->
+                    <circle class="luz-pulsante" cx="42" cy="40" r="3.5" fill="#ffffff" filter="drop-shadow(0 0 6px #fff)"/>
+                    <circle class="luz-atrasada" cx="72" cy="38" r="3" fill="#e2c792" filter="drop-shadow(0 0 5px var(--ouro-brilhante))"/>
+                    <circle class="luz-pulsante" cx="46" cy="22" r="4" fill="#ffffff" filter="drop-shadow(0 0 8px #fff)"/>
+                    <circle class="luz-atrasada" cx="68" cy="26" r="3.5" fill="#c5a85c" filter="drop-shadow(0 0 5px var(--ouro-brilhante))"/>
+                    
+                    <defs>
+                        <linearGradient id="ouroCanva" x1="0%" y1="100%" x2="100%" y2="0%">
+                            <stop offset="0%" stop-color="#4a3b13"/>
+                            <stop offset="50%" stop-color="#c5a85c"/>
+                            <stop offset="100%" stop-color="#ffffff"/>
+                        </linearGradient>
+                    </defs>
+                </svg>
 
-            <div class="conteudo-papel">
-                <h1 class="titulo-chumbado">RECEITA</h1>
-                <div class="cabecalho-secao">🧪 TERAPÊUTICA RECOMENDADA</div>
-                <div class="texto-clinico">
-                    <ul class="lista-receita">
-                        <li>
-                            <span class="icone-receita">🌊</span>
-                            <div><strong>Mergulhos Livres:</strong> Frequente os oceanos imensos e profundos que combinam com sua natureza de sereia. Proibido restringir-se a espaços limitados.</div>
-                        </li>
-                        <li>
-                            <span class="icone-receita">✨</span>
-                            <div><strong>Preservação da Essência:</strong> Mantenha a sua blindagem brilhante contra as sombras do mundo exterior.</div>
-                        </li>
-                        <li>
-                            <span class="icone-receita">🎵</span>
-                            <div><strong>Doses de Arte e Som:</strong> Administração diária de trilhas sonoras clássicas e românticas para acalmar o seu cosmos interno.</div>
-                        </li>
-                        <li>
-                            <span class="icone-receita">🧭</span>
-                            <div><strong>Cuidado Continuado:</strong> Lembre-se de que o impacto positivo de sua atuação ecoará permanentemente no meu tempo e na minha jornada.</div>
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="area-botao">
-                    <button class="btn-proxima" onclick="irParaProxima(event)">PRÓXIMA</button>
-                </div>
+                <!-- Coração Realista Pulsante (Prata) -->
+                <svg class="coracao-pulsante" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M50 82 C50 82, 15 55, 15 35 C15 20, 28 12, 50 30 C72 12, 85 20, 85 35 C85 55, 50 82, 50 82 Z" fill="url(#gradPrataCard)" stroke="#ffffff" stroke-width="1.5"/>
+                    <path d="M45 35 C35 35, 28 40, 32 50" stroke="#fff" stroke-width="1.8" stroke-linecap="round" opacity="0.4"/>
+                    <defs>
+                        <linearGradient id="gradPrataCard" x1="30%" y1="10%" x2="70%" y2="90%">
+                            <stop offset="0%" stop-color="#ffffff"/>
+                            <stop offset="50%" stop-color="#cbd5e1"/>
+                            <stop offset="100%" stop-color="#334155"/>
+                        </linearGradient>
+                    </defs>
+                </svg>
             </div>
-        </div>
 
+            <!-- TEXTOS REQUISITADOS -->
+            <h1 class="titulo-capa">AQUI FOI DADO O MEU MELHOR</h1>
+            
+            <div class="sub-titulo-capa">
+                Apesar de parecer simples, houve todo um trabalho. E como meu defeito é ser perfeccionista demais, cada detalhe foi dedicado; e sei que ser perfeccionista pode ser um defeito, porém foi o melhor que pude aqui oferecer a você: o meu melhor.
+            </div>
+            
+            <!-- TEXTO DE AGRADECIMENTO PRINCIPAL -->
+            <p class="texto-agradecimento">
+                "Apesar de não podermos ter tudo que desejamos na vida, que possamos aprender a celebrar todos os dias a vida e as pessoas à nossa volta, principalmente as que amamos e as que entram em nossa vida nos fascinando como você.<br><br>
+                <span>Gratidão pelo carinho, pelo respeito, por tudo que você no seu limite fez por mim</span> e que isso levarei na minha bagagem a qual esteja onde eu estiver você será sempre inesquecível."
+            </p>
+
+            <div class="autor">DRA. DÉBORA</div>
+        </div>
     </div>
 
-    <!-- Reprodutor de áudio físico -->
-    <audio id="som-ambiente" src="elvis.html.mp3" loop></audio>
+    <audio id="trilha" src="elvis.html.mp3" loop></audio>
 
-    <!-- -->
     <script>
-        const audio = document.getElementById('som-ambiente');
-        const btn = document.getElementById('btn-play-pause');
-        const volumeSlider = document.getElementById('controle-volume');
-
-        let audioContext = null;
-        let ambientSynthInterval = null;
-        let synthOscillators = [];
-        let delayNode = null;
-        let masterGain = null;
-        let isSynthPlaying = false;
-        let audioPlayAttempted = false;
+        const audio = document.getElementById('trilha');
+        const btnPP = document.getElementById('playPause');
+        const volumeSlider = document.getElementById('volumeSlider');
+        const capaFisica = document.getElementById('capaFisica');
 
         window.onload = () => {
-            document.body.style.opacity = '1';
+            audio.volume = 0.5;
+            volumeSlider.value = 0.5;
 
-            const savedTime = localStorage.getItem('musica_tempo') || localStorage.getItem('elvis_time');
-            const isPlaying = localStorage.getItem('musica_playing') || localStorage.getItem('elvis_playing');
-            const savedVol = localStorage.getItem('musica_vol') || localStorage.getItem('elvis_vol');
-
-            if (savedTime) {
-                audio.currentTime = parseFloat(savedTime);
-            }
+            const tempoSalvo = localStorage.getItem('musica_tempo');
+            if (tempoSalvo) { audio.currentTime = parseFloat(tempoSalvo); }
             
-            const volumeInicial = savedVol ? parseFloat(savedVol) : 0.15;
-            audio.volume = volumeInicial;
-            volumeSlider.value = volumeInicial;
+            audio.play().then(() => {
+                btnPP.innerText = "PAUSE";
+            }).catch(() => {
+                btnPP.innerText = "PLAY";
+            });
 
-            if (isPlaying === 'true') {
-                desbloquearAudioUnificado();
+            setTimeout(() => {
+                capaFisica.classList.add('revelada');
+            }, 200);
+        };
+
+        audio.ontimeupdate = () => {
+            localStorage.setItem('musica_tempo', audio.currentTime);
+        };
+
+        btnPP.onclick = () => {
+            if (audio.paused) {
+                audio.play();
+                btnPP.innerText = "PAUSE";
+            } else {
+                audio.pause();
+                btnPP.innerText = "PLAY";
             }
         };
 
-        function iniciarSintetizador() {
-            if (!audio.paused || isSynthPlaying) return;
+        function ajustarVol(v) { audio.volume = v; }
 
-            try {
-                const AudioContextClass = window.AudioContext || window.webkitAudioContext;
-                audioContext = new AudioContextClass();
-
-                masterGain = audioContext.createGain();
-                masterGain.gain.setValueAtTime(volumeSlider.value * 0.08, audioContext.currentTime);
-
-                delayNode = audioContext.createDelay(1.0);
-                delayNode.delayTime.setValueAtTime(0.8, audioContext.currentTime);
-
-                const delayFeedback = audioContext.createGain();
-                delayFeedback.gain.setValueAtTime(0.3, audioContext.currentTime);
-
-                masterGain.connect(audioContext.destination);
-                masterGain.connect(delayNode);
-                delayNode.connect(delayFeedback);
-                delayFeedback.connect(delayNode);
-                delayNode.connect(masterGain);
-
-                tocarProgressaoDeAcordes();
-                ambientSynthInterval = setInterval(tocarProgressaoDeAcordes, 10000);
-                isSynthPlaying = true;
-                btn.textContent = "MEDITAÇÃO (SYNTH)";
-            } catch (e) {
-                console.warn("Web Audio indisponível", e);
-            }
-        }
-
-        function pararSintetizador() {
-            if (ambientSynthInterval) {
-                clearInterval(ambientSynthInterval);
-                ambientSynthInterval = null;
-            }
-            synthOscillators.forEach(osc => {
-                try { osc.stop(); } catch(e) {}
-            });
-            synthOscillators = [];
-            isSynthPlaying = false;
-        }
-
-        const notasAcordes = [
-            [130.81, 164.81, 196.00, 246.94], // Cmaj7
-            [110.00, 130.81, 164.81, 220.00], // Am9
-            [87.31, 130.81, 174.61, 220.00],  // Fmaj7
-            [98.00, 146.83, 196.00, 246.94]   // G6
-        ];
-        let indiceAcorde = 0;
-
-        function tocarProgressaoDeAcordes() {
-            if (!audioContext || audioContext.state === 'suspended' || !isSynthPlaying) return;
-
-            const agora = audioContext.currentTime;
-            const frequencias = notasAcordes[indiceAcorde];
-
-            frequencias.forEach((freq, index) => {
-                const osc = audioContext.createOscillator();
-                const gain = audioContext.createGain();
-
-                osc.type = 'sine';
-                osc.frequency.setValueAtTime(freq, agora);
-                osc.detune.setValueAtTime((Math.random() - 0.5) * 4, agora);
-
-                gain.gain.setValueAtTime(0, agora);
-                gain.gain.linearRampToValueAtTime(0.01, agora + 3.5 + index * 0.3);
-                gain.gain.exponentialRampToValueAtTime(0.0001, agora + 9.5);
-
-                osc.connect(gain);
-                gain.connect(masterGain);
-
-                osc.start(agora);
-                osc.stop(agora + 10);
-                synthOscillators.push(osc);
-            });
-
-            indiceAcorde = (indiceAcorde + 1) % notasAcordes.length;
-        }
-
-        function desbloquearAudioUnificado() {
-            if (audioPlayAttempted) return;
-            audioPlayAttempted = true;
-
-            audio.play().then(() => {
-                pararSintetizador();
-                btn.textContent = "MEDITAÇÃO";
-                localStorage.setItem('musica_playing', 'true');
-                localStorage.setItem('elvis_playing', 'true');
-            }).catch(() => {
-                iniciarSintetizador();
-                if (audioContext && audioContext.state === 'suspended') {
-                    audioContext.resume();
-                }
-                localStorage.setItem('musica_playing', 'true');
-                localStorage.setItem('elvis_playing', 'true');
-            });
-        }
-
-        function alternarAudio() {
-            if (!audio.paused) {
-                audio.pause();
-                btn.textContent = "MUTADO";
-                localStorage.setItem('musica_playing', 'false');
-                localStorage.setItem('elvis_playing', 'false');
-            } else if (isSynthPlaying) {
-                if (audioContext) audioContext.suspend();
-                pararSintetizador();
-                btn.textContent = "MUTADO";
-                localStorage.setItem('musica_playing', 'false');
-                localStorage.setItem('elvis_playing', 'false');
-            } else {
-                audioPlayAttempted = false;
-                desbloquearAudioUnificado();
-            }
-        }
-
-        function ajustarVolume(v) {
-            audio.volume = v;
-            localStorage.setItem('musica_vol', v);
-            localStorage.setItem('elvis_vol', v);
-            if (masterGain && audioContext) {
-                masterGain.gain.setValueAtTime(parseFloat(v) * 0.08, audioContext.currentTime);
-            }
-        }
-
-        function irParaProxima(e) {
-            if (e) e.stopPropagation();
-            localStorage.setItem('musica_tempo', audio.currentTime);
-            localStorage.setItem('elvis_time', audio.currentTime);
-            localStorage.setItem('musica_playing', (!audio.paused || isSynthPlaying) ? 'true' : 'false');
-            localStorage.setItem('elvis_playing', (!audio.paused || isSynthPlaying) ? 'true' : 'false');
-            
-            document.body.style.opacity = '0';
-            setTimeout(() => {
-                window.location.href = "carta.html";
-            }, 1000);
-        }
-
-        /* Geração de estrelas do fundo */
-        const cosmos = document.getElementById('cenario-cosmos');
-        const numEstrelas = window.innerWidth < 640 ? 45 : 85;
-
-        for (let i = 0; i < numEstrelas; i++) {
+        // SISTEMA DE ESTRELAS DE FUNDO
+        const cosmos = document.getElementById('fundo-cosmos');
+        for (let i = 0; i < 65; i++) {
             const estrela = document.createElement('div');
-            estrela.className = 'estrela-prata';
-            const size = Math.random() * 2.0 + 0.6;
-            estrela.style.width = size + 'px';
-            estrela.style.height = size + 'px';
+            estrela.className = 'estrela';
+            const tam = Math.random() * 2 + 0.5;
+            estrela.style.width = tam + 'px';
+            estrela.style.height = tam + 'px';
             estrela.style.top = Math.random() * 100 + '%';
             estrela.style.left = Math.random() * 100 + '%';
-            estrela.style.animationDelay = Math.random() * 4 + 's';
-            estrela.style.animationDuration = (Math.random() * 3 + 2.5) + 's';
+            estrela.style.animationDuration = (Math.random() * 5 + 3) + 's';
             cosmos.appendChild(estrela);
         }
     </script>
