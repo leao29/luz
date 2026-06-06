@@ -1,69 +1,43 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Para Dra. Debora</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">   
+    <title>Para Dra. Debora</title>    
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">   
     
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
-    
-    <style>
+    <style>        
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            user-select: none;
-            -webkit-user-select: none;
+            box-sizing: border-box;
         }
-        
-        body, html {
-            width: 100%;
-            height: 100%;
-            overflow: hidden; 
-            background-color: #030107;
-            font-family: 'Playfair Display', serif;
+
+        body {
+            background-color: #0d0703;
             display: flex;
             justify-content: center;
             align-items: center;
-            perspective: 1000px;
-        }
-
-        .cosmic-bg {
-            position: absolute;
-            inset: 0;
-            z-index: 1;
-            pointer-events: none;
+            min-height: 100vh;
             overflow: hidden;
-            background: radial-gradient(circle at center, #0a041f 0%, #030107 100%);
         }
 
-        .star {
-            position: absolute;
-            background-color: #ffffff;
-            border-radius: 50%;
-            box-shadow: 0 0 6px rgba(255, 255, 255, 0.7), 0 0 12px rgba(200, 220, 255, 0.3);
-            animation: twinkle 4s infinite ease-in-out alternate;
-        }
-
-        @keyframes twinkle {
-            0% { opacity: 0.15; transform: scale(0.8); }
-            50% { opacity: 0.9; transform: scale(1.2); box-shadow: 0 0 10px rgba(255, 255, 255, 0.9), 0 0 15px rgba(212, 175, 55, 0.4); }
-            100% { opacity: 0.15; transform: scale(0.8); }
-        }
-
-        .card-frame {
-            position: relative;
-            z-index: 10;
-            width: 92vw;
-            max-width: 850px;
-            aspect-ratio: 1000 / 563;
-            border-radius: 24px;
-            padding: 4px;
-            background: linear-gradient(135deg, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
-            background-size: 300% 300%;
-            animation: goldenFlow 6s ease infinite, goldGlow 4s infinite ease-in-out alternate;
-            transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.4s ease, opacity 0.8s ease;
-        }
+        /* CARD PRINCIPAL RESPONSIVO */        
+        .card-frame {            
+            position: relative;            
+            z-index: 10;            
+            width: 92vw;            
+            max-width: 500px; /* Proporção ideal de convite vertical para mobile */            
+            min-height: 70vh;            
+            max-height: 85vh;            
+            aspect-ratio: 1000 / 563;            
+            border-radius: 24px;            
+            padding: 4px;            
+            background: linear-gradient(135deg, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);            
+            background-size: 300% 300%;            
+            animation: goldenFlow 6s ease infinite, goldGlow 4s infinite ease-in-out alternate;            
+            transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.4s ease, opacity 0.8s ease;            
+            display: flex;        
+        }        
 
         @keyframes goldenFlow {
             0% { background-position: 0% 50%; }
@@ -72,240 +46,263 @@
         }
 
         @keyframes goldGlow {
-            0% { box-shadow: 0 8px 30px rgba(170, 119, 28, 0.3); }
+            0% { box-shadow: 0 4px 20px rgba(191, 149, 63, 0.3); }
             100% { box-shadow: 0 12px 45px rgba(252, 246, 186, 0.5); }
         }
 
-        @media (min-aspect-ratio: 1000/563) {
-            .card-frame {
-                width: auto;
-                height: 75vh;
-                aspect-ratio: 1000 / 563;
-            }
+        /* Ajuste para telas Desktop (paisagem) */
+        @media (min-aspect-ratio: 1000/563) {            
+            .card-frame {                
+                width: auto;                
+                height: 75vh;                
+                max-width: 850px;
+                aspect-ratio: 1000 / 563;            
+            }        
+        }        
+
+        /* AJUSTE PARA CELULAR: Altera a proporção para caber em telas em pé (retrato) */        
+        @media (max-width: 600px) and (orientation: portrait) {            
+            .card-frame {                
+                aspect-ratio: 4 / 5; /* Formato vertical perfeito para smartphone */                
+                width: 90vw;            
+            }        
+        }        
+
+        .card-frame:hover {            
+            transform: scale(1.01) translateY(-2px);        
         }
 
-        /* AJUSTE PARA CELULAR: Altera a proporção para caber em telas em pé (retrato) */
-        @media (max-width: 600px) and (orientation: portrait) {
-            .card-frame {
-                aspect-ratio: 4 / 5; /* Formato vertical perfeito para smartphone */
-                width: 90vw;
-            }
-        }
-
-        .card-frame:hover {
-            transform: scale(1.01) translateY(-2px);
-        }
-
+        /* CONTEÚDO INTERNO DO ENVELOPE */
         .card-inner {
             width: 100%;
             height: 100%;
-            border-radius: 21px;
-            overflow: hidden;
-            position: relative;
-            background: radial-gradient(circle at center, #261d15 0%, #0d0703 100%);
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            padding: clamp(15px, 3.5vw, 35px);
-            border: 1px solid rgba(191, 149, 63, 0.15);
+            border-radius: 21px;            
+            overflow: hidden;            
+            position: relative;            
+            background: radial-gradient(circle at center, #261d15 0%, #0d0703 100%);            
+            display: flex;            
+            flex-direction: column;            
+            justify-content: space-between;            
+            align-items: center;            
+            padding: clamp(15px, 3.5vw, 35px);            
+            border: 1px solid rgba(191, 149, 63, 0.15);        
+        }        
+
+        .card-header {            
+            width: 100%;            
+            display: flex;            
+            justify-content: space-between;            
+            align-items: flex-start;            
+            margin-bottom: 10px;        
+        }        
+
+        .luxury-tag {            
+            color: #bf953f;            
+            opacity: 0.5;            
+            font-family: 'Cinzel', serif;            
+            font-size: clamp(8px, 1.1vw, 11px);            
+            letter-spacing: 3px;        
+        }        
+
+        .stamp-confidential {            
+            border: 2px solid #ff3b30;            
+            color: #ff3b30;            
+            font-family: 'Cinzel', serif;            
+            font-weight: 700;            
+            font-size: clamp(9px, 1.3vw, 12px);            
+            padding: 3px 12px;            
+            transform: rotate(-6deg) translateY(-2px);            
+            border-radius: 4px;            
+            letter-spacing: 4px;            
+            background: rgba(255, 59, 48, 0.08);            
+            text-shadow: 0 0 4px rgba(255, 59, 48, 0.4);            
+            box-shadow: inset 0 0 4px rgba(255, 59, 48, 0.2), 0 2px 8px rgba(0,0,0,0.4);        
+        }        
+
+        .envelope-body {            
+            text-align: center;            
+            margin: auto 0;            
+            display: flex;            
+            flex-direction: column;            
+            gap: clamp(6px, 1.2vw, 14px);        
+        }        
+
+        .title-recipient {            
+            font-family: 'Great Vibes', cursive;            
+            font-size: clamp(34px, 5.8vw, 62px);            
+            background: linear-gradient(180deg, #ffffff 0%, #e5e7eb 40%, #9ca3af 100%);            
+            -webkit-background-clip: text;            
+            -webkit-text-fill-color: transparent;            
+            filter: drop-shadow(0px 2px 4px rgba(0,0,0,0.6));            
+            letter-spacing: 1px;            
+            display: inline-block;        
+        }        
+
+        .subtitle-sender {            
+            font-family: 'Playfair Display', serif;            
+            font-style: italic;            
+            font-size: clamp(13px, 2vw, 21px);            
+            background: linear-gradient(180deg, #ffffff 0%, #d1d5db 50%, #9ca3af 100%);            
+            -webkit-background-clip: text;            
+            -webkit-text-fill-color: transparent;            
+            filter: drop-shadow(0px 2px 3px rgba(0,0,0,0.7));            
+            letter-spacing: 1px;            
+            opacity: 0.95;            
+            display: inline-block;        
+        }        
+
+        /* NOVO SELO COM PÉROLA NEGRA E BRILHO PRATEADO */        
+        .seal-container {            
+            display: flex;            
+            justify-content: center;            
+            align-items: center;            
+            margin: clamp(4px, 0.8vw, 15px) 0;            
+            position: relative;        
+        }        
+
+        .wax-seal {            
+            width: clamp(65px, 9.5vw, 85px);            
+            height: clamp(65px, 9.5vw, 85px);            
+            background: radial-gradient(circle at 30% 30%, #525255 0%, #29292d 55%, #0e0e12 100%);            
+            border-radius: 48% 52% 45% 55% / 52% 47% 53% 48%;            
+            position: relative;            
+            display: flex;            
+            justify-content: center;            
+            align-items: center;            
+            z-index: 2;            
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.75), inset 2px 2px 5px rgba(255, 255, 255, 0.25), inset -3px -3px 8px rgba(0, 0, 0, 0.9);            
+            border: 1.5px solid #1a1a1e;            
+            transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.4s ease;        
+        }        
+
+        /* Pérola Negra interna redimensionada e ultra iluminada em prata */        
+        .wax-seal::before {            
+            content: '';            
+            position: absolute;            
+            inset: 7px;            
+            border-radius: 50%;            
+            background: radial-gradient(circle at 30% 30%, #ffffff 0%, #e2e8f0 18%, #475569 45%, #0f172a 80%, #020617 100%);            
+            animation: flutuarPerola 3.5s infinite ease-in-out;            
+            border: 1px solid rgba(229, 231, 235, 0.25);            
+            box-shadow: 0 0 18px rgba(255, 255, 255, 0.95), 0 0 8px rgba(203, 213, 225, 0.6), inset -3px -3px 8px rgba(0,0,0,0.95), inset 4px 4px 6px rgba(255,255,255,0.7);            
+            pointer-events: none;        
+        }        
+
+        .wax-seal::after {            
+            content: '';            
+            position: absolute;            
+            inset: -5px;            
+            border-radius: 53% 47% 55% 45% / 46% 54% 48% 52%;            
+            background: radial-gradient(circle at center, rgba(41, 41, 45, 0.3) 0%, rgba(14, 14, 18, 0.5) 80%, rgba(0, 0, 0, 0.6) 100%);            
+            z-index: -1;            
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.5), inset 1px 1px 3px rgba(255, 255, 255, 0.1);        
+        }        
+
+        @keyframes flutuarPerola {            
+            0%, 100% { transform: translateY(0px) scale(1); }            
+            50% { transform: translateY(-3px) scale(1.03); }        
         }
 
-        .card-header {
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-        }
+        .wax-seal:hover {            
+            transform: scale(1.05) rotate(3deg);            
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.9), 0 0 15px rgba(100, 100, 110, 0.3);        
+        }        
 
-        .luxury-tag {
-            color: #bf953f;
-            opacity: 0.5;
-            font-family: 'Cinzel', serif;
-            font-size: clamp(8px, 1.1vw, 11px);
-            letter-spacing: 3px;
-        }
+        .psychiatry-symbol {            
+            width: 38%;            
+            height: 38%;            
+            color: #f3f4f6;            
+            filter: drop-shadow(1px 2px 3px rgba(0, 0, 0, 0.9));            
+            z-index: 2;        
+        }        
 
-        .stamp-confidential {
-            border: 2px solid #ff3b30;
-            color: #ff3b30;
-            font-family: 'Cinzel', serif;
-            font-weight: 700;
-            font-size: clamp(9px, 1.3vw, 12px);
-            padding: 3px 12px;
-            transform: rotate(-6deg) translateY(-2px);
-            border-radius: 4px;
-            letter-spacing: 4px;
-            background: rgba(255, 59, 48, 0.08);
-            text-shadow: 0 0 4px rgba(255, 59, 48, 0.4);
-            box-shadow: inset 0 0 4px rgba(255, 59, 48, 0.2), 0 2px 8px rgba(0,0,0,0.4);
-        }
+        /* BOTÃO LUXUOSO DE AÇÃO */
+        .action-button-container {            
+            width: 100%;            
+            display: flex;            
+            justify-content: center;            
+            margin-top: 10px;            
+            padding-bottom: 5px;        
+        }        
 
-        .envelope-body {
-            text-align: center;
-            margin: auto 0;
-            display: flex;
-            flex-direction: column;
-            gap: clamp(6px, 1.2vw, 14px);
-        }
+        .btn-luxury {            
+            background: rgba(15, 10, 5, 0.4);            
+            backdrop-filter: blur(12px);            
+            -webkit-backdrop-filter: blur(12px);            
+            color: #fbf5b7;            
+            font-family: 'Cinzel', serif;            
+            font-weight: 500;            
+            font-size: clamp(11px, 1.6vw, 14px);            
+            letter-spacing: 4.5px;            
+            text-transform: uppercase;            
+            padding: clamp(10px, 1.5vw, 14px) clamp(26px, 4.5vw, 46px);            
+            border-radius: 40px;            
+            cursor: pointer;            
+            outline: none;            
+            position: relative;            
+            overflow: hidden;            
+            border: 1px solid rgba(191, 149, 63, 0.4);            
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4), inset 0 1px 2px rgba(252, 246, 186, 0.1);            
+            animation: goldAuraPulse 3s infinite ease-in-out;            
+            width: 100%;            
+            max-width: 280px;            
+            transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);        
+        }        
 
-        .title-recipient {
-            font-family: 'Great Vibes', cursive;
-            font-size: clamp(34px, 5.8vw, 62px);
-            background: linear-gradient(180deg, #ffffff 0%, #e5e7eb 40%, #9ca3af 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0px 2px 4px rgba(0,0,0,0.6));
-            letter-spacing: 1px;
-            display: inline-block;
-        }
+        .btn-luxury::after {            
+            content: '';            
+            position: absolute;            
+            top: 0;            
+            left: -150%;            
+            width: 100%;            
+            height: 100%;            
+            background: linear-gradient(90deg, transparent, rgba(252, 246, 186, 0.25), transparent);            
+            transform: skewX(-20deg);            
+            animation: goldShimmerSweep 5s infinite ease-in-out;        
+        }        
 
-        .subtitle-sender {
-            font-family: 'Playfair Display', serif;
-            font-style: italic;
-            font-size: clamp(13px, 2vw, 21px);
-            background: linear-gradient(180deg, #ffffff 0%, #d1d5db 50%, #9ca3af 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0px 2px 3px rgba(0,0,0,0.7));
-            letter-spacing: 1px;
-            opacity: 0.95;
-            display: inline-block;
-        }
+        @keyframes goldShimmerSweep {            
+            0% { left: -150%; }            
+            25% { left: 150%; }            
+            30% { left: 150%; }            
+            100% { left: 150%; }        
+        }        
 
-        .seal-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin: clamp(4px, 0.8vw, 15px) 0;
-        }
+        @keyframes goldAuraPulse {            
+            0% { border-color: rgba(191, 149, 63, 0.4); box-shadow: 0 4px 15px rgba(0,0,0,0.4), 0 0 5px rgba(191, 149, 63, 0.15); }            
+            50% { border-color: rgba(252, 246, 186, 0.85); box-shadow: 0 4px 20px rgba(0,0,0,0.4), 0 0 15px rgba(252, 246, 186, 0.35); }            
+            100% { border-color: rgba(191, 149, 63, 0.4); box-shadow: 0 4px 15px rgba(0,0,0,0.4), 0 0 5px rgba(191, 149, 63, 0.15); }        
+        }        
 
-        .wax-seal {
-            width: clamp(65px, 9.5vw, 85px);
-            height: clamp(65px, 9.5vw, 85px);
-            background: radial-gradient(circle at 30% 30%, #525255 0%, #29292d 55%, #0e0e12 100%);
-            border-radius: 48% 52% 45% 55% / 52% 47% 53% 48%;
-            position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.75), inset 2px 2px 5px rgba(255, 255, 255, 0.25), inset -3px -3px 8px rgba(0, 0, 0, 0.9);
-            border: 1.5px solid #1a1a1e;
-            transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.4s ease;
-        }
+        .btn-luxury:hover {            
+            border-color: rgba(252, 246, 186, 1);            
+            color: #ffffff;            
+            background: rgba(35, 25, 15, 0.8);            
+            letter-spacing: 5px;            
+            transform: translateY(-1px);        
+        }        
 
-        .wax-seal::before {
-            content: '';
-            position: absolute;
-            inset: 7px;
-            border-radius: 50%;
-            border: 1px solid rgba(229, 231, 235, 0.25);
-            box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.7);
-            pointer-events: none;
-        }
-
-        .wax-seal::after {
-            content: '';
-            position: absolute;
-            inset: -5px;
-            border-radius: 53% 47% 55% 45% / 46% 54% 48% 52%;
-            background: radial-gradient(circle at center, rgba(41, 41, 45, 0.3) 0%, rgba(14, 14, 18, 0.5) 80%, rgba(0, 0, 0, 0.6) 100%);
-            z-index: -1;
-            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.5), inset 1px 1px 3px rgba(255, 255, 255, 0.1);
-        }
-
-        .wax-seal:hover {
-            transform: scale(1.05) rotate(3deg);
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.9), 0 0 15px rgba(100, 100, 110, 0.3);
-        }
-
-        .psychiatry-symbol {
-            width: 38%;
-            height: 38%;
-            color: #f3f4f6;
-            filter: drop-shadow(1px 2px 3px rgba(0, 0, 0, 0.9));
-            z-index: 2;
-        }
-
-        .action-button-container {
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            padding-bottom: 5px;
-        }
-
-        .btn-luxury {
-            background: rgba(15, 10, 5, 0.4);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            color: #fbf5b7;
-            font-family: 'Cinzel', serif;
-            font-weight: 500;
-            font-size: clamp(11px, 1.6vw, 14px);
-            letter-spacing: 4.5px;
-            text-transform: uppercase;
-            padding: clamp(10px, 1.5vw, 14px) clamp(26px, 4.5vw, 46px);
-            border-radius: 40px;
-            cursor: pointer;
-            outline: none;
-            position: relative;
-            overflow: hidden;
-            border: 1px solid rgba(191, 149, 63, 0.4);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.4), inset 0 1px 2px rgba(252, 246, 186, 0.1);
-            animation: goldAuraPulse 3s infinite ease-in-out;
-            transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
-        }
-
-        .btn-luxury::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -150%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(252, 246, 186, 0.25), transparent);
-            transform: skewX(-20deg);
-            animation: goldShimmerSweep 5s infinite ease-in-out;
-        }
-
-        @keyframes goldShimmerSweep {
-            0% { left: -150%; }
-            30% { left: 150%; }
-            100% { left: 150%; }
-        }
-
-        @keyframes goldAuraPulse {
-            0% { border-color: rgba(191, 149, 63, 0.4); box-shadow: 0 4px 15px rgba(0,0,0,0.4), 0 0 5px rgba(191, 149, 63, 0.15); }
-            50% { border-color: rgba(252, 246, 186, 0.85); box-shadow: 0 4px 20px rgba(0,0,0,0.4), 0 0 15px rgba(252, 246, 186, 0.35); }
-            100% { border-color: rgba(191, 149, 63, 0.4); box-shadow: 0 4px 15px rgba(0,0,0,0.4), 0 0 5px rgba(191, 149, 63, 0.15); }
-        }
-
-        .btn-luxury:hover {
-            border-color: rgba(252, 246, 186, 1);
-            color: #ffffff;
-            letter-spacing: 5px;
-            transform: translateY(-1px);
-        }
-
-        .audio-controls-panel {
-            position: fixed;
-            bottom: 24px;
-            right: 24px;
-            background: rgba(10, 6, 18, 0.9);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(212, 175, 55, 0.35);
-            padding: 10px 18px;
-            border-radius: 40px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            z-index: 50;
-            opacity: 0;
-            transform: scale(0.9);
-            pointer-events: none;
-            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
-        }
+        /* CONTROLES DO ÁUDIO OTIMIZADOS PARA DISPOSITIVOS MÓVEIS */        
+        .audio-controls-panel {            
+            position: fixed;            
+            bottom: 24px;            
+            right: 24px;            
+            background: rgba(10, 6, 18, 0.9);            
+            backdrop-filter: blur(12px);            
+            -webkit-backdrop-filter: blur(12px);            
+            border: 1px solid rgba(212, 175, 55, 0.35);            
+            padding: 10px 18px;            
+            border-radius: 40px;            
+            display: flex;            
+            align-items: center;            
+            gap: 12px;            
+            z-index: 50;            
+            opacity: 0;            
+            transform: scale(0.9);            
+            pointer-events: none;            
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);            
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);        
+        }        
 
         .audio-controls-panel.visible {
             opacity: 1;
@@ -313,30 +310,29 @@
             pointer-events: auto;
         }
 
-        .btn-play-pause {
-            background: none;
-            border: none;
-            color: #d4af37;
-            font-size: 13px;
-            font-weight: 600;
-            cursor: pointer;
-            outline: none;
-            font-family: 'Cinzel', serif;
-        }
+        .audio-btn {            
+            background: none;            
+            border: none;            
+            color: #d4af37;            
+            font-size: 13px;            
+            font-weight: 600;            
+            cursor: pointer;            
+            outline: none;            
+            font-family: 'Cinzel', serif;            
+            white-space: nowrap;        
+        }        
 
-        .vol-slider {
-            -webkit-appearance: none;
-            appearance: none;
-            width: 75px;
+        .vol-slider {            
+            -webkit-appearance: none;            
+            width: 70px;
             height: 3px;
-            background: rgba(255, 255, 255, 0.15);
+            background: rgba(212, 175, 55, 0.2);
             border-radius: 2px;
             outline: none;
         }
-
+        
         .vol-slider::-webkit-slider-thumb {
             -webkit-appearance: none;
-            appearance: none;
             width: 10px;
             height: 10px;
             border-radius: 50%;
@@ -347,93 +343,36 @@
 </head>
 <body>
 
-    <div class="cosmic-bg">
-        <div class="stars-container" id="starsContainer"></div>
-    </div>
-
-    <div id="mainCard" class="card-frame">
+    <div class="card-frame">
         <div class="card-inner">
             <div class="card-header">
-                <div class="luxury-tag">⭐ LUXURY INVITATION</div>
-                <div class="stamp-confidential">CONFIDENCIAL</div>
+                <span class="luxury-tag">CONVITE EXCLUSIVO</span>
+                <span class="stamp-confidential">CONFIDENCIAL</span>
             </div>
 
             <div class="envelope-body">
                 <h1 class="title-recipient">Dra. Debora</h1>
-                <p class="subtitle-sender">Paciente: A que jamais esquecerá você</p>
-            </div>
-
-            <div class="seal-container">
-                <div class="wax-seal">
-                    <svg class="psychiatry-symbol" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M12 3v17" />
-                        <path d="M8 20h8" />
-                        <path d="M6 6v3a6 6 0 0 0 12 0V6" />
-                    </svg>
+                <p class="subtitle-sender">Você foi cordialmente convidada</p>
+                
+                <div class="seal-container">
+                    <div class="wax-seal">
+                        <!-- O símbolo da psiquiatria (Psi) pode ser inserido aqui como SVG ou texto -->
+                        <span class="psychiatry-symbol">Ψ</span>
+                    </div>
                 </div>
             </div>
 
             <div class="action-button-container">
-                <button onclick="irParaProntuario()" class="btn-luxury">
-                    Aperte com carinho
-                </button>
+                <button class="btn-luxury">Abrir Convite</button>
             </div>
         </div>
     </div>
 
-    <div class="audio-controls-panel" id="customControls">
-        <button class="btn-play-pause" id="playPauseBtn" onclick="togglePlay()">⏸ Pausar</button>
-        <input type="range" class="vol-slider" id="volumeControl" min="0" max="1" step="0.1" value="0.8" oninput="ajustarVolume(this.value)">
+    <!-- Painel de Áudio Oculto por padrão (adicione a classe .visible via JS) -->
+    <div class="audio-controls-panel visible">
+        <button class="audio-btn">PLAY</button>
+        <input type="range" class="vol-slider" min="0" max="100" value="50">
     </div>
 
-    <audio id="musica" loop preload="auto">
-        <source src="elvis.jtml.mp3" type="audio/mpeg">
-    </audio>
-
-    <script>
-        const starsContainer = document.getElementById('starsContainer');
-        for (let i = 0; i < 55; i++) {
-            const star = document.createElement('div');
-            star.className = 'star';
-            const size = Math.random() * 2.2 + 1.2;
-            star.style.width = `${size}px`;
-            star.style.height = `${size}px`;
-            star.style.top = `${Math.random() * 100}%`;
-            star.style.left = `${Math.random() * 100}%`;
-            star.style.animationDelay = `${Math.random() * 4}s`;
-            starsContainer.appendChild(star);
-        }
-
-        const som = document.getElementById('musica');
-        const painel = document.getElementById('customControls');
-        const mainCard = document.getElementById('mainCard');
-
-        function irParaProntuario() {
-            som.volume = 0.8;
-            som.play().catch(() => console.log("Áudio iniciado."));
-            painel.classList.add('visible');
-            mainCard.style.opacity = '0';
-            mainCard.style.transform = 'scale(0.92) rotateY(-3deg)';
-
-            // Link mantido como prontuario.htm
-            setTimeout(() => {
-                window.location.href = "prontuario.htm";
-            }, 2200); 
-        }
-
-        function togglePlay() {
-            if (som.paused) {
-                som.play();
-                document.getElementById('playPauseBtn').innerHTML = "⏸ Pausar";
-            } else {
-                som.pause();
-                document.getElementById('playPauseBtn').innerHTML = "▶️ Tocar";
-            }
-        }
-
-        function ajustarVolume(valor) {
-            som.volume = valor;
-        }
-    </script>
 </body>
 </html>
