@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>O Encontro com o Destino - Dra. Débora</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght=500;700&family=Orbitron:wght=400;600&family=Lora:ital,wght=0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Orbitron:wght@400;600&family=Lora:ital,wght=0,400;0,600;1,400&display=swap" rel="stylesheet">
     <style>
         :root {
             --azul-cosmos: #020617;
@@ -33,7 +33,7 @@
             overflow-x: hidden;
             opacity: 0;
             transition: opacity 2s ease;
-            perspective: 1500px;
+            perspective: 2000px; /* Aumentado para um efeito 3D mais dramático */
         }
 
         #fundo-cosmos {
@@ -124,8 +124,10 @@
             -webkit-text-fill-color: transparent;
             filter: drop-shadow(0 2px 8px rgba(0,0,0,0.8));
             font-weight: 700;
+            transition: transform 1.5s ease, opacity 1s ease;
         }
 
+        /* CARD PRINCIPAL COM SUPORTE A VIRADA DE PÁGINA 3D */
         .card-principal {
             max-width: 750px;
             width: 100%;
@@ -135,6 +137,14 @@
             padding: 1px;
             box-shadow: 0 40px 80px rgba(0,0,0,0.8);
             border: 1px solid rgba(197, 168, 92, 0.2);
+            transform-origin: left center; /* Eixo de rotação como a lombada de um livro */
+            transition: transform 1.6s cubic-bezier(0.66, 0, 0.34, 1), opacity 1.4s ease;
+        }
+
+        /* Classe que executa a virada cinematográfica */
+        .card-principal.virar-pagina {
+            transform: rotateY(-140deg) scale(0.9) translateX(-100px);
+            opacity: 0;
         }
 
         .papel-interno {
@@ -443,13 +453,14 @@
         const volumeSlider = document.getElementById('volumeSlider');
         const instrucao = document.getElementById('textoInstrucao');
         const btnLivroContainer = document.getElementById('btnLivroContainer');
+        const livroContainer = document.getElementById('livroContainer');
+        const mainTitle = document.getElementById('mainTitle');
 
         window.onload = () => {
             document.body.style.opacity = '1';
             audio.volume = 0.5;
             volumeSlider.value = 0.5;
 
-            // Recupera o tempo exato de onde a música parou na página anterior
             const tempoSalvo = localStorage.getItem('musica_tempo');
             if (tempoSalvo) { audio.currentTime = parseFloat(tempoSalvo); }
             
@@ -460,7 +471,6 @@
             });
         };
 
-        // Salva o tempo a cada frame/segundo de forma contínua e precisa
         audio.ontimeupdate = () => {
             localStorage.setItem('musica_tempo', audio.currentTime);
         };
@@ -470,7 +480,6 @@
                 ostraContainer.classList.add('aberta');
                 instrucao.textContent = "A pérola de Débora está flutuando...";
                 
-                // Exibe o botão de transição com suavidade luxuosa
                 btnLivroContainer.style.display = "flex";
                 setTimeout(() => { btnLivroContainer.style.opacity = "1"; }, 100);
 
@@ -480,17 +489,26 @@
             } else {
                 perola.classList.remove('flutuando');
                 setTimeout(() => {
-                    ostraContainer.classList.remove('aberta');
+                    ostraContainer.classList.remove('all', 'aberta');
                     instrucao.textContent = "Aperte na ostra para a pérola sair";
                 }, 400);
             }
         }
 
-        // Procure a função que faz o botão avançar dentro de fim.html e deixe assim:
+        // FAZ A PÁGINA VIRAR EM 3D ANTES DE REDIRECIONAR
         function irParaProxima(e) {
             e.stopPropagation();
             localStorage.setItem('musica_tempo', audio.currentTime);
-            window.location.href = "final.html"; // Altere aqui para ir para a página final.html
+            
+            // Ativa o efeito visual de folhear o livro
+            livroContainer.classList.add('virar-pagina');
+            mainTitle.style.opacity = "0";
+            mainTitle.style.transform = "translateY(-20px)";
+            
+            // Aguarda a animação 3D terminar (1.5 segundos) e pula de tela
+            setTimeout(() => {
+                window.location.href = "final.html";
+            }, 1500);
         }
 
         function iniciarAudio() {
@@ -513,7 +531,6 @@
 
         function ajustarVol(v) { audio.volume = v; }
 
-        // GERADOR CÓSMICO: ESTRELAS E CADENTES
         const cosmos = document.getElementById('fundo-cosmos');
         const fragmento = document.createDocumentFragment();
         
