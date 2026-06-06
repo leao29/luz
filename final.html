@@ -82,6 +82,473 @@
         
         .vol-slider { width: 70px; accent-color: var(--ouro-brilhante); }
 
+        /* PÉROLA NEGRA COM FLUTUAÇÃO 3D REALISTA */
+        .container-perola-interna {
+            margin: 10px 0 35px 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            height: 100px;
+        }
+
+        .perola-negra {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 35% 35%, #94a3b8 0%, #334155 30%, #0f172a 70%, #020617 100%);
+            box-shadow: 
+                0 0 30px rgba(226, 232, 240, 0.6),
+                inset -8px -8px 20px rgba(0,0,0,0.9),
+                inset 10px 10px 18px rgba(255,255,255,0.25);
+            position: relative;
+            z-index: 2;
+            animation: flutuarPerolaAvançado 4s infinite ease-in-out;
+        }
+
+        /* Sombra projetada abaixo da pérola para dar o efeito realista de flutuação */
+        .sombra-perola {
+            width: 45px;
+            height: 8px;
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 50%;
+            filter: blur(4px);
+            position: absolute;
+            bottom: 5px;
+            animation: sombraPerolaAvançado 4s infinite ease-in-out;
+            z-index: 1;
+        }
+
+        @keyframes flutuarPerolaAvançado {
+            0%, 100% { transform: translateY(0px) scale(1); }
+            50% { transform: translateY(-12px) scale(1.02); }
+        }
+
+        @keyframes sombraPerolaAvançado {
+            0%, 100% { transform: scale(1); opacity: 0.8; filter: blur(3px); }
+            50% { transform: scale(0.7); opacity: 0.3; filter: blur(5px); }
+        }
+
+        /* ESTRUTURA DO CARD DE LUXO */
+        .capa-livro {
+            max-width: 620px;
+            width: 100%;
+            background: linear-gradient(135deg, #050c24 0%, #020511 100%);
+            border-radius: 16px;
+            padding: 45px 30px;
+            box-shadow: -15px 30px 60px rgba(0,0,0,0.9), inset 5px 0 15px rgba(255,255,255,0.03);
+            border: 2px solid var(--ouro-escuro);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transform-origin: left center;
+            transform: rotateY(45deg) scale(0.95);
+            opacity: 0;
+            transition: transform 1.8s cubic-bezier(0.16, 1, 0.3, 1), opacity 1s ease;
+            margin-bottom: 50px;
+        }
+
+        .capa-livro.revelada {
+            transform: rotateY(0deg) scale(1);
+            opacity: 1;
+        }
+
+        /* Moldura de Ouro Barroca */
+        .moldura-barroca {
+            position: absolute;
+            top: 15px; bottom: 15px; left: 15px; right: 15px;
+            border: 1px solid rgba(197, 168, 92, 0.3);
+            border-radius: 12px;
+            pointer-events: none;
+        }
+
+        .moldura-barroca::before {
+            content: '';
+            position: absolute;
+            top: 8px; bottom: 8px; left: 8px; right: 8px;
+            border: 2px solid var(--ouro-brilhante);
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(197, 168, 92, 0.2);
+        }
+
+        .canto-decorativo {
+            position: absolute;
+            width: 25px; height: 25px;
+            border: 2px solid var(--ouro-brilhante);
+            border-radius: 50%;
+        }
+        .canto-tl { top: 20px; left: 20px; border-right: transparent; border-bottom: transparent; }
+        .canto-tr { top: 20px; right: 20px; border-left: transparent; border-bottom: transparent; }
+        .canto-bl { bottom: 20px; left: 20px; border-right: transparent; border-top: transparent; }
+        .canto-br { bottom: 20px; right: 20px; border-left: transparent; border-top: transparent; }
+
+        /* CONTEÚDO INTERNO */
+        .conteudo-capa {
+            z-index: 2;
+            text-align: center;
+            width: 100%;
+        }
+
+        /* CONTAINER DOS SIMBOLOS */
+        .grid-simbolos {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 50px;
+            margin-bottom: 30px;
+        }
+
+        /* Cabeça de Psiquiatria Ultra Futurista com Árvore de Luz Interna */
+        .cabeca-psiquiatria {
+            width: 95px; height: 95px;
+            filter: drop-shadow(0 0 20px rgba(197, 168, 92, 0.8));
+        }
+
+        /* Animação de pulsar das luzes internas do cérebro geológico */
+        .luz-pulsante {
+            animation: brilhoCelular 2s infinite ease-in-out;
+        }
+        .luz-atrasada {
+            animation: brilhoCelular 2s infinite ease-in-out 1s;
+        }
+
+        @keyframes brilhoCelular {
+            0%, 100% { opacity: 0.4; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.3); }
+        }
+
+        /* Coração Pulsante Realista */
+        .coracao-pulsante {
+            width: 65px; height: 65px;
+            animation: pulsarCoracao 1.2s infinite cubic-bezier(0.25, 0.8, 0.25, 1);
+            filter: drop-shadow(0 0 15px rgba(256, 256, 256, 0.5));
+        }
+
+        @keyframes pulsarCoracao {
+            0% { transform: scale(1); }
+            30% { transform: scale(1.12); }
+            45% { transform: scale(1.05); }
+            60% { transform: scale(1.18); }
+            100% { transform: scale(1); }
+        }
+
+        .titulo-capa {
+            font-size: 2.2rem;
+            letter-spacing: 4px;
+            background: linear-gradient(135deg, #ffffff 0%, #e2c792 50%, #c5a85c 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin: 15px 0 12px 0;
+            font-weight: 700;
+            line-height: 1.3;
+        }
+
+        .sub-titulo-capa {
+            font-family: 'Lora', serif;
+            font-style: italic;
+            font-size: 1.05rem;
+            color: #94a3b8;
+            letter-spacing: 1px;
+            max-width: 530px;
+            margin: 0 auto 35px auto;
+            line-height: 1.6;
+        }
+
+        /* TEXTO PRINCIPAL DE GRATIDÃO */
+        .texto-agradecimento {
+            font-family: 'Lora', serif;
+            font-size: 1.05rem;
+            line-height: 1.9;
+            color: #cbd5e1;
+            max-width: 520px;
+            margin: 0 auto 35px auto;
+            text-align: center;
+        }
+        
+        .texto-agradecimento span {
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        .autor {
+            font-size: 1.3rem;
+            color: #ffffff;
+            letter-spacing: 4px;
+            border-top: 1px solid rgba(197, 168, 92, 0.2);
+            padding-top: 15px;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+
+        /* RODAPÉ CHUMBADO EM FERRO */
+        .rodape-ferro {
+            width: 100%;
+            max-width: 520px;
+            background: linear-gradient(180deg, #2d3748 0%, #1a202c 100%);
+            border: 2px solid #4a5568;
+            border-top: 2px solid #718096;
+            padding: 16px 20px;
+            border-radius: 6px;
+            box-shadow: 
+                0 10px 25px rgba(0,0,0,0.7),
+                inset 0 1px 0 rgba(255,255,255,0.2);
+            text-align: center;
+            position: relative;
+            margin-top: auto;
+        }
+
+        .rodape-ferro::before, .rodape-ferro::after {
+            content: '';
+            position: absolute;
+            top: 50%; width: 8px; height: 8px;
+            background: #111;
+            border-radius: 50%;
+            box-shadow: inset 0 1px 2px rgba(255,255,255,0.3);
+            transform: translateY(-50%);
+        }
+        .rodape-ferro::before { left: 12px; }
+        .rodape-ferro::after { right: 12px; }
+
+        .texto-ferro {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 5px;
+            color: #a0aec0;
+            text-shadow: 1px 1px 0px #000, -1px -1px 0px rgba(255,255,255,0.1);
+            text-transform: uppercase;
+        }
+
+        @media (max-width: 600px) {
+            .capa-livro { padding: 35px 15px; }
+            .titulo-capa { font-size: 1.6rem; }
+            .texto-agradecimento { font-size: 0.95rem; line-height: 1.7; }
+            .grid-simbolos { gap: 25px; }
+            .cabeca-psiquiatria, .coracao-pulsante { transform: scale(0.85); }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="fundo-cosmos"></div>
+
+    <!-- PAINEL DE CONTROLE DE ÁUDIO -->
+    <div class="painel-musica-fixo">
+        <button class="btn-controle" id="playPause">PAUSE</button>
+        <div style="display:flex; align-items:center; gap:6px;">
+            <span style="color:var(--ouro-brilhante); font-size:10px;">🔈</span>
+            <input type="range" class="vol-slider" id="volumeSlider" min="0" max="1" step="0.05" value="0.5" oninput="ajustarVol(this.value)">
+            <span style="color:var(--ouro-brilhante); font-size:10px;">🔊</span>
+        </div>
+    </div>
+
+    <!-- CARD PRINCIPAL LUXUOSO -->
+    <div class="capa-livro" id="capaFisica">
+        <div class="moldura-barroca"></div>
+        <div class="canto-decorativo canto-tl"></div>
+        <div class="canto-decorativo canto-tr"></div>
+        <div class="canto-decorativo canto-bl"></div>
+        <div class="canto-decorativo canto-br"></div>
+        
+        <div class="conteudo-capa">
+            
+            <!-- PÉROLA NEGRA DETALHADA COM FLUTUAÇÃO REALISTA DENTRO DO CARD -->
+            <div class="container-perola-interna">
+                <div class="perola-negra"></div>
+                <div class="sombra-perola"></div>
+            </div>
+
+            <!-- SIMBOLOS REESTRUTURADOS -->
+            <div class="grid-simbolos">
+                
+                <!-- Perfil Humano nítido e Árvore Geológica da Mente com efeitos de Brilho Avançados -->
+                <svg class="cabeca-psiquiatria" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Perfil anatômico bem definido da mente voltado para a direita -->
+                    <path d="M35 85 C35 80, 38 75, 42 70 C34 62, 32 52, 32 42 C32 20, 48 12, 62 12 C78 12, 85 24, 82 44 C80 50, 83 54, 81 58 C78 64, 72 68, 70 74 C68 80, 65 85, 62 85" stroke="url(#ouroVibrante)" stroke-width="2.5" stroke-linecap="round"/>
+                    
+                    <!-- Tronco Principal da Árvore Geológica / Psiquiatria -->
+                    <path d="M52 72 L52 48" stroke="url(#ouroVibrante)" stroke-width="3" stroke-linecap="round"/>
+                    
+                    <!-- Galhos e Conexões Cristalinas com Nodes de Alta Definição -->
+                    <path d="M52 58 Q40 54, 43 42" stroke="#e2e8f0" stroke-width="1.5" stroke-linecap="round" opacity="0.8"/>
+                    <path d="M52 52 Q65 48, 72 40" stroke="url(#ouroVibrante)" stroke-width="1.5" stroke-linecap="round"/>
+                    <path d="M52 48 Q44 32, 48 24" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" opacity="0.9"/>
+                    <path d="M52 48 Q62 34, 68 28" stroke="url(#ouroVibrante)" stroke-width="1.5" stroke-linecap="round"/>
+                    
+                    <!-- Pontos de Luz com Efeito Canva (Pulsantes e Fixos) -->
+                    <circle class="luz-pulsante" cx="43" cy="42" r="3.5" fill="#ffffff" filter="drop-shadow(0 0 6px #fff)"/>
+                    <circle class="luz-atrasada" cx="72" cy="40" r="3" fill="#e2c792" filter="drop-shadow(0 0 5px var(--ouro-brilhante))"/>
+                    <circle class="luz-pulsante" cx="48" cy="24" r="4" fill="#ffffff" filter="drop-shadow(0 0 8px #fff)"/>
+                    <circle class="luz-atrasada" cx="68" cy="28" r="3.5" fill="#c5a85c" filter="drop-shadow(0 0 5px var(--ouro-brilhante))"/>
+                    
+                    <defs>
+                        <linearGradient id="ouroVibrante" x1="0%" y1="100%" x2="100%" y2="0%">
+                            <stop offset="0%" stop-color="#4a3b13"/>
+                            <stop offset="50%" stop-color="#c5a85c"/>
+                            <stop offset="100%" stop-color="#ffffff"/>
+                        </linearGradient>
+                    </defs>
+                </svg>
+
+                <!-- Coração Realista Pulsante (Prata) -->
+                <svg class="coracao-pulsante" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M50 82 C50 82, 15 55, 15 35 C15 20, 28 12, 50 30 C72 12, 85 20, 85 35 C85 55, 50 82, 50 82 Z" fill="url(#gradPrataCard)" stroke="#ffffff" stroke-width="1.5"/>
+                    <path d="M45 35 C35 35, 28 40, 32 50" stroke="#fff" stroke-width="1.8" stroke-linecap="round" opacity="0.4"/>
+                    <defs>
+                        <linearGradient id="gradPrataCard" x1="30%" y1="10%" x2="70%" y2="90%">
+                            <stop offset="0%" stop-color="#ffffff"/>
+                            <stop offset="50%" stop-color="#cbd5e1"/>
+                            <stop offset="100%" stop-color="#334155"/>
+                        </linearGradient>
+                    </defs>
+                </svg>
+            </div>
+
+            <!-- TEXTOS REQUISITADOS -->
+            <h1 class="titulo-capa">AQUI FOI DADO O MEU MELHOR</h1>
+            
+            <div class="sub-titulo-capa">
+                Apesar de parecer simples, houve todo um trabalho. E como meu defeito é ser perfeccionista demais, cada detalhe foi dedicado; e sei que ser perfeccionista pode ser um defeito, porém foi o melhor que pude aqui oferecer a você: o meu melhor.
+            </div>
+            
+            <!-- TEXTO DE AGRADECIMENTO PRINCIPAL -->
+            <p class="texto-agradecimento">
+                "Apesar de não podermos ter tudo que desejamos na vida, que possamos aprender a celebrar todos os dias a vida e as pessoas à nossa volta, principalmente as que amamos e as que entram em nossa vida nos fascinando como você.<br><br>
+                <span>Gratidão pelo carinho, pelo respeito, por tudo que você no seu limite fez por mim</span> e que isso levarei na minha bagagem a qual esteja onde eu estiver você será sempre inesquecível."
+            </p>
+
+            <div class="autor">DRA. DÉBORA</div>
+        </div>
+    </div>
+
+    <!-- RODAPÉ CHUMBADO COMO FERRO -->
+    <div class="rodape-ferro">
+        <div class="texto-ferro">Final dessa linda experiência</div>
+    </div>
+
+    <audio id="trilha" src="elvis.html.mp3" loop></audio>
+
+    <script>
+        const audio = document.getElementById('trilha');
+        const btnPP = document.getElementById('playPause');
+        const volumeSlider = document.getElementById('volumeSlider');
+        const capaFisica = document.getElementById('capaFisica');
+
+        window.onload = () => {
+            audio.volume = 0.5;
+            volumeSlider.value = 0.5;
+
+            const tempoSalvo = localStorage.getItem('musica_tempo');
+            if (tempoSalvo) { audio.currentTime = parseFloat(tempoSalvo); }
+            
+            audio.play().then(() => {
+                btnPP.innerText = "PAUSE";
+            }).catch(() => {
+                btnPP.innerText = "PLAY";
+            });
+
+            setTimeout(() => {
+                capaFisica.classList.add('revelada');
+            }, 200);
+        };
+
+        audio.ontimeupdate = () => {
+            localStorage.setItem('musica_tempo', audio.currentTime);
+        };
+
+        btnPP.onclick = () => {
+            if (audio.paused) {
+                audio.play();
+                btnPP.innerText = "PAUSE";
+            } else {
+                audio.pause();
+                btnPP.innerText = "PLAY";
+            }
+        };
+
+        function ajustarVol(v) { audio.volume = v; }
+
+        // SISTEMA DE ESTRELAS DE FUNDO
+        const cosmos = document.getElementById('fundo-cosmos');
+        for (let i = 0; i < 65; i++) {
+            const estrela = document.createElement('div');
+            estrela.className = 'estrela';
+            const tam = Math.random() * 2 + 0.5;
+            estrela.style.width = tam + 'px';
+            estrela.style.height = tam + 'px';
+            estrela.style.top = Math.random() * 100 + '%';
+            estrela.style.left = Math.random() * 100 + '%';
+            estrela.style.animationDuration = (Math.random() * 5 + 3) + 's';
+            cosmos.appendChild(estrela);
+        }
+    </script>
+</body>
+</html>
+        body {
+            margin: 0; padding: 0;
+            width: 100%; min-height: 100vh;
+            background-color: var(--azul-cosmos);
+            font-family: 'Cinzel', serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 40px 20px;
+            overflow-x: hidden;
+            perspective: 2000px;
+        }
+
+        #fundo-cosmos {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -2;
+            background: radial-gradient(circle at center, #0a1931 0%, #040d21 60%, var(--azul-cosmos) 100%);
+        }
+
+        .estrela {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            opacity: 0.3;
+            animation: brilho infinite ease-in-out;
+        }
+
+        @keyframes brilho {
+            0%, 100% { opacity: 0.1; transform: scale(1); }
+            50% { opacity: 0.6; transform: scale(1.4); }
+        }
+
+        /* PAINEL DE MÚSICA */
+        .painel-musica-fixo {
+            position: fixed;
+            top: 20px; right: 20px;
+            background: rgba(5, 11, 30, 0.85);
+            backdrop-filter: blur(15px);
+            border: 1px solid var(--ouro-escuro);
+            padding: 8px 16px;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            z-index: 100;
+            box-shadow: 0 4px 30px rgba(0,0,0,0.5);
+        }
+
+        .btn-controle {
+            background: transparent;
+            border: 1px solid var(--ouro-brilhante);
+            color: var(--ouro-brilhante);
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.7rem;
+            cursor: pointer;
+        }
+        
+        .vol-slider { width: 70px; accent-color: var(--ouro-brilhante); }
+
         /* PÉROLA NEGRA DENTRO DO CARD */
         .container-perola-interna {
             margin: 15px 0 25px 0;
