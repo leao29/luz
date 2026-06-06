@@ -13,6 +13,8 @@
             --ouro-brilhante: #c5a85c;
             --texto-claro: #f1f5f9;
             --texto-ouro: #e2c792;
+            --prata-dor: #94a3b8;
+            --prata-brilhante: #e2e8f0;
             --madre-perola: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(203,213,225,0.05) 50%, rgba(197,168,92,0.05) 100%);
         }
 
@@ -124,7 +126,6 @@
             font-weight: 700;
         }
 
-        /* CARD PRINCIPAL SEM O EFEITO DE OURO GIRATÓRIO */
         .card-principal {
             max-width: 750px;
             width: 100%;
@@ -133,9 +134,7 @@
             border-radius: 24px;
             padding: 1px;
             box-shadow: 0 40px 80px rgba(0,0,0,0.8);
-            transition: transform 2s cubic-bezier(0.66, 0, 0.34, 1), width 2s ease, max-width 2s ease, border-radius 2s ease;
-            transform-style: preserve-3d;
-            border: 1px solid rgba(197, 168, 92, 0.2); /* Uma borda sutil e estática para acabamento */
+            border: 1px solid rgba(197, 168, 92, 0.2);
         }
 
         .papel-interno {
@@ -146,56 +145,6 @@
             color: var(--texto-claro);
             border-radius: 22px;
             text-align: center;
-            transition: opacity 1.5s ease;
-        }
-
-        /* CAPA DO LIVRO FECHADO (ESCONDIDA INICIALMENTE) */
-        .capa-livro {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(135deg, #030712 0%, #0f172a 100%);
-            border: 6px double var(--ouro-brilhante);
-            border-radius: 12px;
-            z-index: 10;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            transform: rotateY(-180deg);
-            backface-visibility: hidden;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 1s ease;
-            box-shadow: inset 0 0 50px rgba(0,0,0,0.9);
-        }
-
-        .capa-livro::after {
-            content: '';
-            position: absolute;
-            left: 0; top: 0; bottom: 0; width: 25px;
-            background: linear-gradient(90deg, rgba(0,0,0,0.5), transparent);
-            border-right: 1px solid rgba(197, 168, 92, 0.3);
-        }
-
-        .brasao-ouro {
-            width: 120px; height: 120px;
-            border: 2px solid var(--ouro-brilhante);
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-family: 'Cinzel', serif;
-            font-size: 2.5rem;
-            color: var(--ouro-brilhante);
-            text-shadow: 0 0 10px rgba(197, 168, 92, 0.5);
-            margin-bottom: 20px;
-            box-shadow: 0 0 20px rgba(197, 168, 92, 0.2);
-            animation: pulsarBrasao 3s infinite ease-in-out;
-        }
-
-        @keyframes pulsarBrasao {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); box-shadow: 0 0 30px rgba(197, 168, 92, 0.4); }
         }
 
         .card-desfecho {
@@ -305,46 +254,63 @@
             50% { opacity: 1; box-shadow: 0 0 15px rgba(197, 168, 92, 0.4); text-shadow: 0 0 8px var(--ouro-brilhante); }
         }
 
-        /* BOTÃO LUXUOSO DE FECHAR O LIVRO */
+        /* CONTAINER DO BOTÃO AVANÇAR */
         .container-botao-livro {
-            margin-top: 30px;
+            margin-top: 40px;
             display: none;
             justify-content: center;
             opacity: 0;
-            transition: opacity 1s ease;
+            transition: opacity 1.2s ease;
         }
 
-        .btn-fechar-livro {
+        /* BOTÃO CHUMBADO COM FERRO E PRATA LUXUOSO */
+        .btn-avancar-hierarquia {
             font-family: 'Cinzel', serif;
-            font-size: 0.9rem;
-            color: var(--azul-cosmos);
-            background: linear-gradient(135deg, #e2c792, #c5a85c);
-            border: 1px solid var(--ouro-brilhante);
-            padding: 12px 30px;
-            border-radius: 30px;
+            font-size: 1rem;
+            color: var(--prata-brilhante);
+            /* Visual Metálico de Ferro Forjado Macio com lapidação de Prata */
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 40%, #334155 70%, #475569 100%);
+            /* Borda grossa simulando metal fundido e chumbado */
+            border: 3px solid #1e293b;
+            outline: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 16px 45px;
+            border-radius: 4px; /* Formato robusto e sutil de placa chumbada */
             cursor: pointer;
-            letter-spacing: 2px;
+            letter-spacing: 4px;
             font-weight: bold;
-            box-shadow: 0 4px 20px rgba(197, 168, 92, 0.3);
-            transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+            position: relative;
+            text-transform: uppercase;
+            box-shadow: 
+                0 10px 30px rgba(0, 0, 0, 0.7), 
+                inset 0 1px 0 rgba(255, 255, 255, 0.2),
+                0 0 0 4px rgba(148, 163, 184, 0.1); /* Sombra externa em prata */
+            transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+            overflow: hidden;
         }
 
-        .btn-fechar-livro:hover {
-            transform: translateY(-3px) scale(1.03);
-            box-shadow: 0 8px 25px rgba(197, 168, 92, 0.6);
-            letter-spacing: 3px;
+        /* Rebites de Ferro simulados nas pontas da placa chumbada */
+        .btn-avancar-hierarquia::before, .btn-avancar-hierarquia::after {
+            content: '';
+            position: absolute;
+            width: 4px; height: 4px;
+            background: var(--prata-dor);
+            border-radius: 50%;
+            top: 6px;
+            box-shadow: 0 1px 1px rgba(255,255,255,0.3);
         }
+        .btn-avancar-hierarquia::before { left: 6px; }
+        .btn-avancar-hierarquia::after { right: 6px; }
 
-        /* ESTADOS DE TRANSIÇÃO DO LIVRO FECHANDO */
-        .card-principal.livro-fechado {
-            transform: rotateY(-180deg);
-            max-width: 450px;
-            height: 600px;
-            border-radius: 12px;
+        /* Brilho da Prata passando pela cicatriz de dor */
+        .btn-avancar-hierarquia:hover {
+            color: #ffffff;
+            background: linear-gradient(135deg, #334155 0%, #1e293b 50%, #475569 100%);
+            box-shadow: 
+                0 15px 35px rgba(0, 0, 0, 0.8), 
+                0 0 20px rgba(226, 232, 240, 0.3); /* Aura de prata elegante */
+            letter-spacing: 5px;
+            transform: translateY(-2px);
         }
-
-        .card-principal.livro-fechado .papel-interno { opacity: 0; pointer-events: none; }
-        .card-principal.livro-fechado .capa-livro { opacity: 1; transform: rotateY(0deg); pointer-events: auto; }
 
         .texto-conclusao {
             font-size: 1.15rem;
@@ -390,6 +356,7 @@
             .texto-conclusao { font-size: 1rem; line-height: 1.7; }
             .ostra-container.aberta .perola-negra.flutuando { bottom: 130px; }
             .instrucao-toque { font-size: 0.7rem; letter-spacing: 1px; }
+            .btn-avancar-hierarquia { padding: 14px 30px; font-size: 0.85rem; letter-spacing: 3px; }
         }
     </style>
 </head>
@@ -409,16 +376,6 @@
     <h1 class="titulo-final" id="mainTitle">O Destino Encontrado</h1>
 
     <div class="card-principal" id="livroContainer">
-        
-        <!-- FACE DE TRÁS: CAPA DO LIVRO LUXUOSO -->
-        <div class="capa-livro">
-            <div class="brasao-ouro">D</div>
-            <h2 style="font-family:'Cinzel',serif; color:var(--ouro-brilhante); letter-spacing:4px; margin:0 0 10px 0; font-size:1.6rem; text-align:center; padding:0 20px;">DRA. DÉBORA</h2>
-            <p style="font-family:'Orbitron',sans-serif; color:#64748b; font-size:0.7rem; letter-spacing:3px;">A JORNADA CONCLUÍDA</p>
-            <button class="btn-controle" style="margin-top:40px; font-size:0.8rem; padding:8px 20px;" onclick="reabrirLivro(event)">REABRIR LIVRO</button>
-        </div>
-
-        <!-- FACE DA FRENTE: CONTEÚDO ATUAL -->
         <div class="papel-interno">
             <div class="card-desfecho">
                 
@@ -465,7 +422,7 @@
                 </p>
                 
                 <p class="texto-conclusao">
-                    A estrada longa ficou para trás e as dores do caminho transformaram-se em preciosas pérolas de sabedoria. Sob o manto infinito do cosmos, compreendemos que cada curva, cada grão de areia e cada passo incerto faziam parte de um plano maior. O horizonte não é mais um limite distante; agora, ele é o chão que você pisa com paz no coração, carregando a beleza da sua própria pérola negra.
+                    A estrada longa ficou para trás e as dores do caminho transformaram-se em preciosas pérolas de sabedoria. Sob o manto infinito do cosmos, compreendemos que cada curva, cada grão de areia e cada passo incerto faziam parte de um plano maior. O horizonete não é mais um limite distante; agora, ele é o chão que você pisa com paz no coração, carregando a beleza da sua própria pérola negra.
                 </p>
 
                 <p class="texto-desfecho-italico">
@@ -474,9 +431,9 @@
 
                 <div class="mensagem-final">FIM DA JORNADA</div>
                 
-                <!-- BOTÃO DE FECHAR O LIVRO (APARECE DEPOIS) -->
+                <!-- BOTÃO LUXUOSO FINAL CHUMBADO COM PRATA -->
                 <div class="container-botao-livro" id="btnLivroContainer">
-                    <button class="btn-fechar-livro" onclick="fecharLivro(event)">FECHAR </button>
+                    <button class="btn-avancar-hierarquia" onclick="irParaFinal(event)">Concluir o Livro</button>
                 </div>
 
                 <div class="creditos">Gratidão por cada passo compartilhado</div>
@@ -494,14 +451,13 @@
         const volumeSlider = document.getElementById('volumeSlider');
         const instrucao = document.getElementById('textoInstrucao');
         const btnLivroContainer = document.getElementById('btnLivroContainer');
-        const livroContainer = document.getElementById('livroContainer');
-        const mainTitle = document.getElementById('mainTitle');
 
         window.onload = () => {
             document.body.style.opacity = '1';
             audio.volume = 0.5;
             volumeSlider.value = 0.5;
 
+            // Recupera o tempo exato de onde a música parou na página anterior
             const tempoSalvo = localStorage.getItem('musica_tempo');
             if (tempoSalvo) { audio.currentTime = parseFloat(tempoSalvo); }
             
@@ -512,16 +468,17 @@
             });
         };
 
-        setInterval(() => {
-            if (!audio.paused) { localStorage.setItem('musica_tempo', audio.currentTime); }
-        }, 1000);
+        // Salva o tempo a cada frame/segundo de forma contínua e precisa
+        audio.ontimeupdate = () => {
+            localStorage.setItem('musica_tempo', audio.currentTime);
+        };
 
         function cliqueOstra() {
             if (!ostraContainer.classList.contains('aberta')) {
                 ostraContainer.classList.add('aberta');
                 instrucao.textContent = "A pérola de Débora está flutuando...";
                 
-                // Ativa o botão luxuoso do livro com elegância
+                // Exibe o botão de transição com suavidade luxuosa
                 btnLivroContainer.style.display = "flex";
                 setTimeout(() => { btnLivroContainer.style.opacity = "1"; }, 100);
 
@@ -537,20 +494,11 @@
             }
         }
 
-        /* FUNÇÕES REFINADAS DO EFEITO LIVRO */
-        function fecharLivro(e) {
+        // Função refinada que salva o estado da trilha sonora e redireciona
+        function irParaFinal(e) {
             e.stopPropagation();
-            livroContainer.classList.add('livro-fechado');
-            mainTitle.style.transform = "scale(0.9)";
-            mainTitle.style.opacity = "0.5";
-            mainTitle.style.transition = "all 2s ease";
-        }
-
-        function reabrirLivro(e) {
-            e.stopPropagation();
-            livroContainer.classList.remove('livro-fechado');
-            mainTitle.style.transform = "scale(1)";
-            mainTitle.style.opacity = "1";
+            localStorage.setItem('musica_tempo', audio.currentTime);
+            window.location.href = "final.html";
         }
 
         function iniciarAudio() {
@@ -577,7 +525,6 @@
         const cosmos = document.getElementById('fundo-cosmos');
         const fragmento = document.createDocumentFragment();
         
-        // Estrelas fixas pulsantes
         for (let i = 0; i < 65; i++) {
             const estrela = document.createElement('div');
             estrela.className = 'estrela';
@@ -590,11 +537,11 @@
             fragmento.appendChild(estrela);
         }
 
-        // Estrelas cadentes delicadas
         for (let i = 0; i < 4; i++) {
             const cadente = document.createElement('div');
             cadente.className = 'estrela-cadente';
-            cadente.style.top = (Math.random() * 40) + '%';
+            rose = (Math.random() * 40) + '%';
+            cadente.style.top = rose;
             cadente.style.left = (Math.random() * 60) + '%';
             cadente.style.animationDelay = (Math.random() * 8) + 's';
             cadente.style.animationDuration = (Math.random() * 4 + 5) + 's';
@@ -604,4 +551,3 @@
     </script>
 </body>
 </html>
-
