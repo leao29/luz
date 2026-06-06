@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>O Encontro com o Destino - Dra. Débora</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Orbitron:wght@400;600&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght=500;700&family=Orbitron:wght=400;600&family=Lora:ital,wght=0,400;0,600;1,400&display=swap" rel="stylesheet">
     <style>
         :root {
             --azul-cosmos: #020617;
@@ -268,13 +268,11 @@
             font-family: 'Cinzel', serif;
             font-size: 1rem;
             color: var(--prata-brilhante);
-            /* Visual Metálico de Ferro Forjado Macio com lapidação de Prata */
             background: linear-gradient(135deg, #1e293b 0%, #0f172a 40%, #334155 70%, #475569 100%);
-            /* Borda grossa simulando metal fundido e chumbado */
             border: 3px solid #1e293b;
             outline: 1px solid rgba(255, 255, 255, 0.2);
             padding: 16px 45px;
-            border-radius: 4px; /* Formato robusto e sutil de placa chumbada */
+            border-radius: 4px;
             cursor: pointer;
             letter-spacing: 4px;
             font-weight: bold;
@@ -283,12 +281,11 @@
             box-shadow: 
                 0 10px 30px rgba(0, 0, 0, 0.7), 
                 inset 0 1px 0 rgba(255, 255, 255, 0.2),
-                0 0 0 4px rgba(148, 163, 184, 0.1); /* Sombra externa em prata */
+                0 0 0 4px rgba(148, 163, 184, 0.1);
             transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
             overflow: hidden;
         }
 
-        /* Rebites de Ferro simulados nas pontas da placa chumbada */
         .btn-avancar-hierarquia::before, .btn-avancar-hierarquia::after {
             content: '';
             position: absolute;
@@ -301,13 +298,12 @@
         .btn-avancar-hierarquia::before { left: 6px; }
         .btn-avancar-hierarquia::after { right: 6px; }
 
-        /* Brilho da Prata passando pela cicatriz de dor */
         .btn-avancar-hierarquia:hover {
             color: #ffffff;
             background: linear-gradient(135deg, #334155 0%, #1e293b 50%, #475569 100%);
             box-shadow: 
                 0 15px 35px rgba(0, 0, 0, 0.8), 
-                0 0 20px rgba(226, 232, 240, 0.3); /* Aura de prata elegante */
+                0 0 20px rgba(226, 232, 240, 0.3);
             letter-spacing: 5px;
             transform: translateY(-2px);
         }
@@ -379,10 +375,8 @@
         <div class="papel-interno">
             <div class="card-desfecho">
                 
-                <!-- Cenário Organizado da Ostra -->
                 <div class="cenario-ostra">
                     <div class="ostra-container" id="ostraMagica" onclick="cliqueOstra()">
-                        <!-- Concha Superior SVG -->
                         <svg class="concha-sup-svg" viewBox="0 0 100 65" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M50 2C22 2 5 15 5 35C5 45 15 55 50 62C85 55 95 45 95 35C95 15 78 2 50 2Z" fill="url(#gradienteConcha)" stroke="#475569" stroke-width="0.7"/>
                             <path d="M50 62C50 40 40 10 30 5M50 62C53 40 65 10 70 5M50 62C45 35 18 20 12 18M50 62C55 35 82 20 88 18" stroke="rgba(255,255,255,0.08)" stroke-width="0.5"/>
@@ -397,7 +391,6 @@
 
                         <div class="perola-negra" id="perolaMagica"></div>
 
-                        <!-- Concha Inferior SVG -->
                         <svg class="concha-inf-svg" viewBox="0 0 100 65" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M50 63C22 63 5 50 5 30C5 20 20 4 50 2C80 4 95 20 95 30C95 50 78 63 50 63Z" fill="url(#gradienteMadreperola)" stroke="#334155" stroke-width="0.7"/>
                             <path d="M50 2C42 20 25 35 10 38M50 2C58 20 75 35 90 38" stroke="rgba(255,255,255,0.15)" stroke-width="0.4"/>
@@ -431,9 +424,8 @@
 
                 <div class="mensagem-final">FIM DA JORNADA</div>
                 
-                <!-- BOTÃO LUXUOSO FINAL CHUMBADO COM PRATA -->
                 <div class="container-botao-livro" id="btnLivroContainer">
-                    <button class="btn-avancar-hierarquia" onclick="irParaFinal(event)">Concluir o Livro</button>
+                    <button class="btn-avancar-hierarquia" onclick="irParaProxima(event)">Concluir o Livro</button>
                 </div>
 
                 <div class="creditos">Gratidão por cada passo compartilhado</div>
@@ -494,11 +486,11 @@
             }
         }
 
-        // Função refinada que salva o estado da trilha sonora e redireciona
-        function irParaFinal(e) {
+        // Procure a função que faz o botão avançar dentro de fim.html e deixe assim:
+        function irParaProxima(e) {
             e.stopPropagation();
             localStorage.setItem('musica_tempo', audio.currentTime);
-            window.location.href = "final.html";
+            window.location.href = "final.html"; // Altere aqui para ir para a página final.html
         }
 
         function iniciarAudio() {
@@ -540,7 +532,7 @@
         for (let i = 0; i < 4; i++) {
             const cadente = document.createElement('div');
             cadente.className = 'estrela-cadente';
-            rose = (Math.random() * 40) + '%';
+            const rose = (Math.random() * 40) + '%';
             cadente.style.top = rose;
             cadente.style.left = (Math.random() * 60) + '%';
             cadente.style.animationDelay = (Math.random() * 8) + 's';
