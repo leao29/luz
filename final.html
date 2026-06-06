@@ -3,16 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>A Capa Final - Dra. Débora</title>
+    <title>O Destino Final - Dra. Débora</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Orbitron:wght@400;600&family=Lora:ital,wght=0,400;0,600;1,400&display=swap" rel="stylesheet">
     <style>
         :root {
             --azul-cosmos: #020617;
-            --azul-capa: #040918;
+            --azul-capa: #03081e;
             --ouro-escuro: #4a3b13;
             --ouro-brilhante: #c5a85c;
             --texto-claro: #f1f5f9;
             --texto-ouro: #e2c792;
+            --prata-brilhante: #e2e8f0;
+            --prata-sombra: #64748b;
         }
 
         * { box-sizing: border-box; }
@@ -23,9 +25,10 @@
             background-color: var(--azul-cosmos);
             font-family: 'Cinzel', serif;
             display: flex;
+            flex-direction: column;
             align-items: center;
-            justify-content: center;
-            padding: 20px;
+            justify-content: flex-start;
+            padding: 40px 20px;
             overflow-x: hidden;
             perspective: 2000px;
         }
@@ -50,7 +53,7 @@
             50% { opacity: 0.6; transform: scale(1.4); }
         }
 
-        /* PAINEL DE MÚSICA DE LUXO */
+        /* PAINEL DE MÚSICA */
         .painel-musica-fixo {
             position: fixed;
             top: 20px; right: 20px;
@@ -79,27 +82,67 @@
         
         .vol-slider { width: 70px; accent-color: var(--ouro-brilhante); }
 
-        /* DESIGN DA CONTRA CAPA DO LIVRO LUXUOSO */
+        /* ELEMENTO: A PÉROLA NEGRA FLUTUANTE (TOP) */
+        .container-perola {
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+        }
+
+        .perola-negra {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, #475569 0%, #1e293b 40%, #020617 80%);
+            box-shadow: 
+                0 0 20px rgba(255,255,255,0.2),
+                0 0 40px rgba(226, 232, 240, 0.4),
+                inset -5px -5px 15px rgba(0,0,0,0.8),
+                inset 10px 10px 20px rgba(255,255,255,0.15);
+            position: relative;
+            animation: flutuarPerola 4s infinite ease-in-out;
+        }
+
+        /* Aura/Luz de prata ao redor da pérola */
+        .perola-negra::after {
+            content: '';
+            position: absolute;
+            top: -10px; left: -10px; right: -10px; bottom: -10px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(226,232,240,0.15) 0%, transparent 70%);
+            animation: pulsarPrata 2s infinite ease-in-out;
+        }
+
+        @keyframes flutuarPerola {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-12px) rotate(5deg); }
+        }
+
+        @keyframes pulsarPrata {
+            0%, 100% { transform: scale(1); opacity: 0.6; }
+            50% { transform: scale(1.15); opacity: 0.9; }
+        }
+
+        /* ESTRUTURA DO LIVRO / CARD DE LUXO */
         .capa-livro {
-            max-width: 550px;
+            max-width: 600px;
             width: 100%;
-            height: 750px;
             background: linear-gradient(135deg, #050c24 0%, #020511 100%);
-            border-radius: 12px 24px 24px 12px;
-            padding: 25px;
-            box-shadow: -15px 30px 60px rgba(0,0,0,0.9), inset 5px 0 15px rgba(255,255,255,0.05);
+            border-radius: 16px;
+            padding: 40px 30px;
+            box-shadow: -15px 30px 60px rgba(0,0,0,0.9), inset 5px 0 15px rgba(255,255,255,0.03);
             border: 2px solid var(--ouro-escuro);
             position: relative;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
             align-items: center;
-            
-            /* Efeito de rotação contrária para simular a folha pousando aberta */
             transform-origin: left center;
-            transform: rotateY(120deg) scale(0.8);
+            transform: rotateY(45deg) scale(0.95);
             opacity: 0;
             transition: transform 1.8s cubic-bezier(0.16, 1, 0.3, 1), opacity 1s ease;
+            margin-bottom: 50px;
         }
 
         .capa-livro.revelada {
@@ -107,92 +150,168 @@
             opacity: 1;
         }
 
-        /* Moldura de Ouro Barroca Francesa */
-        .moldura-ouro {
+        /* Moldura de Ouro Barroca com Voltas nos Cantos */
+        .moldura-barroca {
             position: absolute;
-            top: 20px; bottom: 20px; left: 20px; right: 20px;
-            border: 1px solid rgba(197, 168, 92, 0.4);
-            border-radius: 8px;
+            top: 15px; bottom: 15px; left: 15px; right: 15px;
+            border: 1px solid rgba(197, 168, 92, 0.3);
+            border-radius: 12px;
             pointer-events: none;
         }
 
-        .moldura-ouro::before {
+        .moldura-barroca::before {
             content: '';
             position: absolute;
             top: 8px; bottom: 8px; left: 8px; right: 8px;
             border: 2px solid var(--ouro-brilhante);
-            opacity: 0.85;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(197, 168, 92, 0.2);
         }
 
-        /* Conteúdo Interno da Capa */
+        /* Detalhes decorativos simulando as voltas barrocas do Canva */
+        .canto-decorativo {
+            position: absolute;
+            width: 25px; height: 25px;
+            border: 2px solid var(--ouro-brilhante);
+            border-radius: 50%;
+        }
+        .canto-tl { top: 20px; left: 20px; border-right: transparent; border-bottom: transparent; }
+        .canto-tr { top: 20px; right: 20px; border-left: transparent; border-bottom: transparent; }
+        .canto-bl { bottom: 20px; left: 20px; border-right: transparent; border-top: transparent; }
+        .canto-br { bottom: 20px; right: 20px; border-left: transparent; border-top: transparent; }
+
+        /* CONTEÚDO INTERNO */
         .conteudo-capa {
             z-index: 2;
             text-align: center;
-            margin: auto;
-            padding: 0 20px;
+            width: 100%;
         }
 
-        .brasao-final {
-            width: 80px; height: 80px;
-            margin-bottom: 40px;
-            filter: drop-shadow(0 0 15px var(--ouro-brilhante));
-            animation: flutuarBrasao 4s infinite ease-in-out;
+        /* CONTAINER DOS ICONES GEOFUTURISTAS E DE PSIQUIATRIA */
+        .grid-simbolos {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 40px;
+            margin-bottom: 30px;
+            margin-top: 10px;
         }
 
-        @keyframes flutuarBrasao {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+        /* Cabeça Geológica / Psiquiatria com linhas de cristal realistas */
+        .cabeca-geologica {
+            width: 75px; height: 75px;
+            position: relative;
+            filter: drop-shadow(0 0 12px var(--ouro-brilhante));
+        }
+
+        /* Coração Pulsante de Prata Ultra Realista */
+        .coracao-pulsante {
+            width: 65px; height: 65px;
+            position: relative;
+            animation: pulsarCoracao 1.2s infinite cubic-bezier(0.25, 0.8, 0.25, 1);
+            filter: drop-shadow(0 0 15px rgba(226, 232, 240, 0.6));
+        }
+
+        @keyframes pulsarCoracao {
+            0% { transform: scale(1); }
+            30% { transform: scale(1.12); }
+            45% { transform: scale(1.05); }
+            60% { transform: scale(1.18); }
+            100% { transform: scale(1); }
         }
 
         .titulo-capa {
-            font-size: 2.5rem;
+            font-size: 2.6rem;
             letter-spacing: 6px;
             background: linear-gradient(135deg, #fff 0%, #e2c792 50%, #c5a85c 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            margin-bottom: 20px;
+            margin: 15px 0 5px 0;
             font-weight: 700;
         }
 
         .sub-titulo-capa {
             font-family: 'Lora', serif;
             font-style: italic;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             color: var(--texto-ouro);
             letter-spacing: 2px;
-            margin-bottom: 60px;
+            margin-bottom: 35px;
         }
 
+        /* TEXTO DO PEDIDO PERSONALIZADO */
         .texto-agradecimento {
             font-family: 'Lora', serif;
-            font-size: 1.1rem;
-            line-height: 1.8;
-            color: #94a3b8;
-            max-width: 400px;
-            margin: 0 auto 50px auto;
+            font-size: 1.05rem;
+            line-height: 1.9;
+            color: #cbd5e1;
+            max-width: 480px;
+            margin: 0 auto 35px auto;
+            text-align: center;
+            font-style: italic;
+        }
+        
+        .texto-agradecimento span {
+            color: #ffffff;
+            font-weight: 600;
         }
 
         .autor {
-            font-size: 1.4rem;
+            font-size: 1.3rem;
             color: #ffffff;
             letter-spacing: 4px;
             border-top: 1px solid rgba(197, 168, 92, 0.2);
-            padding-top: 20px;
+            padding-top: 15px;
             display: inline-block;
+            margin-bottom: 10px;
         }
 
-        .selo-fim {
+        /* RODAPÉ CHUMBADO EM FERRO (FINAL DA EXPERIÊNCIA) */
+        .rodape-ferro {
+            width: 100%;
+            max-width: 500px;
+            background: linear-gradient(180deg, #2d3748 0%, #1a202c 100%);
+            border: 2px solid #4a5568;
+            border-top: 2px solid #718096;
+            padding: 15px 20px;
+            border-radius: 6px;
+            box-shadow: 
+                0 10px 25px rgba(0,0,0,0.7),
+                inset 0 1px 0 rgba(255,255,255,0.2);
+            text-align: center;
+            position: relative;
+            margin-top: auto;
+        }
+
+        /* Efeito de rebites/parafusos nas pontas do ferro */
+        .rodape-ferro::before, .rodape-ferro::after {
+            content: '';
+            position: absolute;
+            top: 50%; width: 8px; height: 8px;
+            background: #111;
+            border-radius: 50%;
+            box-shadow: inset 0 1px 2px rgba(255,255,255,0.3);
+            transform: translateY(-50%);
+        }
+        .rodape-ferro::before { left: 12px; }
+        .rodape-ferro::after { right: 12px; }
+
+        .texto-ferro {
             font-family: 'Orbitron', sans-serif;
-            font-size: 0.7rem;
-            color: var(--ouro-brilhante);
-            letter-spacing: 6px;
-            opacity: 0.6;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 5px;
+            color: #a0aec0;
+            text-shadow: 1px 1px 0px #000, -1px -1px 0px rgba(255,255,255,0.1);
+            text-transform: uppercase;
         }
 
         @media (max-width: 600px) {
-            .capa-livro { height: 600px; padding: 15px; }
-            .titulo-capa { font-size: 1.8rem; }
-            .texto-agradecimento { font-size: 0.95rem; }
+            .capa-livro { padding: 30px 15px; }
+            .titulo-capa { font-size: 1.9rem; }
+            .texto-agradecimento { font-size: 0.95rem; line-height: 1.7; }
+            .grid-simbolos { gap: 20px; }
+            .cabeca-geologica, .coracao-pulsante { transform: scale(0.85); }
         }
     </style>
 </head>
@@ -200,6 +319,7 @@
 
     <div id="fundo-cosmos"></div>
 
+    <!-- PAINEL DE CONTROLE DE ÁUDIO -->
     <div class="painel-musica-fixo">
         <button class="btn-controle" id="playPause">PAUSE</button>
         <div style="display:flex; align-items:center; gap:6px;">
@@ -209,26 +329,68 @@
         </div>
     </div>
 
+    <!-- PÉROLA NEGRA FLUTUANTE NO TOPO -->
+    <div class="container-perola">
+        <div class="perola-negra" title="A Pérola Negra"></div>
+    </div>
+
+    <!-- CARD PRINCIPAL LUXUOSO -->
     <div class="capa-livro" id="capaFisica">
-        <div class="moldura-ouro"></div>
+        <div class="moldura-barroca"></div>
+        <div class="canto-decorativo canto-tl"></div>
+        <div class="canto-decorativo canto-tr"></div>
+        <div class="canto-decorativo canto-bl"></div>
+        <div class="canto-decorativo canto-br"></div>
         
         <div class="conteudo-capa">
-            <svg class="brasao-final" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="50" cy="50" r="20" fill="radial-gradient(circle, #475569, #020617)" stroke="#c5a85c" stroke-width="2"/>
-                <path d="M50 5 L55 35 L85 35 L60 55 L70 85 L50 65 L30 85 L40 55 L15 35 L45 35 Z" stroke="#c5a85c" stroke-width="1" opacity="0.4"/>
-            </svg>
+            
+            <!-- SIMBOLOS EM ESTILO CANVA ULTRA REALISTA/FUTURISTA -->
+            <div class="grid-simbolos">
+                <!-- Cabeça Geológica / Psiquiatria (Cristais em Ouro) -->
+                <svg class="cabeca-geologica" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M30 85 C30 75, 35 65, 40 55 C35 50, 25 45, 25 35 C25 15, 45 10, 55 10 C75 10, 80 25, 80 45 C80 65, 70 75, 65 85 Z" stroke="url(#gradOuro)" stroke-width="2.5" stroke-linejoin="round"/>
+                    <path d="M40 55 L50 35 L65 45 L50 65 Z" stroke="var(--ouro-brilhante)" stroke-width="1" opacity="0.7"/>
+                    <path d="M55 10 L50 35 L55 50" stroke="var(--texto-ouro)" stroke-width="1" opacity="0.6"/>
+                    <defs>
+                        <linearGradient id="gradOuro" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#fff"/>
+                            <stop offset="50%" stop-color="#c5a85c"/>
+                            <stop offset="100%" stop-color="#4a3b13"/>
+                        </linearGradient>
+                    </defs>
+                </svg>
+
+                <!-- Coração Realista Pulsante (Prata Metálico/Platina) -->
+                <svg class="coracao-pulsante" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M50 82 C50 82, 15 55, 15 35 C15 20, 28 12, 50 30 C72 12, 85 20, 85 35 C85 55, 50 82, 50 82 Z" fill="url(#gradPrata)" stroke="#ffffff" stroke-width="1.5"/>
+                    <path d="M45 35 C35 35, 28 40, 32 50" stroke="#fff" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
+                    <defs>
+                        <linearGradient id="gradPrata" x1="30%" y1="10%" x2="70%" y2="90%">
+                            <stop offset="0%" stop-color="#ffffff"/>
+                            <stop offset="40%" stop-color="#cbd5e1"/>
+                            <stop offset="80%" stop-color="#475569"/>
+                            <stop offset="100%" stop-color="#1e293b"/>
+                        </linearGradient>
+                    </defs>
+                </svg>
+            </div>
 
             <h1 class="titulo-capa">O DESTINO</h1>
             <div class="sub-titulo-capa">Foi Conquistado</div>
             
+            <!-- TEXTO EDITADO EXATAMENTE COMO VOCÊ PEDIU -->
             <p class="texto-agradecimento">
-                "As dores transformaram-se em nácar. A longa estrada sob o cosmos moldou a mais rara das joias."
+                "Apesar de não podermos ter tudo que desejamos na vida, que possamos aprender a celebrar todos os dias a vida e as pessoas à nossa volta, principalmente as que amamos e as que entram em nossa vida nos fascinando como você.<br><br>
+                <span>Gratidão pelo carinho, pelo respeito, por tudo que você no seu limite fez por mim</span> e que isso levarei na minha bagagem a qual esteja onde eu estiver você será sempre inesquecível."
             </p>
 
             <div class="autor">DRA. DÉBORA</div>
         </div>
+    </div>
 
-        <div class="selo-fim">CONCLUÍDO</div>
+    <!-- RODAPÉ CHUMBADO COMO FERRO -->
+    <div class="rodape-ferro">
+        <div class="texto-ferro">Final dessa linda experiência</div>
     </div>
 
     <audio id="trilha" src="elvis.html.mp3" loop></audio>
@@ -252,7 +414,6 @@
                 btnPP.innerText = "PLAY";
             });
 
-            // Dá um leve delay e faz a capa "pousar" aberta na tela elegantemente
             setTimeout(() => {
                 capaFisica.classList.add('revelada');
             }, 200);
@@ -274,9 +435,9 @@
 
         function ajustarVol(v) { audio.volume = v; }
 
-        // ESTRELAS DE FUNDO
+        // SISTEMA DE ESTRELAS DE FUNDO
         const cosmos = document.getElementById('fundo-cosmos');
-        for (let i = 0; i < 60; i++) {
+        for (let i = 0; i < 65; i++) {
             const estrela = document.createElement('div');
             estrela.className = 'estrela';
             const tam = Math.random() * 2 + 0.5;
