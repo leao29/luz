@@ -3,37 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>O Encontro com o Destino - Dra. Débora</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Orbitron:wght@400;600&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <title>A Capa Final - Dra. Débora</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Orbitron:wght@400;600&family=Lora:ital,wght=0,400;0,600;1,400&display=swap" rel="stylesheet">
     <style>
         :root {
             --azul-cosmos: #020617;
-            --azul-card: #050b1e;
+            --azul-capa: #040918;
             --ouro-escuro: #4a3b13;
             --ouro-brilhante: #c5a85c;
             --texto-claro: #f1f5f9;
             --texto-ouro: #e2c792;
-            --prata-dor: #94a3b8;
-            --prata-brilhante: #e2e8f0;
-            --madre-perola: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(203,213,225,0.05) 50%, rgba(197,168,92,0.05) 100%);
         }
 
         * { box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
 
         body {
             margin: 0; padding: 0;
             width: 100%; min-height: 100vh;
             background-color: var(--azul-cosmos);
-            font-family: 'Lora', serif;
+            font-family: 'Cinzel', serif;
             display: flex;
-            flex-direction: column;
             align-items: center;
-            padding: 80px 20px 40px 20px;
+            justify-content: center;
+            padding: 20px;
             overflow-x: hidden;
-            opacity: 0;
-            transition: opacity 2s ease;
-            perspective: 1500px;
+            perspective: 2000px;
         }
 
         #fundo-cosmos {
@@ -51,24 +45,9 @@
             animation: brilho infinite ease-in-out;
         }
 
-        .estrela-cadente {
-            position: absolute;
-            height: 1px;
-            background: linear-gradient(90deg, #fff, transparent);
-            opacity: 0;
-            animation: cadente 6s infinite ease-in-out;
-        }
-
         @keyframes brilho {
             0%, 100% { opacity: 0.1; transform: scale(1); }
             50% { opacity: 0.6; transform: scale(1.4); }
-        }
-
-        @keyframes cadente {
-            0% { transform: translateX(0) translateY(0) rotate(-35deg); opacity: 0; width: 0; }
-            10% { opacity: 0.7; width: 80px; }
-            20% { transform: translateX(300px) translateY(200px) rotate(-35deg); opacity: 0; width: 0; }
-            100% { opacity: 0; }
         }
 
         /* PAINEL DE MÚSICA DE LUXO */
@@ -84,7 +63,7 @@
             align-items: center;
             gap: 12px;
             z-index: 100;
-            box-shadow: 0 4px 30px rgba(0,0,0,0.5), inset 0 1px 1px rgba(255,255,255,0.1);
+            box-shadow: 0 4px 30px rgba(0,0,0,0.5);
         }
 
         .btn-controle {
@@ -95,276 +74,133 @@
             border-radius: 20px;
             font-family: 'Orbitron', sans-serif;
             font-size: 0.7rem;
-            letter-spacing: 1px;
             cursor: pointer;
-            transition: 0.3s;
-        }
-
-        .btn-controle:hover { 
-            background: var(--ouro-brilhante); 
-            color: var(--azul-cosmos);
-            box-shadow: 0 0 10px var(--ouro-brilhante);
         }
         
-        .vol-slider { 
-            cursor: pointer; 
-            accent-color: var(--ouro-brilhante); 
-            width: 70px; 
+        .vol-slider { width: 70px; accent-color: var(--ouro-brilhante); }
+
+        /* DESIGN DA CONTRA CAPA DO LIVRO LUXUOSO */
+        .capa-livro {
+            max-width: 550px;
+            width: 100%;
+            height: 750px;
+            background: linear-gradient(135deg, #050c24 0%, #020511 100%);
+            border-radius: 12px 24px 24px 12px;
+            padding: 25px;
+            box-shadow: -15px 30px 60px rgba(0,0,0,0.9), inset 5px 0 15px rgba(255,255,255,0.05);
+            border: 2px solid var(--ouro-escuro);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            
+            /* Efeito de rotação contrária para simular a folha pousando aberta */
+            transform-origin: left center;
+            transform: rotateY(120deg) scale(0.8);
+            opacity: 0;
+            transition: transform 1.8s cubic-bezier(0.16, 1, 0.3, 1), opacity 1s ease;
         }
 
-        .titulo-final {
-            font-family: 'Cinzel', serif;
-            font-size: 2.8rem;
-            text-transform: uppercase;
-            letter-spacing: 8px;
+        .capa-livro.revelada {
+            transform: rotateY(0deg) scale(1);
+            opacity: 1;
+        }
+
+        /* Moldura de Ouro Barroca Francesa */
+        .moldura-ouro {
+            position: absolute;
+            top: 20px; bottom: 20px; left: 20px; right: 20px;
+            border: 1px solid rgba(197, 168, 92, 0.4);
+            border-radius: 8px;
+            pointer-events: none;
+        }
+
+        .moldura-ouro::before {
+            content: '';
+            position: absolute;
+            top: 8px; bottom: 8px; left: 8px; right: 8px;
+            border: 2px solid var(--ouro-brilhante);
+            opacity: 0.85;
+        }
+
+        /* Conteúdo Interno da Capa */
+        .conteudo-capa {
+            z-index: 2;
             text-align: center;
-            margin-bottom: 30px;
+            margin: auto;
+            padding: 0 20px;
+        }
+
+        .brasao-final {
+            width: 80px; height: 80px;
+            margin-bottom: 40px;
+            filter: drop-shadow(0 0 15px var(--ouro-brilhante));
+            animation: flutuarBrasao 4s infinite ease-in-out;
+        }
+
+        @keyframes flutuarBrasao {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .titulo-capa {
+            font-size: 2.5rem;
+            letter-spacing: 6px;
             background: linear-gradient(135deg, #fff 0%, #e2c792 50%, #c5a85c 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0 2px 8px rgba(0,0,0,0.8));
+            margin-bottom: 20px;
             font-weight: 700;
         }
 
-        .card-principal {
-            max-width: 750px;
-            width: 100%;
-            position: relative;
-            background: var(--azul-card);
-            border-radius: 24px;
-            padding: 1px;
-            box-shadow: 0 40px 80px rgba(0,0,0,0.8);
-            border: 1px solid rgba(197, 168, 92, 0.2);
-        }
-
-        .papel-interno {
-            position: relative;
-            z-index: 2;
-            background: radial-gradient(circle at top, #091333 0%, var(--azul-card) 100%);
-            padding: 50px 35px;
-            color: var(--texto-claro);
-            border-radius: 22px;
-            text-align: center;
-        }
-
-        .card-desfecho {
-            background: rgba(2, 6, 23, 0.35);
-            border: 1px solid rgba(197, 168, 92, 0.15);
-            border-radius: 16px;
-            padding: 40px 25px;
-            backdrop-filter: blur(5px);
-            background-image: var(--madre-perola);
-        }
-
-        /* --- ÁREA DA OSTRA --- */
-        .cenario-ostra {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 200px;
-            margin: 20px 0;
-            position: relative;
-        }
-
-        .ostra-container {
-            position: relative;
-            width: 180px;
-            height: 160px;
-            cursor: pointer;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            transition: transform 0.3s ease;
-        }
-
-        .ostra-container:hover { transform: scale(1.05); }
-
-        .concha-sup-svg {
-            position: absolute;
-            top: 25px; width: 160px; height: 100px; z-index: 3;
-            transform-origin: bottom center;
-            transition: transform 1.5s cubic-bezier(0.25, 1, 0.5, 1);
-            filter: drop-shadow(0 -4px 8px rgba(0,0,0,0.5));
-        }
-
-        .ostra-container.aberta .concha-sup-svg {
-            transform: rotateX(-110deg) translateY(-35px) scaleY(0.95);
-        }
-
-        .concha-inf-svg {
-            position: absolute;
-            bottom: 15px; width: 160px; height: 100px; z-index: 1;
-            filter: drop-shadow(0 8px 15px rgba(0,0,0,0.6));
-        }
-
-        .perola-negra {
-            position: absolute;
-            bottom: 45px; left: 50%; width: 28px; height: 28px;
-            background: radial-gradient(circle at 35% 30%, #ffffff 0%, #cbd5e1 15%, #475569 50%, #1e293b 85%, #020617 100%);
-            border-radius: 50%; z-index: 2;
-            transform: translateX(-50%) scale(0);
-            transition: transform 1s cubic-bezier(0.34, 1.56, 0.64, 1) 0.4s, bottom 1.5s cubic-bezier(0.25, 1, 0.5, 1);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.7), inset -2px -2px 5px rgba(0,0,0,0.8);
-        }
-
-        .ostra-container.aberta .perola-negra { transform: translateX(-50%) scale(1); }
-
-        .ostra-container.aberta .perola-negra.flutuando {
-            bottom: 150px;
-            transform: translateX(-50%) scale(1.4);
-            animation: flutuarEmanarPrata 4.5s infinite ease-in-out;
-            z-index: 9;
-        }
-
-        @keyframes flutuarEmanarPrata {
-            0%, 100% {
-                transform: translateX(-50%) scale(1.4) translateY(0px);
-                filter: drop-shadow(0 0 15px rgba(226, 232, 240, 0.5)) drop-shadow(0 0 30px rgba(255, 255, 255, 0.3));
-            }
-            50% {
-                transform: translateX(-50%) scale(1.4) translateY(-15px);
-                filter: drop-shadow(0 0 25px rgba(241, 245, 249, 0.7)) drop-shadow(0 0 45px rgba(255, 255, 255, 0.45));
-            }
-        }
-
-        /* TEXTO DE INSTRUÇÃO FLUTUANTE */
-        .bloco-instrucao {
-            margin: 15px 0 35px 0;
-            display: flex;
-            justify-content: center;
-        }
-
-        .instrucao-toque {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 0.8rem;
-            color: var(--ouro-brilhante);
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            font-weight: 600;
-            padding: 8px 20px;
-            border: 1px solid rgba(197, 168, 92, 0.3);
-            border-radius: 20px;
-            background: rgba(5, 11, 30, 0.6);
-            display: inline-block;
-            animation: brilhoTexto 2s infinite ease-in-out;
-        }
-
-        @keyframes brilhoTexto {
-            0%, 100% { opacity: 0.6; box-shadow: 0 0 4px transparent; }
-            50% { opacity: 1; box-shadow: 0 0 15px rgba(197, 168, 92, 0.4); text-shadow: 0 0 8px var(--ouro-brilhante); }
-        }
-
-        /* CONTAINER DO BOTÃO AVANÇAR */
-        .container-botao-livro {
-            margin-top: 40px;
-            display: none;
-            justify-content: center;
-            opacity: 0;
-            transition: opacity 1.2s ease;
-        }
-
-        /* BOTÃO CHUMBADO COM FERRO E PRATA LUXUOSO */
-        .btn-avancar-hierarquia {
-            font-family: 'Cinzel', serif;
-            font-size: 1rem;
-            color: var(--prata-brilhante);
-            /* Visual Metálico de Ferro Forjado Macio com lapidação de Prata */
-            background: linear-gradient(135deg, #1e293b 0%, #0f172a 40%, #334155 70%, #475569 100%);
-            /* Borda grossa simulando metal fundido e chumbado */
-            border: 3px solid #1e293b;
-            outline: 1px solid rgba(255, 255, 255, 0.2);
-            padding: 16px 45px;
-            border-radius: 4px; /* Formato robusto e sutil de placa chumbada */
-            cursor: pointer;
-            letter-spacing: 4px;
-            font-weight: bold;
-            position: relative;
-            text-transform: uppercase;
-            box-shadow: 
-                0 10px 30px rgba(0, 0, 0, 0.7), 
-                inset 0 1px 0 rgba(255, 255, 255, 0.2),
-                0 0 0 4px rgba(148, 163, 184, 0.1); /* Sombra externa em prata */
-            transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
-            overflow: hidden;
-        }
-
-        /* Rebites de Ferro simulados nas pontas da placa chumbada */
-        .btn-avancar-hierarquia::before, .btn-avancar-hierarquia::after {
-            content: '';
-            position: absolute;
-            width: 4px; height: 4px;
-            background: var(--prata-dor);
-            border-radius: 50%;
-            top: 6px;
-            box-shadow: 0 1px 1px rgba(255,255,255,0.3);
-        }
-        .btn-avancar-hierarquia::before { left: 6px; }
-        .btn-avancar-hierarquia::after { right: 6px; }
-
-        /* Brilho da Prata passando pela cicatriz de dor */
-        .btn-avancar-hierarquia:hover {
-            color: #ffffff;
-            background: linear-gradient(135deg, #334155 0%, #1e293b 50%, #475569 100%);
-            box-shadow: 
-                0 15px 35px rgba(0, 0, 0, 0.8), 
-                0 0 20px rgba(226, 232, 240, 0.3); /* Aura de prata elegante */
-            letter-spacing: 5px;
-            transform: translateY(-2px);
-        }
-
-        .texto-conclusao {
-            font-size: 1.15rem;
-            line-height: 1.9;
-            text-align: justify;
-            margin-bottom: 25px;
-            color: #cbd5e1;
-        }
-
-        .texto-desfecho-italico {
+        .sub-titulo-capa {
             font-family: 'Lora', serif;
             font-style: italic;
-            font-size: 1.3rem;
-            line-height: 1.8;
+            font-size: 1.2rem;
             color: var(--texto-ouro);
-            padding: 25px 20px 10px 20px;
-            border-top: 1px solid rgba(197, 168, 92, 0.15);
-            margin-top: 35px;
-            text-align: center;
+            letter-spacing: 2px;
+            margin-bottom: 60px;
         }
 
-        .mensagem-final {
-            font-family: 'Cinzel', serif;
-            font-size: 1.8rem;
-            letter-spacing: 6px;
-            color: var(--ouro-brilhante);
-            font-weight: bold;
-            margin-top: 35px;
+        .texto-agradecimento {
+            font-family: 'Lora', serif;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #94a3b8;
+            max-width: 400px;
+            margin: 0 auto 50px auto;
         }
 
-        .creditos {
+        .autor {
+            font-size: 1.4rem;
+            color: #ffffff;
+            letter-spacing: 4px;
+            border-top: 1px solid rgba(197, 168, 92, 0.2);
+            padding-top: 20px;
+            display: inline-block;
+        }
+
+        .selo-fim {
             font-family: 'Orbitron', sans-serif;
             font-size: 0.7rem;
-            color: #475569;
-            text-transform: uppercase;
-            letter-spacing: 4px;
-            margin-top: 40px;
+            color: var(--ouro-brilhante);
+            letter-spacing: 6px;
+            opacity: 0.6;
         }
 
         @media (max-width: 600px) {
-            .titulo-final { font-size: 1.8rem; letter-spacing: 4px; }
-            .papel-interno { padding: 35px 20px; }
-            .texto-conclusao { font-size: 1rem; line-height: 1.7; }
-            .ostra-container.aberta .perola-negra.flutuando { bottom: 130px; }
-            .instrucao-toque { font-size: 0.7rem; letter-spacing: 1px; }
-            .btn-avancar-hierarquia { padding: 14px 30px; font-size: 0.85rem; letter-spacing: 3px; }
+            .capa-livro { height: 600px; padding: 15px; }
+            .titulo-capa { font-size: 1.8rem; }
+            .texto-agradecimento { font-size: 0.95rem; }
         }
     </style>
 </head>
-<body onclick="iniciarAudio()">
+<body>
 
     <div id="fundo-cosmos"></div>
 
-    <div class="painel-musica-fixo" onclick="event.stopPropagation()">
+    <div class="painel-musica-fixo">
         <button class="btn-controle" id="playPause">PAUSE</button>
         <div style="display:flex; align-items:center; gap:6px;">
             <span style="color:var(--ouro-brilhante); font-size:10px;">🔈</span>
@@ -373,72 +209,26 @@
         </div>
     </div>
 
-    <h1 class="titulo-final" id="mainTitle">O Destino Encontrado</h1>
+    <div class="capa-livro" id="capaFisica">
+        <div class="moldura-ouro"></div>
+        
+        <div class="conteudo-capa">
+            <svg class="brasao-final" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="50" cy="50" r="20" fill="radial-gradient(circle, #475569, #020617)" stroke="#c5a85c" stroke-width="2"/>
+                <path d="M50 5 L55 35 L85 35 L60 55 L70 85 L50 65 L30 85 L40 55 L15 35 L45 35 Z" stroke="#c5a85c" stroke-width="1" opacity="0.4"/>
+            </svg>
 
-    <div class="card-principal" id="livroContainer">
-        <div class="papel-interno">
-            <div class="card-desfecho">
-                
-                <!-- Cenário Organizado da Ostra -->
-                <div class="cenario-ostra">
-                    <div class="ostra-container" id="ostraMagica" onclick="cliqueOstra()">
-                        <!-- Concha Superior SVG -->
-                        <svg class="concha-sup-svg" viewBox="0 0 100 65" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M50 2C22 2 5 15 5 35C5 45 15 55 50 62C85 55 95 45 95 35C95 15 78 2 50 2Z" fill="url(#gradienteConcha)" stroke="#475569" stroke-width="0.7"/>
-                            <path d="M50 62C50 40 40 10 30 5M50 62C53 40 65 10 70 5M50 62C45 35 18 20 12 18M50 62C55 35 82 20 88 18" stroke="rgba(255,255,255,0.08)" stroke-width="0.5"/>
-                            <defs>
-                                <linearGradient id="gradienteConcha" x1="0%" y1="0%" x2="100%" y2="100%">
-                                    <stop offset="0%" stop-color="#2d3748"/>
-                                    <stop offset="50%" stop-color="#1a202c"/>
-                                    <stop offset="100%" stop-color="#0f172a"/>
-                                </linearGradient>
-                            </defs>
-                        </svg>
+            <h1 class="titulo-capa">O DESTINO</h1>
+            <div class="sub-titulo-capa">Foi Conquistado</div>
+            
+            <p class="texto-agradecimento">
+                "As dores transformaram-se em nácar. A longa estrada sob o cosmos moldou a mais rara das joias."
+            </p>
 
-                        <div class="perola-negra" id="perolaMagica"></div>
-
-                        <!-- Concha Inferior SVG -->
-                        <svg class="concha-inf-svg" viewBox="0 0 100 65" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M50 63C22 63 5 50 5 30C5 20 20 4 50 2C80 4 95 20 95 30C95 50 78 63 50 63Z" fill="url(#gradienteMadreperola)" stroke="#334155" stroke-width="0.7"/>
-                            <path d="M50 2C42 20 25 35 10 38M50 2C58 20 75 35 90 38" stroke="rgba(255,255,255,0.15)" stroke-width="0.4"/>
-                            <defs>
-                                <radialGradient id="gradienteMadreperola" cx="50%" cy="30%" r="50%">
-                                    <stop offset="0%" stop-color="#ffffff"/>
-                                    <stop offset="35%" stop-color="#f1f5f9"/>
-                                    <stop offset="70%" stop-color="#cbd5e1"/>
-                                    <stop offset="100%" stop-color="#1e293b"/>
-                                </radialGradient>
-                            </defs>
-                        </svg>
-                    </div>
-                </div>
-
-                <div class="bloco-instrucao">
-                    <div class="instrucao-toque" id="textoInstrucao">Aperte na ostra para a pérola sair</div>
-                </div>
-
-                <p class="texto-conclusao">
-                    Existe uma célebre fábula sobre a ostra: para que uma pérola nasça, é preciso que um grão de areia entre em seu interior e cause uma ferida profunda. A ostra não destrói o invasor; em vez disso, ela o envolve cuidadosamente com camadas de nácar brilhante, transformando a dor e o incômodo em uma joia rara.
-                </p>
-                
-                <p class="texto-conclusao">
-                    A estrada longa ficou para trás e as dores do caminho transformaram-se em preciosas pérolas de sabedoria. Sob o manto infinito do cosmos, compreendemos que cada curva, cada grão de areia e cada passo incerto faziam parte de um plano maior. O horizonete não é mais um limite distante; agora, ele é o chão que você pisa com paz no coração, carregando a beleza da sua própria pérola negra.
-                </p>
-
-                <p class="texto-desfecho-italico">
-                    "Ser forte é entender que os golpes da vida acontecem, mas a pérola negra prova que a dor não te venceu: ela foi engolida, dominada e transformada em poder."
-                </p>
-
-                <div class="mensagem-final">FIM DA JORNADA</div>
-                
-                <!-- BOTÃO LUXUOSO FINAL CHUMBADO COM PRATA -->
-                <div class="container-botao-livro" id="btnLivroContainer">
-                    <button class="btn-avancar-hierarquia" onclick="irParaFinal(event)">Concluir o Livro</button>
-                </div>
-
-                <div class="creditos">Gratidão por cada passo compartilhado</div>
-            </div>
+            <div class="autor">DRA. DÉBORA</div>
         </div>
+
+        <div class="selo-fim">CONCLUÍDO</div>
     </div>
 
     <audio id="trilha" src="elvis.html.mp3" loop></audio>
@@ -446,18 +236,13 @@
     <script>
         const audio = document.getElementById('trilha');
         const btnPP = document.getElementById('playPause');
-        const ostraContainer = document.getElementById('ostraMagica');
-        const perola = document.getElementById('perolaMagica');
         const volumeSlider = document.getElementById('volumeSlider');
-        const instrucao = document.getElementById('textoInstrucao');
-        const btnLivroContainer = document.getElementById('btnLivroContainer');
+        const capaFisica = document.getElementById('capaFisica');
 
         window.onload = () => {
-            document.body.style.opacity = '1';
             audio.volume = 0.5;
             volumeSlider.value = 0.5;
 
-            // Recupera o tempo exato de onde a música parou na página anterior
             const tempoSalvo = localStorage.getItem('musica_tempo');
             if (tempoSalvo) { audio.currentTime = parseFloat(tempoSalvo); }
             
@@ -466,50 +251,18 @@
             }).catch(() => {
                 btnPP.innerText = "PLAY";
             });
+
+            // Dá um leve delay e faz a capa "pousar" aberta na tela elegantemente
+            setTimeout(() => {
+                capaFisica.classList.add('revelada');
+            }, 200);
         };
 
-        // Salva o tempo a cada frame/segundo de forma contínua e precisa
         audio.ontimeupdate = () => {
             localStorage.setItem('musica_tempo', audio.currentTime);
         };
 
-        function cliqueOstra() {
-            if (!ostraContainer.classList.contains('aberta')) {
-                ostraContainer.classList.add('aberta');
-                instrucao.textContent = "A pérola de Débora está flutuando...";
-                
-                // Exibe o botão de transição com suavidade luxuosa
-                btnLivroContainer.style.display = "flex";
-                setTimeout(() => { btnLivroContainer.style.opacity = "1"; }, 100);
-
-                setTimeout(() => {
-                    perola.classList.add('flutuando');
-                }, 300);
-            } else {
-                perola.classList.remove('flutuando');
-                setTimeout(() => {
-                    ostraContainer.classList.remove('aberta');
-                    instrucao.textContent = "Aperte na ostra para a pérola sair";
-                }, 400);
-            }
-        }
-
-        // Função refinada que salva o estado da trilha sonora e redireciona
-        function irParaFinal(e) {
-            e.stopPropagation();
-            localStorage.setItem('musica_tempo', audio.currentTime);
-            window.location.href = "final.html";
-        }
-
-        function iniciarAudio() {
-            if (audio.paused) {
-                audio.play();
-                btnPP.innerText = "PAUSE";
-            }
-        }
-
-        btnPP.onclick = (e) => {
-            e.stopPropagation();
+        btnPP.onclick = () => {
             if (audio.paused) {
                 audio.play();
                 btnPP.innerText = "PAUSE";
@@ -521,11 +274,9 @@
 
         function ajustarVol(v) { audio.volume = v; }
 
-        // GERADOR CÓSMICO: ESTRELAS E CADENTES
+        // ESTRELAS DE FUNDO
         const cosmos = document.getElementById('fundo-cosmos');
-        const fragmento = document.createDocumentFragment();
-        
-        for (let i = 0; i < 65; i++) {
+        for (let i = 0; i < 60; i++) {
             const estrela = document.createElement('div');
             estrela.className = 'estrela';
             const tam = Math.random() * 2 + 0.5;
@@ -534,20 +285,8 @@
             estrela.style.top = Math.random() * 100 + '%';
             estrela.style.left = Math.random() * 100 + '%';
             estrela.style.animationDuration = (Math.random() * 5 + 3) + 's';
-            fragmento.appendChild(estrela);
+            cosmos.appendChild(estrela);
         }
-
-        for (let i = 0; i < 4; i++) {
-            const cadente = document.createElement('div');
-            cadente.className = 'estrela-cadente';
-            rose = (Math.random() * 40) + '%';
-            cadente.style.top = rose;
-            cadente.style.left = (Math.random() * 60) + '%';
-            cadente.style.animationDelay = (Math.random() * 8) + 's';
-            cadente.style.animationDuration = (Math.random() * 4 + 5) + 's';
-            fragmento.appendChild(cadente);
-        }
-        cosmos.appendChild(fragmento);
     </script>
 </body>
 </html>
