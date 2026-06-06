@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>O Destino Final - Dra. Débora</title>
+    <title>A Capa Final - Dra. Débora</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Orbitron:wght@400;600&family=Lora:ital,wght=0,400;0,600;1,400&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -82,56 +82,53 @@
         
         .vol-slider { width: 70px; accent-color: var(--ouro-brilhante); }
 
-        /* ELEMENTO: A PÉROLA NEGRA FLUTUANTE (TOP) */
-        .container-perola {
-            margin-bottom: 30px;
+        /* PÉROLA NEGRA DENTRO DO CARD */
+        .container-perola-interna {
+            margin: 15px 0 25px 0;
             display: flex;
             justify-content: center;
             align-items: center;
-            z-index: 10;
         }
 
         .perola-negra {
-            width: 70px;
-            height: 70px;
+            width: 65px;
+            height: 65px;
             border-radius: 50%;
-            background: radial-gradient(circle at 30% 30%, #475569 0%, #1e293b 40%, #020617 80%);
+            background: radial-gradient(circle at 35% 35%, #64748b 0%, #1e293b 40%, #020617 80%);
             box-shadow: 
-                0 0 20px rgba(255,255,255,0.2),
-                0 0 40px rgba(226, 232, 240, 0.4),
-                inset -5px -5px 15px rgba(0,0,0,0.8),
-                inset 10px 10px 20px rgba(255,255,255,0.15);
+                0 0 25px rgba(226, 232, 240, 0.5),
+                inset -5px -5px 15px rgba(0,0,0,0.9),
+                inset 8px 8px 15px rgba(255,255,255,0.2);
             position: relative;
             animation: flutuarPerola 4s infinite ease-in-out;
         }
 
-        /* Aura/Luz de prata ao redor da pérola */
         .perola-negra::after {
             content: '';
             position: absolute;
-            top: -10px; left: -10px; right: -10px; bottom: -10px;
+            top: -8px; left: -8px; right: -8px; bottom: -8px;
             border-radius: 50%;
-            background: radial-gradient(circle, rgba(226,232,240,0.15) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(226,232,240,0.2) 0%, transparent 70%);
             animation: pulsarPrata 2s infinite ease-in-out;
         }
 
         @keyframes flutuarPerola {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-12px) rotate(5deg); }
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
         }
 
         @keyframes pulsarPrata {
-            0%, 100% { transform: scale(1); opacity: 0.6; }
-            50% { transform: scale(1.15); opacity: 0.9; }
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 0.8; }
         }
 
-        /* ESTRUTURA DO LIVRO / CARD DE LUXO */
+        /* ESTRUTURA DO CARD DE LUXO */
         .capa-livro {
-            max-width: 600px;
+            max-width: 620px;
             width: 100%;
             background: linear-gradient(135deg, #050c24 0%, #020511 100%);
             border-radius: 16px;
-            padding: 40px 30px;
+            padding: 45px 30px;
             box-shadow: -15px 30px 60px rgba(0,0,0,0.9), inset 5px 0 15px rgba(255,255,255,0.03);
             border: 2px solid var(--ouro-escuro);
             position: relative;
@@ -168,7 +165,6 @@
             box-shadow: 0 0 10px rgba(197, 168, 92, 0.2);
         }
 
-        /* Detalhes decorativos simulando as voltas barrocas do Canva */
         .canto-decorativo {
             position: absolute;
             width: 25px; height: 25px;
@@ -187,29 +183,26 @@
             width: 100%;
         }
 
-        /* CONTAINER DOS ICONES GEOFUTURISTAS E DE PSIQUIATRIA */
+        /* CONTAINER DOS SIMBOLOS */
         .grid-simbolos {
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 40px;
+            gap: 45px;
             margin-bottom: 30px;
-            margin-top: 10px;
         }
 
-        /* Cabeça Geológica / Psiquiatria com linhas de cristal realistas */
-        .cabeca-geologica {
-            width: 75px; height: 75px;
-            position: relative;
-            filter: drop-shadow(0 0 12px var(--ouro-brilhante));
+        /* Mente / Árvore Geológica da Psiquiatria com Cores Brilhantes */
+        .cabeca-psiquiatria {
+            width: 85px; height: 85px;
+            filter: drop-shadow(0 0 15px rgba(197, 168, 92, 0.7));
         }
 
-        /* Coração Pulsante de Prata Ultra Realista */
+        /* Coração Pulsante de Prata Realista */
         .coracao-pulsante {
             width: 65px; height: 65px;
-            position: relative;
             animation: pulsarCoracao 1.2s infinite cubic-bezier(0.25, 0.8, 0.25, 1);
-            filter: drop-shadow(0 0 15px rgba(226, 232, 240, 0.6));
+            filter: drop-shadow(0 0 15px rgba(256, 256, 256, 0.5));
         }
 
         @keyframes pulsarCoracao {
@@ -221,34 +214,36 @@
         }
 
         .titulo-capa {
-            font-size: 2.6rem;
-            letter-spacing: 6px;
-            background: linear-gradient(135deg, #fff 0%, #e2c792 50%, #c5a85c 100%);
+            font-size: 2.2rem;
+            letter-spacing: 4px;
+            background: linear-gradient(135deg, #ffffff 0%, #e2c792 50%, #c5a85c 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            margin: 15px 0 5px 0;
+            margin: 15px 0 10px 0;
             font-weight: 700;
+            line-height: 1.3;
         }
 
         .sub-titulo-capa {
             font-family: 'Lora', serif;
             font-style: italic;
-            font-size: 1.1rem;
-            color: var(--texto-ouro);
-            letter-spacing: 2px;
-            margin-bottom: 35px;
+            font-size: 1.05rem;
+            color: #94a3b8;
+            letter-spacing: 1px;
+            max-width: 500px;
+            margin: 0 auto 35px auto;
+            line-height: 1.6;
         }
 
-        /* TEXTO DO PEDIDO PERSONALIZADO */
+        /* TEXTO PRINCIPAL DE GRATIDÃO */
         .texto-agradecimento {
             font-family: 'Lora', serif;
             font-size: 1.05rem;
             line-height: 1.9;
             color: #cbd5e1;
-            max-width: 480px;
+            max-width: 520px;
             margin: 0 auto 35px auto;
             text-align: center;
-            font-style: italic;
         }
         
         .texto-agradecimento span {
@@ -266,14 +261,14 @@
             margin-bottom: 10px;
         }
 
-        /* RODAPÉ CHUMBADO EM FERRO (FINAL DA EXPERIÊNCIA) */
+        /* RODAPÉ CHUMBADO EM FERRO */
         .rodape-ferro {
             width: 100%;
-            max-width: 500px;
+            max-width: 520px;
             background: linear-gradient(180deg, #2d3748 0%, #1a202c 100%);
             border: 2px solid #4a5568;
             border-top: 2px solid #718096;
-            padding: 15px 20px;
+            padding: 16px 20px;
             border-radius: 6px;
             box-shadow: 
                 0 10px 25px rgba(0,0,0,0.7),
@@ -283,7 +278,6 @@
             margin-top: auto;
         }
 
-        /* Efeito de rebites/parafusos nas pontas do ferro */
         .rodape-ferro::before, .rodape-ferro::after {
             content: '';
             position: absolute;
@@ -298,7 +292,7 @@
 
         .texto-ferro {
             font-family: 'Orbitron', sans-serif;
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             font-weight: 600;
             letter-spacing: 5px;
             color: #a0aec0;
@@ -307,11 +301,11 @@
         }
 
         @media (max-width: 600px) {
-            .capa-livro { padding: 30px 15px; }
-            .titulo-capa { font-size: 1.9rem; }
+            .capa-livro { padding: 35px 15px; }
+            .titulo-capa { font-size: 1.7rem; }
             .texto-agradecimento { font-size: 0.95rem; line-height: 1.7; }
             .grid-simbolos { gap: 20px; }
-            .cabeca-geologica, .coracao-pulsante { transform: scale(0.85); }
+            .cabeca-psiquiatria, .coracao-pulsante { transform: scale(0.85); }
         }
     </style>
 </head>
@@ -329,11 +323,6 @@
         </div>
     </div>
 
-    <!-- PÉROLA NEGRA FLUTUANTE NO TOPO -->
-    <div class="container-perola">
-        <div class="perola-negra" title="A Pérola Negra"></div>
-    </div>
-
     <!-- CARD PRINCIPAL LUXUOSO -->
     <div class="capa-livro" id="capaFisica">
         <div class="moldura-barroca"></div>
@@ -344,41 +333,60 @@
         
         <div class="conteudo-capa">
             
-            <!-- SIMBOLOS EM ESTILO CANVA ULTRA REALISTA/FUTURISTA -->
+            <!-- PÉROLA NEGRA DETALHADA (AGORA DENTRO DO CARD) -->
+            <div class="container-perola-interna">
+                <div class="perola-negra"></div>
+            </div>
+
+            <!-- SIMBOLOS REESTRUTURADOS -->
             <div class="grid-simbolos">
-                <!-- Cabeça Geológica / Psiquiatria (Cristais em Ouro) -->
-                <svg class="cabeca-geologica" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M30 85 C30 75, 35 65, 40 55 C35 50, 25 45, 25 35 C25 15, 45 10, 55 10 C75 10, 80 25, 80 45 C80 65, 70 75, 65 85 Z" stroke="url(#gradOuro)" stroke-width="2.5" stroke-linejoin="round"/>
-                    <path d="M40 55 L50 35 L65 45 L50 65 Z" stroke="var(--ouro-brilhante)" stroke-width="1" opacity="0.7"/>
-                    <path d="M55 10 L50 35 L55 50" stroke="var(--texto-ouro)" stroke-width="1" opacity="0.6"/>
+                <!-- Cabeça Psiquiátrica com Árvore Geológica Crescendo por dentro (Cores Vibrantes em Ouro e Degradê) -->
+                <svg class="cabeca-psiquiatria" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Contorno Sutil do Perfil da Mente -->
+                    <path d="M25 80 C25 70, 30 62, 35 55 C30 50, 22 45, 22 35 C22 15, 42 12, 52 12 C72 12, 78 22, 78 42 C78 60, 68 70, 62 80" stroke="url(#ouroVibrante)" stroke-width="2" stroke-linecap="round"/>
+                    <!-- Tronco Geológico Central -->
+                    <path d="M50 75 L50 48" stroke="url(#ouroVibrante)" stroke-width="3" stroke-linecap="round"/>
+                    <!-- Ramificações Neuronais / Galhos de Árvore Brilhantes -->
+                    <path d="M50 58 Q40 50, 32 45" stroke="#fff" stroke-width="1.5" opacity="0.9"/>
+                    <path d="M50 54 Q62 48, 70 40" stroke="url(#ouroVibrante)" stroke-width="1.5"/>
+                    <path d="M50 48 Q42 35, 45 22" stroke="#fff" stroke-width="1.5" opacity="0.9"/>
+                    <path d="M50 48 Q58 35, 65 25" stroke="url(#ouroVibrante)" stroke-width="1.5"/>
+                    <!-- Cristais/Folhas Geológicas Iluminadas -->
+                    <circle cx="32" cy="45" r="3" fill="#fff" filter="drop-shadow(0 0 4px #fff)"/>
+                    <circle cx="70" cy="40" r="3" fill="#c5a85c"/>
+                    <circle cx="45" cy="22" r="3.5" fill="#fff" filter="drop-shadow(0 0 4px #fff)"/>
+                    <circle cx="65" cy="25" r="3" fill="#e2c792"/>
                     <defs>
-                        <linearGradient id="gradOuro" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" stop-color="#fff"/>
+                        <linearGradient id="ouroVibrante" x1="0%" y1="100%" x2="100%" y2="0%">
+                            <stop offset="0%" stop-color="#4a3b13"/>
                             <stop offset="50%" stop-color="#c5a85c"/>
-                            <stop offset="100%" stop-color="#4a3b13"/>
+                            <stop offset="100%" stop-color="#fff"/>
                         </linearGradient>
                     </defs>
                 </svg>
 
-                <!-- Coração Realista Pulsante (Prata Metálico/Platina) -->
+                <!-- Coração Realista Pulsante (Prata) -->
                 <svg class="coracao-pulsante" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M50 82 C50 82, 15 55, 15 35 C15 20, 28 12, 50 30 C72 12, 85 20, 85 35 C85 55, 50 82, 50 82 Z" fill="url(#gradPrata)" stroke="#ffffff" stroke-width="1.5"/>
-                    <path d="M45 35 C35 35, 28 40, 32 50" stroke="#fff" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
+                    <path d="M50 82 C50 82, 15 55, 15 35 C15 20, 28 12, 50 30 C72 12, 85 20, 85 35 C85 55, 50 82, 50 82 Z" fill="url(#gradPrataCard)" stroke="#ffffff" stroke-width="1.5"/>
+                    <path d="M45 35 C35 35, 28 40, 32 50" stroke="#fff" stroke-width="1.8" stroke-linecap="round" opacity="0.4"/>
                     <defs>
-                        <linearGradient id="gradPrata" x1="30%" y1="10%" x2="70%" y2="90%">
+                        <linearGradient id="gradPrataCard" x1="30%" y1="10%" x2="70%" y2="90%">
                             <stop offset="0%" stop-color="#ffffff"/>
-                            <stop offset="40%" stop-color="#cbd5e1"/>
-                            <stop offset="80%" stop-color="#475569"/>
-                            <stop offset="100%" stop-color="#1e293b"/>
+                            <stop offset="50%" stop-color="#cbd5e1"/>
+                            <stop offset="100%" stop-color="#334155"/>
                         </linearGradient>
                     </defs>
                 </svg>
             </div>
 
-            <h1 class="titulo-capa">O DESTINO</h1>
-            <div class="sub-titulo-capa">Foi Conquistado</div>
+            <!-- NOVOS TEXTOS REQUISITADOS -->
+            <h1 class="titulo-capa">AQUI FOI DADO O MEU MELHOR</h1>
             
-            <!-- TEXTO EDITADO EXATAMENTE COMO VOCÊ PEDIU -->
+            <div class="sub-titulo-capa">
+                Apesar de parecer simples, houve todo um trabalho. E como meu defeito é ser perfeccionista demais, cada detalhe foi dedicado; e sei que ser perfeccionista pode ser um defeito, porém foi o melhor que pude aqui oferecer a você: o meu melhor.
+            </div>
+            
+            <!-- TEXTO DE AGRADECIMENTO PRINCIPAL -->
             <p class="texto-agradecimento">
                 "Apesar de não podermos ter tudo que desejamos na vida, que possamos aprender a celebrar todos os dias a vida e as pessoas à nossa volta, principalmente as que amamos e as que entram em nossa vida nos fascinando como você.<br><br>
                 <span>Gratidão pelo carinho, pelo respeito, por tudo que você no seu limite fez por mim</span> e que isso levarei na minha bagagem a qual esteja onde eu estiver você será sempre inesquecível."
