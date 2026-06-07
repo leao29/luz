@@ -1,440 +1,281 @@
-<!DOCTYPE html>
+Prontuario.htm <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>A Capa Final - Dra. Débora</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Orbitron:wght@400;600&family=Lora:ital,wght=0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <title>Prontuário & Receita - Dra. Débora</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Orbitron:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <style>
         :root {
-            --azul-cosmos: #020617;
-            --azul-capa: #03081e;
-            --ouro-escuro: #4a3b13;
-            --ouro-brilhante: #c5a85c;
-            --texto-claro: #f1f5f9;
-            --texto-ouro: #e2c792;
-            --prata-brilhante: #f8fafc;
-            --prata-sombra: #475569;
+            --azul-cosmos: #01040a;
+            --preto-profundo: #020617;
+            --prata-fino: linear-gradient(135deg, #bdc3c7, #ffffff, #95a5a6, #ffffff, #7f8c8d);
+            --ouro-escuro: #614d1a;
+            --cor-prata: #e2e8f0;
+            --papel-antigo: #f5e6c4;
         }
 
         * { box-sizing: border-box; }
 
-        body {
+        body, html {
             margin: 0; padding: 0;
             width: 100%; min-height: 100vh;
             background-color: var(--azul-cosmos);
-            font-family: 'Cinzel', serif;
+            font-family: 'Lora', serif;
             display: flex;
-            flex-direction: column;
-            align-items: center;
             justify-content: center;
-            padding: 40px 20px;
+            align-items: center;
             overflow-x: hidden;
-            perspective: 2000px;
+            overflow-y: auto;
+            transition: opacity 0.8s ease;
+            padding: 40px 20px;
         }
 
-        #fundo-cosmos {
+        /* FUNDO COSMOS COM ESTRELAS PULSANTES BRILHANTES */
+        #cenario-cosmos {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            z-index: -2;
-            background: radial-gradient(circle at center, #0a1931 0%, #040d21 60%, var(--azul-cosmos) 100%);
+            z-index: -1;
+            background: radial-gradient(circle at center, #0a1e3d 0%, var(--azul-cosmos) 100%);
         }
 
-        .estrela {
+        .estrela-prata {
             position: absolute;
-            background: white;
+            background: #ffffff;
             border-radius: 50%;
-            opacity: 0.3;
-            animation: brilho infinite ease-in-out;
+            box-shadow: 0 0 12px 3px #ffffff;
+            animation: pulsar 2.5s infinite ease-in-out;
         }
 
-        @keyframes brilho {
-            0%, 100% { opacity: 0.1; transform: scale(1); }
-            50% { opacity: 0.6; transform: scale(1.4); }
+        @keyframes pulsar {
+            0%, 100% { opacity: 0.3; transform: scale(0.7); }
+            50% { opacity: 1; transform: scale(1.4); }
         }
 
-        /* PAINEL DE MÚSICA */
-        .painel-musica-fixo {
+        /* PAINEL DE CONTROLE DE MÍDIA PREMIUM */
+        .painel-audio {
             position: fixed;
             top: 20px; right: 20px;
-            background: rgba(5, 11, 30, 0.85);
-            backdrop-filter: blur(15px);
-            border: 1px solid var(--ouro-escuro);
-            padding: 8px 16px;
+            background: rgba(15, 23, 42, 0.9);
+            border: 1px solid var(--cor-prata);
+            padding: 10px 16px;
             border-radius: 30px;
             display: flex;
             align-items: center;
             gap: 12px;
-            z-index: 100;
-            box-shadow: 0 4px 30px rgba(0,0,0,0.5);
+            z-index: 1000;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.5);
         }
 
-        .btn-controle {
-            background: transparent;
-            border: 1px solid var(--ouro-brilhante);
-            color: var(--ouro-brilhante);
-            padding: 4px 14px;
-            border-radius: 20px;
-            font-family: 'Orbitron', sans-serif;
-            font-size: 0.7rem;
+        .btn-audio {
+            background: none; border: none; cursor: pointer; color: white; font-size: 1.2rem;
+            display: flex; align-items: center; justify-content: center; padding: 0;
+        }
+
+        .slider-volume {
+            width: 75px;
             cursor: pointer;
+            accent-color: var(--cor-prata);
         }
-        
-        .vol-slider { width: 70px; accent-color: var(--ouro-brilhante); }
 
-        /* PÉROLA NEGRA MENOR COM BRILHO PRATEADO INTENSO */
-        .container-perola-interna {
-            margin: 5px 0 25px 0;
+        /* CONTAINER DO LAYOUT EM DUAS COLUNAS */
+        .layout-duas-colunas {
             display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-            height: 80px;
-        }
-
-        .perola-negra {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            /* Degradê simulando pérola negra com forte iluminação refletiva branca/prata */
-            background: radial-gradient(circle at 30% 30%, #ffffff 0%, #cbd5e1 15%, #334155 45%, #0f172a 75%, #020617 100%);
-            box-shadow: 
-                0 0 25px rgba(255, 255, 255, 0.8),
-                0 0 10px rgba(203, 213, 225, 0.4),
-                inset -4px -4px 12px rgba(0,0,0,0.95),
-                inset 6px 6px 10px rgba(255,255,255,0.6);
-            position: relative;
-            z-index: 2;
-            animation: flutuarPerolaAvançado 4s infinite ease-in-out;
-        }
-
-        .sombra-perola {
-            width: 32px;
-            height: 6px;
-            background: rgba(0, 0, 0, 0.7);
-            border-radius: 50%;
-            filter: blur(3px);
-            position: absolute;
-            bottom: 12px;
-            animation: sombraPerolaAvançado 4s infinite ease-in-out;
-            z-index: 1;
-        }
-
-        @keyframes flutuarPerolaAvançado {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-        }
-
-        @keyframes sombraPerolaAvançado {
-            0%, 100% { transform: scale(1); opacity: 0.7; }
-            50% { transform: scale(0.7); opacity: 0.2; filter: blur(4px); }
-        }
-
-        /* ESTRUTURA DO CARD DE LUXO */
-        .capa-livro {
-            max-width: 620px;
+            gap: 30px;
             width: 100%;
-            background: linear-gradient(135deg, #050c24 0%, #020511 100%);
+            max-width: 1200px;
+            justify-content: center;
+            align-items: stretch;
+        }
+
+        /* ENGENHARIA E DESIGN DOS CARDS COM EFEITO DE ZOOM */
+        .card-container {
+            flex: 1;
+            background: var(--prata-fino);
+            padding: 4px;
+            border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+            transition: transform 0.5s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.5s ease;
+        }
+
+        .card-container:hover {
+            transform: scale(1.03) translateY(-5px);
+            box-shadow: 0 30px 70px rgba(255, 255, 255, 0.15);
+        }
+
+        .conteudo-papel {
+            background-color: var(--papel-antigo);
+            background-image: url('https://www.transparenttextures.com/patterns/cream-paper.png');
             border-radius: 16px;
-            padding: 45px 30px;
-            box-shadow: -15px 30px 60px rgba(0,0,0,0.9), inset 5px 0 15px rgba(255,255,255,0.03);
-            border: 2px solid var(--ouro-escuro);
-            position: relative;
+            padding: 40px;
+            border: 3px double var(--ouro-escuro);
+            height: 100%;
             display: flex;
             flex-direction: column;
-            align-items: center;
-            transform-origin: left center;
-            transform: rotateY(45deg) scale(0.95);
-            opacity: 0;
-            transition: transform 1.8s cubic-bezier(0.16, 1, 0.3, 1), opacity 1s ease;
+            position: relative;
+            box-shadow: inset 0 0 40px rgba(97, 77, 26, 0.25);
         }
 
-        .capa-livro.revelada {
-            transform: rotateY(0deg) scale(1);
-            opacity: 1;
-        }
-
-        /* Moldura de Ouro Barroca */
-        .moldura-barroca {
-            position: absolute;
-            top: 15px; bottom: 15px; left: 15px; right: 15px;
-            border: 1px solid rgba(197, 168, 92, 0.3);
-            border-radius: 12px;
-            pointer-events: none;
-        }
-
-        .moldura-barroca::before {
-            content: '';
-            position: absolute;
-            top: 8px; bottom: 8px; left: 8px; right: 8px;
-            border: 2px solid var(--ouro-brilhante);
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(197, 168, 92, 0.2);
-        }
-
-        .canto-decorativo {
-            position: absolute;
-            width: 25px; height: 25px;
-            border: 2px solid var(--ouro-brilhante);
-            border-radius: 50%;
-        }
-        .canto-tl { top: 20px; left: 20px; border-right: transparent; border-bottom: transparent; }
-        .canto-tr { top: 20px; right: 20px; border-left: transparent; border-bottom: transparent; }
-        .canto-bl { bottom: 20px; left: 20px; border-right: transparent; border-top: transparent; }
-        .canto-br { bottom: 20px; right: 20px; border-left: transparent; border-top: transparent; }
-
-        .conteudo-capa {
-            z-index: 2;
+        /* TÍTULOS EM LETRAS CHUMBADAS DE FERRO PRATA */
+        .titulo-chumbado {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.7rem;
             text-align: center;
-            width: 100%;
-        }
-
-        /* CONTAINER DOS SIMBOLOS */
-        .grid-simbolos {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 50px;
-            margin-bottom: 30px;
-        }
-
-        /* Cabeça de Psiquiatria Estilo Vetor Canva Premium */
-        .cabeca-psiquiatria {
-            width: 95px; height: 95px;
-            filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.3)) drop-shadow(0 0 20px rgba(197, 168, 92, 0.6));
-        }
-
-        .luz-pulsante {
-            animation: brilhoCelular 2s infinite ease-in-out;
-        }
-        .luz-atrasada {
-            animation: brilhoCelular 2s infinite ease-in-out 1s;
-        }
-
-        @keyframes brilhoCelular {
-            0%, 100% { opacity: 0.5; transform: scale(1); }
-            50% { opacity: 1; transform: scale(1.4); }
-        }
-
-        /* Coração Pulsante Realista */
-        .coracao-pulsante {
-            width: 65px; height: 65px;
-            animation: pulsarCoracao 1.2s infinite cubic-bezier(0.25, 0.8, 0.25, 1);
-            filter: drop-shadow(0 0 15px rgba(256, 256, 256, 0.5));
-        }
-
-        @keyframes pulsarCoracao {
-            0% { transform: scale(1); }
-            30% { transform: scale(1.12); }
-            45% { transform: scale(1.05); }
-            60% { transform: scale(1.18); }
-            100% { transform: scale(1); }
-        }
-
-        .titulo-capa {
-            font-size: 2.2rem;
-            letter-spacing: 4px;
-            background: linear-gradient(135deg, #ffffff 0%, #e2c792 50%, #c5a85c 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin: 15px 0 12px 0;
             font-weight: 700;
-            line-height: 1.3;
+            letter-spacing: 5px;
+            margin-bottom: 30px;
+            color: #334155;
+            text-transform: uppercase;
+            text-shadow: 
+                -1px -1px 0 #ffffff, 
+                1px -1px 0 #ffffff, 
+                -1px 1px 0 #94a3b8, 
+                1px 1px 0 #64748b,
+                2px 2px 5px rgba(0,0,0,0.4);
         }
 
-        .sub-titulo-capa {
-            font-family: 'Lora', serif;
-            font-style: italic;
+        .cabecalho-secao {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-family: 'Orbitron', sans-serif;
+            color: #1e293b;
+            font-weight: bold;
             font-size: 1.05rem;
-            color: #94a3b8;
+            border-bottom: 2px solid var(--ouro-escuro);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
             letter-spacing: 1px;
-            max-width: 530px;
-            margin: 0 auto 35px auto;
-            line-height: 1.6;
         }
 
-        .texto-agradecimento {
-            font-family: 'Lora', serif;
-            font-size: 1.05rem;
-            line-height: 1.9;
-            color: #cbd5e1;
-            max-width: 520px;
-            margin: 0 auto 35px auto;
-            text-align: center;
-        }
-        
-        .texto-agradecimento span {
-            color: #ffffff;
-            font-weight: 600;
-        }
-
-        .autor {
-            font-size: 1.3rem;
-            color: #ffffff;
-            letter-spacing: 4px;
-            border-top: 1px solid rgba(197, 168, 92, 0.2);
-            padding-top: 15px;
+        .carimbo-diagnostico {
             display: inline-block;
+            border: 3px double #b91c1c;
+            color: #b91c1c;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            font-size: 1.1rem;
+            padding: 8px 15px;
+            margin: 15px 0;
+            transform: rotate(-2deg);
+            text-transform: uppercase;
+            opacity: 0.85;
+            align-self: flex-start;
         }
 
-        @media (max-width: 600px) {
-            .capa-livro { padding: 35px 15px; }
-            .titulo-capa { font-size: 1.6rem; }
-            .texto-agradecimento { font-size: 0.95rem; line-height: 1.7; }
-            .grid-simbolos { gap: 25px; }
-            .cabeca-psiquiatria, .coracao-pulsante { transform: scale(0.85); }
+        .texto-clinico {
+            flex-grow: 1;
+        }
+
+        .texto-clinico p, .lista-receita li {
+            line-height: 1.8;
+            color: #2c2519;
+            text-align: justify;
+            margin-bottom: 15px;
+            font-size: 1.05rem;
+        }
+
+        .texto-clinico strong { color: #000000; }
+
+        .lista-receita { list-style: none; padding: 0; margin: 0; }
+
+        .lista-receita li {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            background: rgba(255, 255, 255, 0.25);
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid var(--ouro-escuro);
+        }
+
+        .icone-receita { font-size: 1.4rem; margin-top: 2px; }
+
+        .area-botao {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: auto;
+            padding-top: 25px;
+        }
+
+        .btn-proxima {
+            background: #1e293b;
+            color: white;
+            border: 1px solid var(--ouro-escuro);
+            padding: 14px 35px;
+            border-radius: 8px;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            letter-spacing: 2px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            text-transform: uppercase;
+        }
+
+        .btn-proxima:hover {
+            background: var(--ouro-escuro);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 900px) {
+            .layout-duas-colunas { flex-direction: column; gap: 40px; }
+            body { padding: 80px 15px 40px 15px; }
+            .conteudo-papel { padding: 25px 20px; }
+            .titulo-chumbado { font-size: 1.4rem; }
+            .area-botao { justify-content: center; }
+            .btn-proxima { width: 100%; text-align: center; }
         }
     </style>
 </head>
-<body>
+<body onclick="desbloquearAudio()">
 
-    <div id="fundo-cosmos"></div>
+    <div id="cenario-cosmos"></div>
 
-    <!-- PAINEL DE CONTROLE DE ÁUDIO -->
-    <div class="painel-musica-fixo">
-        <button class="btn-controle" id="playPause">PAUSE</button>
-        <div style="display:flex; align-items:center; gap:6px;">
-            <span style="color:var(--ouro-brilhante); font-size:10px;">🔈</span>
-            <input type="range" class="vol-slider" id="volumeSlider" min="0" max="1" step="0.05" value="0.5" oninput="ajustarVol(this.value)">
-            <span style="color:var(--ouro-brilhante); font-size:10px;">🔊</span>
-        </div>
+    <div class="painel-audio" onclick="event.stopPropagation()">
+        <button class="btn-audio" id="btn-play-pause" onclick="alternarAudio()">⏸️</button>
+        <input type="range" class="slider-volume" id="controle-volume" min="0" max="1" step="0.05" value="1" oninput="ajustarVolume(this.value)">
     </div>
 
-    <!-- CARD PRINCIPAL LUXUOSO -->
-    <div class="capa-livro" id="capaFisica">
-        <div class="moldura-barroca"></div>
-        <div class="canto-decorativo canto-tl"></div>
-        <div class="canto-decorativo canto-tr"></div>
-        <div class="canto-decorativo canto-bl"></div>
-        <div class="canto-decorativo canto-br"></div>
+    <div class="layout-duas-colunas">
         
-        <div class="conteudo-capa">
-            
-            <!-- PÉROLA NEGRA BRILHANTE E REFINADA -->
-            <div class="container-perola-interna">
-                <div class="perola-negra"></div>
-                <div class="sombra-perola"></div>
+        <div class="card-container">
+            <div class="conteudo-papel">
+                <h1 class="titulo-chumbado">PRONTUÁRIO MÉDICO</h1>
+                <div class="cabecalho-secao">📋 HISTÓRICO & QUADRO CLÍNICO</div>
+                <div class="texto-clinico">
+                    <p><strong>Paciente:</strong> Identificada como uma alma sonhadora em trânsito temporário por Belém (período de 1 ano e 3 meses fixado pelas raízes familiares e esperando o primeiro aninho de idade da Helena Sophia em 5 de agosto), com retorno programado para Brasília pós-aniversário.</p>
+                    <p><strong>Evolução:</strong> Veterana de uma jornada de mais de 20 anos enfrentando a síndrome do pânico. Apresenta alta capacidade de discernimento e blindagem terapêutica, sabendo separar perfeitamente a relação médico-paciente tradicional.</p>
+                    <div class="carimbo-diagnostico">Diagnóstico: Afeto Agudo Incurável</div>
+                    <p><strong>Nota Clínica Importante:</strong> Desenvolveu um desejo e vontade de ficar com você, é algo único e genuíno sobre a profissional responsável. Sei que isso jamais acontecerá, até porque sei que você é uma linda sereia que merece os mais belos oceanos do mundo e não o meu laguinho.</p>
+                </div>
             </div>
-
-            <!-- SIMBOLOS VETORIAIS ESTILO CANVA -->
-            <div class="grid-simbolos">
-                
-                <!-- Perfil Clínico + Árvore de Conexões Iluminada -->
-                <svg class="cabeca-psiquiatria" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <!-- Linha do contorno da mente elegante e contínua -->
-                    <path d="M30 80 C32 73, 35 68, 40 64 C32 56, 30 46, 30 36 C30 16, 46 10, 60 10 C76 10, 82 22, 80 40 C78 46, 81 50, 79 54 C76 60, 70 64, 68 70 C66 76, 63 80, 60 80" stroke="url(#ouroCanva)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-                    
-                    <!-- Tronco Central -->
-                    <path d="M52 68 L52 46" stroke="url(#ouroCanva)" stroke-width="3" stroke-linecap="round"/>
-                    
-                    <!-- Galhos Cristalinos -->
-                    <path d="M52 56 Q38 52, 42 40" stroke="#f1f5f9" stroke-width="1.5" stroke-linecap="round"/>
-                    <path d="M52 50 Q66 46, 72 38" stroke="url(#ouroCanva)" stroke-width="1.5" stroke-linecap="round"/>
-                    <path d="M52 46 Q42 30, 46 22" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round"/>
-                    <path d="M52 46 Q64 32, 68 26" stroke="url(#ouroCanva)" stroke-width="1.5" stroke-linecap="round"/>
-                    
-                    <!-- Pontos de Brilho de Alta Intensidade -->
-                    <circle class="luz-pulsante" cx="42" cy="40" r="3.5" fill="#ffffff" filter="drop-shadow(0 0 6px #fff)"/>
-                    <circle class="luz-atrasada" cx="72" cy="38" r="3" fill="#e2c792" filter="drop-shadow(0 0 5px var(--ouro-brilhante))"/>
-                    <circle class="luz-pulsante" cx="46" cy="22" r="4" fill="#ffffff" filter="drop-shadow(0 0 8px #fff)"/>
-                    <circle class="luz-atrasada" cx="68" cy="26" r="3.5" fill="#c5a85c" filter="drop-shadow(0 0 5px var(--ouro-brilhante))"/>
-                    
-                    <defs>
-                        <linearGradient id="ouroCanva" x1="0%" y1="100%" x2="100%" y2="0%">
-                            <stop offset="0%" stop-color="#4a3b13"/>
-                            <stop offset="50%" stop-color="#c5a85c"/>
-                            <stop offset="100%" stop-color="#ffffff"/>
-                        </linearGradient>
-                    </defs>
-                </svg>
-
-                <!-- Coração Realista Pulsante (Prata) -->
-                <svg class="coracao-pulsante" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M50 82 C50 82, 15 55, 15 35 C15 20, 28 12, 50 30 C72 12, 85 20, 85 35 C85 55, 50 82, 50 82 Z" fill="url(#gradPrataCard)" stroke="#ffffff" stroke-width="1.5"/>
-                    <path d="M45 35 C35 35, 28 40, 32 50" stroke="#fff" stroke-width="1.8" stroke-linecap="round" opacity="0.4"/>
-                    <defs>
-                        <linearGradient id="gradPrataCard" x1="30%" y1="10%" x2="70%" y2="90%">
-                            <stop offset="0%" stop-color="#ffffff"/>
-                            <stop offset="50%" stop-color="#cbd5e1"/>
-                            <stop offset="100%" stop-color="#334155"/>
-                        </linearGradient>
-                    </defs>
-                </svg>
-            </div>
-
-            <!-- TEXTOS REQUISITADOS -->
-            <h1 class="titulo-capa">AQUI FOI DADO O MEU MELHOR</h1>
-            
-            <div class="sub-titulo-capa">
-                Apesar de parecer simples, houve todo um trabalho. E como meu defeito é ser perfeccionista demais, cada detalhe foi dedicado; e sei que ser perfeccionista pode ser um defeito, porém foi o melhor que pude aqui oferecer a você: o meu melhor.
-            </div>
-            
-            <!-- TEXTO DE AGRADECIMENTO PRINCIPAL -->
-            <p class="texto-agradecimento">
-                "Apesar de não podermos ter tudo que desejamos na vida, que possamos aprender a celebrar todos os dias a vida e as pessoas à nossa volta, principalmente as que amamos e as que entram em nossa vida nos fascinando como você.<br><br>
-                <span>Gratidão pelo carinho, pelo respeito, por tudo que você no seu limite fez por mim</span> e que isso levarei na minha bagagem a qual esteja onde eu estiver você será sempre inesquecível."
-            </p>
-
-            <div class="autor">DRA. DÉBORA</div>
         </div>
-    </div>
 
-    <audio id="trilha" src="elvis.html.mp3" loop></audio>
+        <div class="card-container">
+            <div class="conteudo-papel">
+                <h1 class="titulo-chumbado">RECEITA</h1>
+                <div class="cabecalho-secao">🧪 TERAPÊUTICA RECOMENDADA</div>
+                <div class="texto-clinico">
+                    <ul class="lista-receita">
+                        <li>
+                            <span class="icone-receita">🌊</span>
+                            <div><strong>Mergulhos Livres:</strong> Frequentar os oceanos imensos e profundos que combinam com sua natureza de sereia. Proibido restringir-se a espaços limitados.</div>
+                        </li>
+                        <li>
+                            <span class="icone-receita">✨</span>
+                            <div><strong>Preservação da Essência:</strong> Manter a blindagem brilhante contra as sombras do mundo exterior.</div>
+                        </li>
+                        <li>
+                            <span class="icone-receita">🎵</span>
+                            <div><strong>Doses de Arte e Som:</strong> Administração diária de trilhas sonoras clássicas e românticas para acalmar o cosmos interno.</div>
+                        </li>
+                        <li>
+                            <span class="icone-receita">🧭</span>
+                            <div><strong>Cuidado Continuado:</strong> Lembrar-se de que o impacto positivo de sua atuação ecoará permanentemente no tempo.</div>
+                        </li>
+                    </ul>
+                </div>
 
-    <script>
-        const audio = document.getElementById('trilha');
-        const btnPP = document.getElementById('playPause');
-        const volumeSlider = document.getElementById('volumeSlider');
-        const capaFisica = document.getElementById('capaFisica');
-
-        window.onload = () => {
-            audio.volume = 0.5;
-            volumeSlider.value = 0.5;
-
-            const tempoSalvo = localStorage.getItem('musica_tempo');
-            if (tempoSalvo) { audio.currentTime = parseFloat(tempoSalvo); }
-            
-            audio.play().then(() => {
-                btnPP.innerText = "PAUSE";
-            }).catch(() => {
-                btnPP.innerText = "PLAY";
-            });
-
-            setTimeout(() => {
-                capaFisica.classList.add('revelada');
-            }, 200);
-        };
-
-        audio.ontimeupdate = () => {
-            localStorage.setItem('musica_tempo', audio.currentTime);
-        };
-
-        btnPP.onclick = () => {
-            if (audio.paused) {
-                audio.play();
-                btnPP.innerText = "PAUSE";
-            } else {
-                audio.pause();
-                btnPP.innerText = "PLAY";
-            }
-        };
-
-        function ajustarVol(v) { audio.volume = v; }
-
-        // SISTEMA DE ESTRELAS DE FUNDO
-        const cosmos = document.getElementById('fundo-cosmos');
-        for (let i = 0; i < 65; i++) {
-            const estrela = document.createElement('div');
-            estrela.className = 'estrela';
-            const tam = Math.random() * 2 + 0.5;
-            estrela.style.width = tam + 'px';
-            estrela.style.height = tam + 'px';
-            estrela.style.top = Math.random() * 100 + '%';
-            estrela.style.left = Math.random() * 100 + '%';
-            estrela.style.animationDuration = (Math.random() * 5 + 3) + 's';
-            cosmos.appendChild(estrela);
-        }
-    </script>
-</body>
-</html>
