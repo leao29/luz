@@ -33,7 +33,7 @@
             overflow-x: hidden;
             opacity: 0;
             transition: opacity 2s ease;
-            perspective: 2000px; /* Aumentado para um efeito 3D mais dramático */
+            perspective: 2000px;
         }
 
         #fundo-cosmos {
@@ -137,7 +137,7 @@
             padding: 1px;
             box-shadow: 0 40px 80px rgba(0,0,0,0.8);
             border: 1px solid rgba(197, 168, 92, 0.2);
-            transform-origin: left center; /* Eixo de rotação como a lombada de um livro */
+            transform-origin: left center;
             transition: transform 1.6s cubic-bezier(0.66, 0, 0.34, 1), opacity 1.4s ease;
         }
 
@@ -171,7 +171,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 200px;
+            height: 220px;
             margin: 20px 0;
             position: relative;
         }
@@ -220,7 +220,7 @@
         .ostra-container.aberta .perola-negra { transform: translateX(-50%) scale(1); }
 
         .ostra-container.aberta .perola-negra.flutuando {
-            bottom: 150px;
+            bottom: 140px;
             transform: translateX(-50%) scale(1.4);
             animation: flutuarEmanarPrata 4.5s infinite ease-in-out;
             z-index: 9;
@@ -267,10 +267,16 @@
         /* CONTAINER DO BOTÃO AVANÇAR */
         .container-botao-livro {
             margin-top: 40px;
-            display: none;
+            display: flex;
             justify-content: center;
             opacity: 0;
+            pointer-events: none;
             transition: opacity 1.2s ease;
+        }
+
+        .container-botao-livro.visivel {
+            pointer-events: auto;
+            opacity: 1;
         }
 
         /* BOTÃO CHUMBADO COM FERRO E PRATA LUXUOSO */
@@ -345,6 +351,12 @@
             color: var(--ouro-brilhante);
             font-weight: bold;
             margin-top: 35px;
+            opacity: 0;
+            transition: opacity 2s ease 1s;
+        }
+
+        .mensagem-final.revelada {
+            opacity: 1;
         }
 
         .creditos {
@@ -360,7 +372,7 @@
             .titulo-final { font-size: 1.8rem; letter-spacing: 4px; }
             .papel-interno { padding: 35px 20px; }
             .texto-conclusao { font-size: 1rem; line-height: 1.7; }
-            .ostra-container.aberta .perola-negra.flutuando { bottom: 130px; }
+            .ostra-container.aberta .perola-negra.flutuando { bottom: 120px; }
             .instrucao-toque { font-size: 0.7rem; letter-spacing: 1px; }
             .btn-avancar-hierarquia { padding: 14px 30px; font-size: 0.85rem; letter-spacing: 3px; }
         }
@@ -371,192 +383,176 @@
     <div id="fundo-cosmos"></div>
 
     <div class="painel-musica-fixo" onclick="event.stopPropagation()">
-        <button class="btn-controle" id="playPause">PAUSE</button>
+        <button class="btn-controle" id="playPause">PLAY</button>
         <div style="display:flex; align-items:center; gap:6px;">
             <span style="color:var(--ouro-brilhante); font-size:10px;">🔈</span>
             <input type="range" class="vol-slider" id="volumeSlider" min="0" max="1" step="0.05" value="0.5" oninput="ajustarVol(this.value)">
-            <span style="color:var(--ouro-brilhante); font-size:10px;">🔊</span>
         </div>
     </div>
 
-    <h1 class="titulo-final" id="mainTitle">O Destino Encontrado</h1>
+    <!-- Áudio de fundo em Loop (Substitua o link pelo arquivo de música desejado) -->
+    <audio id="musicaFundo" loop src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"></audio>
 
-    <div class="card-principal" id="livroContainer">
+    <h1 class="titulo-final" id="mainTitle">O Encontro com o Destino</h1>
+
+    <div class="card-principal" id="livroCard">
         <div class="papel-interno">
             <div class="card-desfecho">
+                <p class="texto-conclusao">
+                    A jornada da Dra. Débora cruzou oceanos de incertezas até encontrar o seu verdadeiro porto. Cada escolha, cada paciente e cada desafio enfrentado funcionaram como lapidações silenciosas do tempo. No vasto cosmos da medicina e da vida, as conexões mais profundas não acontecem por mero acaso; elas são traçadas pela precisão cirúrgica do destino.
+                </p>
                 
+                <!-- CENÁRIO DA OSTRA INTERATIVA -->
                 <div class="cenario-ostra">
-                    <div class="ostra-container" id="ostraMagica" onclick="cliqueOstra()">
-                        <svg class="concha-sup-svg" viewBox="0 0 100 65" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M50 2C22 2 5 15 5 35C5 45 15 55 50 62C85 55 95 45 95 35C95 15 78 2 50 2Z" fill="url(#gradienteConcha)" stroke="#475569" stroke-width="0.7"/>
-                            <path d="M50 62C50 40 40 10 30 5M50 62C53 40 65 10 70 5M50 62C45 35 18 20 12 18M50 62C55 35 82 20 88 18" stroke="rgba(255,255,255,0.08)" stroke-width="0.5"/>
-                            <defs>
-                                <linearGradient id="gradienteConcha" x1="0%" y1="0%" x2="100%" y2="100%">
-                                    <stop offset="0%" stop-color="#2d3748"/>
-                                    <stop offset="50%" stop-color="#1a202c"/>
-                                    <stop offset="100%" stop-color="#0f172a"/>
-                                </linearGradient>
-                            </defs>
+                    <div class="ostra-container" id="ostra" onclick="interagirOstra(event)">
+                        <!-- Concha Superior (SVG) -->
+                        <svg class="concha-sup-svg" viewBox="0 0 100 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M10 50 C10 15, 90 15, 90 50 C75 55, 25 55, 10 50 Z" fill="#1e293b" stroke="#c5a85c" stroke-width="1.5"/>
+                            <path d="M20 48 C30 25, 50 20, 50 20 C50 20, 70 25, 80 48" stroke="#4a3b13" stroke-width="1"/>
+                            <path d="M35 49 C40 30, 50 25, 50 25 C50 25, 60 30, 65 49" stroke="#4a3b13" stroke-width="1"/>
                         </svg>
-
-                        <div class="perola-negra" id="perolaMagica"></div>
-
-                        <svg class="concha-inf-svg" viewBox="0 0 100 65" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M50 63C22 63 5 50 5 30C5 20 20 4 50 2C80 4 95 20 95 30C95 50 78 63 50 63Z" fill="url(#gradienteMadreperola)" stroke="#334155" stroke-width="0.7"/>
-                            <path d="M50 2C42 20 25 35 10 38M50 2C58 20 75 35 90 38" stroke="rgba(255,255,255,0.15)" stroke-width="0.4"/>
-                            <defs>
-                                <radialGradient id="gradienteMadreperola" cx="50%" cy="30%" r="50%">
-                                    <stop offset="0%" stop-color="#ffffff"/>
-                                    <stop offset="35%" stop-color="#f1f5f9"/>
-                                    <stop offset="70%" stop-color="#cbd5e1"/>
-                                    <stop offset="100%" stop-color="#1e293b"/>
-                                </radialGradient>
-                            </defs>
+                        
+                        <!-- Pérola Negra Estilizada -->
+                        <div class="perola-negra" id="perola"></div>
+                        
+                        <!-- Concha Inferior (SVG) -->
+                        <svg class="concha-inf-svg" viewBox="0 0 100 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M10 15 C10 50, 90 50, 90 15 C75 10, 25 10, 10 15 Z" fill="#0f172a" stroke="#c5a85c" stroke-width="1.5"/>
+                            <path d="M15 16 C30 35, 50 40, 50 40 C50 40, 70 35, 85 16" stroke="#4a3b13" stroke-width="0.7"/>
                         </svg>
                     </div>
                 </div>
 
-                <div class="bloco-instrucao">
-                    <div class="instrucao-toque" id="textoInstrucao">Aperte na ostra para a pérola sair</div>
+                <div class="bloco-instrucao" id="blocoInstrucao">
+                    <div class="instrucao-toque">Toque na ostra para revelar o segredo</div>
                 </div>
-
-                <p class="texto-conclusao">
-                    Existe uma célebre fábula sobre a ostra: para que uma pérola nasça, é preciso que um grão de areia entre em seu interior e cause uma ferida profunda. A ostra não destrói o invasor; em vez disso, ela o envolve cuidadosamente com camadas de nácar brilhante, transformando a dor e o incômodo em uma joia rara.
-                </p>
-                
-                <p class="texto-conclusao">
-                    A estrada longa ficou para trás e as dores do caminho transformaram-se em preciosas pérolas de sabedoria. Sob o manto infinito do cosmos, compreendemos que cada curva, cada grão de areia e cada passo incerto faziam parte de um plano maior. O horizonete não é mais um limite distante; agora, ele é o chão que você pisa com paz no coração, carregando a beleza da sua própria pérola negra.
-                </p>
 
                 <p class="texto-desfecho-italico">
-                    "Ser forte é entender que os golpes da vida acontecem, mas a pérola negra prova que a dor não te venceu: ela foi engolida, dominada e transformada em poder."
+                    "Assim como a pérola mais rara nasce nas profundezas ocultas do mar, o nosso propósito se revela nas camadas mais profundas da nossa alma."
                 </p>
-
-                <div class="mensagem-final">FIM DA JORNADA</div>
-                
-                <div class="container-botao-livro" id="btnLivroContainer">
-                    <button class="btn-avancar-hierarquia" onclick="irParaProxima(event)">Concluir o Livro</button>
-                </div>
-
-                <div class="creditos">Gratidão por cada passo compartilhado</div>
             </div>
         </div>
     </div>
 
-    <audio id="trilha" src="elvis.html.mp3" loop></audio>
+    <!-- Container do Botão Avançar -->
+    <div class="container-botao-livro" id="containerBotao">
+        <button class="btn-avancar-hierarquia" onclick="avancarPagina()">Seguir o Destino</button>
+    </div>
+
+    <div class="mensagem-final" id="mensagemFinal">Sua história continua...</div>
+
+    <div class="creditos">Dra. Débora — 2026</div>
 
     <script>
-        const audio = document.getElementById('trilha');
-        const btnPP = document.getElementById('playPause');
-        const ostraContainer = document.getElementById('ostraMagica');
-        const perola = document.getElementById('perolaMagica');
-        const volumeSlider = document.getElementById('volumeSlider');
-        const instrucao = document.getElementById('textoInstrucao');
-        const btnLivroContainer = document.getElementById('btnLivroContainer');
-        const livroContainer = document.getElementById('livroContainer');
-        const mainTitle = document.getElementById('mainTitle');
-
-        window.onload = () => {
+        // Revelação suave do Body ao carregar a página
+        window.addEventListener('DOMContentLoaded', () => {
             document.body.style.opacity = '1';
-            audio.volume = 0.5;
-            volumeSlider.value = 0.5;
+            gerarEstrelas();
+        });
 
-            const tempoSalvo = localStorage.getItem('musica_tempo');
-            if (tempoSalvo) { audio.currentTime = parseFloat(tempoSalvo); }
+        // Geração dinâmica de estrelas no plano de fundo cósmico
+        function gerarEstrelas() {
+            const fundo = document.getElementById('fundo-cosmos');
+            const numEstrelas = 100;
             
-            audio.play().then(() => {
-                btnPP.innerText = "PAUSE";
-            }).catch(() => {
-                btnPP.innerText = "PLAY";
-            });
-        };
-
-        audio.ontimeupdate = () => {
-            localStorage.setItem('musica_tempo', audio.currentTime);
-        };
-
-        function cliqueOstra() {
-            if (!ostraContainer.classList.contains('aberta')) {
-                ostraContainer.classList.add('aberta');
-                instrucao.textContent = "A pérola de Débora está flutuando...";
+            for (let i = 0; i < numEstrelas; i++) {
+                const estrela = document.createElement('div');
+                estrela.className = 'estrela';
                 
-                btnLivroContainer.style.display = "flex";
-                setTimeout(() => { btnLivroContainer.style.opacity = "1"; }, 100);
-
-                setTimeout(() => {
-                    perola.classList.add('flutuando');
-                }, 300);
-            } else {
-                perola.classList.remove('flutuando');
-                setTimeout(() => {
-                    ostraContainer.classList.remove('all', 'aberta');
-                    instrucao.textContent = "Aperte na ostra para a pérola sair";
-                }, 400);
+                const tamanho = Math.random() * 3;
+                estrela.style.width = `${tamanho}px`;
+                estrela.style.height = `${tamanho}px`;
+                
+                estrela.style.top = `${Math.random() * 100}%`;
+                estrela.style.left = `${Math.random() * 100}%`;
+                
+                estrela.style.animationDuration = `${2 + Math.random() * 4}s`;
+                estrela.style.animationDelay = `${Math.random() * 3}s`;
+                
+                fundo.appendChild(estrela);
             }
+
+            // Geração de Estrelas Cadentes periódicas
+            setInterval(() => {
+                const cadente = document.createElement('div');
+                cadente.className = 'estrela-cadente';
+                cadente.style.top = `${Math.random() * 40}%`;
+                cadente.style.left = `${Math.random() * 60}%`;
+                fundo.appendChild(cadente);
+                
+                setTimeout(() => cadente.remove(), 6000);
+            }, 8000);
         }
 
-        // FAZ A PÁGINA VIRAR EM 3D ANTES DE REDIRECIONAR
-        function irParaProxima(e) {
-            e.stopPropagation();
-            localStorage.setItem('musica_tempo', audio.currentTime);
-            
-            // Ativa o efeito visual de folhear o livro
-            livroContainer.classList.add('virar-pagina');
-            mainTitle.style.opacity = "0";
-            mainTitle.style.transform = "translateY(-20px)";
-            
-            // Aguarda a animação 3D terminar (1.5 segundos) e pula de tela
-            setTimeout(() => {
-                window.location.href = "final.html";
-            }, 1500);
-        }
+        // Controle do Sistema de Áudio de Luxo
+        const musica = document.getElementById('musicaFundo');
+        const btnPlayPause = document.getElementById('playPause');
+        let audioIniciado = false;
 
         function iniciarAudio() {
-            if (audio.paused) {
-                audio.play();
-                btnPP.innerText = "PAUSE";
+            if (!audioIniciado) {
+                musica.play().then(() => {
+                    btnPlayPause.textContent = "PAUSE";
+                    audioIniciado = true;
+                }).catch(err => console.log("Aguardando interação humana: ", err));
             }
         }
 
-        btnPP.onclick = (e) => {
+        btnPlayPause.addEventListener('click', (e) => {
             e.stopPropagation();
-            if (audio.paused) {
-                audio.play();
-                btnPP.innerText = "PAUSE";
+            if (musica.paused) {
+                musica.play();
+                btnPlayPause.textContent = "PAUSE";
+                audioIniciado = true;
             } else {
-                audio.pause();
-                btnPP.innerText = "PLAY";
+                musica.pause();
+                btnPlayPause.textContent = "PLAY";
             }
-        };
+        });
 
-        function ajustarVol(v) { audio.volume = v; }
-
-        const cosmos = document.getElementById('fundo-cosmos');
-        const fragmento = document.createDocumentFragment();
-        
-        for (let i = 0; i < 65; i++) {
-            const estrela = document.createElement('div');
-            estrela.className = 'estrela';
-            const tam = Math.random() * 2 + 0.5;
-            estrela.style.width = tam + 'px';
-            estrela.style.height = tam + 'px';
-            estrela.style.top = Math.random() * 100 + '%';
-            estrela.style.left = Math.random() * 100 + '%';
-            estrela.style.animationDuration = (Math.random() * 5 + 3) + 's';
-            fragmento.appendChild(estrela);
+        function ajustarVol(valor) {
+            musica.volume = valor;
         }
 
-        for (let i = 0; i < 4; i++) {
-            const cadente = document.createElement('div');
-            cadente.className = 'estrela-cadente';
-            const rose = (Math.random() * 40) + '%';
-            cadente.style.top = rose;
-            cadente.style.left = (Math.random() * 60) + '%';
-            cadente.style.animationDelay = (Math.random() * 8) + 's';
-            cadente.style.animationDuration = (Math.random() * 4 + 5) + 's';
-            fragmento.appendChild(cadente);
+        // Lógica de Interação da Ostra e Revelação Cósmica da Pérola
+        let ostraAberta = false;
+        function interagirOstra(event) {
+            event.stopPropagation();
+            const ostra = document.getElementById('ostra');
+            const perola = document.getElementById('perola');
+            const instrucao = document.getElementById('blocoInstrucao');
+            const containerBotao = document.getElementById('containerBotao');
+
+            if (!ostraAberta) {
+                ostra.classList.add('aberta');
+                instrucao.style.opacity = '0';
+                ostraAberta = true;
+
+                // Transição da pérola para o estado flutuante e emanante
+                setTimeout(() => {
+                    perola.classList.add('flutuando');
+                    // Exibe o luxuoso botão de avanço hierárquico
+                    containerBotao.classList.add('visivel');
+                }, 1200);
+            }
         }
-        cosmos.appendChild(fragmento);
+
+        // Efeito Cinematográfico de Virada de Página 3D
+        function avancarPagina() {
+            const livroCard = document.getElementById('livroCard');
+            const mainTitle = document.getElementById('mainTitle');
+            const mensagemFinal = document.getElementById('mensagemFinal');
+
+            livroCard.classList.add('virar-pagina');
+            mainTitle.style.transform = 'scale(0.9) translateY(-20px)';
+            mainTitle.style.opacity = '0.5';
+
+            // Remove o elemento físico após a animação e revela o desfecho final
+            setTimeout(() => {
+                livroCard.style.display = 'none';
+                mensagemFinal.classList.add('revelada');
+            }, 1600);
+        }
     </script>
 </body>
 </html>
