@@ -311,7 +311,7 @@
         <input type="range" class="slider-volume" id="controle-volume" min="0" max="1" step="0.05" value="1" oninput="ajustarVolume(this.value)">
     </div>
 
-    <!-- ELEMENTO DE ÁUDIO (Substitua o src pelo link real da sua música) -->
+    <!-- ELEMENTO DE ÁUDIO -->
     <audio id="musica-cosmos" loop src="sua-musica.mp3"></audio>
 
     <div class="layout-duas-colunas">
@@ -322,7 +322,7 @@
                 <h1 class="titulo-chumbado">PRONTUÁRIO MÉDICO</h1>
                 <div class="cabecalho-secao">📋 HISTÓRICO & QUADRO CLÍNICO</div>
                 <div class="texto-clinico">
-                    <p><strong>Paciente:</strong> Identificada como uma alma sonhadora em trânsito temporário por Belém (período de 1 ano e 3 meses fixado pelas raízes familiares e esperando o primeiro aninho de idade da Helena Sophia em 5 de agosto), com retorno programado para Brasília pós-aniversário.</p>
+                    <p><strong>Paciente:</strong> Identificada como uma alma sonhadora em trânsito temporário por Belém (período de 1 ano e 3 meses fixado pelas raíces familiares e esperando o primeiro aninho de idade da Helena Sophia em 5 de agosto), com retorno programado para Brasília pós-aniversário.</p>
                     <p><strong>Evolução:</strong> Veterana de uma jornada de mais de 20 anos enfrentando a síndrome do pânico. Apresenta alta capacidade de discernimento e blindagem terapêutica, sabendo separar perfeitamente a relação médico-paciente tradicional.</p>
                     
                     <div class="carimbo-diagnostico">Diagnóstico: Afeto Agudo Incurável</div>
@@ -363,120 +363,62 @@
                         <li>
                             <span class="icone-receita">🧭</span>
                             <div>
-                                <div class="medicamento-titulo">Ancoragem Atemporal — Injetável</div>
-                                <strong>Cuidado Continuado:</strong> Lembrar-se de que o impacto positivo de sua atuação e sua presença ecoará permanentemente no tempo, transcendendo distâncias entre Belém e Brasília.
+                                <div class="medicamento-titulo">Bússola do Destino — Uso Diário</div>
+                                <strong>Roteiro Cósmico:</strong> Seguir as coordenadas do próprio coração, garantindo o retorno seguro e iluminado a Brasília no tempo certo, celebrando cada ciclo e o desabrochar da pequena Helena Sophia.
                             </div>
                         </li>
                     </ul>
                 </div>
             </div>
         </div>
-
     </div>
 
-    <!-- ÁREA DO BOTÃO PRÓXIMA -->
+    <!-- BOTÃO PRÓXIMA DE NAVEGAÇÃO -->
     <div class="area-botao">
-        <a href="carta.html" class="btn-proxima" onclick="salvarEstadoAudio()">Próxima</a>
+        <a href="#" class="btn-proxima">Próxima Etapa</a>
     </div>
 
+    <!-- SCRIPTS DE INTERAÇÃO -->
     <script>
-        // GERADOR DE ESTRELAS DINÂMICAS NO FUNDO COSMICO
-        function criarEstrelas() {
-            const cenario = document.getElementById('cenario-cosmos');
-            const numeroEstrelas = window.innerWidth < 600 ? 25 : 50; // Menos estrelas no celular para melhor performance
-            
-            for (let i = 0; i < numeroEstrelas; i++) {
-                const estrela = document.createElement('div');
-                estrela.classList.add('estrela-prata');
-                
-                const tamanho = Math.random() * 3 + 2; // 2px a 5px
-                estrela.style.width = `${tamanho}px`;
-                estrela.style.height = `${tamanho}px`;
-                
-                estrela.style.top = `${Math.random() * 100}%`;
-                estrela.style.left = `${Math.random() * 100}%`;
-                
-                // Delay aleatório para que pulsem em tempos diferentes
-                estrela.style.animationDelay = `${Math.random() * 3}s`;
-                estrela.style.animationDuration = `${Math.random() * 2 + 2}s`;
-                
-                cenario.appendChild(estrela);
-            }
-        }
-
-        // SISTEMA DE GERENCIAMENTO DE ÁUDIO CONTÍNUO INTER-PÁGINAS
-        const audio = document.getElementById('musica-cosmos');
+        // Lógica básica para controle do elemento de áudio fictício
+        const musica = document.getElementById('musica-cosmos');
         const btnPlayPause = document.getElementById('btn-play-pause');
-        const controleVolume = document.getElementById('controle-volume');
-
-        // Carrega as configurações salvas e o tempo exato da música
-        window.addEventListener('DOMContentLoaded', () => {
-            criarEstrelas();
-
-            const audioTocando = localStorage.getItem('audioTocando');
-            const audioTempo = localStorage.getItem('audioTempo');
-            const audioVolume = localStorage.getItem('audioVolume');
-
-            if (audioVolume !== null) {
-                audio.volume = audioVolume;
-                controleVolume.value = audioVolume;
-            }
-
-            if (audioTempo !== null) {
-                audio.currentTime = parseFloat(audioTempo);
-            }
-
-            // Tentativa de auto-play baseada no estado anterior (respeitando regras do navegador)
-            if (audioTocando === 'true') {
-                audio.play().then(() => {
-                    btnPlayPause.textContent = '⏸️';
-                }).catch(() => {
-                    // Se o navegador bloquear, espera o primeiro clique na página
-                    btnPlayPause.textContent = '▶️';
-                    document.body.setAttribute('onclick', 'desbloquearAudio()');
-                });
-            } else {
-                btnPlayPause.textContent = '▶️';
-            }
-        });
-
-        function desbloquearAudio() {
-            audio.play().then(() => {
-                btnPlayPause.textContent = '⏸️';
-                localStorage.setItem('audioTocando', 'true');
-                document.body.removeAttribute('onclick');
-            });
-        }
 
         function alternarAudio() {
-            if (audio.paused) {
-                audio.play();
-                btnPlayPause.textContent = '⏸️';
-                localStorage.setItem('audioTocando', 'true');
+            if (musica.paused) {
+                musica.play().catch(() => console.log("Adicione um arquivo válido em src para tocar."));
+                btnPlayPause.innerText = '⏸️';
             } else {
-                audio.pause();
-                btnPlayPause.textContent = '▶️';
-                localStorage.setItem('audioTocando', 'false');
+                musica.pause();
+                btnPlayPause.innerText = '▶️';
             }
         }
 
         function ajustarVolume(valor) {
-            audio.volume = valor;
-            localStorage.setItem('audioVolume', valor);
+            musica.volume = valor;
         }
 
-        // Salva o progresso exato segundos antes de ir para carta.html
-        function salvarEstadoAudio() {
-            localStorage.setItem('audioTempo', audio.currentTime);
-            localStorage.setItem('audioTocando', !audio.paused);
-        }
+        // Geração dinâmica de estrelas em segundo plano para o cenário cosmos
+        const cenario = document.getElementById('cenario-cosmos');
+        const numEstrelas = 40;
 
-        // Atualização contínua preventiva do tempo atual
-        setInterval(() => {
-            if (!audio.paused) {
-                localStorage.setItem('audioTempo', audio.currentTime);
-            }
-        }, 1000);
+        for (let i = 0; i < numEstrelas; i++) {
+            const estrela = document.createElement('div');
+            estrela.className = 'estrela-prata';
+            
+            // Posições e tamanhos randômicos
+            const tamanho = Math.random() * 3 + 1;
+            estrela.style.width = tamanho + 'px';
+            estrela.style.height = tamanho + 'px';
+            estrela.style.top = Math.random() * 100 + '%';
+            estrela.style.left = Math.random() * 100 + '%';
+            
+            // Atrasos de animação variados para criar o efeito orgânico
+            estrela.style.animationDelay = Math.random() * 3 + 's';
+            estrela.style.animationDuration = (Math.random() * 2 + 2) + 's';
+            
+            cenario.appendChild(estrela);
+        }
     </script>
 </body>
 </html>
