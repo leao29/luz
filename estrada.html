@@ -2,147 +2,247 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate, max-age=0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <!-- Metatags para evitar cache e garantir a versão mais recente -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
     <title>Em Busca do Horizonte</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Lora:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    
     <style>
         :root {
-            --cosmos-fundo: #01040a;
-            --ouro-ativo: #d4af37;
-            --ouro-escuro: #8c6d23;
+            --cosmos-fundo: #020617;
             --prata-fino: #e2e8f0;
-            --prata-luxo: #cbd5e1;
+            --ouro-ativo: #c5a862;
+            --papel-sutil: rgba(255, 255, 255, 0.03);
         }
 
-        * { box-sizing: border-box; }
+        * { 
+            box-sizing: border-box; 
+        }
 
-        /* Barra de rolagem prata luxuosa e elegante */
-        ::-webkit-scrollbar { width: 8px; }
+        /* Customização sutil da barra de rolagem */
+        ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: var(--cosmos-fundo); }
-        ::-webkit-scrollbar-thumb { 
-            background: linear-gradient(180deg, #475569, var(--prata-luxo), #475569); 
-            border-radius: 4px; 
-            border: 2px solid var(--cosmos-fundo); 
-        }
+        ::-webkit-scrollbar-thumb { background: #64748b; border-radius: 3px; border: 1px solid #1e293b; }
         ::-webkit-scrollbar-thumb:hover { background: var(--prata-fino); }
 
         body {
-            margin: 0; padding: 60px 20px;
+            margin: 0; 
+            padding: 80px 20px 40px 20px;
             background-color: var(--cosmos-fundo);
             color: var(--prata-fino);
             font-family: 'Lora', serif;
             min-height: 100vh;
-            display: flex; flex-direction: column; align-items: center;
+            display: flex; 
+            flex-direction: column; 
+            align-items: center;
             overflow-x: hidden;
         }
 
-        .fundo-cosmos { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; background: radial-gradient(circle at center, #0a1e3d 0%, var(--cosmos-fundo) 100%); }
-        .estrela { position: absolute; background: var(--prata-fino); border-radius: 50%; animation: brilhar 3s infinite; }
-        @keyframes brilhar { 0%, 100% { opacity: 0.2; transform: scale(1); } 50% { opacity: 0.9; transform: scale(1.2); } }
+        /* Fundo Cosmos e Estrelas */
+        .fundo-cosmos { 
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+            z-index: -1; 
+            background: radial-gradient(circle at center, #0a1e3d 0%, var(--cosmos-fundo) 100%); 
+        }
+        
+        .estrela { 
+            position: absolute; 
+            background: var(--prata-fino); 
+            border-radius: 50%; 
+            animation: brilhar 3s infinite; 
+        }
+        
+        @keyframes brilhar { 
+            0%, 100% { opacity: 0.2; transform: scale(1); } 
+            50% { opacity: 0.9; transform: scale(1.2); } 
+        }
 
-        /* Painel de controle de áudio luxuoso */
+        /* Áudio minimalista luxuoso */
         .audio-container {
-            position: fixed; top: 20px; right: 20px; z-index: 1000;
-            display: flex; align-items: center; gap: 8px; background: rgba(1, 4, 10, 0.75);
-            padding: 6px 14px; border-radius: 25px; border: 1px solid var(--ouro-escuro);
-            backdrop-filter: blur(8px); box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+            position: fixed; 
+            top: 20px; 
+            right: 20px; 
+            z-index: 1000;
+            display: flex; 
+            align-items: center; 
+            gap: 10px; 
+            background: rgba(0, 0, 0, 0.5);
+            padding: 8px 12px; 
+            border-radius: 20px; 
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
         }
+        
         .btn-audio {
-            background: transparent; border: 1px solid transparent;
-            color: var(--ouro-ativo); font-size: 0.9rem; padding: 5px;
-            cursor: pointer; display: flex; align-items: center; justify-content: center;
-            transition: 0.3s; font-family: 'Cinzel'; min-width: 28px;
+            background: transparent; 
+            border: 1px solid var(--ouro-ativo);
+            color: var(--ouro-ativo); 
+            width: 32px; 
+            height: 32px; 
+            border-radius: 50%;
+            cursor: pointer; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center;
+            transition: 0.3s; 
+            font-family: 'Cinzel', serif;
+            font-size: 1rem;
         }
-        .btn-audio:hover { color: var(--prata-fino); text-shadow: 0 0 5px var(--ouro-ativo); }
-        .divisor-audio { width: 1px; height: 14px; background: rgba(212, 175, 55, 0.3); }
+        
+        .btn-audio:hover { 
+            background: var(--ouro-ativo); 
+            color: var(--cosmos-fundo); 
+        }
+        
+        .vol-slider { 
+            width: 60px; 
+            accent-color: var(--ouro-ativo); 
+            cursor: pointer; 
+        }
 
-        h1 { font-family: 'Cinzel', serif; font-size: 2rem; margin-bottom: 50px; letter-spacing: 4px; color: var(--prata-fino); text-align: center; text-shadow: 0 2px 10px rgba(255,255,255,0.1); }
+        h1 { 
+            font-family: 'Cinzel', serif; 
+            font-size: 2rem; 
+            margin-bottom: 40px; 
+            letter-spacing: 4px; 
+            color: var(--prata-fino); 
+            text-align: center; 
+            line-height: 1.3;
+        }
 
-        /* Wrapper da carta com efeito de zoom suave */
+        /* Estrutura da Carta */
         .carta-wrapper {
-            position: relative; max-width: 700px; width: 100%;
-            padding: 3px; border-radius: 20px; overflow: hidden;
-            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.7);
+            position: relative; 
+            max-width: 700px; 
+            width: 100%;
+            padding: 2px; 
+            border-radius: 20px; 
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(197, 168, 98, 0.3);
         }
-        /* Efeito de zoom elegante no hover */
-        .carta-wrapper:hover {
-            transform: scale(1.03);
-        }
-        /* Borda de ouro escuro correndo um atrás do outro */
-        .carta-wrapper::before {
-            content: ""; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
-            background: conic-gradient(
-                transparent, 
-                var(--ouro-escuro), 
-                transparent 20%, 
-                transparent 50%, 
-                var(--ouro-ativo), 
-                transparent 70%
-            );
-            animation: rodar 6s linear infinite;
-        }
-        @keyframes rodar { 100% { transform: rotate(360deg); } }
 
         .carta-container {
-            background: #020712; padding: 40px; border-radius: 17px;
-            line-height: 1.8; font-size: 1.15rem; text-align: justify;
-            position: relative; z-index: 1; border: 1px solid rgba(255,255,255,0.02);
+            background: rgba(15, 23, 42, 0.75);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 18px;
+            position: relative; 
+            z-index: 1;
         }
 
-        /* Card de Instrução/Dedicação */
-        .card-instrucao {
-            max-width: 700px; width: 100%;
-            margin-top: 40px; margin-bottom: 10px;
-            background: rgba(2, 7, 18, 0.6);
-            border: 1px dashed var(--ouro-escuro);
-            padding: 25px; border-radius: 15px;
-            text-align: center; backdrop-filter: blur(4px);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        .carta-container p {
+            line-height: 1.8;
+            font-size: 1.1rem;
+            text-align: justify;
+            margin-bottom: 20px;
+            color: #cbd5e1;
         }
-        .card-instrucao p {
-            margin: 0; font-style: italic;
-            font-size: 1.1rem; line-height: 1.6;
-            color: var(--prata-luxo);
-            text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+        
+        .carta-container p:last-child {
+            margin-bottom: 0;
         }
 
-        .grid-musicas { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; max-width: 700px; width: 100%; margin-top: 30px; }
+        /* Grid de Músicas com efeito zoom */
+        .grid-musicas { 
+            display: grid; 
+            grid-template-columns: repeat(2, 1fr); 
+            gap: 15px; 
+            max-width: 700px; 
+            width: 100%; 
+            margin-top: 40px; 
+        }
+        
         .card-musica {
-            background: rgba(255,255,255,0.03); padding: 20px; border-radius: 12px;
-            border: 1px solid rgba(255,255,255,0.08); text-decoration: none; color: var(--prata-fino);
+            background: var(--papel-sutil); 
+            padding: 20px; 
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1); 
+            text-decoration: none; 
+            color: var(--prata-fino);
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
-        .card-musica:hover { border-color: var(--ouro-ativo); background: rgba(255,255,255,0.08); transform: scale(1.05); box-shadow: 0 5px 15px rgba(0,0,0,0.4); }
-        .card-musica strong { display: block; margin-bottom: 5px; font-family: 'Cinzel', serif; color: var(--ouro-ativo); font-size: 0.85rem; }
-        .card-musica p { font-size: 0.75rem; margin: 0; opacity: 0.8; }
-
-        .btn-fim {
-            margin-top: 60px; margin-bottom: 60px;
-            padding: 15px 40px; border: 1px solid var(--ouro-ativo);
-            background: transparent; color: var(--ouro-ativo);
-            border-radius: 30px; cursor: pointer; font-family: 'Cinzel';
-            transition: 0.3s; text-transform: uppercase; letter-spacing: 2px;
+        
+        .card-musica:hover { 
+            border-color: var(--ouro-ativo); 
+            background: rgba(255, 255, 255, 0.08); 
+            transform: scale(1.04); 
         }
-        .btn-fim:hover { background: var(--ouro-ativo); color: var(--cosmos-fundo); box-shadow: 0 0 15px rgba(214,175,55,0.4); }
+        
+        .card-musica strong { 
+            display: block; 
+            margin-bottom: 5px; 
+            font-family: 'Cinzel', serif; 
+            color: var(--ouro-ativo); 
+            font-size: 0.9rem; 
+        }
+
+        .card-musica span {
+            font-size: 0.85rem;
+            color: #94a3b8;
+        }
+
+        /* Otimizações Responsivas para Celulares */
+        @media (max-width: 680px) {
+            body {
+                padding: 70px 15px 30px 15px;
+            }
+            
+            h1 {
+                font-size: 1.5rem;
+                margin-bottom: 30px;
+                letter-spacing: 2px;
+            }
+
+            .carta-container {
+                padding: 25px 20px;
+            }
+
+            .carta-container p {
+                font-size: 1rem;
+                line-height: 1.7;
+                text-align: left; /* Melhora a leitura em telas estreitas */
+            }
+
+            .grid-musicas {
+                grid-template-columns: 1fr; /* Transforma o grid em uma única coluna */
+                gap: 12px;
+                margin-top: 30px;
+            }
+
+            .audio-container {
+                top: 10px;
+                right: 10px;
+                padding: 6px 10px;
+            }
+        }
     </style>
 </head>
 <body>
+
+    <!-- Elemento do Cosmos Background -->
     <div class="fundo-cosmos" id="cosmos"></div>
 
-    <!-- Container de Áudio Luxuoso com Controles de Volume -->
+    <!-- Elemento de Áudio (Insira o link da música de fundo no atributo src) -->
+    <audio id="audio" loop src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3"></audio>
+
+    <!-- Painel de Controle de Som -->
     <div class="audio-container">
-        <button class="btn-audio" id="btn-audio" title="Play/Pause">||</button>
-        <div class="divisor-audio"></div>
-        <button class="btn-audio" id="btn-vol-down" title="Diminuir Volume">−</button>
-        <button class="btn-audio" id="btn-vol-up" title="Aumentar Volume">+</button>
+        <button class="btn-audio" id="btn-audio">♪</button>
+        <input type="range" class="vol-slider" id="vol-slider" min="0" max="1" step="0.1" value="0.3">
     </div>
 
     <h1>Em Busca do Horizonte</h1>
 
+    <!-- Card de Conteúdo Principal -->
     <div class="carta-wrapper">
         <div class="carta-container">
             <p>Talvez a maior beleza da vida esteja na coragem de sermos vulneráveis, mesmo quando sabemos que o roteiro não prevê um final a dois...</p>
@@ -153,23 +253,74 @@
         </div>
     </div>
 
-    <div class="card-instrucao">
-        <p>“Toque em cada uma destas canções... Desejo, do fundo do meu coração, que através de cada acorde você consiga sentir exatamente o que sinto quando penso em você.”.</p>
-    </div>
-
+    <!-- Grid de Sugestões Musicais -->
     <div class="grid-musicas">
-        <a class="card-musica" href="https://youtu.be/G0WTFfZqjz0" target="_blank"><strong>Can't Help Falling In Love</strong><p>Essa música seria a qual amaria dançar com você.</p></a>
-        <a class="card-musica" href="https://youtu.be/Ri7-vnrJD3k" target="_blank"><strong>Set Fire To The Rain</strong><p>Tatuado no braço, algo surreal e mágico.</p></a>
-        <a class="card-musica" href="https://youtu.be/fV4DiAyExN0" target="_blank"><strong>The Reason</strong><p>Maturidade da relação e aprendizado.</p></a>
-        <a class="card-musica" href="https://youtu.be/ksNoe8W2jTc" target="_blank"><strong>How Can I Go On</strong><p>Imagino eu e você vendo essa ópera.</p></a>
-        <a class="card-musica" href="https://youtu.be/0xEB1wIy4OE" target="_blank"><strong>The Power Of Love</strong><p>Um dos meus sonhos in Las Vegas.</p></a>
-        <a class="card-musica" href="https://youtu.be/JRfuAukYTKg" target="_blank"><strong>Titanium</strong><p>Homenagem ao Pietro, algo inabalável.</p></a>
-        <a class="card-musica" href="https://youtu.be/rtOvBOTyX00" target="_blank"><strong>A Thousand Years</strong><p>Pretendo cantar no meu futuro casamento.</p></a>
-        <a class="card-musica" href="https://youtu.be/u9Dg-g7t2l4" target="_blank"><strong>The Sound Of Silence</strong><p>A profundidade do silêncio.</p></a>
+        <a href="#" class="card-musica" target="_blank">
+            <strong>Trilha Sonora Clássica</strong>
+            <span>Melodias que confortam a mente e organizam o caos interno.</span>
+        </a>
+        <a href="#" class="card-musica" target="_blank">
+            <strong>Sinfonia do Horizonte</strong>
+            <span>Uma curadoria para inspirar novos caminhos e liberdade.</span>
+        </a>
     </div>
 
-    <!-- Redirecionamento configurado para salvar o estado exato da trilha antes da transição -->
-    <button class="btn-fim" id="btn-ir-fim">Seguir para o Destino Final</button>
+    <script>
+        const audio = document.getElementById('audio');
+        const btn = document.getElementById('btn-audio');
+        const slider = document.getElementById('vol-slider');
+        const cosmos = document.getElementById('cosmos');
+
+        // Geração inteligente de estrelas adaptável ao tamanho da tela
+        function gerarEstrelas() {
+            cosmos.innerHTML = '';
+            const totalEstrelas = window.innerWidth < 680 ? 40 : 80;
+            
+            for(let i = 0; i < totalEstrelas; i++) {
+                const star = document.createElement('div');
+                star.className = 'estrela';
+                const s = Math.random() * 2 + 1;
+                star.style.width = s + 'px'; 
+                star.style.height = s + 'px';
+                star.style.top = Math.random() * 100 + '%'; 
+                star.style.left = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 3 + 's';
+                cosmos.appendChild(star);
+            }
+        }
+
+        // Tenta iniciar o áudio no carregamento seguindo as políticas restritivas do navegador
+        window.addEventListener('load', () => {
+            gerarEstrelas();
+            audio.volume = 0.3;
+            audio.play().then(() => {
+                btn.textContent = '⏸';
+            }).catch(() => {
+                console.log("Interação do usuário necessária para reproduzir áudio.");
+            });
+        });
+
+        // Controle de Play/Pause
+        btn.addEventListener('click', () => {
+            if (audio.paused) {
+                audio.play();
+                btn.textContent = '⏸';
+            } else {
+                audio.pause();
+                btn.textContent = '♪';
+            }
+        });
+
+        // Controle do slider deslizante de volume
+        slider.addEventListener('input', (e) => {
+            audio.volume = e.target.value;
+        });
+
+        // Recalcula as estrelas caso o celular mude de orientação (paisagem/retrato)
+        window.addEventListener('resize', gerarEstrelas);
+    </script>
+</body>
+</html>
 
     <audio id="audio" src="elvis.html.mp3" loop></audio>
 
