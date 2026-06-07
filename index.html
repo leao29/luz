@@ -1,49 +1,13 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Para Dra. Debora</title>
-    
+
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Great+Vibes&family=Playfair+Display:ital,wght=0,400;0,600;1,400&display=swap" rel="stylesheet">
+
     <style>
         * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            background-color: #0d0703;
-            overflow: hidden;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            perspective: 1000px;
-        }
-
-        /* Container de estrelas de fundo */
-        #starsContainer {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            z-index: 1;
-            pointer-events: none;
-        }
-
-        .star {
-            position: absolute;
-            background-color: #fff;
-            border-radius: 50%;
-            animation: pulseStar 2s infinite ease-in-out alternate;
-        }
-
-        @keyframes pulseStar {
-            0% { opacity: 0.15; transform: scale(0.8); }
-            100% { opacity: 0.85; transform: scale(1.2); }
+@@ -51,18 +51,21 @@
+            100% { opacity: 0.15; transform: scale(0.8); }
         }
 
         /* CARD PRINCIPAL RESPONSIVO */
@@ -51,6 +15,8 @@
             position: relative;
             z-index: 10;
             width: 92vw;
+            max-width: 850px;
+            aspect-ratio: 1000 / 563;
             max-width: 500px; /* Proporção ideal de convite vertical para mobile e desktop */
             min-height: 70vh;
             max-height: 85vh;
@@ -64,29 +30,31 @@
         }
 
         @keyframes goldenFlow {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+@@ -76,14 +79,6 @@
+            100% { box-shadow: 0 12px 45px rgba(252, 246, 186, 0.5); }
         }
 
-        @keyframes goldGlow {
-            0% { box-shadow: 0 5px 20px rgba(191, 149, 63, 0.3); }
-            100% { box-shadow: 0 12px 45px rgba(252, 246, 186, 0.5); }
+        @media (min-aspect-ratio: 1000/563) {
+            .card-frame {
+                width: auto;
+                height: 75vh;
+                aspect-ratio: 1000 / 563;
+            }
         }
 
         .card-frame:hover {
             transform: scale(1.01) translateY(-2px);
         }
-
-        .card-content {
-            width: 100%;
-            background: radial-gradient(circle at center, #1a1412 0%, #0d0703 100%);
+@@ -94,157 +89,146 @@
             border-radius: 21px;
             overflow: hidden;
             position: relative;
+            background: radial-gradient(circle at center, #261d15 0%, #0d0703 100%);
+            background: radial-gradient(circle at center, #1a1412 0%, #0d0703 100%);
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            padding: clamp(15px, 3.5vw, 35px);
             align-items: center;
             padding: clamp(20px, 5vw, 35px);
             border: 1px solid rgba(191, 149, 63, 0.15);
@@ -96,27 +64,36 @@
             width: 100%;
             display: flex;
             justify-content: space-between;
+            align-items: flex-start;
             align-items: center;
             margin-bottom: 10px;
         }
 
         .luxury-tag {
             color: #bf953f;
+            opacity: 0.5;
             opacity: 0.6;
             font-family: 'Cinzel', serif;
+            font-size: clamp(8px, 1.1vw, 11px);
+            letter-spacing: 3px;
             font-size: clamp(9px, 2.2vw, 11px);
             letter-spacing: 2px;
         }
 
         .stamp-confidential {
+            border: 2px solid #ff3b30;
             border: 1.5px solid #ff3b30;
             color: #ff3b30;
             font-family: 'Cinzel', serif;
             font-weight: 700;
+            font-size: clamp(9px, 1.3vw, 12px);
+            padding: 3px 12px;
+            transform: rotate(-6deg) translateY(-2px);
             font-size: clamp(9px, 2.2vw, 11px);
             padding: 2px 10px;
             transform: rotate(-4deg);
             border-radius: 4px;
+            letter-spacing: 4px;
             letter-spacing: 2px;
             background: rgba(255, 59, 48, 0.08);
             text-shadow: 0 0 4px rgba(255, 59, 48, 0.4);
@@ -128,11 +105,13 @@
             margin: auto 0;
             display: flex;
             flex-direction: column;
+            gap: clamp(6px, 1.2vw, 14px);
             gap: 8px;
         }
 
         .title-recipient {
             font-family: 'Great Vibes', cursive;
+            font-size: clamp(34px, 5.8vw, 62px);
             font-size: clamp(42px, 10vw, 65px);
             background: linear-gradient(180deg, #ffffff 0%, #e5e7eb 40%, #9ca3af 100%);
             -webkit-background-clip: text;
@@ -145,6 +124,8 @@
         .subtitle-sender {
             font-family: 'Playfair Display', serif;
             font-style: italic;
+            font-size: clamp(13px, 2vw, 21px);
+            background: linear-gradient(180deg, #ffffff 0%, #d1d5db 50%, #9ca3af 100%);
             font-size: clamp(14px, 3.5vw, 19px);
             background: linear-gradient(180deg, #ffffff 0%, #d1d5db 50%, #afb4be 100%);
             -webkit-background-clip: text;
@@ -160,11 +141,17 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            margin: clamp(4px, 0.8vw, 15px) 0;
             margin: 20px 0;
             position: relative;
         }
 
         .wax-seal {
+            width: clamp(65px, 9.5vw, 85px);
+            height: clamp(65px, 9.5vw, 85px);
+            background: radial-gradient(circle at 30% 30%, #525255 0%, #29292d 55%, #0e0e12 100%);
+            border-radius: 48% 52% 45% 55% / 52% 47% 53% 48%;
+            position: relative;
             width: clamp(75px, 18vw, 90px);
             height: clamp(75px, 18vw, 90px);
             background: radial-gradient(circle at 35% 35%, #4b4b4e 0%, #222225 50%, #0b0b0d 100%);
@@ -172,29 +159,50 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.75), inset 2px 2px 5px rgba(255, 255, 255, 0.25), inset -3px -3px 8px rgba(0, 0, 0, 0.9);
+            border: 1.5px solid #1a1a1e;
+            transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.4s ease;
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.8), inset 2px 2px 6px rgba(255, 255, 255, 0.15), inset -4px -4px 10px rgba(0, 0, 0, 0.9);
             border: 1px solid #151518;
             position: relative;
             z-index: 2;
-            transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.4s ease;
         }
 
+        .wax-seal::before {
+            content: '';
+            position: absolute;
+            inset: 7px;
         /* Pérola Negra interna redimensionada e ultra iluminada em prata */
         .perola-negra-canva {
-            position: absolute;
             width: 42%;
             height: 42%;
             border-radius: 50%;
             border: 1px solid rgba(229, 231, 235, 0.25);
             box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.7);
             pointer-events: none;
-            background: radial-gradient(circle at 30% 30%, #ffffff 0%, #e2e8f0 18%, #475569 45%, #0f172a 80%, #020617 100%);
-            animation: flutuarPerola 3.5s infinite ease-in-out;
+        }
+
+        .wax-seal::after {
+            content: '';
+            position: absolute;
+            inset: -5px;
+            border-radius: 53% 47% 55% 45% / 46% 54% 48% 52%;
+            background: radial-gradient(circle at center, rgba(41, 41, 45, 0.3) 0%, rgba(14, 14, 18, 0.5) 80%, rgba(0, 0, 0, 0.6) 100%);
+            z-index: -1;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.5), inset 1px 1px 3px rgba(255, 255, 255, 0.1);
         }
 
         .wax-seal:hover {
             transform: scale(1.05) rotate(3deg);
-            box-shadow: 0 0 18px rgba(255, 255, 255, 0.95), 0 0 8px rgba(203, 213, 225, 0.6), inset -3px -3px 8px rgba(0,0,0,0.95), inset 4px 4px 6px rgba(255,255,255,0.7);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.9), 0 0 15px rgba(100, 100, 110, 0.3);
+            background: radial-gradient(circle at 30% 30%, #ffffff 0%, #e2e8f0 18%, #475569 45%, #0f172a 80%, #020617 100%);
+            box-shadow: 
+                0 0 18px rgba(255, 255, 255, 0.95), 
+                0 0 8px rgba(203, 213, 225, 0.6),
+                inset -3px -3px 8px rgba(0,0,0,0.95),
+                inset 4px 4px 6px rgba(255,255,255,0.7);
+            position: relative;
+            animation: flutuarPerola 3.5s infinite ease-in-out;
         }
 
         .psychiatry-symbol {
@@ -203,8 +211,6 @@
             color: #f3f4f6;
             filter: drop-shadow(1px 2px 3px rgba(0, 0, 0, 0.9));
             z-index: 2;
-        }
-
         @keyframes flutuarPerola {
             0%, 100% { transform: translateY(0px) scale(1); }
             50% { transform: translateY(-3px) scale(1.03); }
@@ -219,49 +225,59 @@
         }
 
         .btn-luxury {
+            background: rgba(15, 10, 5, 0.4);
             background: rgba(15, 10, 5, 0.6);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             color: #fbf5b7;
             font-family: 'Cinzel', serif;
+            font-weight: 500;
+            font-size: clamp(11px, 1.6vw, 14px);
+            letter-spacing: 4.5px;
             font-weight: 600;
             font-size: clamp(11px, 2.8vw, 13px);
             letter-spacing: 3px;
             text-transform: uppercase;
+            padding: clamp(10px, 1.5vw, 14px) clamp(26px, 4.5vw, 46px);
             padding: 12px 32px;
             border-radius: 40px;
             cursor: pointer;
             outline: none;
             position: relative;
             overflow: hidden;
+            border: 1px solid rgba(191, 149, 63, 0.4);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4), inset 0 1px 2px rgba(252, 246, 186, 0.1);
             border: 1px solid rgba(191, 149, 63, 0.5);
             box-shadow: 0 4px 15px rgba(0,0,0,0.5), inset 0 1px 2px rgba(252, 246, 186, 0.15);
             animation: goldAuraPulse 3s infinite ease-in-out;
+            transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
             transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
             width: 100%;
             max-width: 280px;
         }
 
         .btn-luxury::after {
-            content: '';
-            position: absolute;
-            top: 0;
+@@ -254,49 +238,49 @@
             left: -150%;
             width: 100%;
             height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(252, 246, 186, 0.25), transparent);
             background: linear-gradient(90deg, transparent, rgba(252, 246, 186, 0.3), transparent);
             transform: skewX(-20deg);
+            animation: goldShimmerSweep 5s infinite ease-in-out;
             animation: goldShimmerSweep 4s infinite ease-in-out;
         }
 
         @keyframes goldShimmerSweep {
             0% { left: -150%; }
+            30% { left: 150%; }
             25% { left: 150%; }
             100% { left: 150%; }
         }
 
         @keyframes goldAuraPulse {
             0% { border-color: rgba(191, 149, 63, 0.4); box-shadow: 0 4px 15px rgba(0,0,0,0.4), 0 0 5px rgba(191, 149, 63, 0.15); }
+            50% { border-color: rgba(252, 246, 186, 0.85); box-shadow: 0 4px 20px rgba(0,0,0,0.4), 0 0 15px rgba(252, 246, 186, 0.35); }
             50% { border-color: rgba(252, 246, 186, 0.9); box-shadow: 0 4px 20px rgba(0,0,0,0.4), 0 0 15px rgba(252, 246, 186, 0.4); }
             100% { border-color: rgba(191, 149, 63, 0.4); box-shadow: 0 4px 15px rgba(0,0,0,0.4), 0 0 5px rgba(191, 149, 63, 0.15); }
         }
@@ -277,35 +293,39 @@
         /* CONTROLES DO ÁUDIO OTIMIZADOS PARA DISPOSITIVOS MÓVEIS */
         .audio-controls-panel {
             position: fixed;
+            bottom: 24px;
+            right: 24px;
+            background: rgba(10, 6, 18, 0.9);
             bottom: 20px;
             right: 20px;
             background: rgba(10, 6, 18, 0.95);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(212, 175, 55, 0.35);
+            padding: 10px 18px;
             border: 1px solid rgba(212, 175, 55, 0.4);
             padding: 8px 16px;
             border-radius: 40px;
             display: flex;
             align-items: center;
+            gap: 12px;
+            z-index: 50;
             gap: 10px;
             z-index: 100;
             opacity: 0;
             transform: scale(0.9);
             pointer-events: none;
             transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
         }
 
         .audio-controls-panel.visible {
-            opacity: 1;
-            transform: scale(1);
-            pointer-events: auto;
-        }
-
-        .btn-play-pause {
+@@ -309,28 +293,29 @@
             background: none;
             border: none;
             color: #d4af37;
+            font-size: 13px;
             font-size: 12px;
             font-weight: 600;
             cursor: pointer;
@@ -317,8 +337,10 @@
         .vol-slider {
             -webkit-appearance: none;
             appearance: none;
+            width: 75px;
             width: 60px;
             height: 3px;
+            background: rgba(255, 255, 255, 0.15);
             background: rgba(255, 255, 255, 0.2);
             border-radius: 2px;
             outline: none;
@@ -327,31 +349,18 @@
         .vol-slider::-webkit-slider-thumb {
             -webkit-appearance: none;
             appearance: none;
+            width: 10px;
+            height: 10px;
             width: 12px;
             height: 12px;
             border-radius: 50%;
             background: #d4af37;
             cursor: pointer;
-        }
-    </style>
-</head>
-<body>
-
-    <div id="starsContainer"></div>
-
-    <div class="card-frame" id="mainCard">
-        <div class="card-content">
-            <div class="card-header">
-                <span class="luxury-tag">DOCUMENTO EXCLUSIVO</span>
-                <span class="stamp-confidential">CONFIDENCIAL</span>
-            </div>
-
-            <div class="envelope-body">
-                <h1 class="title-recipient">Dra. Debora</h1>
+@@ -355,13 +340,10 @@ <h1 class="title-recipient">Dra. Debora</h1>
                 <p class="subtitle-sender">Paciente: A que jamais esquecerá você</p>
             </div>
 
-            <!-- SELO PREMIUM DE ALTA DEFINIÇÃO COM PÉROLA NEGRA -->
+            <!-- SELO PREMIUM DE ALTA DEFINIÇÃO DO CANVA COM PÉROLA NEGRA -->
             <div class="seal-container">
                 <div class="wax-seal">
                     <svg class="psychiatry-symbol" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
@@ -363,9 +372,7 @@
                 </div>
             </div>
 
-            <div class="action-button-container">
-                <button class="btn-luxury" onclick="irParaProntuario()">Acessar Prontuário</button>
-            </div>
+@@ -373,6 +355,7 @@ <h1 class="title-recipient">Dra. Debora</h1>
         </div>
     </div>
 
@@ -373,61 +380,34 @@
     <div class="audio-controls-panel" id="customControls">
         <button class="btn-play-pause" id="playPauseBtn" onclick="togglePlay()">⏸ Pausar</button>
         <input type="range" class="vol-slider" id="volumeControl" min="0" max="1" step="0.1" value="0.8" oninput="ajustarVolume(this.value)">
-    </div>
-
-    <!-- Elemento de áudio de fundo (insira a URL do seu áudio no src) -->
-    <audio id="bgAudio" src="musica_de_fundo.mp3" loop></audio>
+@@ -383,11 +366,14 @@ <h1 class="title-recipient">Dra. Debora</h1>
+    </audio>
 
     <script>
-        // Gerador de estrelas dinâmico ajustado para Mobile/Desktop
+        // Gerador de estrelas dinâmico ajustado para Mobile
         const starsContainer = document.getElementById('starsContainer');
+        for (let i = 0; i < 55; i++) {
         const totalEstrelas = window.innerWidth < 600 ? 35 : 60;
         
         for (let i = 0; i < totalEstrelas; i++) {
             const star = document.createElement('div');
             star.className = 'star';
+            const size = Math.random() * 2.2 + 1.2;
             const size = Math.random() * 2 + 1;
             star.style.width = `${size}px`;
             star.style.height = `${size}px`;
             star.style.top = `${Math.random() * 100}%`;
-            star.style.left = `${Math.random() * 100}%`;
-            star.style.animationDelay = `${Math.random() * 3}s`;
-            starsContainer.appendChild(star);
-        }
-
-        // Elementos de controle do áudio e transição
-        const som = document.getElementById('bgAudio');
-        const painel = document.getElementById('customControls');
-        const mainCard = document.getElementById('mainCard');
+@@ -402,12 +388,11 @@ <h1 class="title-recipient">Dra. Debora</h1>
 
         function irParaProntuario() {
             som.volume = 0.8;
+            som.play().catch(() => console.log("Áudio iniciado."));
             som.play().catch(() => console.log("Áudio iniciado pelo usuário."));
-            
             painel.classList.add('visible');
             mainCard.style.opacity = '0';
             mainCard.style.transform = 'scale(0.92) rotateY(-3deg)';
-            
-            // Redireciona após a animação de fade-out do card (2.2 segundos)
+
+            // Link mantido como prontuario.htm
             setTimeout(() => {
                 window.location.href = "prontuario.htm";
-            }, 2200);
-        }
-
-        function togglePlay() {
-            const btn = document.getElementById('playPauseBtn');
-            if (som.paused) {
-                som.play();
-                btn.innerText = "⏸ Pausar";
-            } else {
-                som.pause();
-                btn.innerText = "▶ Play";
-            }
-        }
-
-        function ajustarVolume(valor) {
-            som.volume = valor;
-        }
-    </script>
-</body>
-</html>
+            }, 2200); 
