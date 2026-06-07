@@ -4,7 +4,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Para Dra. Debora</title>
 
-    <!-- Fontes Premium -->
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
 
     <style>
@@ -53,7 +52,7 @@
             position: relative;
             z-index: 10;
             width: 92vw;
-            max-width: 500px; /* Proporção ideal vertical para mobile e desktop */
+            max-width: 500px; 
             min-height: 70vh;
             max-height: 85vh;
             border-radius: 24px;
@@ -211,7 +210,7 @@
             50% { transform: translateY(-3px) scale(1.03); }
         }
 
-        /* BOTÃO DE AÇÃO */
+        /* BOTÃO DE AÇÃO RESPONSIVO */
         .action-button-container {
             width: 100%;
             display: flex;
@@ -225,12 +224,12 @@
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             color: #fbf5b7;
-            font-family: 'Cinzel', serif;
+            font-family: 'Playfair Display', serif; 
             font-weight: 600;
-            font-size: clamp(11px, 2.8vw, 13px);
-            letter-spacing: 3px;
+            font-size: clamp(10px, 2.5vw, 12px); /* Tamanho dinâmico para não quebrar no celular */
+            letter-spacing: 1px;
             text-transform: uppercase;
-            padding: 12px 32px;
+            padding: 14px 20px;
             border-radius: 40px;
             cursor: pointer;
             outline: none;
@@ -241,7 +240,7 @@
             animation: goldAuraPulse 3s infinite ease-in-out;
             transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
             width: 100%;
-            max-width: 280px;
+            max-width: 340px; /* Largura ideal para caber a frase inteira */
         }
 
         .btn-luxury::after {
@@ -271,7 +270,7 @@
         .btn-luxury:hover {
             border-color: rgba(252, 246, 186, 1);
             color: #ffffff;
-            letter-spacing: 5px;
+            letter-spacing: 2px;
             transform: translateY(-1px);
             background: rgba(35, 25, 15, 0.8);
         }
@@ -353,7 +352,6 @@
                 <p class="subtitle-sender">Paciente: A que jamais esquecerá você</p>
             </div>
 
-            <!-- SELO PREMIUM DO CANVA COM PÉROLA NEGRA -->
             <div class="seal-container">
                 <div class="wax-seal">
                     <svg class="psychiatry-symbol" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
@@ -366,20 +364,17 @@
             </div>
 
             <div class="action-button-container">
-                <!-- Botão que executa a função de transição e redirecionamento -->
-                <button class="btn-luxury" onclick="irParaProntuario()">Acessar Prontuário</button>
+                <button class="btn-luxury" onclick="irParaProntuario()">Aperte com carinho para próxima página</button>
             </div>
         </div>
     </div>
 
-    <!-- PAINEL DE ÁUDIO REFINADO -->
     <div class="audio-controls-panel" id="customControls">
         <button class="btn-play-pause" id="playPauseBtn" onclick="togglePlay()">⏸ Pausar</button>
         <input type="range" class="vol-slider" id="volumeControl" min="0" max="1" step="0.1" value="0.8" oninput="ajustarVolume(this.value)">
     </div>
 
-    <!-- Elemento de áudio de fundo (Substitua "musica_de_fundo.mp3" pelo seu link/arquivo real) -->
-    <audio id="bgAudio" src="musica_de_fundo.mp3" loop></audio>
+    <audio id="bgAudio" src="elvis.html.mp3" loop></audio>
 
     <script>
         // Gerador de estrelas dinâmico ajustado para Mobile e Desktop
@@ -413,10 +408,10 @@
             mainCard.style.opacity = '0';
             mainCard.style.transform = 'scale(0.92) rotateY(-3deg)';
 
-            // Aguarda 2.2 segundos (tempo da animação estética) antes de mudar de página
+            // Transição rápida de 400ms ideal para PC e Celular
             setTimeout(() => {
                 window.location.href = "prontuario.htm";
-            }, 2200);
+            }, 400);
         }
 
         function togglePlay() {
