@@ -8,7 +8,7 @@
     <style>
         :root {
             --azul-profundo-cosmos: #02040a;
-            --fundo-card: rgba(3, 7, 18, 0.92); /* Mantém o interior bem visível e luxuoso */
+            --fundo-card: rgba(3, 7, 18, 0.85);
             --ouro-escuro: #503e14;
             --ouro-medio: #846726;
             --ouro-brilhante: #d4af37;
@@ -182,76 +182,40 @@
             z-index: 10;
         }
 
-        /* CONTAINER CORRIGIDO: TOTALMENTE VAZADO POR FORA */
+        /* CARD LUXUOSO: SEM SEGUNDO PLANO ESCURO ESCAPANDO, TOTALMENTE LIMPO E VAZADO */
         .card-container {
             flex: 1;
-            position: relative;
-            padding: 1.5px; /* Grossura da borda luxo */
-            border-radius: 24px;
+            border: 1px solid transparent;
+            /* Nova borda em degradê ouro estrita, sem códigos pseudo-elementos pesados */
+            border-image: linear-gradient(135deg, var(--ouro-escuro), var(--ouro-brilhante), var(--ouro-escuro)) 1;
+            background: transparent;
             box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
-            overflow: hidden;
-            background: transparent; /* Remove qualquer fundo intruso de trás */
             display: flex;
+            transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
-        /* O efeito Chase agora gira puramente em uma camada transparente */
-        .card-container::before {
-            content: '';
-            position: absolute;
-            top: -50%; left: -50%;
-            width: 200%; height: 200%;
-            background: conic-gradient(
-                transparent, 
-                var(--ouro-escuro), 
-                var(--ouro-brilhante), 
-                var(--ouro-escuro), 
-                transparent 40%
-            );
-            z-index: 0;
-        }
-
-        .card-container.esquerdo::before {
-            animation: persequicaoOuroEsquerda 7s linear infinite;
-        }
-
-        .card-container.direito::before {
-            animation: persequicaoOuroDireita 7s linear infinite;
-        }
-
-        @keyframes persequicaoOuroEsquerda {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        @keyframes persequicaoOuroDireita {
-            0% { transform: rotate(180deg); }
-            100% { transform: rotate(540deg); }
-        }
-
-        /* CONTEÚDO INTERNO LUXUOSO - COR LIMITADA APENAS AQUI DENTRO */
+        /* CONTEÚDO INTERNO LUXUOSO - O AZUL ESCURO FICA APENAS EXCLUSIVAMENTE AQUI */
         .conteudo-luxo {
-            position: relative;
-            z-index: 1;
-            background-color: var(--fundo-card); /* O azul escuro quase preto fica estritamente aqui */
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            border-radius: 22px;
+            background-color: var(--fundo-card);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             padding: 45px 35px;
             width: 100%;
             display: flex;
             flex-direction: column;
-            border: 1px solid rgba(255, 255, 255, 0.02);
             transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
-        .card-container:hover .conteudo-luxo {
-            background-color: rgba(4, 9, 24, 0.96);
-            box-shadow: inset 0 0 30px rgba(132, 103, 38, 0.15);
-        }
-
+        /* Efeitos de Hover sofisticados e limpos */
         .card-container:hover {
             transform: scale(1.015) translateY(-4px);
-            box-shadow: 0 35px 80px rgba(132, 103, 38, 0.15);
+            box-shadow: 0 35px 80px rgba(132, 103, 38, 0.25);
+            border-image: linear-gradient(135deg, var(--ouro-medio), #ffffff, var(--ouro-medio)) 1;
+        }
+
+        .card-container:hover .conteudo-luxo {
+            background-color: rgba(4, 9, 24, 0.94);
+            box-shadow: inset 0 0 30px rgba(132, 103, 38, 0.2);
         }
 
         /* TIPOGRAFIA E TÍTULOS */
