@@ -7,12 +7,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Orbitron:wght@400;600;800&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
     <style>
         :root {
-            --fundo-card: rgba(3, 7, 18, 0.90); /* Azul escuro quase preto mantido exclusivamente dentro do card */
+            --fundo-card: rgba(3, 7, 18, 0.88); /* Fundo nobre e translúcido exclusivo para o interior dos cards */
             --ouro-escuro: #4a3b19;
             --ouro-medio: #846726;
             --ouro-brilhante: #d4af37;
-            --prata-incandescente: #e2e8f0;
-            --chumbo-ferro: #1e293b;
+            --prata-incandescente: #cbd5e1;
+            --chumbo-ferro: #151f32; /* Tom chumbo metálico de ferro fosco */
         }
 
         * { 
@@ -21,7 +21,7 @@
             padding: 0;
         }
 
-        /* FUNDO DA PÁGINA TOTALMENTE CONFIGURADO PARA MOSTRAR O COSMOS EXCLUSIVAMENTE */
+        /* ESTRUTURA VAZADA PARA FAZER O COSMOS APARECER COMPLETAMENTE */
         body, html {
             width: 100%;
             min-height: 100vh;
@@ -41,14 +41,14 @@
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             z-index: -2;
-            background: radial-gradient(circle at center, #0b192e 0%, #02040a 100%) !important;
+            background: radial-gradient(circle at center, #0c1a30 0%, #020409 100%) !important;
         }
 
         .estrela-prata {
             position: absolute;
-            background: var(--prata-incandescente);
+            background: #ffffff;
             border-radius: 50%;
-            box-shadow: 0 0 12px 3px rgba(241, 245, 249, 0.8);
+            box-shadow: 0 0 10px 2px rgba(226, 232, 240, 0.8);
             animation: pulsarIncandescente infinite ease-in-out;
             pointer-events: none;
         }
@@ -109,7 +109,7 @@
             cursor: pointer;
         }
 
-        /* ESTRUTURAS DO GRID SEM NENHUM FUNDO ESCURO */
+        /* GRID TOTALMENTE TRANSPARENTE E INTEGRADO AO CÉU */
         .layout-duas-colunas {
             display: flex;
             flex-direction: row;
@@ -123,7 +123,7 @@
             background: transparent !important;
         }
 
-        /* ESTRUTURA DOS CARDS VAZADA E CRISTALINA POR FORA */
+        /* ESTRUTURA DOS CARDS CRISTALINA POR FORA */
         .card-container {
             flex: 1;
             position: relative;
@@ -135,11 +135,11 @@
             transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
         }
 
-        /* CONTEÚDO DO CARD: O AZUL ESCURO QUASE PRETO SÓ EXISTE AQUI DENTRO */
+        /* O FUNDO ESCURO MORA APENAS DENTRO DO CONTEÚDO DO CARD */
         .conteudo-luxo {
             background-color: var(--fundo-card) !important;
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
             padding: 45px 35px;
             width: 100%;
             display: flex;
@@ -235,7 +235,7 @@
             letter-spacing: 1px;
         }
 
-        /* ÁREA DE BOTÃO TOTALMENTE REESTRUTURADA E VAZADA */
+        /* ÁREA DO BOTÃO TOTALMENTE CRISTALINA */
         .area-botao {
             width: 100%;
             max-width: 1200px;
@@ -246,19 +246,19 @@
             background: transparent !important;
         }
 
-        /* NOVO BOTÃO: DELICADO, FUTURISTA, CHUMBO/FERRO, OURO ESCURO E LETRAS PRATA COM ZOOM */
+        /* BOTÃO APENAS "PRÓXIMA": DELICADO, FUTURISTA, FILTRADO COM COR CHUMBO DE FERRO, BORDA DE OURO ESCURO E LETRA PRATA */
         .btn-proxima {
             background-color: var(--chumbo-ferro);
             color: var(--prata-incandescente);
             border: 1px solid var(--ouro-escuro);
-            padding: 12px 35px; /* Tamanho reduzido para um formato delicado e elegante */
-            border-radius: 4px; /* Cantos levemente retos para ar futurista */
+            padding: 11px 32px; /* Reduzido e delicado como um card minúsculo */
+            border-radius: 3px; /* Cantos retos futuristas marcantes */
             font-family: 'Orbitron', sans-serif;
             font-weight: 600;
-            font-size: 0.8rem;
+            font-size: 0.78rem;
             cursor: pointer;
-            letter-spacing: 3px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+            letter-spacing: 4px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
             text-transform: uppercase;
             text-decoration: none;
             text-align: center;
@@ -266,13 +266,13 @@
             transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        /* Efeito de Zoom Delicado e Brilho Futurista */
+        /* EFEITO ZOOM FUTURISTA E DELICADO NO BOTÃO */
         .btn-proxima:hover {
-            transform: scale(1.06); /* Efeito zoom sutil e delicado */
-            background-color: #334155; /* Tom de ferro clareado */
+            transform: scale(1.08); /* Efeito de zoom nítido e responsivo */
+            background-color: #1e293b; /* Tom chumbo sutilmente iluminado */
             border-color: var(--ouro-brilhante);
             color: #ffffff;
-            box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.35);
         }
 
         /* RESPONSIVIDADE */
@@ -291,8 +291,8 @@
                 justify-content: center; 
             }
             .btn-proxima { 
-                width: 80%; 
-                max-width: 280px;
+                width: 75%; 
+                max-width: 260px;
             }
             .painel-audio {
                 top: 20px;
@@ -307,6 +307,7 @@
 </head>
 <body>
 
+    <!-- Cenário completo brilhando livre ao fundo -->
     <div id="cenario-cosmos"></div>
 
     <div class="painel-audio">
@@ -349,7 +350,7 @@
                             <span class="icone-receita">💊</span>
                             <div>
                                 <div class="medicamento-titulo">Sereína de Alta Pureza — 500mg</div>
-                                <strong>Mergulhos Livres:</strong> Frequentar os oceanos imensos e profundos que combinam com sua natureza de sereia. Proibido restringir-se a espaços limitados ou lagoas rasas.
+                                <strong>Mergulhos Livres:</strong> Frequentar os oceanos imensos e profundos que combinam com sua natureza de sereia. Proibido restringir-se a espaços limiteds ou lagoas rasas.
                             </div>
                         </li>
                         <li>
@@ -379,8 +380,9 @@
         </div>
     </div>
 
+    <!-- Redirecionamento configurado perfeitamente para carta.html apenas com a palavra Próxima -->
     <div class="area-botao">
-        <a href="felicidade.html" class="btn-proxima" onclick="salvarTempoAntesDeSair()">Próxima</a>
+        <a href="carta.html" class="btn-proxima" onclick="salvarTempoAntesDeSair()">Próxima</a>
     </div>
 
     <script>
