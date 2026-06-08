@@ -6,7 +6,7 @@
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate, max-age=0">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
-    <title>Em Busca do Horizonte</title>
+    <title>O Horizonte da Felicidade</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -40,7 +40,7 @@
             position: relative;
         }
 
-        /* FUNDO CÓSMICO */
+        /* FUNDO CÓSMICO SIMÉTRICO */
         .fundo-cosmos { 
             position: fixed; 
             top: 0; left: 0; 
@@ -53,16 +53,16 @@
             position: absolute; 
             background: #ffffff; 
             border-radius: 50%; 
-            box-shadow: 0 0 12px 3px rgba(255, 255, 255, 0.6);
+            box-shadow: 0 0 14px 4px rgba(226, 232, 240, 0.85);
             animation: brilhar 3s infinite ease-in-out; 
         }
         
         @keyframes brilhar { 
-            0%, 100% { opacity: 0.2; transform: scale(0.7); } 
-            50% { opacity: 1; transform: scale(1.3); box-shadow: 0 0 16px 5px rgba(255, 255, 255, 0.8); } 
+            0%, 100% { opacity: 0.25; transform: scale(0.7); } 
+            50% { opacity: 1; transform: scale(1.35); box-shadow: 0 0 18px 6px rgba(255, 255, 255, 0.9); } 
         }
 
-        /* PAINEL DE CONTROLE DE ÁUDIO LUXUOSO */
+        /* CONTROLE DE ÁUDIO COESO */
         .audio-container {
             position: fixed; top: 20px; right: 20px; z-index: 1000;
             display: flex; align-items: center; gap: 12px; 
@@ -101,6 +101,7 @@
             position: relative; z-index: 1; border: 1px solid rgba(97, 77, 26, 0.2);
             text-align: center;
         }
+
         h1 { 
             font-family: 'Cinzel', serif; 
             font-size: 1.8rem; 
@@ -116,7 +117,7 @@
                 3px 3px 8px rgba(0,0,0,0.8);
         }
 
-        /* ENVELOPE DA CARTA COM CONTORNO OURO CORRENDO */
+        /* ENVELOPE DA CARTA DA SEGUNDA PÁGINA */
         .carta-wrapper {
             position: relative; max-width: 750px; width: 100%;
             padding: 2px; border-radius: 20px; overflow: hidden;
@@ -148,91 +149,9 @@
         
         .carta-container p:last-child { margin-bottom: 0; }
 
-        /* CARD DA MENSAGEM INTERMEDIÁRIA */
-        .card-intermediario {
-            max-width: 750px; width: 100%;
-            background: rgba(15, 23, 42, 0.5);
-            border-left: 4px solid var(--ouro-ativo);
-            border-right: 1px solid var(--ouro-escuro);
-            border-top: 1px solid var(--ouro-escuro);
-            border-bottom: 1px solid var(--ouro-escuro);
-            padding: 25px 30px;
-            border-radius: 12px;
-            margin-bottom: 40px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
-            text-align: center;
-        }
-        .texto-intermediario {
-            font-family: 'Lora', serif;
-            font-style: italic;
-            font-weight: 700;
-            font-size: 1.1rem;
-            line-height: 1.7;
-            color: #e2e8f0;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
-        }
-
-        /* GRID DE MÚSICAS LUXUOSO */
-        .grid-musicas { 
-            display: grid; 
-            grid-template-columns: repeat(2, 1fr); 
-            gap: 25px; 
-            max-width: 750px; 
-            width: 100%; 
-        }
-        
-        .card-musica {
-            background: var(--papel-antigo); 
-            padding: 24px; 
-            border-radius: 14px;
-            border: 1px solid var(--ouro-escuro); 
-            text-decoration: none; 
-            color: var(--prata-brilhante);
-            position: relative;
-            overflow: hidden;
-            backdrop-filter: blur(4px);
-            box-shadow: 0 6px 15px rgba(0,0,0,0.3);
-            transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), border-color 0.4s ease, box-shadow 0.4s ease, background 0.4s ease;
-        }
-        
-        .card-musica:hover { 
-            border-color: var(--ouro-ativo); 
-            background: rgba(97, 77, 26, 0.15); 
-            transform: scale(1.05) translateY(-3px); 
-            box-shadow: 0 15px 30px rgba(212, 175, 55, 0.25);
-            z-index: 2;
-        }
-        
-        .card-musica strong { 
-            display: block; 
-            margin-bottom: 10px; 
-            font-family: 'Cinzel', serif; 
-            color: var(--ouro-ativo); 
-            font-size: 1rem; 
-            letter-spacing: 1px;
-            transition: color 0.3s, text-shadow 0.3s;
-        }
-        
-        .card-musica:hover strong {
-            color: #ffffff;
-            text-shadow: 0 0 10px rgba(212, 175, 55, 0.8);
-        }
-        
-        .card-musica p { 
-            font-size: 0.85rem; 
-            margin: 0; 
-            opacity: 0.8; 
-            line-height: 1.6;
-            color: #cbd5e1;
-        }
-
-        /* CONTAINER E BOTÃO "PRÓXIMA" NO CANTO INFERIOR */
+        /* BOTÃO VOLTAR DESIGN LUXO */
         .container-botao-fim {
-            width: 100%;
-            max-width: 750px;
-            display: flex;
-            justify-content: flex-end;
-            margin-top: 60px;
+            width: 100%; max-width: 750px; display: flex; justify-content: flex-end; margin-top: 40px;
         }
 
         .btn-fim {
@@ -243,13 +162,10 @@
             border-radius: 30px; 
             cursor: pointer; 
             font-family: 'Cinzel', serif;
-            font-weight: 700;
-            font-size: 0.95rem;
+            font-weight: 700; font-size: 0.95rem;
             transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); 
-            text-transform: uppercase; 
-            letter-spacing: 4px;
-            text-decoration: none;
-            text-align: center;
+            text-transform: uppercase; letter-spacing: 4px;
+            text-decoration: none; text-align: center;
             box-shadow: 0 8px 25px rgba(0,0,0,0.6);
             backdrop-filter: blur(5px);
         }
@@ -262,24 +178,12 @@
             transform: translateY(-4px);
         }
 
-        /* ADAPTAÇÃO TOTAL PARA DISPOSITIVOS MÓVEIS (CELULARES) */
         @media (max-width: 768px) {
             body { padding: 90px 15px 60px 15px; }
             .card-titulo-interno { padding: 20px 15px; }
             h1 { font-size: 1.35rem; letter-spacing: 3px; }
             .carta-container { padding: 30px 20px; font-size: 1.05rem; line-height: 1.8; }
-            .card-intermediario { padding: 20px; margin-bottom: 30px; }
-            .texto-intermediario { font-size: 0.95rem; }
-            .grid-musicas { grid-template-columns: 1fr; gap: 20px; }
-            
-            /* Zoom adaptado perfeitamente para interações de toque em celular */
-            .card-musica { padding: 20px; }
-            .card-musica:active {
-                transform: scale(1.03);
-                border-color: var(--ouro-ativo);
-            }
-            
-            .container-botao-fim { justify-content: center; margin-top: 50px; }
+            .container-botao-fim { justify-content: center; margin-top: 40px; }
             .btn-fim { width: 100%; padding: 16px 20px; font-size: 0.9rem; letter-spacing: 2px; }
             .audio-container { top: 15px; right: 15px; padding: 8px 14px; }
         }
@@ -290,68 +194,25 @@
 
     <div class="audio-container">
         <button class="btn-audio" id="btn-audio" onclick="alternarAudio()">⏸️</button>
-        <input type="range" class="slider-volume" id="controle-volume" min="0" max="1" step="0.05" value="1" oninput="ajustarVolume(this.value)">
+        <input type="range" class="slider-volume" id="controle-volume" min="0" max="1" step="0.05" value="0.5" oninput="ajustarVolume(this.value)">
     </div>
 
     <div class="card-titulo-wrapper">
         <div class="card-titulo-interno">
-            <h1>Em Busca do Horizonte</h1>
+            <h1>O Horizonte da Felicidade</h1>
         </div>
     </div>
 
     <div class="carta-wrapper">
         <div class="carta-container">
-            <p>Talvez a maior beleza da vida esteja na coragem de sermos vulneráveis, mesmo quando sabemos que o roteiro não prevê um final a dois...</p>
-            <p>É a primeira vez que me vejo assim, traduzindo um sentimento que não exige nada em troca.</p>
-            <p>Nas consultas, o silêncio entre as palavras carregava o peso de quem enxerga além do diagnóstico. Você tornou-se para mim um cenário onde aprendi, nas entrelinhas, o valor da sua dedicação. Sua humanidade foi o meu melhor remédio, uma bússola para as minhas incertezas, e a clareza com que você conduz nossas sessões é o que me devolve o chão toda vez que sinto que vou flutuar para longe de mijm mesma.</p>
-            <p>Gostaria apenas que, no futuro, ao pensar em mim, você se lembre de uma paciente que você lutou para ver livre do peso dos remédios.</p>
-            <p>Encerro este assunto aqui, com o coração em paz e uma admiração que ultrapassa o consultório, guardando para sempre o brilho de quem você é na minha estrada.</p>
+            <p>Encontrar a felicidade não significa a ausência completa de tempestades, mas a calmaria preciosa que escolhemos carregar no peito enquanto o universo se move.</p>
+            <p>Cada passo dado até aqui reflete a busca sutil por um horizonte mais leve, onde a admiração sincera e as memórias bem guardadas servem como combustível para os melhores dias que virão.</p>
+            <p>Que o destino reserve sempre o melhor para as nossas estradas, mantendo perfeitamente aceso o brilho da resiliência e a pureza de tudo o que foi aprendido ao longo do caminho.</p>
         </div>
-    </div>
-
-    <div class="card-intermediario">
-        <div class="texto-intermediario">
-            "Cada link abaixo carrega um pedaço da minha história. Aperte e, do fundo do meu coração, espero que você goste... Até porque todas me lembram você."
-        </div>
-    </div>
-
-    <div class="grid-musicas">
-        <a class="card-musica" href="https://youtu.be/G0WTFfZqjz0" target="_blank" onclick="pausarParaLink()"> 
-            <strong>Can't Help Falling In Love</strong> (Boyce Avenue Cover)
-            <p>Essa música seria a qual amaria dançar com você.</p>
-        </a>
-        <a class="card-musica" href="https://youtu.be/Ri7-vnrJD3k" target="_blank" onclick="pausarParaLink()">
-            <strong>Set Fire To The Rain</strong>
-            <p>Tatuado no braço, algo surreal e mágico.</p>
-        </a>
-        <a class="card-musica" href="https://youtu.be/fV4DiAyExN0" target="_blank" onclick="pausarParaLink()">
-            <strong>The Reason</strong>
-            <p>Maturidade da vida da relação que traz um ótimo aprendizado.</p>
-        </a>
-        <a class="card-musica" href="https://youtu.be/ksNoe8W2jTc" target="_blank" onclick="pausarParaLink()">
-            <strong>How Can I Go On</strong>
-            <p>Imagino eu e você vendo, viajo longe imaginando nós duas ouvindo e vendo essa ópera.</p>
-        </a>
-        <a class="card-musica" href="https://youtu.be/0xEB1wIy4OE" target="_blank" onclick="pausarParaLink()">
-            <strong>The Power Of Love</strong>
-            <p>Um dos meus sonhos em Las Vegas o qual infelizmente terei que apreciar apenas pelas telas, até porque ela está com uma doença rara que já não pode mais ir aos palcos fazer o que sempre fez de melhor: brilhar nos palcos.</p>
-        </a>
-        <a class="card-musica" href="https://youtu.be/JRfuAukYTKg" target="_blank" onclick="pausarParaLink()">
-            <strong>Titanium</strong>
-            <p>Tenho essa música tatuada no meu braço em homenagem ao meu sobrinho Pietro que mora em Brasília, teve que ser reanimado assim que nasceu e hoje tem 11 anos de idade com muita saúde.</p>
-        </a>
-        <a class="card-musica" href="https://youtu.be/rtOvBOTyX00" target="_blank" onclick="pausarParaLink()">
-            <strong>A Thousand Years</strong>
-            <p>Pretendo cantar no meu futuro casamento essa canção no pôr do sol, as duas de noivas, o qual essa música diz do amor eterno que dure milhões de anos e é algo que sonho realizar.</p>
-        </a>
-        <a class="card-musica" href="https://youtu.be/u9Dg-g7t2l4" target="_blank" onclick="pausarParaLink()">
-            <strong>The Sound Of Silence</strong>
-            <p>A profundidade do silêncio transmite a ideia de ir na escuridão, em busca de conhecer a si mesma sem ter medo.</p>
-        </a>
     </div>
 
     <div class="container-botao-fim">
-        <a href="felicidade.html" class="btn-fim" onclick="salvarEstadoAudio()">Próxima</a>
+        <a href="carta.html" class="btn-fim" onclick="salvarEstadoAudio()">Voltar</a>
     </div>
 
     <audio id="audio" src="elvis.html.mp3" loop></audio>
@@ -362,7 +223,6 @@
         const controleVolume = document.getElementById('controle-volume');
         const cosmos = document.getElementById('cosmos');
 
-        // GERADOR DE ESTRELAS
         function criarEstrelas() {
             const numeroEstrelas = window.innerWidth < 768 ? 35 : 80;
             for(let i=0; i<numeroEstrelas; i++) {
@@ -379,7 +239,6 @@
             }
         }
 
-        // SINCRONIZAÇÃO E PERSISTÊNCIA RESTRITA DE ÁUDIO
         window.addEventListener('DOMContentLoaded', () => {
             criarEstrelas();
 
@@ -388,11 +247,11 @@
             const audioVolume = localStorage.getItem('audioVolume');
 
             if (audioVolume !== null) {
-                audio.volume = audioVolume;
+                audio.volume = parseFloat(audioVolume);
                 controleVolume.value = audioVolume;
             } else {
-                audio.volume = 0.4;
-                controleVolume.value = 0.4;
+                audio.volume = 0.5;
+                controleVolume.value = 0.5;
             }
 
             if (audioTempo !== null) {
@@ -433,15 +292,6 @@
             localStorage.setItem('audioTocando', !audio.paused);
         }
 
-        // Pausa temporariamente ao abrir um link externo para evitar sobreposição
-        function pausarParaLink() {
-            audio.pause();
-            btnAudio.textContent = '▶️';
-            localStorage.setItem('audioTocando', 'false');
-            localStorage.setItem('audioTempo', audio.currentTime);
-        }
-
-        // Gravação contínua do progresso temporal em background
         setInterval(() => {
             if (!audio.paused) {
                 localStorage.setItem('audioTempo', audio.currentTime);
