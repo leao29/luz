@@ -7,12 +7,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Orbitron:wght@400;600;800&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
     <style>
         :root {
-            --azul-profundo-cosmos: #02040a;
-            --fundo-card: rgba(3, 7, 18, 0.93); /* O azul escuro quase preto sofisticado */
-            --ouro-escuro: #503e14;
+            --fundo-card: rgba(3, 7, 18, 0.90); /* Azul escuro quase preto mantido exclusivamente dentro do card */
+            --ouro-escuro: #4a3b19;
             --ouro-medio: #846726;
             --ouro-brilhante: #d4af37;
-            --prata-incandescente: #f1f5f9;
+            --prata-incandescente: #e2e8f0;
+            --chumbo-ferro: #1e293b;
         }
 
         * { 
@@ -21,10 +21,11 @@
             padding: 0;
         }
 
+        /* FUNDO DA PÁGINA TOTALMENTE CONFIGURADO PARA MOSTRAR O COSMOS EXCLUSIVAMENTE */
         body, html {
             width: 100%;
             min-height: 100vh;
-            background-color: var(--azul-profundo-cosmos) !important;
+            background: transparent !important;
             font-family: 'Lora', serif;
             display: flex;
             flex-direction: column;
@@ -35,120 +36,80 @@
             padding: 90px 20px 40px 20px;
         }
 
-        /* CENÁRIO CÓSMICO ABSOLUTO */
+        /* CENÁRIO CÓSMICO SEM NENHUM BLOQUEIO À FRENTE */
         #cenario-cosmos {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            z-index: -1;
-            background: radial-gradient(circle at center, #071324 0%, var(--azul-profundo-cosmos) 100%) !important;
+            z-index: -2;
+            background: radial-gradient(circle at center, #0b192e 0%, #02040a 100%) !important;
         }
 
         .estrela-prata {
             position: absolute;
             background: var(--prata-incandescente);
             border-radius: 50%;
-            box-shadow: 0 0 12px 3px rgba(241, 245, 249, 0.9);
+            box-shadow: 0 0 12px 3px rgba(241, 245, 249, 0.8);
             animation: pulsarIncandescente infinite ease-in-out;
             pointer-events: none;
         }
 
         @keyframes pulsarIncandescente {
-            0%, 100% { opacity: 0.3; transform: scale(0.7); filter: blur(0.5px); }
-            50% { opacity: 1; transform: scale(1.4); box-shadow: 0 0 18px 6px rgba(255, 255, 255, 1); }
+            0%, 100% { opacity: 0.2; transform: scale(0.6); }
+            50% { opacity: 1; transform: scale(1.3); box-shadow: 0 0 16px 5px rgba(255, 255, 255, 0.9); }
         }
 
-        /* CONTROLE DE MÍDIA */
+        /* PAINEL DE ÁUDIO */
         .painel-audio {
             position: fixed;
             top: 25px; right: 25px;
-            background: rgba(2, 4, 10, 0.8);
-            border: 1px solid rgba(212, 175, 55, 0.3);
+            background: rgba(2, 4, 10, 0.7);
+            border: 1px solid rgba(212, 175, 55, 0.25);
             padding: 8px 16px;
             border-radius: 30px;
             display: flex;
             align-items: center;
             gap: 12px;
             z-index: 1000;
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            box-shadow: 0 10px 40px rgba(0,0,0,0.8);
-            transition: all 0.3s ease;
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
         }
 
         .btn-audio {
             -webkit-appearance: none;
-            -moz-appearance: none;
-            appearance: none;
             background: transparent !important; 
             border: none !important; 
-            outline: none !important;
-            box-shadow: none !important;
             cursor: pointer; 
             display: flex; 
             align-items: center; 
-            justify-content: center; 
-            padding: 4px;
-            margin: 0;
         }
         
         .btn-audio svg {
             width: 18px;
             height: 18px;
-            display: block;
             fill: var(--ouro-brilhante) !important;
-            filter: drop-shadow(0 0 4px rgba(212, 175, 55, 0.5));
-            transition: fill 0.3s ease, transform 0.3s ease;
-        }
-
-        .btn-audio:hover svg {
-            fill: #ffffff !important;
-            transform: scale(1.1);
-            filter: drop-shadow(0 0 8px var(--ouro-brilhante));
-        }
-
-        .conteiner-volume {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .conteiner-volume svg {
-            width: 14px;
-            height: 14px;
-            fill: rgba(255, 255, 255, 0.4);
-            display: block;
+            filter: drop-shadow(0 0 4px rgba(212, 175, 55, 0.4));
         }
 
         .slider-volume {
             -webkit-appearance: none;
-            -moz-appearance: none;
-            appearance: none;
             width: 70px;
             background: rgba(255, 255, 255, 0.15);
             height: 3px;
             border-radius: 10px;
             outline: none;
-            margin: 0;
-            border: none;
         }
 
         .slider-volume::-webkit-slider-thumb {
             -webkit-appearance: none;
-            appearance: none;
             width: 10px;
             height: 10px;
             border-radius: 50%;
             background: var(--ouro-brilhante);
             cursor: pointer;
-            box-shadow: 0 0 6px var(--ouro-medio);
         }
 
-        .slider-volume::-webkit-slider-thumb:hover {
-            transform: scale(1.3);
-            background: #ffffff;
-        }
-
-        /* GRID IMPEDIDO DE GERAR FUNDOS ESCUROS INTERNOS */
+        /* ESTRUTURAS DO GRID SEM NENHUM FUNDO ESCURO */
         .layout-duas-colunas {
             display: flex;
             flex-direction: row;
@@ -157,57 +118,48 @@
             max-width: 1200px;
             justify-content: center;
             align-items: stretch;
-            margin-bottom: 40px;
+            margin-bottom: 45px;
             z-index: 10;
-            background: transparent !important; /* Força transparência total na linha dos cards */
+            background: transparent !important;
         }
 
-        /* CONTAINER DOS CARDS - VAZADO E TOTALMENTE TRANSPARENTE POR FORA */
+        /* ESTRUTURA DOS CARDS VAZADA E CRISTALINA POR FORA */
         .card-container {
             flex: 1;
             position: relative;
-            background: transparent !important; /* Garante que nenhuma caixa escura vaze por trás */
+            background: transparent !important;
             border: 1px solid transparent;
-            border-image: linear-gradient(135deg, var(--ouro-escuro), var(--ouro-brilhante), var(--ouro-escuro)) 1;
-            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
+            border-image: linear-gradient(135deg, var(--ouro-escuro), var(--ouro-medio), var(--ouro-escuro)) 1;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
             display: flex;
-            transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
         }
 
-        /* CONTEÚDO INTERNO - A COR ESCURA DO CARD VIVE EXCLUSIVAMENTE AQUI DENTRO */
+        /* CONTEÚDO DO CARD: O AZUL ESCURO QUASE PRETO SÓ EXISTE AQUI DENTRO */
         .conteudo-luxo {
-            background-color: var(--fundo-card) !important; /* Fundo mantido rigorosamente restrito ao interior */
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+            background-color: var(--fundo-card) !important;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             padding: 45px 35px;
             width: 100%;
             display: flex;
             flex-direction: column;
-            transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
-        /* Hovers limpos e responsivos */
         .card-container:hover {
-            transform: scale(1.015) translateY(-4px);
-            box-shadow: 0 35px 80px rgba(132, 103, 38, 0.25);
-            border-image: linear-gradient(135deg, var(--ouro-medio), #ffffff, var(--ouro-medio)) 1;
-        }
-
-        .card-container:hover .conteudo-luxo {
-            background-color: rgba(4, 9, 24, 0.95) !important;
-            box-shadow: inset 0 0 30px rgba(132, 103, 38, 0.2);
+            transform: translateY(-4px);
+            box-shadow: 0 30px 60px rgba(132, 103, 38, 0.15);
         }
 
         /* TIPOGRAFIA */
         .titulo-luxo {
             font-family: 'Cinzel', serif;
-            font-size: 1.7rem;
+            font-size: 1.65rem;
             text-align: center;
             font-weight: 700;
             letter-spacing: 5px;
             margin-bottom: 35px;
-            color: var(--prata-incandescente);
-            text-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+            color: #ffffff;
             background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -220,8 +172,8 @@
             font-family: 'Orbitron', sans-serif;
             color: var(--ouro-brilhante);
             font-weight: 600;
-            font-size: 0.9rem;
-            border-bottom: 1px solid rgba(132, 103, 38, 0.3);
+            font-size: 0.85rem;
+            border-bottom: 1px solid rgba(132, 103, 38, 0.25);
             padding-bottom: 12px;
             margin-bottom: 30px;
             text-transform: uppercase;
@@ -233,25 +185,23 @@
             border: 1px solid #f43f5e;
             color: #f43f5e;
             font-family: 'Orbitron', monospace;
-            font-weight: 400;
-            font-size: 0.85rem;
-            padding: 6px 16px;
+            font-size: 0.8rem;
+            padding: 5px 14px;
             margin: 25px 0;
             letter-spacing: 2px;
             border-radius: 4px;
             transform: rotate(-1deg);
             text-transform: uppercase;
-            background: rgba(244, 63, 94, 0.05);
-            box-shadow: 0 0 15px rgba(244, 63, 94, 0.1);
+            background: rgba(244, 63, 94, 0.04);
             align-self: flex-start;
         }
 
         .texto-clinico p, .lista-receita li {
-            line-height: 1.9;
+            line-height: 1.85;
             color: #94a3b8;
             text-align: justify;
             margin-bottom: 18px;
-            font-size: 1.05rem;
+            font-size: 1.02rem;
         }
 
         .texto-clinico strong { 
@@ -259,39 +209,33 @@
             font-weight: 600;
         }
 
-        /* ITENS DA RECEITA */
-        .lista-receita { list-style: none; padding: 0; margin: 0; }
+        .lista-receita { list-style: none; }
 
         .lista-receita li {
             display: flex;
             align-items: flex-start;
-            gap: 18px;
-            background: rgba(255, 255, 255, 0.02);
+            gap: 16px;
+            background: rgba(255, 255, 255, 0.01);
             padding: 20px;
-            border-radius: 14px;
+            border-radius: 12px;
             border-left: 3px solid var(--ouro-medio);
             margin-bottom: 18px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
-            border-top: 1px solid rgba(255,255,255,0.01);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
         }
 
-        .icone-receita { 
-            font-size: 1.4rem; 
-            line-height: 1;
-            filter: drop-shadow(0 2px 8px rgba(132,103,38,0.4));
-        }
+        .icone-receita { font-size: 1.3rem; }
 
         .medicamento-titulo {
             font-family: 'Orbitron', sans-serif;
-            font-size: 0.9rem;
-            color: var(--prata-incandescente);
+            font-size: 0.85rem;
+            color: #f1f5f9;
             font-weight: 600;
-            margin-bottom: 6px;
+            margin-bottom: 5px;
             text-transform: uppercase;
             letter-spacing: 1px;
         }
 
-        /* NAVEGAÇÃO / BOTÃO */
+        /* ÁREA DE BOTÃO TOTALMENTE REESTRUTURADA E VAZADA */
         .area-botao {
             width: 100%;
             max-width: 1200px;
@@ -302,39 +246,40 @@
             background: transparent !important;
         }
 
+        /* NOVO BOTÃO: DELICADO, FUTURISTA, CHUMBO/FERRO, OURO ESCURO E LETRAS PRATA COM ZOOM */
         .btn-proxima {
-            background: rgba(3, 7, 18, 0.6);
+            background-color: var(--chumbo-ferro);
             color: var(--prata-incandescente);
             border: 1px solid var(--ouro-escuro);
-            padding: 18px 50px;
-            border-radius: 35px;
-            font-family: 'Cinzel', serif;
-            font-weight: 700;
-            font-size: 0.95rem;
+            padding: 12px 35px; /* Tamanho reduzido para um formato delicado e elegante */
+            border-radius: 4px; /* Cantos levemente retos para ar futurista */
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 600;
+            font-size: 0.8rem;
             cursor: pointer;
-            transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
-            letter-spacing: 4px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            letter-spacing: 3px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
             text-transform: uppercase;
             text-decoration: none;
             text-align: center;
-            backdrop-filter: blur(10px);
+            display: inline-block;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
+        /* Efeito de Zoom Delicado e Brilho Futurista */
         .btn-proxima:hover {
-            background: linear-gradient(135deg, var(--ouro-escuro) 0%, #30240a 100%);
-            color: #ffffff;
-            box-shadow: 0 0 30px rgba(212, 175, 87, 0.25);
-            transform: translateY(-4px);
+            transform: scale(1.06); /* Efeito zoom sutil e delicado */
+            background-color: #334155; /* Tom de ferro clareado */
             border-color: var(--ouro-brilhante);
-            letter-spacing: 5px;
+            color: #ffffff;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
         }
 
         /* RESPONSIVIDADE */
         @media (max-width: 950px) {
             .layout-duas-colunas { 
                 flex-direction: column; 
-                gap: 40px; 
+                gap: 35px; 
             }
             body { 
                 padding: 120px 20px 40px 20px; 
@@ -342,15 +287,12 @@
             .conteudo-luxo { 
                 padding: 35px 25px; 
             }
-            .titulo-luxo { 
-                font-size: 1.45rem; 
-                letter-spacing: 3px;
-            }
             .area-botao { 
                 justify-content: center; 
             }
             .btn-proxima { 
-                width: 100%; 
+                width: 80%; 
+                max-width: 280px;
             }
             .painel-audio {
                 top: 20px;
@@ -374,9 +316,6 @@
             </svg>
         </button>
         <div class="conteiner-volume">
-            <svg viewBox="0 0 24 24">
-                <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/>
-            </svg>
             <input type="range" class="slider-volume" id="controle-volume" min="0" max="1" step="0.01" value="0.5" oninput="ajustarVolume(this.value)">
         </div>
     </div>
@@ -441,34 +380,27 @@
     </div>
 
     <div class="area-botao">
-        <a href="felicidade.html" class="btn-proxima" onclick="salvarTempoAntesDeSair()">Próxima Etapa</a>
+        <a href="felicidade.html" class="btn-proxima" onclick="salvarTempoAntesDeSair()">Próxima</a>
     </div>
 
     <script>
         const musica = document.getElementById('musica-cosmos');
         const svgIcone = document.getElementById('svg-icone');
-        const controleVolume = document.getElementById('controle-volume');
-
         const pathPause = "M6 20h4V4H6v16zm8-16v16h4V4h-4z";
         const pathPlay = "M8 5v14l11-7z";
 
         window.addEventListener('DOMContentLoaded', () => {
             const deveTocar = localStorage.getItem('musicaTocando');
             const tempoSalvo = localStorage.getItem('musicaTempo');
-            
             musica.volume = 0.5;
-            controleVolume.value = 0.5;
 
-            if (tempoSalvo) {
-                musica.currentTime = parseFloat(tempoSalvo);
-            }
+            if (tempoSalvo) musica.currentTime = parseFloat(tempoSalvo);
 
             if (deveTocar !== 'false') {
                 musica.play().then(() => {
                     svgIcone.querySelector('path').setAttribute('d', pathPause);
                 }).catch(() => {
                     svgIcone.querySelector('path').setAttribute('d', pathPlay);
-                    
                     document.addEventListener('click', () => {
                         if(musica.paused && localStorage.getItem('musicaTocando') !== 'false') {
                             musica.play();
@@ -481,9 +413,7 @@
             }
 
             setInterval(() => {
-                if (!musica.paused) {
-                    localStorage.setItem('musicaTempo', musica.currentTime);
-                }
+                if (!musica.paused) localStorage.setItem('musicaTempo', musica.currentTime);
             }, 500);
         });
 
@@ -499,30 +429,22 @@
             }
         }
 
-        function ajustarVolume(valor) {
-            musica.volume = valor;
-        }
-
-        function salvarTempoAntesDeSair() {
-            localStorage.setItem('musicaTempo', musica.currentTime);
-        }
+        function ajustarVolume(valor) { musica.volume = valor; }
+        function salvarTempoAntesDeSair() { localStorage.setItem('musicaTempo', musica.currentTime); }
 
         const cenario = document.getElementById('cenario-cosmos');
-        const numEstrelas = window.innerWidth < 600 ? 35 : 70;
+        const numEstrelas = window.innerWidth < 600 ? 35 : 75;
 
         for (let i = 0; i < numEstrelas; i++) {
             const estrela = document.createElement('div');
             estrela.className = 'estrela-prata';
-            
-            const tamanho = Math.random() * 2.2 + 0.8;
+            const tamanho = Math.random() * 2 + 0.8;
             estrela.style.width = tamanho + 'px';
             estrela.style.height = tamanho + 'px';
             estrela.style.top = Math.random() * 100 + '%';
             estrela.style.left = Math.random() * 100 + '%';
-            
             estrela.style.animationDelay = Math.random() * 4 + 's';
-            estrela.style.animationDuration = (Math.random() * 3 + 2) + 's';
-            
+            estrela.style.animationDuration = (Math.random() * 3 + 2.5) + 's';
             cenario.appendChild(estrela);
         }
     </script>
