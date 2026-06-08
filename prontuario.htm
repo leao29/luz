@@ -246,13 +246,13 @@
             background: transparent !important;
         }
 
-        /* BOTÃO APENAS "PRÓXIMA": DELICADO, FUTURISTA, FILTRADO COM COR CHUMBO DE FERRO, BORDA DE OURO ESCURO E LETRA PRATA */
+        /* BOTÃO APENAS "PRÓXIMA" */
         .btn-proxima {
             background-color: var(--chumbo-ferro);
             color: var(--prata-incandescente);
             border: 1px solid var(--ouro-escuro);
-            padding: 11px 32px; /* Reduzido e delicado como um card minúsculo */
-            border-radius: 3px; /* Cantos retos futuristas marcantes */
+            padding: 11px 32px; 
+            border-radius: 3px; 
             font-family: 'Orbitron', sans-serif;
             font-weight: 600;
             font-size: 0.78rem;
@@ -266,10 +266,10 @@
             transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        /* EFEITO ZOOM FUTURISTA E DELICADO NO BOTÃO */
+        /* EFEITO ZOOM FUTURISTA NO BOTÃO */
         .btn-proxima:hover {
-            transform: scale(1.08); /* Efeito de zoom nítido e responsivo */
-            background-color: #1e293b; /* Tom chumbo sutilmente iluminado */
+            transform: scale(1.08); 
+            background-color: #1e293b; 
             border-color: var(--ouro-brilhante);
             color: #ffffff;
             box-shadow: 0 0 20px rgba(212, 175, 55, 0.35);
@@ -307,7 +307,6 @@
 </head>
 <body>
 
-    <!-- Cenário completo brilhando livre ao fundo -->
     <div id="cenario-cosmos"></div>
 
     <div class="painel-audio">
@@ -330,7 +329,7 @@
                 <h1 class="titulo-luxo">PRONTUÁRIO MÉDICO</h1>
                 <div class="cabecalho-secao">📋 HISTÓRICO & QUADRO CLÍNICO</div>
                 <div class="texto-clinico">
-                    <p><strong>Paciente:</strong> Identificada como uma alma sonhadora em trânsito temporário por Belém (período de 1 ano e 3 meses fixado pelas raízes familiares e esperando o primeiro aninho de idade da Helena Sophia em 5 de agosto), com retorno programado para Brasília pós-aniversário.</p>
+                    <p><strong>Paciente:</strong> Identificada como uma alma sonhadora em trânsito temporário por Belém (período de 1 ano e 3 meses fixado pelas raíces familiares e esperando o primeiro aninho de idade da Helena Sophia em 5 de agosto), com retorno programado para Brasília pós-aniversário.</p>
                     <p><strong>Evolução:</strong> Veterana de uma jornada de mais de 20 anos enfrentando a síndrome do pânico. Apresenta alta capacidade de discernimento e blindagem terapêutica, sabendo separar perfeitamente a relação médico-paciente tradicional.</p>
                     
                     <div class="carimbo-diagnostico">Diagnóstico: Afeto Agudo Incurável</div>
@@ -380,7 +379,6 @@
         </div>
     </div>
 
-    <!-- Redirecionamento configurado perfeitamente para carta.html apenas com a palavra Próxima -->
     <div class="area-botao">
         <a href="carta.html" class="btn-proxima" onclick="salvarTempoAntesDeSair()">Próxima</a>
     </div>
@@ -432,7 +430,11 @@
         }
 
         function ajustarVolume(valor) { musica.volume = valor; }
-        function salvarTempoAntesDeSair() { localStorage.setItem('musicaTempo', musica.currentTime); }
+        
+        function salvarTempoAntesDeSair() { 
+            localStorage.setItem('musicaTempo', musica.currentTime); 
+            localStorage.setItem('musicaTocando', !musica.paused);
+        }
 
         const cenario = document.getElementById('cenario-cosmos');
         const numEstrelas = window.innerWidth < 600 ? 35 : 75;
