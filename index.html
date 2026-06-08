@@ -4,7 +4,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Para Dra. Debora</title>
 
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Great+Vibes&family=Playfair+Display:ital,wght=0,400;0,600;1,400&display=swap" rel="stylesheet">
 
     <style>
         * {
@@ -226,7 +226,7 @@
             color: #fbf5b7;
             font-family: 'Playfair Display', serif; 
             font-weight: 600;
-            font-size: clamp(10px, 2.5vw, 12px); /* Tamanho dinâmico para não quebrar no celular */
+            font-size: clamp(10px, 2.5vw, 12px);
             letter-spacing: 1px;
             text-transform: uppercase;
             padding: 14px 20px;
@@ -240,7 +240,7 @@
             animation: goldAuraPulse 3s infinite ease-in-out;
             transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
             width: 100%;
-            max-width: 340px; /* Largura ideal para caber a frase inteira */
+            max-width: 380px; /* Leve aumento para comportar o texto perfeitamente */
         }
 
         .btn-luxury::after {
@@ -364,7 +364,7 @@
             </div>
 
             <div class="action-button-container">
-                <button class="btn-luxury" onclick="irParaProntuario()">Aperte com carinho para próxima página</button>
+                <button class="btn-luxury" onclick="irParaProntuario()">Aperte com carinho para a próxima página</button>
             </div>
         </div>
     </div>
@@ -377,7 +377,7 @@
     <audio id="bgAudio" src="elvis.html.mp3" loop></audio>
 
     <script>
-        // Gerador de estrelas dinâmico ajustado para Mobile e Desktop
+        // Gerador de estrelas dinâmico
         const starsContainer = document.getElementById('starsContainer');
         const totalEstrelas = window.innerWidth < 600 ? 35 : 60;
         
@@ -393,25 +393,30 @@
             starsContainer.appendChild(star);
         }
 
-        // Variáveis de controle de áudio e elementos visuais
         const som = document.getElementById('bgAudio');
         const painel = document.getElementById('customControls');
         const mainCard = document.getElementById('mainCard');
 
-        // FUNÇÃO DO BOTÃO: Executa a transição elegante e abre a página destino
+        // FUNÇÃO DO BOTÃO ATUALIZADA: Salva o tempo atual da música antes de redirecionar
         function irParaProntuario() {
             som.volume = 0.8;
-            som.play().catch(() => console.log("Áudio iniciado pelo usuário."));
-            
-            // Ativa o painel de áudio discreto e executa o efeito visual de saída no Card
-            painel.classList.add('visible');
-            mainCard.style.opacity = '0';
-            mainCard.style.transform = 'scale(0.92) rotateY(-3deg)';
+            som.play().then(() => {
+                // Guarda no navegador que a música deve continuar e em qual segundo ela parou
+                localStorage.setItem('musicaTempo', som.currentTime);
+                localStorage.setItem('musicaTocando', 'true');
+                
+                painel.classList.add('visible');
+                mainCard.style.opacity = '0';
+                mainCard.style.transform = 'scale(0.92) rotateY(-3deg)';
 
-            // Transição rápida de 400ms ideal para PC e Celular
-            setTimeout(() => {
+                setTimeout(() => {
+                    window.location.href = "prontuario.htm";
+                }, 400);
+            }).catch((err) => {
+                console.log("Erro ao reproduzir áudio:", err);
+                // Mesmo se o áudio falhar por bloqueio do navegador, redireciona
                 window.location.href = "prontuario.htm";
-            }, 400);
+            });
         }
 
         function togglePlay() {
@@ -419,9 +424,11 @@
             if (som.paused) {
                 som.play();
                 btn.innerText = "⏸ Pausar";
+                localStorage.setItem('musicaTocando', 'true');
             } else {
                 som.pause();
                 btn.innerText = "▶ Play";
+                localStorage.setItem('musicaTocando', 'false');
             }
         }
 
