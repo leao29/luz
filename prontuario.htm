@@ -57,13 +57,13 @@
             50% { opacity: 1; transform: scale(1.4); box-shadow: 0 0 18px 6px rgba(255, 255, 255, 1); }
         }
 
-        /* CONTROLE DE MÍDIA ULTRA-LUXO */
+        /* CONTROLE DE MÍDIA COLOÇAL E LUXUOSO (BLINDADO) */
         .painel-audio {
             position: fixed;
             top: 25px; right: 25px;
-            background: rgba(2, 4, 10, 0.75);
-            border: 1px solid rgba(212, 175, 55, 0.25);
-            padding: 10px 18px;
+            background: rgba(2, 4, 10, 0.8);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            padding: 8px 16px;
             border-radius: 30px;
             display: flex;
             align-items: center;
@@ -71,38 +71,40 @@
             z-index: 1000;
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            box-shadow: 0 10px 40px rgba(0,0,0,0.8), inset 0 1px 1px rgba(255,255,255,0.05);
-            transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.8);
+            transition: all 0.3s ease;
         }
 
-        .painel-audio:hover {
-            border-color: rgba(212, 175, 55, 0.6);
-            box-shadow: 0 12px 45px rgba(132, 103, 38, 0.25);
-            transform: translateY(-1px);
-        }
-
+        /* Força a remoção de estilos nativos do botão no iOS/Safari */
         .btn-audio {
-            background: none; 
-            border: none; 
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            background: transparent !important; 
+            border: none !important; 
+            outline: none !important;
+            box-shadow: none !important;
             cursor: pointer; 
             display: flex; 
             align-items: center; 
             justify-content: center; 
-            padding: 6px;
-            border-radius: 50%;
-            transition: all 0.3s ease;
+            padding: 4px;
+            margin: 0;
+            border-radius: 0;
         }
         
+        /* Estilização pura do ícone SVG */
         .btn-audio svg {
-            width: 16px;
-            height: 16px;
-            fill: var(--ouro-brilhante);
+            width: 18px;
+            height: 18px;
+            display: block;
+            fill: var(--ouro-brilhante) !important;
+            filter: drop-shadow(0 0 4px rgba(212, 175, 55, 0.5));
             transition: fill 0.3s ease, transform 0.3s ease;
-            filter: drop-shadow(0 0 4px rgba(212, 175, 55, 0.4));
         }
 
         .btn-audio:hover svg {
-            fill: #ffffff;
+            fill: #ffffff !important;
             transform: scale(1.1);
             filter: drop-shadow(0 0 8px var(--ouro-brilhante));
         }
@@ -110,33 +112,31 @@
         .conteiner-volume {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
         }
 
         .conteiner-volume svg {
             width: 14px;
             height: 14px;
-            fill: rgba(241, 245, 249, 0.5);
+            fill: rgba(255, 255, 255, 0.4);
+            display: block;
         }
 
-        /* Customização Elegante do Slider (Compatível com todos os navegadores) */
+        /* Customização Estrita do Slider */
         .slider-volume {
             -webkit-appearance: none;
+            -moz-appearance: none;
             appearance: none;
             width: 70px;
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.15);
             height: 3px;
             border-radius: 10px;
             outline: none;
-            transition: all 0.3s ease;
+            margin: 0;
+            border: none;
         }
 
-        .slider-volume:hover {
-            background: rgba(255, 255, 255, 0.2);
-            height: 4px;
-        }
-
-        /* Linha de progresso no Webkit (Chrome, Safari, Edge) */
+        /* Slider Thumb - Chrome/Safari/iOS */
         .slider-volume::-webkit-slider-thumb {
             -webkit-appearance: none;
             appearance: none;
@@ -146,7 +146,7 @@
             background: var(--ouro-brilhante);
             cursor: pointer;
             box-shadow: 0 0 6px var(--ouro-medio);
-            transition: transform 0.2s ease;
+            transition: transform 0.2s ease, background-color 0.2s ease;
         }
 
         .slider-volume::-webkit-slider-thumb:hover {
@@ -155,8 +155,10 @@
             box-shadow: 0 0 10px var(--ouro-brilhante);
         }
 
-        /* Linha de progresso no Firefox */
+        /* Slider Thumb - Firefox */
         .slider-volume::-moz-range-thumb {
+            -moz-appearance: none;
+            appearance: none;
             width: 10px;
             height: 10px;
             border: none;
@@ -424,12 +426,12 @@
 
     <div id="cenario-cosmos"></div>
 
-    <!-- PAINEL DE ÁUDIO LUXUOSO -->
+    <!-- PAINEL DE ÁUDIO REFINADO E PROTEGIDO -->
     <div class="painel-audio">
         <button class="btn-audio" id="btn-play-pause" onclick="alternarAudio()" aria-label="Controle de Áudio">
-            <!-- Ícone de Pause Inicial em SVG (Ouro) -->
             <svg id="svg-icone" viewBox="0 0 24 24">
-                <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+                <!-- Ícone elegante de pausa puro vetorizado -->
+                <path d="M6 20h4V4H6v16zm8-16v16h4V4h-4z"/>
             </svg>
         </button>
         <div class="conteiner-volume">
@@ -508,8 +510,8 @@
         const svgIcone = document.getElementById('svg-icone');
         const controleVolume = document.getElementById('controle-volume');
 
-        // Paths vetoriais precisos para os estados do botão
-        const pathPause = "M6 19h4V5H6v14zm8-14v14h4V5h-4z";
+        // Geometria precisa dos caminhos SVG (Play / Pause)
+        const pathPause = "M6 20h4V4H6v16zm8-16v16h4V4h-4z";
         const pathPlay = "M8 5v14l11-7z";
 
         window.addEventListener('DOMContentLoaded', () => {
