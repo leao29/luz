@@ -57,43 +57,119 @@
             50% { opacity: 1; transform: scale(1.4); box-shadow: 0 0 18px 6px rgba(255, 255, 255, 1); }
         }
 
-        /* CONTROLE DE MÍDIA PREMIUM */
+        /* CONTROLE DE MÍDIA ULTRA-LUXO */
         .painel-audio {
             position: fixed;
             top: 25px; right: 25px;
-            background: rgba(2, 4, 10, 0.8);
-            border: 1px solid rgba(132, 103, 38, 0.4);
-            padding: 12px 20px;
-            border-radius: 40px;
+            background: rgba(2, 4, 10, 0.75);
+            border: 1px solid rgba(212, 175, 55, 0.25);
+            padding: 10px 18px;
+            border-radius: 30px;
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 12px;
             z-index: 1000;
-            backdrop-filter: blur(12px);
-            box-shadow: 0 10px 40px rgba(0,0,0,0.7);
-            transition: all 0.3s ease;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.8), inset 0 1px 1px rgba(255,255,255,0.05);
+            transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
         .painel-audio:hover {
-            border-color: var(--ouro-medio);
-            box-shadow: 0 10px 40px rgba(132, 103, 38, 0.15);
+            border-color: rgba(212, 175, 55, 0.6);
+            box-shadow: 0 12px 45px rgba(132, 103, 38, 0.25);
+            transform: translateY(-1px);
         }
 
         .btn-audio {
-            background: none; border: none; cursor: pointer; color: var(--prata-incandescente); font-size: 1.1rem;
-            display: flex; align-items: center; justify-content: center; padding: 0;
-            transition: transform 0.2s ease;
+            background: none; 
+            border: none; 
+            cursor: pointer; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            padding: 6px;
+            border-radius: 50%;
+            transition: all 0.3s ease;
         }
         
-        .btn-audio:hover { transform: scale(1.1); }
+        .btn-audio svg {
+            width: 16px;
+            height: 16px;
+            fill: var(--ouro-brilhante);
+            transition: fill 0.3s ease, transform 0.3s ease;
+            filter: drop-shadow(0 0 4px rgba(212, 175, 55, 0.4));
+        }
 
+        .btn-audio:hover svg {
+            fill: #ffffff;
+            transform: scale(1.1);
+            filter: drop-shadow(0 0 8px var(--ouro-brilhante));
+        }
+
+        .conteiner-volume {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .conteiner-volume svg {
+            width: 14px;
+            height: 14px;
+            fill: rgba(241, 245, 249, 0.5);
+        }
+
+        /* Customização Elegante do Slider (Compatível com todos os navegadores) */
         .slider-volume {
-            width: 80px;
-            cursor: pointer;
-            accent-color: var(--ouro-brilhante);
-            background: rgba(255,255,255,0.1);
+            -webkit-appearance: none;
+            appearance: none;
+            width: 70px;
+            background: rgba(255, 255, 255, 0.1);
+            height: 3px;
+            border-radius: 10px;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .slider-volume:hover {
+            background: rgba(255, 255, 255, 0.2);
             height: 4px;
-            border-radius: 2px;
+        }
+
+        /* Linha de progresso no Webkit (Chrome, Safari, Edge) */
+        .slider-volume::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--ouro-brilhante);
+            cursor: pointer;
+            box-shadow: 0 0 6px var(--ouro-medio);
+            transition: transform 0.2s ease;
+        }
+
+        .slider-volume::-webkit-slider-thumb:hover {
+            transform: scale(1.3);
+            background: #ffffff;
+            box-shadow: 0 0 10px var(--ouro-brilhante);
+        }
+
+        /* Linha de progresso no Firefox */
+        .slider-volume::-moz-range-thumb {
+            width: 10px;
+            height: 10px;
+            border: none;
+            border-radius: 50%;
+            background: var(--ouro-brilhante);
+            cursor: pointer;
+            box-shadow: 0 0 6px var(--ouro-medio);
+            transition: transform 0.2s ease;
+        }
+
+        .slider-volume::-moz-range-thumb:hover {
+            transform: scale(1.3);
+            background: #ffffff;
         }
 
         /* GRID ULTRA-PROFISSIONAL */
@@ -109,7 +185,7 @@
             z-index: 10;
         }
 
-        /* CONTAINER LUXUOSO COM EFEITO CHASE (PERSEGUIÇÃO DE BORDAS) */
+        /* CONTAINER LUXUOSO COM EFEITO CHASE */
         .card-container {
             flex: 1;
             position: relative;
@@ -136,12 +212,10 @@
             z-index: 0;
         }
 
-        /* Card Esquerdo inicia em 0 graus */
         .card-container.esquerdo::before {
             animation: persequicaoOuroEsquerda 7s linear infinite;
         }
 
-        /* Card Direito inicia defasado para parecer que corre atrás */
         .card-container.direito::before {
             animation: persequicaoOuroDireita 7s linear infinite;
         }
@@ -340,8 +414,8 @@
                 right: 50%;
                 transform: translateX(50%);
                 width: calc(100% - 40px);
-                max-width: 340px;
-                justify-content: space-between;
+                max-width: 320px;
+                justify-content: center;
             }
         }
     </style>
@@ -350,9 +424,20 @@
 
     <div id="cenario-cosmos"></div>
 
+    <!-- PAINEL DE ÁUDIO LUXUOSO -->
     <div class="painel-audio">
-        <button class="btn-audio" id="btn-play-pause" onclick="alternarAudio()">⏸️</button>
-        <input type="range" class="slider-volume" id="controle-volume" min="0" max="1" step="0.01" value="0.5" oninput="ajustarVolume(this.value)">
+        <button class="btn-audio" id="btn-play-pause" onclick="alternarAudio()" aria-label="Controle de Áudio">
+            <!-- Ícone de Pause Inicial em SVG (Ouro) -->
+            <svg id="svg-icone" viewBox="0 0 24 24">
+                <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+            </svg>
+        </button>
+        <div class="conteiner-volume">
+            <svg viewBox="0 0 24 24">
+                <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/>
+            </svg>
+            <input type="range" class="slider-volume" id="controle-volume" min="0" max="1" step="0.01" value="0.5" oninput="ajustarVolume(this.value)">
+        </div>
     </div>
 
     <audio id="musica-cosmos" loop src="elvis.html.mp3"></audio>
@@ -420,15 +505,17 @@
 
     <script>
         const musica = document.getElementById('musica-cosmos');
-        const btnPlayPause = document.getElementById('btn-play-pause');
+        const svgIcone = document.getElementById('svg-icone');
         const controleVolume = document.getElementById('controle-volume');
 
-        // GESTÃO EXCLUSIVA DE ÁUDIO SEM SOBREPOSIÇÃO
+        // Paths vetoriais precisos para os estados do botão
+        const pathPause = "M6 19h4V5H6v14zm8-14v14h4V5h-4z";
+        const pathPlay = "M8 5v14l11-7z";
+
         window.addEventListener('DOMContentLoaded', () => {
             const deveTocar = localStorage.getItem('musicaTocando');
             const tempoSalvo = localStorage.getItem('musicaTempo');
             
-            // Força o volume inicial em 50% conforme pedido
             musica.volume = 0.5;
             controleVolume.value = 0.5;
 
@@ -438,22 +525,21 @@
 
             if (deveTocar !== 'false') {
                 musica.play().then(() => {
-                    btnPlayPause.innerText = '⏸️';
+                    svgIcone.querySelector('path').setAttribute('d', pathPause);
                 }).catch(() => {
-                    btnPlayPause.innerText = '▶️';
-                    // Fallback elegante para navegadores que exigem interação
+                    svgIcone.querySelector('path').setAttribute('d', pathPlay);
+                    
                     document.addEventListener('click', () => {
                         if(musica.paused && localStorage.getItem('musicaTocando') !== 'false') {
                             musica.play();
-                            btnPlayPause.innerText = '⏸️';
+                            svgIcone.querySelector('path').setAttribute('d', pathPause);
                         }
                     }, { once: true });
                 });
             } else {
-                btnPlayPause.innerText = '▶️';
+                svgIcone.querySelector('path').setAttribute('d', pathPlay);
             }
 
-            // Grava continuamente o andamento exato para a próxima página ler
             setInterval(() => {
                 if (!musica.paused) {
                     localStorage.setItem('musicaTempo', musica.currentTime);
@@ -464,11 +550,11 @@
         function alternarAudio() {
             if (musica.paused) {
                 musica.play();
-                btnPlayPause.innerText = '⏸️';
+                svgIcone.querySelector('path').setAttribute('d', pathPause);
                 localStorage.setItem('musicaTocando', 'true');
             } else {
                 musica.pause();
-                btnPlayPause.innerText = '▶️';
+                svgIcone.querySelector('path').setAttribute('d', pathPlay);
                 localStorage.setItem('musicaTocando', 'false');
             }
         }
