@@ -12,11 +12,25 @@
     
     <style>
         :root {
-            --cosmos-fundo: #020617;
-            --prata-fino: #e2e8f0;
+            --cosmos-fundo: #02050c;
+            --azul-card-luxo: #040a17;
+            --prata-fino: #cbd5e1;
+            --prata-brilhante: #e2e8f0;
+            --ouro-escuro: #8a6f27;
             --ouro-ativo: #c5a862;
-            --ouro-brilhante: #614d1a;
-            --papel-sutil: rgba(255, 255, 255, 0.03);
+            --ouro-brilhante: #ffd700;
+        }
+
+        /* Barra de rolagem luxuosa prateada harmônica */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, transparent, rgba(226, 232, 240, 0.4), transparent);
+            border-radius: 10px;
         }
 
         * { 
@@ -34,18 +48,18 @@
             flex-direction: column; 
             align-items: center;
             overflow-x: hidden;
-            padding: 60px 20px;
+            padding: 100px 20px 60px 20px;
             opacity: 0;
             transition: opacity 0.8s ease;
         }
 
-        /* Fundo Cósmico */
+        /* Fundo Cósmico Avançado */
         #cosmos { 
             position: fixed; 
             top: 0; left: 0; 
             width: 100%; height: 100%; 
             z-index: -1; 
-            background: radial-gradient(circle at center, #0a1e3d 0%, var(--cosmos-fundo) 100%); 
+            background: radial-gradient(circle at center, #06152b 0%, var(--cosmos-fundo) 100%); 
         }
         
         .estrela { 
@@ -54,69 +68,193 @@
             border-radius: 50%; 
             animation: brilhar 3s infinite ease-in-out; 
         }
+
+        .estrela-cadente {
+            position: absolute;
+            height: 1px;
+            background: linear-gradient(-45deg, rgba(255,255,255,1), rgba(255,255,255,0));
+            filter: drop-shadow(0 0 6px #ffffff);
+            animation: cair 4s infinite linear;
+            opacity: 0;
+        }
         
         @keyframes brilhar { 
-            0%, 100% { opacity: 0.2; transform: scale(0.8); } 
-            50% { opacity: 1; transform: scale(1.2); } 
+            0%, 100% { opacity: 0.1; transform: scale(0.8); } 
+            50% { opacity: 0.9; transform: scale(1.3); } 
         }
 
-        /* 1. CARD DO TÍTULO */
+        @keyframes cair {
+            0% { transform: rotate(-35deg) translateX(0); opacity: 0; width: 0px; }
+            10% { opacity: 0.8; width: 60px; }
+            30% { transform: rotate(-35deg) translateX(-400px); opacity: 0; width: 0px; }
+            100% { transform: rotate(-35deg) translateX(-400px); opacity: 0; width: 0px; }
+        }
+
+        /* CONTROLES DE ÁUDIO LUXUOSOS (TOPO DIREITO) */
+        .player-luxo {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: rgba(4, 10, 23, 0.75);
+            backdrop-filter: blur(15px);
+            padding: 8px 16px;
+            border-radius: 30px;
+            border: 1px solid rgba(138, 111, 39, 0.3);
+            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.5);
+        }
+
+        .btn-audio {
+            background: none;
+            border: none;
+            color: var(--ouro-escuro);
+            font-family: 'Cinzel', serif;
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+
+        .btn-audio:hover {
+            color: var(--ouro-ativo);
+            text-shadow: 0 0 8px rgba(197, 168, 98, 0.5);
+        }
+
+        .controle-volume {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .vol-slider {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 70px;
+            height: 2px;
+            background: rgba(138, 111, 39, 0.25);
+            outline: none;
+        }
+
+        .vol-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--ouro-escuro);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .vol-slider::-webkit-slider-thumb:hover {
+            background: var(--ouro-ativo);
+            transform: scale(1.3);
+        }
+
+        /* 1. CARD DO TÍTULO PRATA */
         .card-titulo {
             width: 100%;
-            max-width: 700px;
-            margin-bottom: 25px;
-            padding: 2px;
+            max-width: 750px;
+            margin-bottom: 30px;
+            padding: 1px;
             border-radius: 12px;
-            background: linear-gradient(135deg, var(--ouro-brilhante), rgba(197, 168, 98, 0.2));
+            background: rgba(226, 232, 240, 0.15);
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .card-titulo:hover {
+            transform: scale(1.01);
         }
 
         .titulo-interno {
-            background: rgba(15, 23, 42, 0.9);
-            padding: 20px;
-            border-radius: 10px;
+            background: var(--azul-card-luxo);
+            padding: 22px;
+            border-radius: 11px;
             text-align: center;
         }
 
         .titulo-ferro { 
             font-family: 'Cinzel', serif; 
-            font-size: 2.2rem; 
-            letter-spacing: 6px; 
-            color: var(--ouro-ativo);
-            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+            font-size: 2.1rem; 
+            letter-spacing: 8px; 
+            color: var(--prata-brilhante);
+            text-shadow: 0 2px 15px rgba(255,255,255,0.1);
         }
 
-        /* 2. CARD DE CONTEÚDO */
+        /* 2. CARD DE CONTEÚDO (Borda de Ouro Infinita Correndo) */
         .card-conteudo {
             position: relative; 
-            max-width: 700px; 
+            max-width: 750px; 
             width: 100%;
-            padding: 2px; 
+            padding: 3px; 
             border-radius: 20px; 
             overflow: hidden;
-            background: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(197, 168, 98, 0.25);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+            background: var(--azul-card-luxo);
+            box-shadow: 0 25px 55px rgba(0, 0, 0, 0.7);
             margin-bottom: 40px;
+            transform: scale(0.98);
+            transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .card-conteudo:hover {
+            transform: scale(1.01);
+        }
+
+        /* Efeito de Borda Infinita Dourada Perfeita */
+        .card-conteudo::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(
+                from 0deg,
+                transparent 25%,
+                rgba(138, 111, 39, 0.3) 45%,
+                var(--ouro-ativo) 50%,
+                rgba(138, 111, 39, 0.3) 55%,
+                transparent 75%
+            );
+            animation: ouroInfinito 6s linear infinite;
+            z-index: 1;
+        }
+
+        @keyframes ouroInfinito {
+            100% { transform: rotate(360deg); }
         }
 
         .papel-antigo {
-            background: rgba(15, 23, 42, 0.85);
-            backdrop-filter: blur(10px);
-            padding: 40px; 
-            border-radius: 18px;
+            position: relative;
+            z-index: 2; 
+            background: rgba(4, 10, 23, 0.96);
+            backdrop-filter: blur(20px);
+            padding: 45px; 
+            border-radius: 17px; 
+            display: flex;
+            flex-direction: column;
         }
 
-        /* Animação do Observer para os parágrafos */
+        /* Parágrafos dinâmicos */
         .paragrafo-futurista {
-            line-height: 1.8; 
-            font-size: 1.1rem; 
+            line-height: 1.9; 
+            font-size: 1.08rem; 
             text-align: justify;
-            margin-bottom: 22px; 
-            color: #cbd5e1;
+            margin-bottom: 24px; 
+            color: #94a3b8;
             opacity: 0;
-            transform: translateY(15px);
-            transition: opacity 0.8s ease, transform 0.8s ease;
+            transform: translateY(20px);
+            transition: opacity 0.9s ease, transform 0.9s ease;
+        }
+
+        .paragrafo-futurista strong {
+            color: var(--prata-brilhante);
+            font-weight: 700;
         }
 
         .paragrafo-futurista.visivel {
@@ -125,63 +263,79 @@
         }
         
         .paragrafo-futurista:last-of-type { 
-            margin-bottom: 35px; 
+            margin-bottom: 40px; 
         }
 
-        /* Citação Estilizada */
+        /* Citação Estilizada Ouro */
         .citacao-luxo {
             font-style: italic;
-            border-left: 3px solid var(--ouro-ativo);
+            border-left: 2px solid var(--ouro-ativo);
             padding-left: 20px;
-            margin: 30px 0;
+            margin: 35px 0;
             color: var(--ouro-ativo);
             font-size: 1.15rem;
-            line-height: 1.6;
+            line-height: 1.7;
             text-align: left;
         }
 
-        /* Botão Próximo */
-        .btn-proximo {
-            display: block;
+        /* Alinhamento do botão no canto direito */
+        .container-botao {
             width: 100%;
-            padding: 16px 20px; 
-            border: 1px solid var(--ouro-brilhante);
-            background: rgba(15, 23, 42, 0.9); 
-            color: var(--ouro-ativo);
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        /* Botão Próximo Elegante Prateado */
+        .btn-proximo {
+            display: inline-block;
+            width: auto;
+            min-width: 260px;
+            padding: 15px 35px; 
+            border: 1px solid rgba(226, 232, 240, 0.3);
+            background: linear-gradient(135deg, rgba(4, 10, 23, 0.95), rgba(15, 23, 42, 0.6));
+            color: var(--prata-brilhante);
             border-radius: 30px; 
             cursor: pointer; 
             font-family: 'Cinzel', serif; 
             font-weight: 700; 
-            font-size: 0.95rem;
+            font-size: 0.85rem;
             transition: all 0.4s ease; 
             text-transform: uppercase; 
-            letter-spacing: 4px;
-            text-shadow: 0 2px 5px rgba(0,0,0,0.5);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+            letter-spacing: 3px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
         }
         
         .btn-proximo:hover { 
-            background: var(--ouro-brilhante); 
-            color: #ffffff; 
-            border-color: var(--ouro-ativo);
-            box-shadow: 0 0 25px rgba(197, 168, 98, 0.35); 
+            border-color: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 0 25px rgba(226, 232, 240, 0.2); 
             transform: translateY(-2px);
+            color: #ffffff;
         }
 
-        /* Mobile */
+        /* Responsividade Minimalista */
         @media (max-width: 680px) {
-            body { padding: 40px 15px; }
-            .titulo-ferro { font-size: 1.7rem; letter-spacing: 4px; }
+            body { padding: 90px 15px 40px 15px; }
+            .player-luxo { top: 20px; right: 20px; padding: 6px 12px; }
+            .vol-slider { width: 50px; }
+            .titulo-ferro { font-size: 1.6rem; letter-spacing: 5px; }
             .papel-antigo { padding: 30px 20px; }
             .paragrafo-futurista { font-size: 1rem; line-height: 1.7; text-align: left; }
-            .citacao-luxo { font-size: 1.05rem; padding-left: 15px; }
-            .btn-proximo { font-size: 0.9rem; letter-spacing: 2px; }
+            .container-botao { justify-content: center; }
+            .btn-proximo { width: 100%; text-align: center; }
         }
     </style>
 </head>
 <body>
 
     <div id="cosmos"></div>
+
+    <div class="player-luxo">
+        <button class="btn-audio" id="btnPlayPause" onclick="togglePlay()">PAUSE</button>
+        <div class="controle-volume">
+            <span class="btn-audio" style="cursor:default; font-size:0.55rem; opacity:0.7;">VOL</span>
+            <input type="range" class="vol-slider" id="sliderVolume" min="0" max="1" step="0.05" oninput="ajustarVolume(this.value)">
+        </div>
+    </div>
 
     <div class="card-titulo">
         <div class="titulo-interno">
@@ -192,23 +346,25 @@
     <div class="card-conteudo" id="meuCard">
         <div class="papel-antigo">
             
-            <p class="paragrafo-futurista">Hoje compreendo com total clareza que o que habita em mim não se molda aos padrões de um "amor romântico" comum, daqueles que exigem reciprocidade, presença ou posse. O que sinto transborda como uma <strong>atração muito forte</strong>, limpa e genuína — um desejo profundo e insistentemente puro de te ver caminhar em direção ao seu melhor destino, brilhando na sua própria órbita. É a evolução de um sentimento que aprendeu a admirar sem precisar tocar.</p>
+            <p class="paragrafo-futurista">Hoje compreendo com total clareza que o que habita em mim não se molda aos padrões do amor comum — aquele que exige reciprocidade, presença ou posse. O que sinto transborda como uma admiração viva, limpa e genuína: um desejo profundo de te ver caminhar em direção ao seu melhor destino, brilhando na sua própria órbita. É a evolução de um afeto que aprendeu a contemplar sem precisar tocar.</p>
             
-            <p class="paragrafo-futurista">Guardo uma gratidão que as palavras mal conseguem tatear por você ter me acolhido e validado quando o meu chão parecia ceder. Você me enxergou e me deu espaço não apenas como alguém sob seus cuidados técnicos, mas como mulher, respeitando minha essência e minha individualidade. Há uma fortaleza silenciosa e admirável no seu olhar; uma firmeza profissional que me serviu de bússola quando eu mais precisava encontrar o norte.</p>
+            <p class="paragrafo-futurista">Guardo uma gratidão que as palavras mal conseguem tatear por você ter me acolhido quando o meu chão parecia ceder. Você me enxergou e validou a minha existência não apenas sob a ótica dos seus cuidados técnicos, mas respeitando minha essência e minha individualidade no momento em que eu mais precisava. Há uma fortaleza silenciosa no seu olhar; uma firmeza profissional que me serviu de bússola quando eu precisava reencontrar o norte.</p>
  
-            <p class="paragrafo-futurista">Olhando para trás, percebo o quanto sua presença foi um divisor de águas. Você entrou na minha vida em um momento de transição e profunda vulnerabilidade, e sua postura não foi apenas um suporte temporário, mas um alicerce para que eu redescobrisse minha própria força. Essa jornada não seria a mesma sem o eco das suas palavras e o acolhimento seguro que encontrei na sua conduta.</p>
+            <p class="paragrafo-futurista">Sua presença foi um divisor de águas. Você entrou na minha vida em um período de transição e profunda vulnerabilidade, e sua conduta não foi um suporte temporário, mas o alicerce para que eu redescobrisse minha própria força. Essa jornada não teria a mesma luz sem o eco das suas palavras e a segurança que encontrei no seu espaço de escuta.</p>
  
             <p class="paragrafo-futurista citacao-luxo">
                "A verdadeira felicidade não reside na ausência de problemas, mas na capacidade de encontrar serenidade mesmo quando o horizonte é incerto."
             </p>
  
-            <p class="paragrafo-futurista">A realidade nua e crua é que existem pessoas que cruzam nosso caminho para redefinir nossa história, e você é, sem dúvida, uma das mais importantes na minha. Essa busca por equilíbrio e lucidez me fez entender que o afeto mais nobre é aquele que sabe o seu lugar e caminha de mãos dadas com o respeito. Admiro profundamente a barreira ética que protege a sua postura impecável, e é justamente por valorizar quem você é que transformo essa admiração em combustível para a minha própria evolução.</p>
+            <p class="paragrafo-futurista">A realidade nua e crua é que existem pessoas que cruzam nosso caminho para redefinir nossa história, e você mudou a minha. Essa busca por lucidez me fez entender que o afeto mais nobre é aquele que reconhece o seu lugar e caminha de mãos dadas com o respeito. Admiro profundamente a barreira ética que protege a sua postura impecável, e é justamente por valorizar quem você é que transformo essa admiração em combustível para a minha própria evolução.</p>
  
-            <p class="paragrafo-futurista">Saber que, de alguma forma, você torce pelo meu sucesso profissional, pela minha stabileza e pela minha paz é o maior prêmio que eu poderia desejar levar dessa convivência. Você se tornou um farol nesta fase da minha vida: alguém que eu não busco reter, mas que faço questão de reverenciar pela importância imensa que teve no meu amadurecimento.</p>
+            <p class="paragrafo-futurista">Saber que, de alguma forma, você torce pelo meu sucesso, pela minha estabilidade e pela minha paz é o maior prêmio que posso levar dessa convivência. Você se tornou um farol nesta fase: alguém que eu não busco reter, mas que faço questão de reverenciar pela importância imensa que teve no meu amadurecimento.</p>
  
-            <p class="paragrafo-futurista">Assim, com o coração em paz e a mente lúcida, sigo em frente. Guardo a beleza e o impacto real desse encontro em um lugar nobre e seguro da minha memória, convicta de que encontrar essa serenidade interna é o passo definitivo para a verdadeira felicidade.</p>
+            <p class="paragrafo-futurista">Assim, com o coração em paz e a mente lúcida, sigo em frente. Guardo o impacto real desse encontro em um lugar nobre e seguro da minha memória, convicta de que encontrar essa serenidade interna é o meu passo definitivo para a verdadeira felicidade.</p>
  
-            <button class="btn-proximo" onclick="irParaEstrada()">Seguir para Estrada</button>
+            <div class="container-botao">
+                <button class="btn-proximo" onclick="irParaEstrada()">Seguir para Estrada</button>
+            </div>
         </div>
     </div>
  
@@ -217,50 +373,81 @@
     <script>
         const audio = document.getElementById('musica');
         const cosmos = document.getElementById('cosmos');
+        const btnPlayPause = document.getElementById('btnPlayPause');
+        const sliderVolume = document.getElementById('sliderVolume');
 
-        // Transição suave ao carregar a página e início do áudio integrado
         window.addEventListener('DOMContentLoaded', () => {
             document.body.style.opacity = '1';
             
-            // Verifica o estado que veio de páginas anteriores
             const tempoSalvo = localStorage.getItem('audioTempo');
             const audioVolume = localStorage.getItem('audioVolume');
             
             if (audioVolume !== null) {
                 audio.volume = parseFloat(audioVolume);
             } else {
-                audio.volume = 0.5; // Padrão confortável se for o primeiro carregamento
+                audio.volume = 0.4; 
             }
+            sliderVolume.value = audio.volume;
 
             if (tempoSalvo !== null) {
                 audio.currentTime = parseFloat(tempoSalvo);
             }
 
-            // Tenta reproduzir se a política do navegador permitir ou se veio ativo
             audio.play().then(() => {
+                btnPlayPause.textContent = "PAUSE";
                 localStorage.setItem('audioTocando', 'true');
             }).catch(() => {
-                console.log("Interação com a página pendente para ativar o som.");
+                btnPlayPause.textContent = "PLAY";
             });
         });
+
+        function togglePlay() {
+            if (audio.paused) {
+                audio.play();
+                btnPlayPause.textContent = "PAUSE";
+                localStorage.setItem('audioTocando', 'true');
+            } else {
+                audio.pause();
+                btnPlayPause.textContent = "PLAY";
+                localStorage.setItem('audioTocando', 'false');
+            }
+        }
+
+        // Armazenamento em tempo real do volume para persistência completa
+        function ajustarVolume(valor) {
+            audio.volume = parseFloat(valor);
+            localStorage.setItem('audioVolume', valor);
+        }
  
-        // Criar estrelas pulsantes cósmicas uniformes
-        for (let i = 0; i < 65; i++) {
+        // Criação de 100 Estrelas Pulsantes Incandescentes
+        for (let i = 0; i < 100; i++) {
             const estrela = document.createElement('div');
             estrela.className = 'estrela';
-            const size = Math.random() * 2.5 + 1;
+            const size = Math.random() * 2.2 + 0.8;
             estrela.style.width = size + 'px';
             estrela.style.height = size + 'px';
             estrela.style.top = Math.random() * 100 + '%';
             estrela.style.left = Math.random() * 100 + '%';
             estrela.style.animationDelay = Math.random() * 3 + 's';
-            estrela.style.animationDuration = (Math.random() * 3 + 2.5) + 's';
+            estrela.style.animationDuration = (Math.random() * 3 + 2) + 's';
             cosmos.appendChild(estrela);
         }
+
+        // Criação Espaçada de Meteoros / Estrelas Cadentes prateadas cadenciadas
+        for (let i = 0; i < 4; i++) {
+            const meteoro = document.createElement('div');
+            meteoro.className = 'estrela-cadente';
+            meteoro.style.top = (Math.random() * 40) + '%';
+            meteoro.style.left = (Math.random() * 50 + 40) + '%';
+            meteoro.style.animationDelay = (Math.random() * 8) + 's';
+            meteoro.style.animationDuration = (Math.random() * 3 + 3) + 's';
+            cosmos.appendChild(meteoro);
+        }
  
-        // Redirecionamento correto salvando o estado para a estrada.html
+        // Redirecionamento correto mantendo o fluxo do arquivo MP3 tocando
         function irParaEstrada() {
             localStorage.setItem('audioTempo', audio.currentTime);
+            localStorage.setItem('audioVolume', audio.volume);
             localStorage.setItem('audioTocando', !audio.paused);
             document.body.style.opacity = '0';
             setTimeout(() => {
@@ -268,18 +455,18 @@
             }, 800);
         }
  
-        // Intersection Observer para os parágrafos surgirem suavemente
+        // Intersection Observer suave para os parágrafos surgirem
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('visivel');
                 }
             });
-        }, { threshold: 0.08 });
+        }, { threshold: 0.05 });
  
         document.querySelectorAll('.paragrafo-futurista').forEach(p => observer.observe(p));
 
-        // Atualiza constantemente o tempo no localStorage enquanto a faixa toca
+        // Guarda o tempo a cada segundo para evitar dessincronização entre páginas
         setInterval(() => {
             if (!audio.paused) {
                 localStorage.setItem('audioTempo', audio.currentTime);
