@@ -14,7 +14,7 @@
             --ouro-escuro: #614d1a;
             --ouro-ativo: #d4af37;
             --prata-fino: #e2e8f0;
-            --papel-antigo: rgba(245, 230, 196, 0.03); /* Fundo harmonioso e sutil para os cards */
+            --fundo-card: #020617;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -34,11 +34,10 @@
             align-items: center;
             overflow-x: hidden;
             overflow-y: auto;
-            padding: 80px 20px 120px 20px; /* Espaço inferior para o botão posicionado */
+            padding: 80px 20px 120px 20px;
             position: relative;
         }
 
-        /* FUNDO CÓSMICO E ESTRELAS INCANDESCENTES MULTIDIMENSIONAIS */
         .fundo-cosmos { 
             position: fixed; 
             top: 0; left: 0; 
@@ -51,20 +50,19 @@
             position: absolute; 
             background: #ffffff; 
             border-radius: 50%; 
-            box-shadow: 0 0 12px 3px rgba(255, 255, 255, 0.6);
+            box-shadow: 0 0 14px 4px rgba(226, 232, 240, 0.8);
             animation: brilhar 3s infinite ease-in-out; 
         }
         
         @keyframes brilhar { 
-            0%, 100% { opacity: 0.2; transform: scale(0.7); } 
-            50% { opacity: 1; transform: scale(1.3); box-shadow: 0 0 16px 5px rgba(255, 255, 255, 0.8); } 
+            0%, 100% { opacity: 0.3; transform: scale(0.8); } 
+            50% { opacity: 1; transform: scale(1.4); box-shadow: 0 0 18px 6px rgba(255, 255, 255, 0.9); } 
         }
 
-        /* PAINEL DE CONTROLE DE ÁUDIO MINIMALISTA */
         .audio-container {
             position: fixed; top: 20px; right: 20px; z-index: 1000;
-            display: flex; align-items: center; gap: 12px; background: rgba(15, 23, 42, 0.8);
-            padding: 10px 16px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.1);
+            display: flex; align-items: center; gap: 12px; background: rgba(15, 23, 42, 0.85);
+            padding: 10px 16px; border-radius: 30px; border: 1px solid var(--ouro-escuro);
             backdrop-filter: blur(10px);
             box-shadow: 0 8px 32px rgba(0,0,0,0.5);
         }
@@ -89,15 +87,15 @@
             text-shadow: 0 4px 12px rgba(0,0,0,0.6);
         }
 
-        /* ENVELOPE DA CARTA COM CONTORNO OURO CORRENDO */
-        .carta-wrapper {
-            position: relative; max-width: 750px; width: 100%;
-            padding: 2px; border-radius: 20px; overflow: hidden;
+        /* EFEITO ORBITAL LUXUOSO NAS BORDAS */
+        .carta-wrapper, .card-musica-wrapper {
+            position: relative; padding: 2px; border-radius: 20px; overflow: hidden;
             box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
-            margin-bottom: 50px;
         }
+
+        .carta-wrapper { max-width: 750px; width: 100%; margin-bottom: 50px; }
         
-        .carta-wrapper::before {
+        .carta-wrapper::before, .card-musica-wrapper::before {
             content: ""; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
             background: conic-gradient(transparent, var(--ouro-escuro), var(--ouro-ativo), var(--ouro-escuro), transparent 35%);
             animation: rodar 6s linear infinite;
@@ -106,7 +104,7 @@
         @keyframes rodar { 100% { transform: rotate(360deg); } }
 
         .carta-container {
-            background: #020617; padding: 45px; border-radius: 18px;
+            background: var(--fundo-card); padding: 45px; border-radius: 18px;
             line-height: 1.9; font-size: 1.15rem; text-align: justify;
             position: relative; z-index: 1;
             border: 1px solid rgba(255, 255, 255, 0.03);
@@ -121,7 +119,6 @@
         
         .carta-container p:last-child { margin-bottom: 0; }
 
-        /* GRID DE MÚSICAS LUXUOSO E DE LINDAS BORDAS */
         .grid-musicas { 
             display: grid; 
             grid-template-columns: repeat(2, 1fr); 
@@ -129,25 +126,25 @@
             max-width: 750px; 
             width: 100%; 
         }
+
+        .card-musica-wrapper { border-radius: 14px; text-decoration: none; }
         
         .card-musica {
-            background: var(--papel-antigo); 
+            background: var(--fundo-card); 
             padding: 22px; 
-            border-radius: 14px;
-            border: 1px solid var(--ouro-escuro); 
-            text-decoration: none; 
+            border-radius: 13px;
             color: var(--prata-fino);
-            position: relative;
-            overflow: hidden;
+            position: relative; z-index: 1;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
             backdrop-filter: blur(4px);
-            transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), border-color 0.4s ease, box-shadow 0.4s ease;
+            transition: background 0.4s ease;
         }
         
-        .card-musica:hover { 
-            border-color: var(--ouro-ativo); 
-            background: rgba(255, 255, 255, 0.05); 
-            transform: scale(1.04) translateY(-2px); 
-            box-shadow: 0 10px 25px rgba(212, 175, 55, 0.15);
+        .card-musica-wrapper:hover .card-musica { 
+            background: rgba(30, 41, 59, 0.9); 
         }
         
         .card-musica strong { 
@@ -157,10 +154,10 @@
             color: var(--ouro-ativo); 
             font-size: 0.95rem; 
             letter-spacing: 1px;
-            transition: color 0.3s;
+            transition: text-shadow 0.3s;
         }
         
-        .card-musica:hover strong {
+        .card-musica-wrapper:hover strong {
             color: #ffffff;
             text-shadow: 0 0 8px rgba(212, 175, 55, 0.6);
         }
@@ -173,30 +170,22 @@
             color: #cbd5e1;
         }
 
-        /* CONTAINER E BOTÃO "PRÓXIMA" NO CANTO INFERIOR COM MÁXIMO LUXO SUTIL */
         .container-botao-fim {
-            width: 100%;
-            max-width: 750px;
-            display: flex;
-            justify-content: flex-end;
-            margin-top: 60px;
+            width: 100%; max-width: 750px; display: flex; justify-content: flex-end; margin-top: 60px;
         }
 
         .btn-fim {
             padding: 16px 50px; 
             border: 1px solid var(--ouro-escuro);
-            background: rgba(15, 23, 42, 0.6); 
+            background: rgba(15, 23, 42, 0.7); 
             color: var(--ouro-ativo);
             border-radius: 30px; 
             cursor: pointer; 
             font-family: 'Cinzel', serif;
-            font-weight: 700;
-            font-size: 0.95rem;
+            font-weight: 700; font-size: 0.95rem;
             transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); 
-            text-transform: uppercase; 
-            letter-spacing: 4px;
-            text-decoration: none;
-            text-align: center;
+            text-transform: uppercase; letter-spacing: 4px;
+            text-decoration: none; text-align: center;
             box-shadow: 0 6px 20px rgba(0,0,0,0.5);
             backdrop-filter: blur(5px);
         }
@@ -205,11 +194,10 @@
             background: var(--ouro-escuro); 
             color: #ffffff; 
             border-color: var(--ouro-ativo);
-            box-shadow: 0 0 25px rgba(212, 175, 55, 0.3);
+            box-shadow: 0 0 25px rgba(212, 175, 55, 0.4);
             transform: translateY(-3px);
         }
 
-        /* ADAPTAÇÃO TOTAL PARA DISPOSITIVOS MÓVEIS (CELULARES) */
         @media (max-width: 768px) {
             body { padding: 90px 15px 60px 15px; }
             h1 { font-size: 1.5rem; letter-spacing: 4px; margin-bottom: 35px; }
@@ -227,7 +215,7 @@
 
     <div class="audio-container">
         <button class="btn-audio" id="btn-audio" onclick="alternarAudio()">⏸️</button>
-        <input type="range" class="slider-volume" id="controle-volume" min="0" max="1" step="0.05" value="1" oninput="ajustarVolume(this.value)">
+        <input type="range" class="slider-volume" id="controle-volume" min="0" max="1" step="0.05" value="0.5" oninput="ajustarVolume(this.value)">
     </div>
 
     <h1>Em Busca do Horizonte</h1>
@@ -236,49 +224,65 @@
         <div class="carta-container">
             <p>Talvez a maior beleza da vida esteja na coragem de sermos vulneráveis, mesmo quando sabemos que o roteiro não prevê um final a dois...</p>
             <p>É a primeira vez que me vejo assim, traduzindo um sentimento que não exige nada em troca.</p>
-            <p>Nas consultas, o silêncio entre as palavras carregava o peso de quem enxerga além do diagnóstico. O jaleco, que deveria ser apenas um símbolo de cura, tornou-se para mim um cenário onde aprendi, nas entrelinhas, o valor da sua dedicação. Sua humanidade foi o meu melhor remédio, uma bússola para as minhas incertezas, e a clareza com que você conduz nossas sessões é o que me devolve o chão toda vez que sinto que vou flutuar para longe de mim mesma.</p>
+            <p>Nas consultas, o silêncio entre as palavras carregava o peso de quem enxerga além do diagnóstico. O jaleco, que deveria ser apenas um símbolo de cura, tornou-se para mim um cenário onde aprendi, nas entrelinhas, o valor da sua dedicação. Sua humanidade foi o meu melhor remédio, uma bússola para as minhas incertezas, e a clareza com que você conduz nossas sessões é o que me devolve o chão toda vez que sinto que vou flutuar para longe de mijm mesma.</p>
             <p>Gostaria apenas que, no futuro, ao pensar em mim, você se lembre de uma paciente que você lutou para ver livre do peso dos remédios.</p>
             <p>Encerro este assunto aqui, com o coração em paz e uma admiração que ultrapassa o consultório, guardando para sempre o brilho de quem você é na minha estrada.</p>
         </div>
     </div>
 
     <div class="grid-musicas">
-        <a class="card-musica" href="https://youtu.be/G0WTFfZqjz0" target="_blank">
-            <strong>Can't Help Falling In Love</strong>
-            <p>Essa música seria a qual amaria dançar com você.</p>
+        <a class="card-musica-wrapper" href="https://youtu.be/G0WTFfZqjz0" target="_blank">
+            <div class="card-musica">
+                <strong>Can't Help Falling In Love</strong>
+                <p>Essa música seria a qual amaria dançar com você.</p>
+            </div>
         </a>
-        <a class="card-musica" href="https://youtu.be/Ri7-vnrJD3k" target="_blank">
-            <strong>Set Fire To The Rain</strong>
-            <p>Tatuado no braço, algo surreal e mágico.</p>
+        <a class="card-musica-wrapper" href="https://youtu.be/Ri7-vnrJD3k" target="_blank">
+            <div class="card-musica">
+                <strong>Set Fire To The Rain</strong>
+                <p>Tatuado no braço, algo surreal e mágico.</p>
+            </div>
         </a>
-        <a class="card-musica" href="https://youtu.be/fV4DiAyExN0" target="_blank">
-            <strong>The Reason</strong>
-            <p>Maturidade da relação e aprendizado.</p>
+        <a class="card-musica-wrapper" href="https://youtu.be/fV4DiAyExN0" target="_blank">
+            <div class="card-musica">
+                <strong>The Reason</strong>
+                <p>Maturidade da relação e aprendizado.</p>
+            </div>
         </a>
-        <a class="card-musica" href="https://youtu.be/ksNoe8W2jTc" target="_blank">
-            <strong>How Can I Go On</strong>
-            <p>Imagino eu e você vendo essa ópera.</p>
+        <a class="card-musica-wrapper" href="https://youtu.be/ksNoe8W2jTc" target="_blank">
+            <div class="card-musica">
+                <strong>How Can I Go On</strong>
+                <p>Imagino eu e você vendo essa ópera.</p>
+            </div>
         </a>
-        <a class="card-musica" href="https://youtu.be/0xEB1wIy4OE" target="_blank">
-            <strong>The Power Of Love</strong>
-            <p>Um dos meus sonhos em Las Vegas.</p>
+        <a class="card-musica-wrapper" href="https://youtu.be/0xEB1wIy4OE" target="_blank">
+            <div class="card-musica">
+                <strong>The Power Of Love</strong>
+                <p>Um dos meus sonhos em Las Vegas.</p>
+            </div>
         </a>
-        <a class="card-musica" href="https://youtu.be/JRfuAukYTKg" target="_blank">
-            <strong>Titanium</strong>
-            <p>Homenagem ao Pietro, algo inabalável.</p>
+        <a class="card-musica-wrapper" href="https://youtu.be/JRfuAukYTKg" target="_blank">
+            <div class="card-musica">
+                <strong>Titanium</strong>
+                <p>Homenagem ao Pietro, algo inabalável.</p>
+            </div>
         </a>
-        <a class="card-musica" href="https://youtu.be/rtOvBOTyX00" target="_blank">
-            <strong>A Thousand Years</strong>
-            <p>Pretendo cantar no meu futuro casamento.</p>
+        <a class="card-musica-wrapper" href="https://youtu.be/rtOvBOTyX00" target="_blank">
+            <div class="card-musica">
+                <strong>A Thousand Years</strong>
+                <p>Pretendo cantar no meu futuro casamento.</p>
+            </div>
         </a>
-        <a class="card-musica" href="https://youtu.be/u9Dg-g7t2l4" target="_blank">
-            <strong>The Sound Of Silence</strong>
-            <p>A profundidade do silêncio.</p>
+        <a class="card-musica-wrapper" href="https://youtu.be/u9Dg-g7t2l4" target="_blank">
+            <div class="card-musica">
+                <strong>The Sound Of Silence</strong>
+                <p>A profundidade do silêncio.</p>
+            </div>
         </a>
     </div>
 
     <div class="container-botao-fim">
-        <a href="fim.html" class="btn-fim" onclick="salvarEstadoAudio()">Próxima</a>
+        <a href="felicidade.html" class="btn-fim" onclick="salvarEstadoAudio()">Próxima</a>
     </div>
 
     <audio id="audio" src="sua-musica.mp3" loop></audio>
@@ -289,7 +293,6 @@
         const controleVolume = document.getElementById('controle-volume');
         const cosmos = document.getElementById('cosmos');
 
-        // GERADOR DE ESTRELAS DINÂMICAS E SUTIS
         function criarEstrelas() {
             const numeroEstrelas = window.innerWidth < 768 ? 35 : 80;
             for(let i=0; i<numeroEstrelas; i++) {
@@ -306,7 +309,6 @@
             }
         }
 
-        // SISTEMA DE SINCRONIZAÇÃO E MANUTENÇÃO CONTÍNUA DO ÁUDIO
         window.addEventListener('DOMContentLoaded', () => {
             criarEstrelas();
 
@@ -314,12 +316,13 @@
             const audioTempo = localStorage.getItem('audioTempo');
             const audioVolume = localStorage.getItem('audioVolume');
 
+            // Mantém sempre em 50% por padrão se não houver alteração manual
             if (audioVolume !== null) {
-                audio.volume = audioVolume;
+                audio.volume = parseFloat(audioVolume);
                 controleVolume.value = audioVolume;
             } else {
-                audio.volume = 0.4;
-                controleVolume.value = 0.4;
+                audio.volume = 0.5;
+                controleVolume.value = 0.5;
             }
 
             if (audioTempo !== null) {
@@ -359,7 +362,6 @@
             localStorage.setItem('audioTocando', !audio.paused);
         }
 
-        // Garante a gravação contínua do tempo decorrido
         setInterval(() => {
             if (!audio.paused) {
                 localStorage.setItem('audioTempo', audio.currentTime);
