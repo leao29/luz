@@ -60,7 +60,7 @@
             50% { opacity: 1; transform: scale(1.4); box-shadow: 0 0 18px 6px rgba(255, 255, 255, 0.9); } 
         }
 
-        /* PLAYER DE ÁUDIO ULTRA REFINADO E SUTIL */
+        /* PLAYER DE ÁUDIO REFINADO */
         .audio-container {
             position: fixed; top: 25px; right: 25px; z-index: 1000;
             display: flex; align-items: center; gap: 16px; 
@@ -106,7 +106,7 @@
         }
         .slider-volume::-webkit-slider-thumb:hover { transform: scale(1.3); }
 
-        /* CARD DE TITULO, CARTA E INSTRUÇÃO (COM EFEITO GIRATÓRIO) */
+        /* CARDS E EFEITOS BORDAS GIRATÓRIAS */
         .carta-wrapper, .card-titulo-wrapper, .card-instrucao-wrapper {
             position: relative; padding: 2px; border-radius: 20px; overflow: hidden;
             box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
@@ -157,7 +157,7 @@
             color: #ffffff; text-shadow: 0px 2px 4px rgba(0,0,0,0.9);
         }
 
-        /* GRID DE MÚSICAS ATUALIZADO (REFINADO, SEM BRANCO, COM SOMBRA À ESQUERDA) */
+        /* GRID DE MÚSICAS */
         .grid-musicas { 
             display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; 
             max-width: 750px; width: 100%; 
@@ -170,7 +170,6 @@
             transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.4s ease;
         }
 
-        /* Efeito sutil: Apenas zoom e sombra refinada puxando para o lado esquerdo */
         .card-musica-link:hover, .card-musica-link:active {
             transform: scale(1.03);
             box-shadow: -12px 10px 25px rgba(212, 175, 55, 0.15), 0 10px 25px rgba(0,0,0,0.6);
@@ -317,10 +316,9 @@
         <a href="felicidade.html" class="btn-fim" id="btn-proxima">Próxima</a>
     </div>
 
-    <audio id="audio" src="sua-musica.mp3" loop></audio>
+    <audio id="audio" src="elvis.html.mp3" loop></audio>
 
     <script>
-        // Seleção de elementos do DOM
         const audio = document.getElementById('audio');
         const btnAudio = document.getElementById('btn-audio');
         const iconeAudio = document.getElementById('icone-audio');
@@ -328,46 +326,38 @@
         const cosmos = document.getElementById('cosmos');
         const btnProxima = document.getElementById('btn-proxima');
 
-        // Variável de controle para evitar conflitos de execução do áudio
         let estaAtivandoAudio = false;
 
-        // Criação otimizada das estrelas usando DocumentFragment (evita travamentos)
+        const htmlPause = '<span></span><span></span>';
+        const htmlPlay = '<div style="width: 0; height: 0; border-top: 7px solid transparent; border-bottom: 7px solid transparent; border-left: 12px solid var(--ouro-ativo); margin-left: 2px;"></div>';
+
         function criarEstrelas() {
             if (!cosmos) return;
-            
             const fragmento = document.createDocumentFragment();
-            const numeroEstrelas = window.innerWidth < 768 ? 35 : 80;
+            const numeroEstrelas = window.innerWidth < 768 ? 35 : 75;
             
             for (let i = 0; i < numeroEstrelas; i++) {
                 const star = document.createElement('div');
                 star.className = 'estrela';
-                const s = Math.random() * 2 + 1;
+                const s = Math.random() * 2 + 0.8;
                 
                 star.style.width = `${s}px`; 
                 star.style.height = `${s}px`;
                 star.style.top = `${Math.random() * 100}%`; 
                 star.style.left = `${Math.random() * 100}%`;
-                star.style.animationDelay = `${Math.random() * 3}s`;
-                star.style.animationDuration = `${Math.random() * 2 + 2}s`;
+                star.style.animationDelay = `${Math.random() * 4}s`;
+                star.style.animationDuration = `${Math.random() * 3 + 2.5}s`;
                 
                 fragmento.appendChild(star);
             }
             cosmos.appendChild(fragmento);
         }
 
-        // Atualiza visualmente o botão de Play/Pause
         function atualizarIcone(playing) {
             if (!iconeAudio) return;
-            if (playing) {
-                iconeAudio.className = "icone-pause";
-                iconeAudio.innerHTML = "<span></span><span></span>";
-            } else {
-                iconeAudio.className = "icone-play";
-                iconeAudio.innerHTML = "";
-            }
+            iconeAudio.innerHTML = playing ? htmlPause : htmlPlay;
         }
 
-        // Gerencia o Play/Pause manual do usuário
         function alternarAudio() {
             if (estaAtivandoAudio) return;
 
@@ -378,7 +368,7 @@
                         atualizarIcone(true);
                         localStorage.setItem('audioTocando', 'true');
                     })
-                    .catch(err => console.error("Erro ao tocar áudio:", err))
+                    .catch(err => console.error("Erro ao tocar:", err))
                     .finally(() => estaAtivandoAudio = false);
             } else {
                 audio.pause();
@@ -387,40 +377,32 @@
             }
         }
 
-        // Ajusta o volume e salva a preferência
         function ajustarVolume(valor) {
             audio.volume = valor;
             localStorage.setItem('audioVolume', valor);
         }
 
-        // Salva o progresso atual do áudio antes de mudar de página
         function salvarEstadoAudio() {
             localStorage.setItem('audioTempo', audio.currentTime);
-            localStorage.setItem('audioTocando', 'true');
         }
 
-        // Pausa imediatamente ao ir para o YouTube
         function pausarParaVideo() {
             localStorage.setItem('audioTempo', audio.currentTime);
-            localStorage.setItem('audioTocando', 'true'); 
+            localStorage.setItem('audioTocando', 'false'); 
             audio.pause();
             atualizarIcone(false);
         }
 
-        // Tenta contornar o bloqueio de autoplay do navegador através de interações na tela
         function forcarAutoplay() {
             const audioTocando = localStorage.getItem('audioTocando');
-            
-            if ((audioTocando === 'true' || audioTocando === null) && audio.paused && !estaAtivandoAudio) {
+            if ((audioTocando !== 'false') && audio.paused && !estaAtivandoAudio) {
                 estaAtivandoAudio = true;
                 audio.play()
                     .then(() => {
                         atualizarIcone(true);
                         removerGatilhosDeInteracao();
                     })
-                    .catch(err => {
-                        console.log("Navegador ainda bloqueando o som. Aguardando interação definitiva...");
-                    })
+                    .catch(() => {})
                     .finally(() => estaAtivandoAudio = false);
             }
         }
@@ -437,7 +419,7 @@
             document.removeEventListener('scroll', forcarAutoplay);
         }
 
-        // ESSENCIAL: Sincroniza e retoma o áudio quando o usuário fecha o Youtube e volta para esta aba
+        // Retoma o áudio se o usuário voltar da aba do YouTube
         window.addEventListener('focus', () => {
             const audioTocando = localStorage.getItem('audioTocando');
             const audioTempo = localStorage.getItem('audioTempo');
@@ -446,46 +428,36 @@
                 audio.currentTime = parseFloat(audioTempo);
             }
 
-            if (audioTocando === 'true' && audio.paused && !estaAtivandoAudio) {
+            if (audioTocando !== 'false' && audio.paused && !estaAtivandoAudio) {
                 estaAtivandoAudio = true;
                 audio.play()
-                    .then(() => { 
-                        atualizarIcone(true); 
-                    })
-                    .catch(() => {
-                        adicionarGatilhosDeInteracao();
-                    })
+                    .then(() => { atualizarIcone(true); })
+                    .catch(() => { adicionarGatilhosDeInteracao(); })
                     .finally(() => estaAtivandoAudio = false);
             }
         });
 
-        // Evento contínuo antes de perder o foco para salvar o progresso (segurança extra)
         window.addEventListener('blur', () => {
             if (!audio.paused) {
                 localStorage.setItem('audioTempo', audio.currentTime);
             }
         });
 
-        // Inicialização ao carregar a página
         window.addEventListener('DOMContentLoaded', () => {
             criarEstrelas();
 
-            // Vincula os ouvintes de eventos de maneira limpa pelo JS
             if (btnAudio) btnAudio.addEventListener('click', alternarAudio);
             if (controleVolume) {
                 controleVolume.addEventListener('input', (e) => ajustarVolume(e.target.value));
             }
             if (btnProxima) {
-                btnProxima.addEventListener('click', () => {
-                    salvarEstadoAudio();
-                });
+                btnProxima.addEventListener('click', salvarEstadoAudio);
             }
 
             const audioTocando = localStorage.getItem('audioTocando');
             const audioTempo = localStorage.getItem('audioTempo');
             const audioVolume = localStorage.getItem('audioVolume');
 
-            // Restaura as configurações de volume salvas
             if (audioVolume !== null) {
                 audio.volume = parseFloat(audioVolume);
                 if (controleVolume) controleVolume.value = audioVolume;
@@ -494,20 +466,15 @@
                 if (controleVolume) controleVolume.value = 0.5;
             }
 
-            // Restaura o ponto exato da música vindo do prontuário
             if (audioTempo !== null) {
                 audio.currentTime = parseFloat(audioTempo);
             }
 
-            // Tenta iniciar o som automaticamente ou prepara os sensores de toque
-            if (audioTocando === 'true' || audioTocando === null) {
+            if (audioTocando !== 'false') {
                 estaAtivandoAudio = true;
                 audio.play()
-                    .then(() => {
-                        atualizarIcone(true);
-                    })
+                    .then(() => { atualizarIcone(true); })
                     .catch(() => {
-                        // Bloqueado pelo navegador: ativa o som na primeira rolagem ou clique
                         atualizarIcone(false);
                         adicionarGatilhosDeInteracao();
                     })
@@ -515,6 +482,13 @@
             } else {
                 atualizarIcone(false);
             }
+
+            // Atualiza o progresso dinamicamente
+            setInterval(() => {
+                if (!audio.paused) {
+                    localStorage.setItem('audioTempo', audio.currentTime);
+                }
+            }, 500);
         });
     </script>
 </body>
