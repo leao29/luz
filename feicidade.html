@@ -3,346 +3,450 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>O Caminho da Felicidade</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Orbitron:wght@400;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate, max-age=0">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>Em Busca do Horizonte</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --azul-cosmos: #03081e;
-            --ouro-escuro: linear-gradient(145deg, #3a2f0f, #735e22, #211b09);
-            --ouro-borda: linear-gradient(135deg, #4a3b13 0%, #8c7333 50%, #4a3b13 100%);
-            --prata-chumbado: linear-gradient(180deg, #ffffff 0%, #cbd5e1 45%, #64748b 55%, #334155 100%);
-            --texto-cor: #1c160e;
-            --prata-fina: #e2e8f0;
+            --cosmos-fundo: #01040a;
+            --ouro-escuro: #4a3b13;
+            --ouro-brilhante: #614d1a;
+            --ouro-ativo: #cca43b;
+            --prata-fino: #94a3b8;
+            --prata-brilhante: #e2e8f0;
+            --papel-antigo: rgba(2, 6, 23, 0.7);
         }
 
-        * { box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--cosmos-fundo); }
+        ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 3px; border: 1px solid var(--ouro-escuro); }
+        ::-webkit-scrollbar-thumb:hover { background: var(--ouro-ativo); }
 
         body {
-            margin: 0; padding: 0;
-            width: 100%; min-height: 100vh;
-            background-color: var(--azul-cosmos);
+            background-color: var(--cosmos-fundo);
+            color: var(--prata-brilhante);
             font-family: 'Lora', serif;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 60px 20px;
             overflow-x: hidden;
-            opacity: 0;
-            transition: opacity 0.8s ease;
-        }
-
-        /* Fundo Cósmico com Estrelas Geradas Dinamicamente */
-        #fundo-cosmos {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            z-index: -1;
-            background: radial-gradient(circle at center, #0a163a 0%, var(--azul-cosmos) 100%);
-        }
-
-        .estrela-prata {
-            position: absolute;
-            background: #e2e8f0;
-            border-radius: 50%;
-            animation: pulsar-prata 4s infinite ease-in-out;
-        }
-
-        @keyframes pulsar-prata {
-            0%, 100% { transform: scale(1); opacity: 0.2; box-shadow: 0 0 4px rgba(226,232,240,0.2); }
-            50% { transform: scale(2); opacity: 0.9; box-shadow: 0 0 12px rgba(226,232,240,0.8); }
-        }
-
-        /* Card Superior do Título */
-        .card-titulo-luxo {
-            background: var(--ouro-escuro);
-            padding: 4px;
-            border-radius: 15px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.7), inset 0 0 15px rgba(255,215,0,0.2);
-            margin-bottom: 40px;
-            width: 100%;
-            max-width: 800px;
-            display: flex;
-            justify-content: center;
-        }
-
-        .interno-titulo-luxo {
-            background: rgba(3, 8, 30, 0.85);
-            width: 100%;
-            padding: 20px;
-            border-radius: 12px;
-            border: 1px solid #8c7333;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        /* Título Prata Chumbado Metálico */
-        .titulo-prata {
-            font-family: 'Cinzel', serif;
-            font-size: 3rem;
-            font-weight: 900;
-            text-transform: uppercase;
-            letter-spacing: 12px;
-            text-align: center;
-            margin: 0;
-            background: var(--prata-chumbado);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            filter: drop-shadow(3px 4px 5px rgba(0, 0, 0, 0.9)) drop-shadow(-1px -1px 0px rgba(255,255,255,0.4));
-        }
-
-        /* Card Principal */
-        .card-principal {
-            max-width: 800px;
-            width: 100%;
-            background: var(--ouro-escuro);
-            padding: 5px;
-            border-radius: 24px;
-            box-shadow: 0 40px 80px rgba(0,0,0,0.9);
-        }
-
-        /* Container do Papel com Efeito de Zoom Avançado */
-        .zoom-wrapper {
-            width: 100%;
-            overflow: hidden;
-            border-radius: 20px;
-            transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.5s ease;
-        }
-
-        .card-principal:hover .zoom-wrapper,
-        .card-principal.touch-active .zoom-wrapper {
-            transform: scale(1.03);
-            box-shadow: 0 0 35px rgba(140, 115, 51, 0.5);
-        }
-
-        /* Folha de Papel Envelhecido com Bordas de Ouro Escuro */
-        .papel-antigo {
-            background-color: #f4ebd0;
-            background-image: url('https://www.transparenttextures.com/patterns/cream-paper.png');
-            padding: 50px 40px;
-            color: var(--texto-cor);
-            border: 8px double #4a3b13;
-            box-shadow: inset 0 0 50px rgba(74, 59, 19, 0.4);
+            overflow-y: auto;
+            padding: 100px 20px 120px 20px;
             position: relative;
         }
 
-        .painel-musica-inline {
-            background: rgba(3, 8, 30, 0.95);
-            border: 1px solid #8c7333;
-            padding: 12px 25px;
-            border-radius: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 15px;
+        /* FUNDO CÓSMICO */
+        .fundo-cosmos { 
+            position: fixed; 
+            top: 0; left: 0; 
+            width: 100%; height: 100%; 
+            z-index: -1; 
+            background: radial-gradient(circle at center, #0a1e3d 0%, var(--cosmos-fundo) 100%); 
+        }
+        
+        .estrela { 
+            position: absolute; 
+            background: #ffffff; 
+            border-radius: 50%; 
+            box-shadow: 0 0 12px 3px rgba(255, 255, 255, 0.6);
+            animation: brilhar 3s infinite ease-in-out; 
+        }
+        
+        @keyframes brilhar { 
+            0%, 100% { opacity: 0.2; transform: scale(0.7); } 
+            50% { opacity: 1; transform: scale(1.3); box-shadow: 0 0 16px 5px rgba(255, 255, 255, 0.8); } 
+        }
+
+        /* PAINEL DE CONTROLE DE ÁUDIO LUXUOSO */
+        .audio-container {
+            position: fixed; top: 20px; right: 20px; z-index: 1000;
+            display: flex; align-items: center; gap: 12px; 
+            background: rgba(1, 4, 10, 0.9);
+            padding: 10px 18px; border-radius: 30px; 
+            border: 1px solid var(--ouro-escuro);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.7), inset 0 0 10px rgba(97, 77, 26, 0.2);
+        }
+        
+        .btn-audio {
+            background: transparent; border: none;
+            color: var(--ouro-ativo); font-size: 1.1rem; cursor: pointer; 
+            display: flex; align-items: center; justify-content: center; transition: 0.3s;
+        }
+        
+        .slider-volume {
+            width: 75px; cursor: pointer; accent-color: var(--ouro-ativo);
+            background: var(--ouro-escuro); height: 4px; border-radius: 2px;
+        }
+
+        /* CARD DE TITULO LUXUOSO */
+        .card-titulo-wrapper {
+            position: relative; max-width: 750px; width: 100%;
+            padding: 1px; border-radius: 15px; overflow: hidden;
             margin-bottom: 40px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.6);
         }
-
-        .btn-controle {
-            background: #4a3b13;
-            border: 1px solid #8c7333;
-            color: #fff;
-            padding: 6px 16px;
-            border-radius: 15px;
-            font-family: 'Orbitron', sans-serif;
-            font-size: 0.75rem;
-            cursor: pointer;
-            transition: 0.3s;
+        .card-titulo-wrapper::before {
+            content: ""; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+            background: conic-gradient(transparent, var(--ouro-escuro), var(--ouro-ativo), var(--ouro-escuro), transparent 40%);
+            animation: rodar 8s linear infinite;
         }
-
-        .btn-controle:hover { background: #8c7333; }
-        .vol-slider { cursor: pointer; accent-color: #8c7333; width: 100px; }
-
-        /* Conteúdo do Texto Interno */
-        .card-historia {
-            background: rgba(253, 251, 247, 0.6);
-            border: 1px solid rgba(74, 59, 19, 0.15);
-            border-radius: 15px;
-            padding: 40px 30px;
-            box-shadow: inset 0 0 15px rgba(0,0,0,0.05);
+        .card-titulo-interno {
+            background: #020617; padding: 25px 20px; border-radius: 14px;
+            position: relative; z-index: 1; border: 1px solid rgba(97, 77, 26, 0.2);
+            text-align: center;
         }
-
-        /* Efeito Futurista na Rolagem */
-        .paragrafo-futurista {
-            font-size: 1.2rem;
-            line-height: 1.9;
-            text-align: justify;
-            margin-bottom: 25px;
-            opacity: 0;
-            filter: blur(8px);
-            transform: translateY(50px) scale(0.95);
-            transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .paragrafo-futurista.visivel {
-            opacity: 1;
-            filter: blur(0);
-            transform: translateY(0) scale(1);
-        }
-
-        /* Painel Inferior e Botão */
-        .painel-inferior {
-            margin-top: 40px;
-            width: 100%;
-            max-width: 800px;
-            display: flex;
-            justify-content: center;
-        }
-
-        .btn-navegacao {
-            background: linear-gradient(135deg, #1e293b, #0f172a);
-            color: var(--prata-fina);
-            border: 2px solid #8c7333;
-            padding: 16px 45px;
-            border-radius: 6px;
-            font-family: 'Orbitron', sans-serif;
-            letter-spacing: 3px;
+        h1 { 
+            font-family: 'Cinzel', serif; 
+            font-size: 1.8rem; 
+            letter-spacing: 5px; 
+            color: var(--prata-fino); 
+            font-weight: 700;
             text-transform: uppercase;
-            cursor: pointer;
-            transition: 0.4s;
-            box-shadow: 0 12px 30px rgba(0,0,0,0.6);
+            text-shadow: 
+                -1px -1px 0 rgba(255,255,255,0.1), 
+                1px -1px 0 rgba(255,255,255,0.1), 
+                -1px 1px 0 #334155, 
+                1px 1px 0 #1e293b,
+                3px 3px 8px rgba(0,0,0,0.8);
         }
 
-        .btn-navegacao:hover {
-            background: #4a3b13;
-            border-color: #ffffff;
-            letter-spacing: 5px;
-            box-shadow: 0 0 20px rgba(255,215,0,0.3);
+        /* ENVELOPE DA CARTA COM CONTORNO OURO CORRENDO */
+        .carta-wrapper {
+            position: relative; max-width: 750px; width: 100%;
+            padding: 2px; border-radius: 20px; overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+            margin-bottom: 30px;
+        }
+        
+        .carta-wrapper::before {
+            content: ""; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+            background: conic-gradient(transparent, var(--ouro-escuro), var(--ouro-ativo), var(--ouro-escuro), transparent 35%);
+            animation: rodar 6s linear infinite;
+        }
+        
+        @keyframes rodar { 100% { transform: rotate(360deg); } }
+
+        .carta-container {
+            background: #020617; padding: 45px; border-radius: 18px;
+            line-height: 1.9; font-size: 1.15rem; text-align: justify;
+            position: relative; z-index: 1;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            box-shadow: inset 0 0 30px rgba(0,0,0,0.8);
+        }
+        
+        .carta-container p {
+            margin-bottom: 20px;
+            opacity: 0.95;
+            color: #f1f5f9;
+        }
+        
+        .carta-container p:last-child { margin-bottom: 0; }
+
+        /* CARD DA MENSAGEM INTERMEDIÁRIA */
+        .card-intermediario {
+            max-width: 750px; width: 100%;
+            background: rgba(15, 23, 42, 0.5);
+            border-left: 4px solid var(--ouro-ativo);
+            border-right: 1px solid var(--ouro-escuro);
+            border-top: 1px solid var(--ouro-escuro);
+            border-bottom: 1px solid var(--ouro-escuro);
+            padding: 25px 30px;
+            border-radius: 12px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+            text-align: center;
+        }
+        .texto-intermediario {
+            font-family: 'Lora', serif;
+            font-style: italic;
+            font-weight: 700;
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: #e2e8f0;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
         }
 
+        /* GRID DE MÚSICAS LUXUOSO */
+        .grid-musicas { 
+            display: grid; 
+            grid-template-columns: repeat(2, 1fr); 
+            gap: 25px; 
+            max-width: 750px; 
+            width: 100%; 
+        }
+        
+        .card-musica {
+            background: var(--papel-antigo); 
+            padding: 24px; 
+            border-radius: 14px;
+            border: 1px solid var(--ouro-escuro); 
+            text-decoration: none; 
+            color: var(--prata-brilhante);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(4px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+            transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), border-color 0.4s ease, box-shadow 0.4s ease, background 0.4s ease;
+        }
+        
+        .card-musica:hover { 
+            border-color: var(--ouro-ativo); 
+            background: rgba(97, 77, 26, 0.15); 
+            transform: scale(1.05) translateY(-3px); 
+            box-shadow: 0 15px 30px rgba(212, 175, 55, 0.25);
+            z-index: 2;
+        }
+        
+        .card-musica strong { 
+            display: block; 
+            margin-bottom: 10px; 
+            font-family: 'Cinzel', serif; 
+            color: var(--ouro-ativo); 
+            font-size: 1rem; 
+            letter-spacing: 1px;
+            transition: color 0.3s, text-shadow 0.3s;
+        }
+        
+        .card-musica:hover strong {
+            color: #ffffff;
+            text-shadow: 0 0 10px rgba(212, 175, 55, 0.8);
+        }
+        
+        .card-musica p { 
+            font-size: 0.85rem; 
+            margin: 0; 
+            opacity: 0.8; 
+            line-height: 1.6;
+            color: #cbd5e1;
+        }
+
+        /* CONTAINER E BOTÃO "PRÓXIMA" NO CANTO INFERIOR */
+        .container-botao-fim {
+            width: 100%;
+            max-width: 750px;
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 60px;
+        }
+
+        .btn-fim {
+            padding: 16px 55px; 
+            border: 1px solid var(--ouro-brilhante);
+            background: rgba(15, 23, 42, 0.8); 
+            color: var(--ouro-ativo);
+            border-radius: 30px; 
+            cursor: pointer; 
+            font-family: 'Cinzel', serif;
+            font-weight: 700;
+            font-size: 0.95rem;
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); 
+            text-transform: uppercase; 
+            letter-spacing: 4px;
+            text-decoration: none;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.6);
+            backdrop-filter: blur(5px);
+        }
+        
+        .btn-fim:hover { 
+            background: var(--ouro-brilhante); 
+            color: #ffffff; 
+            border-color: var(--ouro-ativo);
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.4);
+            transform: translateY(-4px);
+        }
+
+        /* ADAPTAÇÃO TOTAL PARA DISPOSITIVOS MÓVEIS (CELULARES) */
         @media (max-width: 768px) {
-            .titulo-prata { font-size: 1.9rem; letter-spacing: 5px; }
-            .papel-antigo { padding: 35px 20px; border: 5px double #4a3b13; }
-            .card-historia { padding: 25px 15px; }
-            .btn-navegacao { width: 100%; padding: 16px 20px; }
+            body { padding: 90px 15px 60px 15px; }
+            .card-titulo-interno { padding: 20px 15px; }
+            h1 { font-size: 1.35rem; letter-spacing: 3px; }
+            .carta-container { padding: 30px 20px; font-size: 1.05rem; line-height: 1.8; }
+            .card-intermediario { padding: 20px; margin-bottom: 30px; }
+            .texto-intermediario { font-size: 0.95rem; }
+            .grid-musicas { grid-template-columns: 1fr; gap: 20px; }
+            
+            /* Zoom adaptado perfeitamente para interações de toque em celular */
+            .card-musica { padding: 20px; }
+            .card-musica:active {
+                transform: scale(1.03);
+                border-color: var(--ouro-ativo);
+            }
+            
+            .container-botao-fim { justify-content: center; margin-top: 50px; }
+            .btn-fim { width: 100%; padding: 16px 20px; font-size: 0.9rem; letter-spacing: 2px; }
+            .audio-container { top: 15px; right: 15px; padding: 8px 14px; }
         }
     </style>
 </head>
-<body onclick="iniciarAudio()">
+<body>
+    <div class="fundo-cosmos" id="cosmos"></div>
 
-    <!-- Camada de fundo cosmológico -->
-    <div id="fundo-cosmos"></div>
+    <div class="audio-container">
+        <button class="btn-audio" id="btn-audio" onclick="alternarAudio()">⏸️</button>
+        <input type="range" class="slider-volume" id="controle-volume" min="0" max="1" step="0.05" value="1" oninput="ajustarVolume(this.value)">
+    </div>
 
-    <!-- Card de Luxo com Título Chumbado em Prata -->
-    <div class="card-titulo-luxo">
-        <div class="interno-titulo-luxo">
-            <h1 class="titulo-prata">Felicidade</h1>
+    <div class="card-titulo-wrapper">
+        <div class="card-titulo-interno">
+            <h1>Em Busca do Horizonte</h1>
         </div>
     </div>
 
-    <!-- Card Principal com o Efeito Zoom Adaptável -->
-    <div class="card-principal" id="meuCard">
-        <div class="zoom-wrapper">
-            <div class="papel-antigo">
-                
-                <!-- Painel de Música Integrado -->
-                <div class="painel-musica-inline" onclick="event.stopPropagation()">
-                    <button class="btn-controle" id="playPause">PAUSE</button>
-                    <div style="display:flex; align-items:center; gap:8px;">
-                        <span style="color:white; font-size:12px;">🔈</span>
-                        <input type="range" class="vol-slider" min="0" max="1" step="0.1" value="1" oninput="ajustarVol(this.value)">
-                        <span style="color:white; font-size:12px;">🔊</span>
-                    </div>
-                </div>
-
-                <!-- Corpo da História -->
-                <div class="card-historia">
-                    <p class="paragrafo-futurista">Depois de compreender o segredo da ostra, os passos tornam-se mais leves. A verdadeira felicidade não é a ausência de problemas, mas a capacidade de superá-los e transformá-los em algo precioso.</p>
-                    <p class="paragrafo-futurista">Ao cobrir cada cicatriz com camadas de compreensão e afeto, descobrimos que o horizonteo não é um limite, mas sim um novo começo que nos aguarda de braços abertos.</p>
-                </div>
-
-            </div>
+    <div class="carta-wrapper">
+        <div class="carta-container">
+            <p>Talvez a maior beleza da vida esteja na coragem de sermos vulneráveis, mesmo quando sabemos que o roteiro não prevê um final a dois...</p>
+            <p>É a primeira vez que me vejo assim, traduzindo um sentimento que não exige nada em troca.</p>
+            <p>Nas consultas, o silêncio entre as palavras carregava o peso de quem enxerga além do diagnóstico. Você tornou-se para mim um cenário onde aprendi, nas entrelinhas, o valor da sua dedicação. Sua humanidade foi o meu melhor remédio, uma bússola para as minhas incertezas, e a clareza com que você conduz nossas sessões é o que me devolve o chão toda vez que sinto que vou flutuar para longe de mijm mesma.</p>
+            <p>Gostaria apenas que, no futuro, ao pensar em mim, você se lembre de uma paciente que você lutou para ver livre do peso dos remédios.</p>
+            <p>Encerro este assunto aqui, com o coração em paz e uma admiração que ultrapassa o consultório, guardando para sempre o brilho de quem você é na minha estrada.</p>
         </div>
     </div>
 
-    <!-- Botão de Navegação para a Estrada -->
-    <div class="painel-inferior">
-        <button class="btn-navegacao" onclick="irParaProxima()">Seguir para a Estrada</button>
+    <div class="card-intermediario">
+        <div class="texto-intermediario">
+            "Cada link abaixo carrega um pedaço da minha história. Aperte e, do fundo do meu coração, espero que você goste... Até porque todas me lembram você."
+        </div>
     </div>
 
-    <!-- Arquivo de Áudio Persistente -->
-    <audio id="trilha" src="elvis.html.mp3" loop></audio>
+    <div class="grid-musicas">
+        <a class="card-musica" href="https://youtu.be/G0WTFfZqjz0" target="_blank" onclick="pausarParaLink()"> 
+            <strong>Can't Help Falling In Love</strong> (Boyce Avenue Cover)
+            <p>Essa música seria a qual amaria dançar com você.</p>
+        </a>
+        <a class="card-musica" href="https://youtu.be/Ri7-vnrJD3k" target="_blank" onclick="pausarParaLink()">
+            <strong>Set Fire To The Rain</strong>
+            <p>Tatuado no braço, algo surreal e mágico.</p>
+        </a>
+        <a class="card-musica" href="https://youtu.be/fV4DiAyExN0" target="_blank" onclick="pausarParaLink()">
+            <strong>The Reason</strong>
+            <p>Maturidade da vida da relação que traz um ótimo aprendizado.</p>
+        </a>
+        <a class="card-musica" href="https://youtu.be/ksNoe8W2jTc" target="_blank" onclick="pausarParaLink()">
+            <strong>How Can I Go On</strong>
+            <p>Imagino eu e você vendo, viajo longe imaginando nós duas ouvindo e vendo essa ópera.</p>
+        </a>
+        <a class="card-musica" href="https://youtu.be/0xEB1wIy4OE" target="_blank" onclick="pausarParaLink()">
+            <strong>The Power Of Love</strong>
+            <p>Um dos meus sonhos em Las Vegas o qual infelizmente terei que apreciar apenas pelas telas, até porque ela está com uma doença rara que já não pode mais ir aos palcos fazer o que sempre fez de melhor: brilhar nos palcos.</p>
+        </a>
+        <a class="card-musica" href="https://youtu.be/JRfuAukYTKg" target="_blank" onclick="pausarParaLink()">
+            <strong>Titanium</strong>
+            <p>Tenho essa música tatuada no meu braço em homenagem ao meu sobrinho Pietro que mora em Brasília, teve que ser reanimado assim que nasceu e hoje tem 11 anos de idade com muita saúde.</p>
+        </a>
+        <a class="card-musica" href="https://youtu.be/rtOvBOTyX00" target="_blank" onclick="pausarParaLink()">
+            <strong>A Thousand Years</strong>
+            <p>Pretendo cantar no meu futuro casamento essa canção no pôr do sol, as duas de noivas, o qual essa música diz do amor eterno que dure milhões de anos e é algo que sonho realizar.</p>
+        </a>
+        <a class="card-musica" href="https://youtu.be/u9Dg-g7t2l4" target="_blank" onclick="pausarParaLink()">
+            <strong>The Sound Of Silence</strong>
+            <p>A profundidade do silêncio transmite a ideia de ir na escuridão, em busca de conhecer a si mesma sem ter medo.</p>
+        </a>
+    </div>
+
+    <div class="container-botao-fim">
+        <a href="felicidade.html" class="btn-fim" onclick="salvarEstadoAudio()">Próxima</a>
+    </div>
+
+    <audio id="audio" src="elvis.html.mp3" loop></audio>
 
     <script>
-        // Criação dinâmica de 50 estrelas de prata pulsantes
-        const fundoCosmos = document.getElementById('fundo-cosmos');
-        for (let i = 0; i < 50; i++) {
-            const estrela = document.createElement('div');
-            estrela.className = 'estrela-prata';
-            const tamanho = (Math.random() * 2.5 + 1) + 'px';
-            estrela.style.width = tamanho;
-            estrela.style.height = tamanho;
-            estrela.style.top = Math.random() * 100 + '%';
-            estrela.style.left = Math.random() * 100 + '%';
-            estrela.style.animationDelay = Math.random() * 4 + 's';
-            fundoCosmos.appendChild(estrela);
-        }
+        const audio = document.getElementById('audio');
+        const btnAudio = document.getElementById('btn-audio');
+        const controleVolume = document.getElementById('controle-volume');
+        const cosmos = document.getElementById('cosmos');
 
-        // Efeito Zoom por Toque no Mobile
-        const cardObj = document.getElementById('meuCard');
-        cardObj.addEventListener('touchstart', function() {
-            this.classList.add('touch-active');
-        }, {passive: true});
-        cardObj.addEventListener('touchend', function() {
-            setTimeout(() => this.classList.remove('touch-active'), 800);
-        }, {passive: true});
-
-        // Intersection Observer para os parágrafos
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visivel');
-                }
-            });
-        }, { threshold: 0.12 });
-
-        document.querySelectorAll('.paragrafo-futurista').forEach(el => observer.observe(el));
-
-        // Gerenciamento do Áudio
-        const audio = document.getElementById('trilha');
-        const btnPP = document.getElementById('playPause');
-
-        window.onload = () => {
-            document.body.style.opacity = '1';
-            const tempoSalvo = localStorage.getItem('musica_tempo');
-            if (tempoSalvo) {
-                audio.currentTime = parseFloat(tempoSalvo);
+        // GERADOR DE ESTRELAS
+        function criarEstrelas() {
+            const numeroEstrelas = window.innerWidth < 768 ? 35 : 80;
+            for(let i=0; i<numeroEstrelas; i++) {
+                const star = document.createElement('div');
+                star.className = 'estrela';
+                const s = Math.random() * 2 + 1;
+                star.style.width = s + 'px'; 
+                star.style.height = s + 'px';
+                star.style.top = Math.random() * 100 + '%'; 
+                star.style.left = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 3 + 's';
+                star.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                cosmos.appendChild(star);
             }
-            audio.play()
-                .then(() => { btnPP.innerText = "PAUSE"; })
-                .catch(() => { btnPP.innerText = "PLAY"; });
-        };
-
-        function iniciarAudio() { 
-            if (audio.paused) { 
-                audio.play(); 
-                btnPP.innerText = "PAUSE"; 
-            } 
         }
 
-        btnPP.onclick = (e) => {
-            e.stopPropagation();
-            if (audio.paused) { 
-                audio.play(); 
-                btnPP.innerText = "PAUSE"; 
-            } else { 
-                audio.pause(); 
-                btnPP.innerText = "PLAY"; 
+        // SINCRONIZAÇÃO E PERSISTÊNCIA RESTRITA DE ÁUDIO
+        window.addEventListener('DOMContentLoaded', () => {
+            criarEstrelas();
+
+            const audioTocando = localStorage.getItem('audioTocando');
+            const audioTempo = localStorage.getItem('audioTempo');
+            const audioVolume = localStorage.getItem('audioVolume');
+
+            if (audioVolume !== null) {
+                audio.volume = audioVolume;
+                controleVolume.value = audioVolume;
+            } else {
+                audio.volume = 0.4;
+                controleVolume.value = 0.4;
             }
-        };
 
-        function ajustarVol(v) { audio.volume = v; }
+            if (audioTempo !== null) {
+                audio.currentTime = parseFloat(audioTempo);
+            }
 
-        // Redirecionamento fluído para estrada.html
-        function irParaProxima() {
-            localStorage.setItem('musica_tempo', audio.currentTime);
-            document.body.style.opacity = '0';
-            setTimeout(() => {
-                // Caminho relativo limpo garantindo o envio correto para estrada.html
-                window.location.href = './estrada.html';
-            }, 800);
+            if (audioTocando === 'true') {
+                audio.play().then(() => {
+                    btnAudio.textContent = '⏸️';
+                }).catch(() => {
+                    btnAudio.textContent = '▶️';
+                    localStorage.setItem('audioTocando', 'false');
+                });
+            } else {
+                btnAudio.textContent = '▶️';
+            }
+        });
+
+        function alternarAudio() {
+            if (audio.paused) {
+                audio.play();
+                btnAudio.textContent = '⏸️';
+                localStorage.setItem('audioTocando', 'true');
+            } else {
+                audio.pause();
+                btnAudio.textContent = '▶️';
+                localStorage.setItem('audioTocando', 'false');
+            }
         }
+
+        function ajustarVolume(valor) {
+            audio.volume = valor;
+            localStorage.setItem('audioVolume', valor);
+        }
+
+        function salvarEstadoAudio() {
+            localStorage.setItem('audioTempo', audio.currentTime);
+            localStorage.setItem('audioTocando', !audio.paused);
+        }
+
+        // Pausa temporariamente ao abrir um link externo para evitar sobreposição
+        function pausarParaLink() {
+            audio.pause();
+            btnAudio.textContent = '▶️';
+            localStorage.setItem('audioTocando', 'false');
+            localStorage.setItem('audioTempo', audio.currentTime);
+        }
+
+        // Gravação contínua do progresso temporal em background
+        setInterval(() => {
+            if (!audio.paused) {
+                localStorage.setItem('audioTempo', audio.currentTime);
+            }
+        }, 1000);
     </script>
 </body>
 </html>
