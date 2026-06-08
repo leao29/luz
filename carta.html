@@ -15,6 +15,7 @@
             --ouro-ativo: #d4af37;
             --prata-fino: #e2e8f0;
             --fundo-card: #020617;
+            --aco-chumbo: cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -34,7 +35,7 @@
             align-items: center;
             overflow-x: hidden;
             overflow-y: auto;
-            padding: 80px 20px 120px 20px;
+            padding: 100px 20px 120px 20px;
             position: relative;
         }
 
@@ -77,31 +78,47 @@
             width: 75px; cursor: pointer; accent-color: var(--ouro-ativo);
         }
 
-        h1 { 
-            font-family: 'Cinzel', serif; 
-            font-size: 2rem; 
-            margin-bottom: 50px; 
-            letter-spacing: 6px; 
-            color: var(--prata-fino); 
-            text-align: center;
-            text-shadow: 0 4px 12px rgba(0,0,0,0.6);
-        }
-
-        /* EFEITO ORBITAL LUXUOSO NAS BORDAS */
-        .carta-wrapper, .card-musica-wrapper {
+        /* EFEITO ORBITAL LUXUOSO NAS BORDAS E EFEITO ZOOM */
+        .carta-wrapper, .card-musica-wrapper, .card-titulo-wrapper, .card-instrucao-wrapper {
             position: relative; padding: 2px; border-radius: 20px; overflow: hidden;
             box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+            animation: efeitoZoom 8s infinite ease-in-out;
         }
 
+        .card-titulo-wrapper { max-width: 750px; width: 100%; margin-bottom: 50px; border-radius: 16px; }
         .carta-wrapper { max-width: 750px; width: 100%; margin-bottom: 50px; }
-        
-        .carta-wrapper::before, .card-musica-wrapper::before {
+        .card-instrucao-wrapper { max-width: 750px; width: 100%; margin-bottom: 40px; border-radius: 16px; }
+
+        .card-titulo-wrapper::before, .carta-wrapper::before, .card-musica-wrapper::before, .card-instrucao-wrapper::before {
             content: ""; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
             background: conic-gradient(transparent, var(--ouro-escuro), var(--ouro-ativo), var(--ouro-escuro), transparent 35%);
-            animation: rodar 6s linear infinite;
+            animation: rodar 4s linear infinite;
         }
         
         @keyframes rodar { 100% { transform: rotate(360deg); } }
+        @keyframes efeitoZoom {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+
+        /* CARD DE TITULO CHUMBADO */
+        .card-titulo-container {
+            background: linear-gradient(135deg, #151b26 0%, #0f131a 100%);
+            padding: 30px; border-radius: 14px; position: relative; z-index: 1;
+            border: 1px solid rgba(226, 232, 240, 0.1);
+            box-shadow: inset 0 0 40px rgba(0,0,0,0.9);
+            text-align: center;
+        }
+
+        .card-titulo-container h1 { 
+            font-family: 'Cinzel', serif; 
+            font-size: 2.2rem; 
+            font-weight: 700;
+            letter-spacing: 6px; 
+            color: #cbd5e1; /* Prata */
+            text-transform: uppercase;
+            text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.8), 0 0 10px rgba(203, 213, 225, 0.2);
+        }
 
         .carta-container {
             background: var(--fundo-card); padding: 45px; border-radius: 18px;
@@ -119,6 +136,24 @@
         
         .carta-container p:last-child { margin-bottom: 0; }
 
+        /* CARD DE INSTRUÇÃO DAS MÚSICAS CHUMBADO OURO ESCURO */
+        .card-instrucao-container {
+            background: linear-gradient(135deg, #2b220b 0%, #171205 100%);
+            padding: 25px 35px; border-radius: 14px; position: relative; z-index: 1;
+            border: 1px solid rgba(212, 175, 55, 0.15);
+            box-shadow: inset 0 0 30px rgba(0,0,0,0.9);
+            text-align: center;
+        }
+
+        .card-instrucao-container p {
+            font-style: italic;
+            font-weight: bold;
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: var(--ouro-ativo);
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+        }
+
         .grid-musicas { 
             display: grid; 
             grid-template-columns: repeat(2, 1fr); 
@@ -127,7 +162,8 @@
             width: 100%; 
         }
 
-        .card-musica-wrapper { border-radius: 14px; text-decoration: none; }
+        .card-musica-wrapper { border-radius: 14px; text-decoration: none; animation: none; }
+        .card-musica-wrapper:hover { transform: scale(1.03); transition: transform 0.3s ease; }
         
         .card-musica {
             background: var(--fundo-card); 
@@ -200,8 +236,11 @@
 
         @media (max-width: 768px) {
             body { padding: 90px 15px 60px 15px; }
-            h1 { font-size: 1.5rem; letter-spacing: 4px; margin-bottom: 35px; }
+            .card-titulo-container { padding: 20px; }
+            .card-titulo-container h1 { font-size: 1.4rem; letter-spacing: 3px; }
             .carta-container { padding: 30px 20px; font-size: 1.05rem; line-height: 1.8; }
+            .card-instrucao-container { padding: 20px; }
+            .card-instrucao-container p { font-size: 0.95rem; }
             .grid-musicas { grid-template-columns: 1fr; gap: 15px; }
             .card-musica { padding: 18px; }
             .container-botao-fim { justify-content: center; margin-top: 45px; }
@@ -218,18 +257,32 @@
         <input type="range" class="slider-volume" id="controle-volume" min="0" max="1" step="0.05" value="0.5" oninput="ajustarVolume(this.value)">
     </div>
 
-    <h1>Em Busca do Horizonte</h1>
+    <!-- CARD DO TITULO PRINCIPAL -->
+    <div class="card-titulo-wrapper">
+        <div class="card-titulo-container">
+            <h1>Em Busca do Horizonte</h1>
+        </div>
+    </div>
 
+    <!-- CARD DA CARTA PRINCIPAL -->
     <div class="carta-wrapper">
         <div class="carta-container">
             <p>Talvez a maior beleza da vida esteja na coragem de sermos vulneráveis, mesmo quando sabemos que o roteiro não prevê um final a dois...</p>
             <p>É a primeira vez que me vejo assim, traduzindo um sentimento que não exige nada em troca.</p>
-            <p>Nas consultas, o silêncio entre as palavras carregava o peso de quem enxerga além do diagnóstico. O jaleco, que deveria ser apenas um símbolo de cura, tornou-se para mim um cenário onde aprendi, nas entrelinhas, o valor da sua dedicação. Sua humanidade foi o meu melhor remédio, uma bússola para as minhas incertezas, e a clareza com que você conduz nossas sessões é o que me devolve o chão toda vez que sinto que vou flutuar para longe de mijm mesma.</p>
-            <p>Gostaria apenas que, no futuro, ao pensar em mim, você se lembre de uma paciente que você lutou para ver livre do peso dos remédios.</p>
-            <p>Encerro este assunto aqui, com o coração em paz e uma admiração que ultrapassa o consultório, guardando para sempre o brilho de quem você é na minha estrada.</p>
+            <p>Nas consultas, o silêncio entre as palavras carregava o peso de quem enxerga além do diagnóstico. O jaleco, que deveria ser apenas um símbolo de cura, tornou-se para mim um cenário onde aprendi, nas entrelinhas, o valor da sua dedicação. Sua humanidade foi o meu melhor remédio, uma bússola para as minhas incertezas, e a clareza com que você conduz nossas sessões é o que me devolve o chão toda vez que sinto que vou flutuar para longe de mim mesma.</p>
+            <p>Gostaria apenas que, no futuro, ao pensar em mim, você se lembre de uma paciente que você tentou fazer diminuir os remedios para a propria saude , psicologica e fisica . Porem eu juro que tentei , mais as provaçoes estao sendo complicadas demais e lamento por desapontar você nesse sentindo. Mas tenha a certeza que irei sim aos poucos organizando a minha saude mental para que eu possa diminuir os remedios .</p>
+            <p> com o coração em paz e uma admiração que ultrapassa o consultório, guardando para sempre o brilho de quem você é na minha estrada.</p>
         </div>
     </div>
 
+    <!-- CARD DE INSTRUÇÃO ANTES DAS MÚSICAS -->
+    <div class="card-instrucao-wrapper">
+        <div class="card-instrucao-container">
+            <p>Aperte o link das musicas as quais me fazem lembrar você . Porém existe outras , mas acredito que essas que voce poderá ouvir , saberá um pouco do meu interior . Porque musica para minha vida sempre foi e será uma terapia . Espero que goste!</p>
+        </div>
+    </div>
+
+    <!-- PLAYLIST DE MÚSICAS -->
     <div class="grid-musicas">
         <a class="card-musica-wrapper" href="https://youtu.be/G0WTFfZqjz0" target="_blank">
             <div class="card-musica">
@@ -240,43 +293,43 @@
         <a class="card-musica-wrapper" href="https://youtu.be/Ri7-vnrJD3k" target="_blank">
             <div class="card-musica">
                 <strong>Set Fire To The Rain</strong>
-                <p>Tatuado no braço, algo surreal e mágico.</p>
+                <p>Tatuado no braço, porque fala de atear fogo a chuva algo surreal a qual acho muito forte agua e fogo </p>
             </div>
         </a>
         <a class="card-musica-wrapper" href="https://youtu.be/fV4DiAyExN0" target="_blank">
             <div class="card-musica">
                 <strong>The Reason</strong>
-                <p>Maturidade da relação e aprendizado.</p>
+                <p>Essa representa a maturidade que com o tempo aprendemos amarr um pouco melhor a si proprio e ao proximo , é o que acredito no significado que me trasmite .</p>
             </div>
         </a>
         <a class="card-musica-wrapper" href="https://youtu.be/ksNoe8W2jTc" target="_blank">
             <div class="card-musica">
                 <strong>How Can I Go On</strong>
-                <p>Imagino eu e você vendo essa ópera.</p>
+                <p>Imagino eu e você vendo essa ópera com em um lugar a dois podendo ficar a vontade para sentir a pronfundidade da pela canção e as vozes que rara e que trasmite muita emoção .</p>
             </div>
         </a>
         <a class="card-musica-wrapper" href="https://youtu.be/0xEB1wIy4OE" target="_blank">
             <div class="card-musica">
                 <strong>The Power Of Love</strong>
-                <p>Um dos meus sonhos em Las Vegas.</p>
+                <p>Um dos meus maiores sonhos que gostaria de vê em las Vegas seria vê celini dion no palco . Infelizmente com sua doença rara a mesma teve que abandonar seu palco o qual tanto brilhou . Mas LAS VEGAS  ME ESPERA!.</p>
             </div>
         </a>
         <a class="card-musica-wrapper" href="https://youtu.be/JRfuAukYTKg" target="_blank">
             <div class="card-musica">
                 <strong>Titanium</strong>
-                <p>Homenagem ao Pietro, algo inabalável.</p>
+                <p>Homenagem ao meu sobrinho Pietro o qual mora em brasilia que ao nascer teve que ser reanimado e graças a Deus ele representa essa quimica jamada Titanium , algo inabalável.</p>
             </div>
         </a>
         <a class="card-musica-wrapper" href="https://youtu.be/rtOvBOTyX00" target="_blank">
             <div class="card-musica">
                 <strong>A Thousand Years</strong>
-                <p>Pretendo cantar no meu futuro casamento.</p>
+                <p>Pretendo cantar no meu futuro casamento, em um lindo por do sol as duas de noivas e com guardas de espada quando passar fazendo um corredor e essa pessoa será a única em minha vida .</p>
             </div>
         </a>
         <a class="card-musica-wrapper" href="https://youtu.be/u9Dg-g7t2l4" target="_blank">
             <div class="card-musica">
                 <strong>The Sound Of Silence</strong>
-                <p>A profundidade do silêncio.</p>
+                <p>A profundidade do silêncio interno e externo que muitos de nós temos a dificuldade desse silencio principalmente o interior que para muitos vira um fantasma e outros agonia e alguns aprendem a se conhecer melhor com suas reflexoes .</p>
             </div>
         </a>
     </div>
@@ -316,7 +369,6 @@
             const audioTempo = localStorage.getItem('audioTempo');
             const audioVolume = localStorage.getItem('audioVolume');
 
-            // Mantém sempre em 50% por padrão se não houver alteração manual
             if (audioVolume !== null) {
                 audio.volume = parseFloat(audioVolume);
                 controleVolume.value = audioVolume;
@@ -359,14 +411,7 @@
 
         function salvarEstadoAudio() {
             localStorage.setItem('audioTempo', audio.currentTime);
-            localStorage.setItem('audioTocando', !audio.paused);
         }
-
-        setInterval(() => {
-            if (!audio.paused) {
-                localStorage.setItem('audioTempo', audio.currentTime);
-            }
-        }, 1000);
     </script>
 </body>
 </html>
