@@ -3,11 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <!-- Metatags para evitar cache e garantir a versão mais recente -->
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
-    <title>Em Busca do Horizonte</title>
+    <title>A Estrada - Em Busca do Horizonte</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     
@@ -16,22 +15,16 @@
             --cosmos-fundo: #020617;
             --prata-fino: #e2e8f0;
             --ouro-ativo: #c5a862;
-            --papel-sutil: rgba(255, 255, 255, 0.03);
+            --ouro-brilhante: #614d1a;
         }
 
         * { 
             box-sizing: border-box; 
+            margin: 0; 
+            padding: 0; 
         }
 
-        /* Customização sutil da barra de rolagem */
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: var(--cosmos-fundo); }
-        ::-webkit-scrollbar-thumb { background: #64748b; border-radius: 3px; border: 1px solid #1e293b; }
-        ::-webkit-scrollbar-thumb:hover { background: var(--prata-fino); }
-
         body {
-            margin: 0; 
-            padding: 80px 20px 40px 20px;
             background-color: var(--cosmos-fundo);
             color: var(--prata-fino);
             font-family: 'Lora', serif;
@@ -40,86 +33,60 @@
             flex-direction: column; 
             align-items: center;
             overflow-x: hidden;
+            padding: 60px 20px;
+            opacity: 0;
+            transition: opacity 0.8s ease;
         }
 
-        /* Fundo Cosmos e Estrelas */
-        .fundo-cosmos { 
+        /* Fundo Cósmico */
+        #cosmos { 
             position: fixed; 
-            top: 0; 
-            left: 0; 
-            width: 100%; 
-            height: 100%; 
+            top: 0; left: 0; 
+            width: 100%; height: 100%; 
             z-index: -1; 
             background: radial-gradient(circle at center, #0a1e3d 0%, var(--cosmos-fundo) 100%); 
         }
         
         .estrela { 
             position: absolute; 
-            background: var(--prata-fino); 
+            background: #ffffff; 
             border-radius: 50%; 
-            animation: brilhar 3s infinite; 
+            animation: brilhar 3s infinite ease-in-out; 
         }
         
         @keyframes brilhar { 
-            0%, 100% { opacity: 0.2; transform: scale(1); } 
-            50% { opacity: 0.9; transform: scale(1.2); } 
+            0%, 100’% { opacity: 0.2; transform: scale(0.8); } 
+            50% { opacity: 1; transform: scale(1.2); } 
         }
 
-        /* Áudio minimalista luxuoso */
-        .audio-container {
-            position: fixed; 
-            top: 20px; 
-            right: 20px; 
-            z-index: 1000;
-            display: flex; 
-            align-items: center; 
-            gap: 10px; 
-            background: rgba(0, 0, 0, 0.5);
-            padding: 8px 12px; 
-            border-radius: 20px; 
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(5px);
-        }
-        
-        .btn-audio {
-            background: transparent; 
-            border: 1px solid var(--ouro-ativo);
-            color: var(--ouro-ativo); 
-            width: 32px; 
-            height: 32px; 
-            border-radius: 50%;
-            cursor: pointer; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center;
-            transition: 0.3s; 
-            font-family: 'Cinzel', serif;
-            font-size: 1rem;
-        }
-        
-        .btn-audio:hover { 
-            background: var(--ouro-ativo); 
-            color: var(--cosmos-fundo); 
-        }
-        
-        .vol-slider { 
-            width: 60px; 
-            accent-color: var(--ouro-ativo); 
-            cursor: pointer; 
+        /* 1. CARD DO TÍTULO SEPARADO COM CONTORNO OURO ESCURO */
+        .card-titulo {
+            width: 100%;
+            max-width: 700px;
+            margin-bottom: 25px;
+            padding: 2px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--ouro-brilhante), rgba(197, 168, 98, 0.2));
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
         }
 
-        h1 { 
+        .titulo-interno {
+            background: rgba(15, 23, 42, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .titulo-ferro { 
             font-family: 'Cinzel', serif; 
-            font-size: 2rem; 
-            margin-bottom: 40px; 
-            letter-spacing: 4px; 
-            color: var(--prata-fino); 
-            text-align: center; 
-            line-height: 1.3;
+            font-size: 2.2rem; 
+            letter-spacing: 6px; 
+            color: var(--ouro-ativo);
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
         }
 
-        /* Estrutura da Carta */
-        .carta-wrapper {
+        /* 2. CARD DE BAIXO SEPARADO COM EFEITO DOURADO NAS BORDAS */
+        .card-conteudo {
             position: relative; 
             max-width: 700px; 
             width: 100%;
@@ -127,289 +94,170 @@
             border-radius: 20px; 
             overflow: hidden;
             background: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(197, 168, 98, 0.3);
+            border: 1px solid rgba(197, 168, 98, 0.25);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+            margin-bottom: 40px;
         }
 
-        .carta-container {
-            background: rgba(15, 23, 42, 0.75);
+        /* PAPEL ENVELHECIDO INTERNO */
+        .papel-antigo {
+            background: rgba(15, 23, 42, 0.85);
             backdrop-filter: blur(10px);
-            padding: 40px;
+            padding: 40px; 
             border-radius: 18px;
-            position: relative; 
-            z-index: 1;
         }
 
-        .carta-container p {
-            line-height: 1.8;
-            font-size: 1.1rem;
+        /* Parágrafos com efeitos de surgimento */
+        .paragrafo-futurista {
+            line-height: 1.8; 
+            font-size: 1.1rem; 
             text-align: justify;
-            margin-bottom: 20px;
+            margin-bottom: 22px; 
             color: #cbd5e1;
-        }
-        
-        .carta-container p:last-child {
-            margin-bottom: 0;
+            opacity: 0;
+            transform: translateY(15px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
         }
 
-        /* Grid de Músicas com efeito zoom */
-        .grid-musicas { 
-            display: grid; 
-            grid-template-columns: repeat(2, 1fr); 
-            gap: 15px; 
-            max-width: 700px; 
-            width: 100%; 
-            margin-top: 40px; 
+        .paragrafo-futurista.visivel {
+            opacity: 1;
+            transform: translateY(0);
         }
         
-        .card-musica {
-            background: var(--papel-sutil); 
-            padding: 20px; 
-            border-radius: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.1); 
-            text-decoration: none; 
-            color: var(--prata-fino);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        .paragrafo-futurista:last-of-type { 
+            margin-bottom: 35px; 
         }
-        
-        .card-musica:hover { 
-            border-color: var(--ouro-ativo); 
-            background: rgba(255, 255, 255, 0.08); 
-            transform: scale(1.04); 
-        }
-        
-        .card-musica strong { 
-            display: block; 
-            margin-bottom: 5px; 
+
+        /* Botão Próximo */
+        .btn-proximo {
+            display: block;
+            width: 100%;
+            padding: 16px 20px; 
+            border: 1px solid var(--ouro-brilhante);
+            background: rgba(15, 23, 42, 0.9); 
+            color: var(--ouro-ativo);
+            border-radius: 30px; 
+            cursor: pointer; 
             font-family: 'Cinzel', serif; 
-            color: var(--ouro-ativo); 
-            font-size: 0.9rem; 
+            font-weight: 700; 
+            font-size: 0.95rem;
+            transition: all 0.4s ease; 
+            text-transform: uppercase; 
+            letter-spacing: 4px;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.5);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+        }
+        
+        .btn-proximo:hover { 
+            background: var(--ouro-brilhante); 
+            color: #ffffff; 
+            border-color: var(--ouro-ativo);
+            box-shadow: 0 0 25px rgba(197, 168, 98, 0.35); 
+            transform: translateY(-2px);
         }
 
-        .card-musica span {
-            font-size: 0.85rem;
-            color: #94a3b8;
-        }
-
-        /* Otimizações Responsivas para Celulares */
+        /* Responsividade Mobile */
         @media (max-width: 680px) {
-            body {
-                padding: 70px 15px 30px 15px;
-            }
-            
-            h1 {
-                font-size: 1.5rem;
-                margin-bottom: 30px;
-                letter-spacing: 2px;
-            }
-
-            .carta-container {
-                padding: 25px 20px;
-            }
-
-            .carta-container p {
-                font-size: 1rem;
-                line-height: 1.7;
-                text-align: left; /* Melhora a leitura em telas estreitas */
-            }
-
-            .grid-musicas {
-                grid-template-columns: 1fr; /* Transforma o grid em uma única coluna */
-                gap: 12px;
-                margin-top: 30px;
-            }
-
-            .audio-container {
-                top: 10px;
-                right: 10px;
-                padding: 6px 10px;
-            }
+            body { padding: 40px 15px; }
+            .titulo-ferro { font-size: 1.7rem; letter-spacing: 4px; }
+            .papel-antigo { padding: 30px 20px; }
+            .paragrafo-futurista { font-size: 1rem; line-height: 1.7; text-align: left; }
+            .btn-proximo { font-size: 0.9rem; letter-spacing: 2px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Elemento do Cosmos Background -->
-    <div class="fundo-cosmos" id="cosmos"></div>
+    <!-- Elemento de Fundo Cósmico -->
+    <div id="cosmos"></div>
 
-    <!-- Elemento de Áudio (Insira o link da música de fundo no atributo src) -->
-    <audio id="audio" loop src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3"></audio>
-
-    <!-- Painel de Controle de Som -->
-    <div class="audio-container">
-        <button class="btn-audio" id="btn-audio">♪</button>
-        <input type="range" class="vol-slider" id="vol-slider" min="0" max="1" step="0.1" value="0.3">
-    </div>
-
-    <h1>Em Busca do Horizonte</h1>
-
-    <!-- Card de Conteúdo Principal -->
-    <div class="carta-wrapper">
-        <div class="carta-container">
-            <p>Talvez a maior beleza da vida esteja na coragem de sermos vulneráveis, mesmo quando sabemos que o roteiro não prevê um final a dois...</p>
-            <p>É a primeira vez que me vejo assim, traduzindo um sentimento que não exige nada em troca.</p>
-            <p>Nas consultas, o silêncio entre as palavras carregava o peso de quem enxerga além do diagnóstico. O jaleco, que deveria ser apenas um símbolo de cura, tornou-se para mim um cenário onde aprendi, nas entrelinhas, o valor da sua dedicação. Sua humanidade foi o meu melhor remédio, uma bússola para as minhas incertezas, e a clareza com que você conduz nossas sessões é o que me devolve o chão toda vez que sinto que vou flutuar para longe de mim mesma.</p>
-            <p>Gostaria apenas que, no futuro, ao pensar em mim, você se lembre de uma paciente que você lutou para ver livre do peso dos remédios.</p>
-            <p>Encerro este assunto aqui, com o coração em paz e uma admiração que ultrapassa o consultório, guardando para sempre o brilho de quem você é na minha estrada.</p>
+    <!-- 1. CARD DO TÍTULO SEPARADO COM CONTORNO OURO ESCURO -->
+    <div class="card-titulo">
+        <div class="titulo-interno">
+            <h1 class="titulo-ferro">A ESTRADA</h1>
         </div>
     </div>
-
-    <!-- Grid de Sugestões Musicais -->
-    <div class="grid-musicas">
-        <a href="#" class="card-musica" target="_blank">
-            <strong>Trilha Sonora Clássica</strong>
-            <span>Melodias que confortam a mente e organizam o caos interno.</span>
-        </a>
-        <a href="#" class="card-musica" target="_blank">
-            <strong>Sinfonia do Horizonte</strong>
-            <span>Uma curadoria para inspirar novos caminhos e liberdade.</span>
-        </a>
-    </div>
-
-    <script>
-        const audio = document.getElementById('audio');
-        const btn = document.getElementById('btn-audio');
-        const slider = document.getElementById('vol-slider');
-        const cosmos = document.getElementById('cosmos');
-
-        // Geração inteligente de estrelas adaptável ao tamanho da tela
-        function gerarEstrelas() {
-            cosmos.innerHTML = '';
-            const totalEstrelas = window.innerWidth < 680 ? 40 : 80;
+ 
+    <!-- 2. CARD DE BAIXO SEPARADO COM EFEITO DOURADO NAS BORDAS -->
+    <div class="card-conteudo" id="meuCard">
+        
+        <!-- PAPEL ENVELHECIDO INTERNO -->
+        <div class="papel-antigo">
             
-            for(let i = 0; i < totalEstrelas; i++) {
-                const star = document.createElement('div');
-                star.className = 'estrela';
-                const s = Math.random() * 2 + 1;
-                star.style.width = s + 'px'; 
-                star.style.height = s + 'px';
-                star.style.top = Math.random() * 100 + '%'; 
-                star.style.left = Math.random() * 100 + '%';
-                star.style.animationDelay = Math.random() * 3 + 's';
-                cosmos.appendChild(star);
-            }
-        }
-
-        // Tenta iniciar o áudio no carregamento seguindo as políticas restritivas do navegador
-        window.addEventListener('load', () => {
-            gerarEstrelas();
-            audio.volume = 0.3;
-            audio.play().then(() => {
-                btn.textContent = '⏸';
-            }).catch(() => {
-                console.log("Interação do usuário necessária para reproduzir áudio.");
-            });
-        });
-
-        // Controle de Play/Pause
-        btn.addEventListener('click', () => {
-            if (audio.paused) {
-                audio.play();
-                btn.textContent = '⏸';
-            } else {
-                audio.pause();
-                btn.textContent = '♪';
-            }
-        });
-
-        // Controle do slider deslizante de volume
-        slider.addEventListener('input', (e) => {
-            audio.volume = e.target.value;
-        });
-
-        // Recalcula as estrelas caso o celular mude de orientação (paisagem/retrato)
-        window.addEventListener('resize', gerarEstrelas);
-    </script>
-</body>
-</html>
-
-    <audio id="audio" src="elvis.html.mp3" loop></audio>
-
+            <p class="paragrafo-futurista">Talvez a maior beleza da vida esteja na coragem de sermos vulneráveis, mesmo quando sabemos que o roteiro não prevê um final a dois...</p>
+            
+            <p class="paragrafo-futurista">É a primeira vez que me vejo assim, traduzindo um sentimento que não exige nada em troca.</p>
+ 
+            <p class="paragrafo-futurista">Nas consultas, o silêncio entre as palavras carregava o peso de quem enxerga além do diagnóstico. Tornou-se para mim um cenário onde aprendi, nas entrelinhas, o valor da sua dedicação. Sua humanidade foi o meu melhor remédio, uma bússola para as minhas incertezas, e a clareza com que você conduz nossas sessões é o que me devolve o chão toda vez que sinto que vou flutuar para longe de mim mesma.</p>
+ 
+            <p class="paragrafo-futurista">Gostaria apenas que, no futuro, ao pensar em mim, você se lembre de uma paciente que você lutou para ver livre do peso dos remédios.</p>
+ 
+            <p class="paragrafo-futurista">Encerro este assunto aqui, com o coração em paz e uma admiração que ultrapassa o consultório, guardando para sempre o brilho de quem você é na minha estrada.</p>
+ 
+            <!-- BOTÃO SEGUIR PARA FIM.HTML -->
+            <button class="btn-proximo" onclick="irParaFim()">Próxima</button>
+        </div>
+    </div>
+ 
+    <audio id="musica" src="elvis.html.mp3" loop></audio>
+ 
     <script>
-        const audio = document.getElementById('audio');
-        const btnPlay = document.getElementById('btn-audio');
-        const btnVolUp = document.getElementById('btn-vol-up');
-        const btnVolDown = document.getElementById('btn-vol-down');
-        const btnIrFim = document.getElementById('btn-ir-fim');
+        // Transição suave ao carregar a página
+        window.onload = () => {
+            document.body.style.opacity = '1';
+            iniciarAudio();
+        };
+ 
+        // Criar estrelas pulsantes cósmicas
         const cosmos = document.getElementById('cosmos');
-
-        // Criando estrelas prateadas
-        for(let i=0; i<80; i++) {
-            const star = document.createElement('div');
-            const s = Math.random() * 2 + 1;
-            star.className = 'estrela';
-            star.style.width = s + 'px'; star.style.height = s + 'px';
-            star.style.top = Math.random() * 100 + '%'; star.style.left = Math.random() * 100 + '%';
-            star.style.animationDelay = Math.random() * 3 + 's';
-            cosmos.appendChild(star);
+        for (let i = 0; i < 65; i++) {
+            const estrela = document.createElement('div');
+            estrela.className = 'estrela';
+            const size = Math.random() * 3.5 + 1;
+            estrela.style.width = size + 'px';
+            estrela.style.height = size + 'px';
+            estrela.style.top = Math.random() * 100 + '%';
+            estrela.style.left = Math.random() * 100 + '%';
+            estrela.style.animationDuration = (Math.random() * 3 + 2.5) + 's';
+            cosmos.appendChild(estrela);
         }
-
-        // Recupera tempo salvo (caso volte para esta página) ou inicia do zero
-        window.addEventListener('load', () => {
-            audio.volume = 0.4;
-            const tempoSalvo = localStorage.getItem('musica_tempo');
-            if (tempoSalvo) {
-                audio.currentTime = parseFloat(tempoSalvo);
+ 
+        // Sistema de Áudio Persistente
+        const audio = document.getElementById('musica');
+        function iniciarAudio() {
+            if (audio.paused) {
+                const tempoSalvo = localStorage.getItem('musica_tempo');
+                if (tempoSalvo) audio.currentTime = parseFloat(tempoSalvo);
+                audio.play().catch(() => {});
             }
-
-            audio.play().then(() => {
-                btnPlay.textContent = '||';
-            }).catch(() => {
-                btnPlay.textContent = '♪';
-                console.log("Interação necessária para iniciar o áudio.");
+        }
+ 
+        // Redirecionamento correto para fim.html salvando o áudio
+        function irParaFim() {
+            localStorage.setItem('musica_tempo', audio.currentTime);
+            document.body.style.opacity = '0';
+            setTimeout(() => {
+                window.location.href = "fim.html";
+            }, 800);
+        }
+ 
+        // Intersection Observer para animação futurista (letras nítidas surgindo)
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visivel');
+                }
             });
-        });
-
-        // Atualiza constantemente o tempo no localStorage enquanto a música toca
+        }, { threshold: 0.05 });
+ 
+        document.querySelectorAll('.paragrafo-futurista').forEach(p => observer.observe(p));
+        
+        // Garante a gravação do tempo antes de qualquer saída acidental
         setInterval(() => {
             if (!audio.paused) {
                 localStorage.setItem('musica_tempo', audio.currentTime);
             }
         }, 1000);
-
-        // Ação ao clicar no botão de ir para a tela final
-        btnIrFim.addEventListener('click', () => {
-            localStorage.setItem('musica_tempo', audio.currentTime);
-            window.location.href = 'fim.html';
-        });
-
-        // Controle de Play / Pause
-        btnPlay.addEventListener('click', () => {
-            if (audio.paused) {
-                audio.play();
-                btnPlay.textContent = '||';
-            } else {
-                audio.pause();
-                btnPlay.textContent = '♪';
-            }
-        });
-
-        // Aumentar Volume
-        btnVolUp.addEventListener('click', () => {
-            if (audio.volume < 0.9) {
-                audio.volume = parseFloat((audio.volume + 0.1).toFixed(1));
-            } else {
-                audio.volume = 1.0;
-            }
-        });
-
-        // Diminuir Volume
-        btnVolDown.addEventListener('click', () => {
-            if (audio.volume > 0.1) {
-                audio.volume = parseFloat((audio.volume - 0.1).toFixed(1));
-            } else {
-                audio.volume = 0.0;
-            }
-        });
-
-        // Pausar o áudio de fundo quando clicar em links externos do YouTube para não encavalar o som
-        const linksMusica = document.querySelectorAll('.card-musica');
-        linksMusica.forEach(link => {
-            link.addEventListener('click', () => {
-                audio.pause();
-                btnPlay.textContent = '♪';
-                localStorage.setItem('musica_tempo', audio.currentTime);
-            });
-        });
     </script>
 </body>
 </html>
