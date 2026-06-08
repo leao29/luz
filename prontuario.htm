@@ -8,7 +8,7 @@
     <style>
         :root {
             --azul-profundo-cosmos: #02040a;
-            --fundo-card: rgba(3, 7, 18, 0.85);
+            --fundo-card: rgba(3, 7, 18, 0.93); /* O azul escuro quase preto sofisticado */
             --ouro-escuro: #503e14;
             --ouro-medio: #846726;
             --ouro-brilhante: #d4af37;
@@ -24,7 +24,7 @@
         body, html {
             width: 100%;
             min-height: 100vh;
-            background-color: var(--azul-profundo-cosmos);
+            background-color: var(--azul-profundo-cosmos) !important;
             font-family: 'Lora', serif;
             display: flex;
             flex-direction: column;
@@ -40,7 +40,7 @@
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             z-index: -1;
-            background: radial-gradient(circle at center, #071324 0%, var(--azul-profundo-cosmos) 100%);
+            background: radial-gradient(circle at center, #071324 0%, var(--azul-profundo-cosmos) 100%) !important;
         }
 
         .estrela-prata {
@@ -57,7 +57,7 @@
             50% { opacity: 1; transform: scale(1.4); box-shadow: 0 0 18px 6px rgba(255, 255, 255, 1); }
         }
 
-        /* CONTROLE DE MÍDIA COLOÇAL E LUXUOSO */
+        /* CONTROLE DE MÍDIA */
         .painel-audio {
             position: fixed;
             top: 25px; right: 25px;
@@ -89,7 +89,6 @@
             justify-content: center; 
             padding: 4px;
             margin: 0;
-            border-radius: 0;
         }
         
         .btn-audio svg {
@@ -142,34 +141,14 @@
             background: var(--ouro-brilhante);
             cursor: pointer;
             box-shadow: 0 0 6px var(--ouro-medio);
-            transition: transform 0.2s ease, background-color 0.2s ease;
         }
 
         .slider-volume::-webkit-slider-thumb:hover {
             transform: scale(1.3);
             background: #ffffff;
-            box-shadow: 0 0 10px var(--ouro-brilhante);
         }
 
-        .slider-volume::-moz-range-thumb {
-            -moz-appearance: none;
-            appearance: none;
-            width: 10px;
-            height: 10px;
-            border: none;
-            border-radius: 50%;
-            background: var(--ouro-brilhante);
-            cursor: pointer;
-            box-shadow: 0 0 6px var(--ouro-medio);
-            transition: transform 0.2s ease;
-        }
-
-        .slider-volume::-moz-range-thumb:hover {
-            transform: scale(1.3);
-            background: #ffffff;
-        }
-
-        /* GRID ULTRA-PROFISSIONAL */
+        /* GRID IMPEDIDO DE GERAR FUNDOS ESCUROS INTERNOS */
         .layout-duas-colunas {
             display: flex;
             flex-direction: row;
@@ -180,23 +159,24 @@
             align-items: stretch;
             margin-bottom: 40px;
             z-index: 10;
+            background: transparent !important; /* Força transparência total na linha dos cards */
         }
 
-        /* CARD LUXUOSO: SEM SEGUNDO PLANO ESCURO ESCAPANDO, TOTALMENTE LIMPO E VAZADO */
+        /* CONTAINER DOS CARDS - VAZADO E TOTALMENTE TRANSPARENTE POR FORA */
         .card-container {
             flex: 1;
+            position: relative;
+            background: transparent !important; /* Garante que nenhuma caixa escura vaze por trás */
             border: 1px solid transparent;
-            /* Nova borda em degradê ouro estrita, sem códigos pseudo-elementos pesados */
             border-image: linear-gradient(135deg, var(--ouro-escuro), var(--ouro-brilhante), var(--ouro-escuro)) 1;
-            background: transparent;
             box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
             display: flex;
             transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
-        /* CONTEÚDO INTERNO LUXUOSO - O AZUL ESCURO FICA APENAS EXCLUSIVAMENTE AQUI */
+        /* CONTEÚDO INTERNO - A COR ESCURA DO CARD VIVE EXCLUSIVAMENTE AQUI DENTRO */
         .conteudo-luxo {
-            background-color: var(--fundo-card);
+            background-color: var(--fundo-card) !important; /* Fundo mantido rigorosamente restrito ao interior */
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             padding: 45px 35px;
@@ -206,7 +186,7 @@
             transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
-        /* Efeitos de Hover sofisticados e limpos */
+        /* Hovers limpos e responsivos */
         .card-container:hover {
             transform: scale(1.015) translateY(-4px);
             box-shadow: 0 35px 80px rgba(132, 103, 38, 0.25);
@@ -214,11 +194,11 @@
         }
 
         .card-container:hover .conteudo-luxo {
-            background-color: rgba(4, 9, 24, 0.94);
+            background-color: rgba(4, 9, 24, 0.95) !important;
             box-shadow: inset 0 0 30px rgba(132, 103, 38, 0.2);
         }
 
-        /* TIPOGRAFIA E TÍTULOS */
+        /* TIPOGRAFIA */
         .titulo-luxo {
             font-family: 'Cinzel', serif;
             font-size: 1.7rem;
@@ -248,7 +228,6 @@
             letter-spacing: 2px;
         }
 
-        /* CARIMBO CLÍNICO PREMIUM */
         .carimbo-diagnostico {
             display: inline-block;
             border: 1px solid #f43f5e;
@@ -280,7 +259,7 @@
             font-weight: 600;
         }
 
-        /* ELEMENTOS DA RECEITA */
+        /* ITENS DA RECEITA */
         .lista-receita { list-style: none; padding: 0; margin: 0; }
 
         .lista-receita li {
@@ -312,7 +291,7 @@
             letter-spacing: 1px;
         }
 
-        /* NAVEGAÇÃO E BOTÃO PRÓXIMA */
+        /* NAVEGAÇÃO / BOTÃO */
         .area-botao {
             width: 100%;
             max-width: 1200px;
@@ -320,6 +299,7 @@
             justify-content: flex-end;
             padding: 10px 0;
             z-index: 10;
+            background: transparent !important;
         }
 
         .btn-proxima {
@@ -350,7 +330,7 @@
             letter-spacing: 5px;
         }
 
-        /* RESPONSIVIDADE COMPLETA */
+        /* RESPONSIVIDADE */
         @media (max-width: 950px) {
             .layout-duas-colunas { 
                 flex-direction: column; 
