@@ -4,15 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Prontuário & Receita - Dra. Débora</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Orbitron:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Orbitron:wght@400;600;800&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
     <style>
         :root {
-            --azul-cosmos: #01040a;
-            --preto-profundo: #020617;
-            --ouro-escuro: #614d1a;
-            --ouro-brilhante: #cca43b;
-            --cor-prata: #e2e8f0;
-            --papel-antigo: rgba(245, 230, 196, 0.85); 
+            --azul-profundo-cosmos: #02040a;
+            --fundo-card: rgba(3, 7, 18, 0.85);
+            --ouro-escuro: #503e14;
+            --ouro-medio: #846726;
+            --ouro-brilhante: #d4af37;
+            --prata-incandescente: #f1f5f9;
         }
 
         * { 
@@ -24,7 +24,7 @@
         body, html {
             width: 100%;
             min-height: 100vh;
-            background-color: var(--azul-cosmos);
+            background-color: var(--azul-profundo-cosmos);
             font-family: 'Lora', serif;
             display: flex;
             flex-direction: column;
@@ -32,62 +32,75 @@
             align-items: center;
             overflow-x: hidden;
             overflow-y: auto;
-            padding: 80px 20px 40px 20px;
+            padding: 90px 20px 40px 20px;
         }
 
-        /* FUNDO COSMOS COM ESTRELAS PULSANTES INCANDESCENTES */
+        /* CENÁRIO CÓSMICO ABSOLUTO */
         #cenario-cosmos {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             z-index: -1;
-            background: radial-gradient(circle at center, #0a1e3d 0%, var(--azul-cosmos) 100%);
+            background: radial-gradient(circle at center, #071324 0%, var(--azul-profundo-cosmos) 100%);
         }
 
         .estrela-prata {
             position: absolute;
-            background: #ffffff;
+            background: var(--prata-incandescente);
             border-radius: 50%;
-            box-shadow: 0 0 16px 4px rgba(255, 255, 255, 0.8);
-            animation: pulsar 3s infinite ease-in-out;
+            box-shadow: 0 0 12px 3px rgba(241, 245, 249, 0.9);
+            animation: pulsarIncandescente infinite ease-in-out;
             pointer-events: none;
         }
 
-        @keyframes pulsar {
-            0%, 100% { opacity: 0.2; transform: scale(0.6); }
-            50% { opacity: 1; transform: scale(1.3); box-shadow: 0 0 20px 6px rgba(255, 255, 255, 0.9); }
+        @keyframes pulsarIncandescente {
+            0%, 100% { opacity: 0.3; transform: scale(0.7); filter: blur(0.5px); }
+            50% { opacity: 1; transform: scale(1.4); box-shadow: 0 0 18px 6px rgba(255, 255, 255, 1); }
         }
 
-        /* PAINEL DE CONTROLE DE MÍDIA PREMIUM */
+        /* CONTROLE DE MÍDIA PREMIUM */
         .painel-audio {
             position: fixed;
-            top: 20px; right: 20px;
-            background: rgba(15, 23, 42, 0.9);
-            border: 1px solid var(--ouro-escuro);
-            padding: 10px 16px;
-            border-radius: 30px;
+            top: 25px; right: 25px;
+            background: rgba(2, 4, 10, 0.8);
+            border: 1px solid rgba(132, 103, 38, 0.4);
+            padding: 12px 20px;
+            border-radius: 40px;
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 15px;
             z-index: 1000;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+            backdrop-filter: blur(12px);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.7);
+            transition: all 0.3s ease;
+        }
+
+        .painel-audio:hover {
+            border-color: var(--ouro-medio);
+            box-shadow: 0 10px 40px rgba(132, 103, 38, 0.15);
         }
 
         .btn-audio {
-            background: none; border: none; cursor: pointer; color: white; font-size: 1.2rem;
+            background: none; border: none; cursor: pointer; color: var(--prata-incandescente); font-size: 1.1rem;
             display: flex; align-items: center; justify-content: center; padding: 0;
+            transition: transform 0.2s ease;
         }
+        
+        .btn-audio:hover { transform: scale(1.1); }
 
         .slider-volume {
-            width: 75px;
+            width: 80px;
             cursor: pointer;
             accent-color: var(--ouro-brilhante);
+            background: rgba(255,255,255,0.1);
+            height: 4px;
+            border-radius: 2px;
         }
 
-        /* LAYOUT EM DUAS COLUNAS RESPONSIVO */
+        /* GRID ULTRA-PROFISSIONAL */
         .layout-duas-colunas {
             display: flex;
             flex-direction: row;
-            gap: 30px;
+            gap: 35px;
             width: 100%;
             max-width: 1200px;
             justify-content: center;
@@ -96,16 +109,16 @@
             z-index: 10;
         }
 
-        /* CARDS COM EFEITO DE BORDA DE OURO CORRENDO */
+        /* CONTAINER LUXUOSO COM EFEITO CHASE (PERSEGUIÇÃO DE BORDAS) */
         .card-container {
             flex: 1;
             position: relative;
-            padding: 4px;
-            border-radius: 20px;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
-            transition: transform 0.5s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.5s ease;
+            padding: 2px;
+            border-radius: 24px;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8);
             overflow: hidden;
-            background: rgba(2, 6, 23, 0.4);
+            background: transparent;
+            display: flex;
         }
 
         .card-container::before {
@@ -118,126 +131,151 @@
                 var(--ouro-escuro), 
                 var(--ouro-brilhante), 
                 var(--ouro-escuro), 
-                transparent 40%
+                transparent 45%
             );
-            animation: girarOuro 6s linear infinite;
             z-index: 0;
         }
 
-        @keyframes girarOuro {
+        /* Card Esquerdo inicia em 0 graus */
+        .card-container.esquerdo::before {
+            animation: persequicaoOuroEsquerda 7s linear infinite;
+        }
+
+        /* Card Direito inicia defasado para parecer que corre atrás */
+        .card-container.direito::before {
+            animation: persequicaoOuroDireita 7s linear infinite;
+        }
+
+        @keyframes persequicaoOuroEsquerda {
+            0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
 
-        .card-container:hover {
-            transform: scale(1.02) translateY(-5px);
-            box-shadow: 0 30px 70px rgba(204, 164, 59, 0.2);
+        @keyframes persequicaoOuroDireita {
+            0% { transform: rotate(180deg); }
+            100% { transform: rotate(540deg); }
         }
 
-        .conteudo-papel {
+        /* CONTEÚDO INTERNO LUXUOSO DOS CARDS */
+        .conteudo-luxo {
             position: relative;
             z-index: 1;
-            background-color: var(--papel-antigo);
-            background-image: url('https://www.transparenttextures.com/patterns/cream-paper.png');
-            border-radius: 16px;
-            padding: 40px 30px;
-            border: 2px solid rgba(97, 77, 26, 0.3);
-            height: 100%;
+            background-color: var(--fundo-card);
+            backdrop-filter: blur(15px);
+            border-radius: 22px;
+            padding: 45px 35px;
+            width: 100%;
             display: flex;
             flex-direction: column;
-            box-shadow: inset 0 0 40px rgba(97, 77, 26, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
-        /* TÍTULOS */
-        .titulo-chumbado {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.6rem;
+        .card-container:hover .conteudo-luxo {
+            background-color: rgba(4, 9, 24, 0.93);
+            box-shadow: inset 0 0 30px rgba(132, 103, 38, 0.1);
+        }
+
+        .card-container:hover {
+            transform: scale(1.015) translateY(-4px);
+            box-shadow: 0 35px 80px rgba(132, 103, 38, 0.12);
+        }
+
+        /* TIPOGRAFIA E TÍTULOS */
+        .titulo-luxo {
+            font-family: 'Cinzel', serif;
+            font-size: 1.7rem;
             text-align: center;
             font-weight: 700;
-            letter-spacing: 4px;
-            margin-bottom: 30px;
-            color: #1e293b;
-            text-transform: uppercase;
-            text-shadow: 
-                -1px -1px 0 #ffffff, 
-                1px -1px 0 #ffffff, 
-                -1px 1px 0 #94a3b8, 
-                1px 1px 0 #64748b,
-                2px 2px 5px rgba(0,0,0,0.3);
+            letter-spacing: 5px;
+            margin-bottom: 35px;
+            color: var(--prata-incandescente);
+            text-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+            background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .cabecalho-secao {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
             font-family: 'Orbitron', sans-serif;
-            color: #0f172a;
-            font-weight: bold;
-            font-size: 1rem;
-            border-bottom: 2px solid var(--ouro-escuro);
-            padding-bottom: 10px;
-            margin-bottom: 25px;
+            color: var(--ouro-brilhante);
+            font-weight: 600;
+            font-size: 0.9rem;
+            border-bottom: 1px solid rgba(132, 103, 38, 0.3);
+            padding-bottom: 12px;
+            margin-bottom: 30px;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
         }
 
+        /* CARIMBO CLÍNICO PREMIUM */
         .carimbo-diagnostico {
             display: inline-block;
-            border: 3px double #b91c1c;
-            color: #b91c1c;
-            font-family: 'Courier New', monospace;
-            font-weight: bold;
-            font-size: 1.1rem;
-            padding: 8px 15px;
-            margin: 20px 0;
-            transform: rotate(-2deg);
+            border: 1px solid #f43f5e;
+            color: #f43f5e;
+            font-family: 'Orbitron', monospace;
+            font-weight: 400;
+            font-size: 0.85rem;
+            padding: 6px 16px;
+            margin: 25px 0;
+            letter-spacing: 2px;
+            border-radius: 4px;
+            transform: rotate(-1deg);
             text-transform: uppercase;
-            opacity: 0.9;
+            background: rgba(244, 63, 94, 0.05);
+            box-shadow: 0 0 15px rgba(244, 63, 94, 0.1);
             align-self: flex-start;
-            box-shadow: 0 0 8px rgba(185, 28, 28, 0.1);
         }
 
         .texto-clinico p, .lista-receita li {
-            line-height: 1.8;
-            color: #1e1b18;
+            line-height: 1.9;
+            color: #94a3b8;
             text-align: justify;
-            margin-bottom: 15px;
+            margin-bottom: 18px;
             font-size: 1.05rem;
         }
 
-        .texto-clinico strong { color: #000000; }
+        .texto-clinico strong { 
+            color: var(--ouro-brilhante); 
+            font-weight: 600;
+        }
 
-        /* LISTA DA RECEITA E REMÉDIOS DA IA */
+        /* ELEMENTOS DA RECEITA */
         .lista-receita { list-style: none; padding: 0; margin: 0; }
 
         .lista-receita li {
             display: flex;
             align-items: flex-start;
-            gap: 15px;
-            background: rgba(255, 255, 255, 0.4);
-            padding: 18px;
-            border-radius: 10px;
-            border-left: 5px solid var(--ouro-escuro);
-            margin-bottom: 15px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+            gap: 18px;
+            background: rgba(255, 255, 255, 0.02);
+            padding: 20px;
+            border-radius: 14px;
+            border-left: 3px solid var(--ouro-medio);
+            margin-bottom: 18px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+            border-top: 1px solid rgba(255,255,255,0.01);
         }
 
         .icone-receita { 
-            font-size: 1.6rem; 
+            font-size: 1.4rem; 
             line-height: 1;
-            filter: drop-shadow(1px 1px 2px rgba(0,0,0,0.2));
+            filter: drop-shadow(0 2px 8px rgba(132,103,38,0.4));
         }
 
         .medicamento-titulo {
             font-family: 'Orbitron', sans-serif;
-            font-size: 0.95rem;
-            color: #0f172a;
-            font-weight: 700;
-            margin-bottom: 4px;
+            font-size: 0.9rem;
+            color: var(--prata-incandescente);
+            font-weight: 600;
+            margin-bottom: 6px;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 1px;
         }
 
-        /* BOTÃO PRÓXIMA DE NAVEGAÇÃO */
+        /* NAVEGAÇÃO E BOTÃO PRÓXIMA */
         .area-botao {
             width: 100%;
             max-width: 1200px;
@@ -248,46 +286,48 @@
         }
 
         .btn-proxima {
-            background: #0f172a;
-            color: #ffffff;
-            border: 2px solid var(--ouro-escuro);
-            padding: 16px 45px;
-            border-radius: 30px;
-            font-family: 'Orbitron', sans-serif;
-            font-weight: bold;
-            font-size: 1rem;
+            background: rgba(3, 7, 18, 0.6);
+            color: var(--prata-incandescente);
+            border: 1px solid var(--ouro-escuro);
+            padding: 18px 50px;
+            border-radius: 35px;
+            font-family: 'Cinzel', serif;
+            font-weight: 700;
+            font-size: 0.95rem;
             cursor: pointer;
-            transition: all 0.4s ease;
-            letter-spacing: 3px;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+            transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+            letter-spacing: 4px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
             text-transform: uppercase;
             text-decoration: none;
             text-align: center;
+            backdrop-filter: blur(10px);
         }
 
         .btn-proxima:hover {
-            background: var(--ouro-escuro);
+            background: linear-gradient(135deg, var(--ouro-escuro) 0%, #30240a 100%);
             color: #ffffff;
-            box-shadow: 0 0 25px var(--ouro-brilhante);
-            transform: translateY(-3px);
+            box-shadow: 0 0 30px rgba(212, 175, 87, 0.25);
+            transform: translateY(-4px);
             border-color: var(--ouro-brilhante);
+            letter-spacing: 5px;
         }
 
-        /* MEDIA QUERIES PARA ADAPTAÇÃO COMPLETA EM CELULARES */
+        /* RESPONSIVIDADE COMPLETA */
         @media (max-width: 950px) {
             .layout-duas-colunas { 
                 flex-direction: column; 
-                gap: 35px; 
+                gap: 40px; 
             }
             body { 
-                padding: 100px 15px 30px 15px; 
+                padding: 120px 20px 40px 20px; 
             }
-            .conteudo-papel { 
-                padding: 30px 20px; 
+            .conteudo-luxo { 
+                padding: 35px 25px; 
             }
-            .titulo-chumbado { 
-                font-size: 1.35rem; 
-                letter-spacing: 2px;
+            .titulo-luxo { 
+                font-size: 1.45rem; 
+                letter-spacing: 3px;
             }
             .area-botao { 
                 justify-content: center; 
@@ -296,9 +336,12 @@
                 width: 100%; 
             }
             .painel-audio {
-                top: 15px;
-                right: 15px;
-                padding: 8px 12px;
+                top: 20px;
+                right: 50%;
+                transform: translateX(50%);
+                width: calc(100% - 40px);
+                max-width: 340px;
+                justify-content: space-between;
             }
         }
     </style>
@@ -309,16 +352,16 @@
 
     <div class="painel-audio">
         <button class="btn-audio" id="btn-play-pause" onclick="alternarAudio()">⏸️</button>
-        <input type="range" class="slider-volume" id="controle-volume" min="0" max="1" step="0.05" value="0.8" oninput="ajustarVolume(this.value)">
+        <input type="range" class="slider-volume" id="controle-volume" min="0" max="1" step="0.01" value="0.5" oninput="ajustarVolume(this.value)">
     </div>
 
     <audio id="musica-cosmos" loop src="elvis.html.mp3"></audio>
 
     <div class="layout-duas-colunas">
         
-        <div class="card-container">
-            <div class="conteudo-papel">
-                <h1 class="titulo-chumbado">PRONTUÁRIO MÉDICO</h1>
+        <div class="card-container esquerdo">
+            <div class="conteudo-luxo">
+                <h1 class="titulo-luxo">PRONTUÁRIO MÉDICO</h1>
                 <div class="cabecalho-secao">📋 HISTÓRICO & QUADRO CLÍNICO</div>
                 <div class="texto-clinico">
                     <p><strong>Paciente:</strong> Identificada como uma alma sonhadora em trânsito temporário por Belém (período de 1 ano e 3 meses fixado pelas raízes familiares e esperando o primeiro aninho de idade da Helena Sophia em 5 de agosto), com retorno programado para Brasília pós-aniversário.</p>
@@ -331,9 +374,9 @@
             </div>
         </div>
 
-        <div class="card-container">
-            <div class="conteudo-papel">
-                <h1 class="titulo-chumbado">RECEITA MÉDICA</h1>
+        <div class="card-container direito">
+            <div class="conteudo-luxo">
+                <h1 class="titulo-luxo">RECEITA MÉDICA</h1>
                 <div class="cabecalho-secao">🧪 TERAPÊUTICA RECOMENDADA</div>
                 <div class="texto-clinico">
                     <ul class="lista-receita">
@@ -372,30 +415,33 @@
     </div>
 
     <div class="area-botao">
-        <a href="#" class="btn-proxima" onclick="salvarTempoAntesDeSair()">Próxima Etapa</a>
+        <a href="felicidade.html" class="btn-proxima" onclick="salvarTempoAntesDeSair()">Próxima Etapa</a>
     </div>
 
     <script>
         const musica = document.getElementById('musica-cosmos');
         const btnPlayPause = document.getElementById('btn-play-pause');
+        const controleVolume = document.getElementById('controle-volume');
 
-        // LÓGICA DE CONTINUIDADE DO ÁUDIO
+        // GESTÃO EXCLUSIVA DE ÁUDIO SEM SOBREPOSIÇÃO
         window.addEventListener('DOMContentLoaded', () => {
             const deveTocar = localStorage.getItem('musicaTocando');
             const tempoSalvo = localStorage.getItem('musicaTempo');
+            
+            // Força o volume inicial em 50% conforme pedido
+            musica.volume = 0.5;
+            controleVolume.value = 0.5;
 
             if (tempoSalvo) {
                 musica.currentTime = parseFloat(tempoSalvo);
             }
 
-            // Se na página anterior estava tocando, continua automaticamente
             if (deveTocar !== 'false') {
-                musica.volume = 0.8;
                 musica.play().then(() => {
                     btnPlayPause.innerText = '⏸️';
                 }).catch(() => {
                     btnPlayPause.innerText = '▶️';
-                    // Fallback para clique caso o navegador bloqueie autoplay
+                    // Fallback elegante para navegadores que exigem interação
                     document.addEventListener('click', () => {
                         if(musica.paused && localStorage.getItem('musicaTocando') !== 'false') {
                             musica.play();
@@ -407,12 +453,12 @@
                 btnPlayPause.innerText = '▶️';
             }
 
-            // Atualiza o tempo continuamente no sistema
+            // Grava continuamente o andamento exato para a próxima página ler
             setInterval(() => {
                 if (!musica.paused) {
                     localStorage.setItem('musicaTempo', musica.currentTime);
                 }
-            }, 1000);
+            }, 500);
         });
 
         function alternarAudio() {
@@ -435,22 +481,22 @@
             localStorage.setItem('musicaTempo', musica.currentTime);
         }
 
-        // Geração dinâmica de estrelas em segundo plano para o cenário cosmos
+        // DESIGN CÓSMICO DE ESTRELAS INCANDESCENTES
         const cenario = document.getElementById('cenario-cosmos');
-        const numEstrelas = window.innerWidth < 600 ? 25 : 50;
+        const numEstrelas = window.innerWidth < 600 ? 35 : 70;
 
         for (let i = 0; i < numEstrelas; i++) {
             const estrela = document.createElement('div');
             estrela.className = 'estrela-prata';
             
-            const tamanho = Math.random() * 2.5 + 1;
+            const tamanho = Math.random() * 2.2 + 0.8;
             estrela.style.width = tamanho + 'px';
             estrela.style.height = tamanho + 'px';
             estrela.style.top = Math.random() * 100 + '%';
             estrela.style.left = Math.random() * 100 + '%';
             
-            estrela.style.animationDelay = Math.random() * 3 + 's';
-            estrela.style.animationDuration = (Math.random() * 2 + 2) + 's';
+            estrela.style.animationDelay = Math.random() * 4 + 's';
+            estrela.style.animationDuration = (Math.random() * 3 + 2) + 's';
             
             cenario.appendChild(estrela);
         }
