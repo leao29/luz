@@ -12,7 +12,7 @@
             --ouro-escuro: #614d1a;
             --ouro-brilhante: #cca43b;
             --cor-prata: #e2e8f0;
-            --papel-antigo: rgba(245, 230, 196, 0.85); /* Suavizado para harmonizar com o cosmos */
+            --papel-antigo: rgba(245, 230, 196, 0.85); 
         }
 
         * { 
@@ -32,7 +32,7 @@
             align-items: center;
             overflow-x: hidden;
             overflow-y: auto;
-            padding: 60px 20px 40px 20px;
+            padding: 80px 20px 40px 20px;
         }
 
         /* FUNDO COSMOS COM ESTRELAS PULSANTES INCANDESCENTES */
@@ -49,6 +49,7 @@
             border-radius: 50%;
             box-shadow: 0 0 16px 4px rgba(255, 255, 255, 0.8);
             animation: pulsar 3s infinite ease-in-out;
+            pointer-events: none;
         }
 
         @keyframes pulsar {
@@ -61,7 +62,7 @@
             position: fixed;
             top: 20px; right: 20px;
             background: rgba(15, 23, 42, 0.9);
-            border: 1px solid var(--cor-prata);
+            border: 1px solid var(--ouro-escuro);
             padding: 10px 16px;
             border-radius: 30px;
             display: flex;
@@ -79,7 +80,7 @@
         .slider-volume {
             width: 75px;
             cursor: pointer;
-            accent-color: var(--cor-prata);
+            accent-color: var(--ouro-brilhante);
         }
 
         /* LAYOUT EM DUAS COLUNAS RESPONSIVO */
@@ -92,6 +93,7 @@
             justify-content: center;
             align-items: stretch;
             margin-bottom: 40px;
+            z-index: 10;
         }
 
         /* CARDS COM EFEITO DE BORDA DE OURO CORRENDO */
@@ -106,7 +108,6 @@
             background: rgba(2, 6, 23, 0.4);
         }
 
-        /* Linha animada de ouro escuro simulando correr pelo contorno do card */
         .card-container::before {
             content: '';
             position: absolute;
@@ -243,6 +244,7 @@
             display: flex;
             justify-content: flex-end;
             padding: 10px 0;
+            z-index: 10;
         }
 
         .btn-proxima {
@@ -278,7 +280,7 @@
                 gap: 35px; 
             }
             body { 
-                padding: 90px 15px 30px 15px; 
+                padding: 100px 15px 30px 15px; 
             }
             .conteudo-papel { 
                 padding: 30px 20px; 
@@ -305,24 +307,21 @@
 
     <div id="cenario-cosmos"></div>
 
-    <!-- PAINEL DE ÁUDIO -->
     <div class="painel-audio">
         <button class="btn-audio" id="btn-play-pause" onclick="alternarAudio()">⏸️</button>
-        <input type="range" class="slider-volume" id="controle-volume" min="0" max="1" step="0.05" value="1" oninput="ajustarVolume(this.value)">
+        <input type="range" class="slider-volume" id="controle-volume" min="0" max="1" step="0.05" value="0.8" oninput="ajustarVolume(this.value)">
     </div>
 
-    <!-- ELEMENTO DE ÁUDIO -->
-    <audio id="musica-cosmos" loop src="sua-musica.mp3"></audio>
+    <audio id="musica-cosmos" loop src="elvis.html.mp3"></audio>
 
     <div class="layout-duas-colunas">
         
-        <!-- CARD ESQUERDO: PRONTUÁRIO -->
         <div class="card-container">
             <div class="conteudo-papel">
                 <h1 class="titulo-chumbado">PRONTUÁRIO MÉDICO</h1>
                 <div class="cabecalho-secao">📋 HISTÓRICO & QUADRO CLÍNICO</div>
                 <div class="texto-clinico">
-                    <p><strong>Paciente:</strong> Identificada como uma alma sonhadora em trânsito temporário por Belém (período de 1 ano e 3 meses fixado pelas raíces familiares e esperando o primeiro aninho de idade da Helena Sophia em 5 de agosto), com retorno programado para Brasília pós-aniversário.</p>
+                    <p><strong>Paciente:</strong> Identificada como uma alma sonhadora em trânsito temporário por Belém (período de 1 ano e 3 meses fixado pelas raízes familiares e esperando o primeiro aninho de idade da Helena Sophia em 5 de agosto), com retorno programado para Brasília pós-aniversário.</p>
                     <p><strong>Evolução:</strong> Veterana de uma jornada de mais de 20 anos enfrentando a síndrome do pânico. Apresenta alta capacidade de discernimento e blindagem terapêutica, sabendo separar perfeitamente a relação médico-paciente tradicional.</p>
                     
                     <div class="carimbo-diagnostico">Diagnóstico: Afeto Agudo Incurável</div>
@@ -332,7 +331,6 @@
             </div>
         </div>
 
-        <!-- CARD DIREITO: RECEITA PERSONALIZADA PELA IA -->
         <div class="card-container">
             <div class="conteudo-papel">
                 <h1 class="titulo-chumbado">RECEITA MÉDICA</h1>
@@ -373,24 +371,59 @@
         </div>
     </div>
 
-    <!-- BOTÃO PRÓXIMA DE NAVEGAÇÃO -->
     <div class="area-botao">
-        <a href="#" class="btn-proxima">Próxima Etapa</a>
+        <a href="#" class="btn-proxima" onclick="salvarTempoAntesDeSair()">Próxima Etapa</a>
     </div>
 
-    <!-- SCRIPTS DE INTERAÇÃO -->
     <script>
-        // Lógica básica para controle do elemento de áudio fictício
         const musica = document.getElementById('musica-cosmos');
         const btnPlayPause = document.getElementById('btn-play-pause');
 
+        // LÓGICA DE CONTINUIDADE DO ÁUDIO
+        window.addEventListener('DOMContentLoaded', () => {
+            const deveTocar = localStorage.getItem('musicaTocando');
+            const tempoSalvo = localStorage.getItem('musicaTempo');
+
+            if (tempoSalvo) {
+                musica.currentTime = parseFloat(tempoSalvo);
+            }
+
+            // Se na página anterior estava tocando, continua automaticamente
+            if (deveTocar !== 'false') {
+                musica.volume = 0.8;
+                musica.play().then(() => {
+                    btnPlayPause.innerText = '⏸️';
+                }).catch(() => {
+                    btnPlayPause.innerText = '▶️';
+                    // Fallback para clique caso o navegador bloqueie autoplay
+                    document.addEventListener('click', () => {
+                        if(musica.paused && localStorage.getItem('musicaTocando') !== 'false') {
+                            musica.play();
+                            btnPlayPause.innerText = '⏸️';
+                        }
+                    }, { once: true });
+                });
+            } else {
+                btnPlayPause.innerText = '▶️';
+            }
+
+            // Atualiza o tempo continuamente no sistema
+            setInterval(() => {
+                if (!musica.paused) {
+                    localStorage.setItem('musicaTempo', musica.currentTime);
+                }
+            }, 1000);
+        });
+
         function alternarAudio() {
             if (musica.paused) {
-                musica.play().catch(() => console.log("Adicione um arquivo válido em src para tocar."));
+                musica.play();
                 btnPlayPause.innerText = '⏸️';
+                localStorage.setItem('musicaTocando', 'true');
             } else {
                 musica.pause();
                 btnPlayPause.innerText = '▶️';
+                localStorage.setItem('musicaTocando', 'false');
             }
         }
 
@@ -398,22 +431,24 @@
             musica.volume = valor;
         }
 
+        function salvarTempoAntesDeSair() {
+            localStorage.setItem('musicaTempo', musica.currentTime);
+        }
+
         // Geração dinâmica de estrelas em segundo plano para o cenário cosmos
         const cenario = document.getElementById('cenario-cosmos');
-        const numEstrelas = 40;
+        const numEstrelas = window.innerWidth < 600 ? 25 : 50;
 
         for (let i = 0; i < numEstrelas; i++) {
             const estrela = document.createElement('div');
             estrela.className = 'estrela-prata';
             
-            // Posições e tamanhos randômicos
-            const tamanho = Math.random() * 3 + 1;
+            const tamanho = Math.random() * 2.5 + 1;
             estrela.style.width = tamanho + 'px';
             estrela.style.height = tamanho + 'px';
             estrela.style.top = Math.random() * 100 + '%';
             estrela.style.left = Math.random() * 100 + '%';
             
-            // Atrasos de animação variados para criar o efeito orgânico
             estrela.style.animationDelay = Math.random() * 3 + 's';
             estrela.style.animationDuration = (Math.random() * 2 + 2) + 's';
             
