@@ -314,8 +314,9 @@
         </a>
     </div>
 
+    <!-- BOTÃO PRÓXIMA CORRIGIDO COM RETORNO DE EVENTO -->
     <div class="container-botao-fim">
-        <a href="felicidade.html" class="btn-fim" onclick="salvarEstadoAudio()">Próxima</a>
+        <a href="felicidade.html" class="btn-fim" onclick="salvarEstadoAudio(); return true;">Próxima</a>
     </div>
 
     <audio id="audio" src="sua-musica.mp3" loop></audio>
@@ -368,36 +369,64 @@
             localStorage.setItem('audioVolume', valor);
         }
 
+        // Função executada ao clicar no botão "Próxima"
         function salvarEstadoAudio() {
             localStorage.setItem('audioTempo', audio.currentTime);
+            localStorage.setItem('audioTocando', 'true'); // Força a próxima página a tocar também
         }
 
-        // Nova mecânica inteligente de pausa para links externos
+        // Pausa imediatamente ao ir para o YouTube
         function pausarParaVideo() {
-            if (!audio.paused) {
-                audio.pause();
-                atualizarIcone(false);
-                // Define que o áudio deve voltar a tocar assim que ela retornar
-                localStorage.setItem('audioTocando', 'true'); 
-            }
+            audio.pause();
+            atualizarIcone(false);
+            localStorage.setItem('audioTocando', 'true'); // Deixa preparado para voltar a tocar depois
         }
 
-        function tentarTocarMusica() {
+        // Função de segurança ativa caso o navegador trave o som no início
+        function forcarAutoplay() {
             const audioTocando = localStorage.getItem('audioTocando');
-            if (audioTocando === 'true' && audio.paused) {
-                audio.play().then(() => { atualizarIcone(true); })
-                .catch(() => { atualizarIcone(false); });
+            if ((audioTocando === 'true' || audioTocando === null) && audio.paused) {
+                audio.play().then(() => {
+                    atualizarIcone(true);
+                    removerGatilhosDeInteracao();
+                }).catch(err => console.log("Aguardando interação...", err));
             }
         }
 
-        // Monitora o foco da aba. Ao voltar do Youtube, a música reinicia
+        function removerGatilhosDeInteracao() {
+            document.removeEventListener('click', forcarAutoplay);
+            document.removeEventListener('touchstart', forcarAutoplay);
+            document.removeEventListener('scroll', forcarAutoplay);
+        }
+
+        // ESSENCIAL: Monitora quando ela FECHA o Youtube e VOLTA para esta aba
         window.addEventListener('focus', () => {
             const audioTocando = localStorage.getItem('audioTocando');
+            const audioTempo = localStorage.getItem('audioTempo');
+            
+            if (audioTempo !== null && audio.paused) {
+                audio.currentTime = parseFloat(audioTempo);
+            }
+
             if (audioTocando === 'true' && audio.paused) {
-                audio.play().then(() => { atualizarIcone(true); });
+                audio.play().then(() => { 
+                    atualizarIcone(true); 
+                }).catch(() => {
+                    // Se o navegador barrar o retorno automático, adiciona os cliques na tela para destravar
+                    document.addEventListener('click', forcarAutoplay);
+                    document.addEventListener('touchstart', forcarAutoplay);
+                });
             }
         });
 
+        // Evento contínuo para atualizar o tempo atual antes de mudar de aba (segurança extra)
+        window.addEventListener('blur', () => {
+            if (!audio.paused) {
+                localStorage.setItem('audioTempo', audio.currentTime);
+            }
+        });
+
+        // Carregamento inicial da página
         window.addEventListener('DOMContentLoaded', () => {
             criarEstrelas();
 
@@ -417,12 +446,16 @@
                 audio.currentTime = parseFloat(audioTempo);
             }
 
-            if (audioTocando === 'true') {
+            // Executa a lógica de reprodução ao entrar vindo do prontuário
+            if (audioTocando === 'true' || audioTocando === null) {
                 audio.play().then(() => {
                     atualizarIcone(true);
                 }).catch(() => {
                     atualizarIcone(false);
-                    document.body.addEventListener('click', tentarTocarMusica, { once: true });
+                    // Ativa os sensores: no primeiro movimento ou toque dela na tela, o som ativa
+                    document.addEventListener('click', forcarAutoplay);
+                    document.addEventListener('touchstart', forcarAutoplay);
+                    document.addEventListener('scroll', forcarAutoplay);
                 });
             } else {
                 atualizarIcone(false);
