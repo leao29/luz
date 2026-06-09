@@ -44,7 +44,7 @@
             flex-direction: column; 
             align-items: center;
             overflow-x: hidden;
-            padding: 100px 20px 60px 20px;
+            padding: 120px 20px 60px 20px;
             opacity: 0; 
             transition: opacity 0.8s ease;
         }
@@ -101,7 +101,7 @@
             100% { transform: translate(-30vw, 80vh) rotate(15deg); opacity: 0; }
         }
 
-        /* CONTROLES DE ÁUDIO LUXUOSOS CORES DE OURO */
+        /* CONTROLES DE ÁUDIO LUXUOSOS */
         .player-luxo {
             position: fixed;
             top: 30px;
@@ -168,61 +168,86 @@
             transform: scale(1.3);
         }
 
-        /* CARD DE CONTEÚDO COM EFEITO ZOOM E BORDA DE PRATA PERSEGUIDA */
-        .card-conteudo {
-            position: relative; 
-            max-width: 750px; 
+        /* CARD DO TÍTULO DE CIMA COM EFEITO OURO CORRENDO */
+        .card-titulo-topo {
+            position: relative;
+            max-width: 750px;
             width: 100%;
-            padding: 3px; /* Espessura da borda iluminada */
-            border-radius: 20px; 
+            padding: 3px;
+            border-radius: 20px;
             overflow: hidden;
             background: var(--azul-card-luxo);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
-            margin-bottom: 30px;
-            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s ease;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.8);
+            margin-bottom: 35px;
+            text-align: center;
         }
 
-        /* Efeito de Zoom Suave no Card */
-        .card-conteudo:hover {
-            transform: scale(1.02);
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.9);
-        }
-
-        /* Efeito Luxuoso: Dois feixes de prata correndo um atrás do outro */
-        .card-conteudo::before {
+        .card-titulo-topo::before {
             content: '';
             position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
             background: conic-gradient(
                 from 0deg,
                 transparent 0%,
                 transparent 15%,
-                var(--prata-brilhante) 25%,
-                rgba(241, 245, 249, 0.2) 35%,
+                var(--ouro-ativo) 25%,
+                rgba(197, 168, 98, 0.2) 35%,
                 transparent 50%,
                 transparent 65%,
-                var(--prata-brilhante) 75%,
-                rgba(241, 245, 249, 0.2) 85%,
+                var(--ouro-ativo) 75%,
+                rgba(197, 168, 98, 0.2) 85%,
                 transparent 100%
             );
-            animation: prataCorrendo 5s linear infinite;
+            animation: ouroCorrendo 5s linear infinite;
             z-index: 1;
         }
 
-        @keyframes prataCorrendo {
+        @keyframes ouroCorrendo {
             100% { transform: rotate(360deg); }
+        }
+
+        .titulo-topo-interno {
+            position: relative;
+            z-index: 2;
+            background: rgba(3, 7, 18, 0.96);
+            padding: 30px 40px;
+            border-radius: 17px;
+        }
+
+        .titulo-topo-interno h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.15rem;
+            color: var(--ouro-ativo);
+            letter-spacing: 2px;
+            line-height: 1.8;
+            text-transform: uppercase;
+        }
+
+        /* CARD DE CONTEÚDO PRINCIPAL (LETRAS PRATA LEGÍVEIS) */
+        .card-conteudo {
+            position: relative; 
+            max-width: 750px; 
+            width: 100%;
+            padding: 1px; 
+            border-radius: 20px; 
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+            margin-bottom: 35px;
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .card-conteudo:hover {
+            transform: scale(1.01);
         }
 
         .papel-antigo {
             position: relative;
             z-index: 2; 
-            background: rgba(3, 7, 18, 0.96); 
-            backdrop-filter: blur(15px);
-            padding: 40px; 
-            border-radius: 17px; 
+            background: var(--azul-card-luxo); 
+            padding: 45px 40px; 
+            border-radius: 19px; 
             display: flex;
             flex-direction: column;
         }
@@ -254,59 +279,82 @@
         }
 
         .verso-narrativo {
-            line-height: 1.8; 
+            line-height: 1.9; 
             font-size: 1.1rem; 
             text-align: center; 
             margin-bottom: 8px; 
-            color: #e2e8f0; 
-            text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+            color: var(--prata-brilhante); /* Cor de Prata bem legível */
+            text-shadow: 0 1px 4px rgba(0,0,0,0.7);
         }
 
-        /* CARD DO RODAPÉ FUTURISTA COM TRADUÇÃO */
+        /* CARD DO RODAPÉ COM EFEITO DE PRATA CORRENDO */
         .card-rodape {
+            position: relative;
             width: 100%;
             max-width: 750px;
-            padding: 1px;
-            border-radius: 16px;
-            background: linear-gradient(135deg, rgba(138, 111, 39, 0.2), transparent, rgba(241, 245, 249, 0.15));
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.7);
+            padding: 3px; /* Espessura da borda iluminada prateada */
+            border-radius: 20px;
+            overflow: hidden;
+            background: var(--azul-card-luxo);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.85);
             margin-bottom: 40px;
-            transition: transform 0.5s ease, box-shadow 0.5s ease;
+            transition: transform 0.5s ease;
         }
         
         .card-rodape:hover {
-            transform: scale(1.02);
-            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.85);
+            transform: scale(1.01);
+        }
+
+        /* Efeito de Prata perseguindo um ao outro nas bordas do rodapé */
+        .card-rodape::before {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: conic-gradient(
+                from 0deg,
+                transparent 0%,
+                transparent 15%,
+                var(--prata-brilhante) 25%,
+                rgba(241, 245, 249, 0.2) 35%,
+                transparent 50%,
+                transparent 65%,
+                var(--prata-brilhante) 75%,
+                rgba(241, 245, 249, 0.2) 85%,
+                transparent 100%
+            );
+            animation: prataCorrendo 5s linear infinite;
+            z-index: 1;
+        }
+
+        @keyframes prataCorrendo {
+            100% { transform: rotate(360deg); }
         }
 
         .rodape-interno {
+            position: relative;
+            z-index: 2;
             background: rgba(3, 7, 18, 0.97); 
             backdrop-filter: blur(15px);
-            padding: 35px;
-            border-radius: 15px;
-        }
-
-        .texto-explicativo {
-            font-family: 'Cinzel', serif;
-            font-size: 0.95rem;
-            color: var(--ouro-ativo);
-            text-align: center;
-            line-height: 1.7;
-            letter-spacing: 2px;
-            margin-bottom: 30px;
-            text-transform: uppercase;
-            border-bottom: 1px solid rgba(197, 168, 98, 0.15);
-            padding-bottom: 15px;
+            padding: 45px 40px;
+            border-radius: 17px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         .traducao-titulo {
             font-family: 'Cinzel', serif;
-            font-size: 1.4rem;
-            color: var(--prata-brilhante);
+            font-size: 1.3rem;
+            color: var(--ouro-ativo);
             text-align: center;
-            letter-spacing: 4px;
-            margin-bottom: 25px;
-            text-shadow: 0 2px 10px rgba(255, 255, 255, 0.1);
+            letter-spacing: 3px;
+            margin-bottom: 35px;
+            line-height: 1.6;
+            text-transform: uppercase;
+            border-bottom: 1px solid rgba(197, 168, 98, 0.2);
+            padding-bottom: 15px;
+            width: 100%;
         }
 
         .verso-traducao {
@@ -315,55 +363,57 @@
             line-height: 1.9;
             color: #cbd5e1; 
             text-align: center;
-            margin-bottom: 18px;
+            margin-bottom: 22px;
             font-style: italic;
             text-shadow: 0 1px 3px rgba(0,0,0,0.6);
         }
 
-        /* NAVEGAÇÃO NO CANTO DIREITO COM ZOOM ATIVO */
+        /* NAVEGAÇÃO CENTRALIZADA ABAIXO DA TRADUÇÃO */
         .container-navegacao {
             width: 100%;
             display: flex;
-            justify-content: flex-end;
-            margin-top: 20px;
+            justify-content: center;
+            margin-top: 25px;
         }
 
         .btn-proximo {
             display: inline-block;
             width: auto;
-            min-width: 260px;
-            padding: 16px 35px; 
-            border: 1px solid rgba(241, 245, 249, 0.25);
+            min-width: 280px;
+            padding: 16px 40px; 
+            border: 1px solid rgba(241, 245, 249, 0.3);
             background: var(--azul-card-luxo); 
-            color: var(--prata-brilhante); 
+            color: var(--prata-brilhante); /* Cor prateada refinada */
             border-radius: 30px; 
             cursor: pointer; 
             font-family: 'Cinzel', serif; 
             font-weight: 700; 
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             text-transform: uppercase; 
-            letter-spacing: 3px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.6);
+            letter-spacing: 4px;
+            box-shadow: 0 4px 25px rgba(0,0,0,0.6);
             transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s, box-shadow 0.4s, color 0.4s;
             outline: none;
         }
         
         .btn-proximo:hover { 
-            transform: scale(1.08); 
-            border-color: rgba(255, 255, 255, 0.9);
-            box-shadow: 0 0 25px rgba(241, 245, 249, 0.25); 
+            transform: scale(1.06); 
+            border-color: var(--prata-brilhante);
+            box-shadow: 0 0 25px rgba(241, 245, 249, 0.35); 
             color: #ffffff;
         }
 
         @media (max-width: 680px) {
-            body { padding: 90px 15px 40px 15px; }
+            body { padding: 110px 15px 40px 15px; }
             .player-luxo { top: 20px; right: 20px; padding: 6px 12px; }
             .vol-slider { width: 50px; }
+            .titulo-topo-interno { padding: 20px; }
+            .titulo-topo-interno h1 { font-size: 0.95rem; }
             .papel-antigo { padding: 30px 20px; }
             .verso-narrativo { font-size: 1rem; line-height: 1.7; }
             .btn-proximo { width: 100%; text-align: center; }
-            .rodape-interno { padding: 25px 15px; }
-            .traducao-titulo { font-size: 1.2rem; }
+            .rodape-interno { padding: 30px 20px; }
+            .traducao-titulo { font-size: 1.1rem; }
             .verso-traducao { font-size: 0.95rem; }
         }
     </style>
@@ -380,6 +430,12 @@
         </div>
     </div>
  
+    <div class="card-titulo-topo">
+        <div class="titulo-topo-interno">
+            <h1>Essa é uma forma poética da música Christina Perri - A Thousand Years, a qual será minha maior realização que é meu futuro casamento.</h1>
+        </div>
+    </div>
+
     <div class="card-conteudo">
         <div class="papel-antigo">
             
@@ -401,7 +457,7 @@
                 <p class="verso-narrativo">Pois o nosso encontro já estava escrito nas estrelas.</p>
             </div>
  
-            <div class="bloco-estrofe" style="margin-bottom: 25px;">
+            <div class="bloco-estrofe" style="margin-bottom: 10px;">
                 <h3 class="titulo-estrofe">A Jornada Continua</h3>
                 <p class="verso-narrativo">Agora, a coragem substitui o antigo vazio que eu carregava.</p>
                 <p class="verso-narrativo">Ver você de pé, com os olhos brilhando na minha direção,</p>
@@ -410,19 +466,13 @@
                 <p class="verso-narrativo">Amando você ontem, hoje, e por toda a eternidade.</p>
             </div>
  
-            <div class="container-navegacao">
-                <button class="btn-proximo" onclick="irParaProxima()">PRÓXIMA PÁGINA</button>
-            </div>
         </div>
     </div>
 
     <div class="card-rodape">
         <div class="rodape-interno">
-            <p class="texto-explicativo">
-                Essa é uma forma poética da música Christina Perri - A Thousand Years, a qual será minha maior realização que é meu futuro casamento.
-            </p>
             
-            <h2 class="traducao-titulo">MIL ANOS (Traduzida)</h2>
+            <h2 class="traducao-titulo">TRADUÇÃO DA MÚSICA<br>Christina Perri - A Thousand Years<br>MIL ANOS</h2>
             
             <p class="verso-traducao">
                 O coração bate acelerado. Cores e promessas. Como ser corajosa?<br>
@@ -448,6 +498,10 @@
                 O tempo trouxe o seu coração para mim.<br>
                 Eu te amei por mil anos. Eu te amarei por mais mil.
             </p>
+
+            <div class="container-navegacao">
+                <button class="btn-proximo" onclick="irParaProxima()">QUASE NO FIM</button>
+            </div>
         </div>
     </div>
  
@@ -461,7 +515,7 @@
         const btnPlayPause = document.getElementById('btnPlayPause');
         const sliderVolume = document.getElementById('sliderVolume');
 
-        // Sincronização automática na entrada da página para não interromper a trilha sonora
+        // Sincronização automática de áudio sem interrupções
         window.addEventListener('DOMContentLoaded', () => {
             document.body.style.opacity = '1'; 
 
@@ -484,7 +538,7 @@
                 audio.play().then(() => {
                     btnPlayPause.textContent = "PAUSE";
                 }).catch(err => {
-                    console.log("Autoplay bloqueado. Aguardando clique.");
+                    console.log("Aguardando interação para iniciar áudio.");
                     btnPlayPause.textContent = "PLAY";
                 });
             }
@@ -513,7 +567,7 @@
             }
         }, 1000);
 
-        // Geração Estática das Estrelas Pratas Pulsantes
+        // Universo de Estrelas Prateadas
         for (let i = 0; i < 100; i++) {
             const estrela = document.createElement('div');
             estrela.className = 'estrela';
@@ -527,7 +581,7 @@
             cosmos.appendChild(estrela);
         }
 
-        // Sistema de Estrelas Cadentes Bilaterais (Esquerda e Direita)
+        // Estrelas Cadentes Bilaterais
         function criarEstrelaCadente() {
             const queda = document.createElement('div');
             const ehEsquerda = Math.random() > 0.5; 
@@ -548,7 +602,7 @@
         }
         setInterval(criarEstrelaCadente, 1500);
 
-        // Transição limpa enviando dados ativos de execução para o fim.html
+        // Direcionamento e persistência de dados para o fim.html
         function irParaProxima() {
             localStorage.setItem('audioTempo', audio.currentTime);
             localStorage.setItem('audioTocando', !audio.paused);
@@ -560,7 +614,7 @@
             }, 800);
         }
  
-        // Observador de Rolagem para Efeito Esmaecido das Estrofes
+        // Observador de Rolagem suave das Estrofes
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
