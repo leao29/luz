@@ -14,7 +14,7 @@
         }
 
         body {
-            background-color: #0d0703;
+            background-color: #030712;
             overflow: hidden;
             display: flex;
             justify-content: center;
@@ -24,7 +24,7 @@
             font-family: 'Playfair Display', serif;
         }
 
-        /* Estrelas de Fundo */
+        /* Fundo Cósmico Azul com Estrelas */
         #starsContainer {
             position: absolute;
             width: 100%;
@@ -33,6 +33,7 @@
             left: 0;
             z-index: 1;
             pointer-events: none;
+            background: radial-gradient(circle at center, #061530 0%, #020617 100%);
         }
 
         .star {
@@ -42,9 +43,26 @@
             animation: pulseStar 2s infinite ease-in-out alternate;
         }
 
+        /* Estrelas cadentes caindo de todos os lados */
+        .falling-star {
+            position: absolute;
+            width: 1.5px;
+            height: 70px;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.7), transparent);
+            opacity: 0;
+            animation: fallAnimation 4s infinite linear;
+        }
+
         @keyframes pulseStar {
             0% { opacity: 0.15; transform: scale(0.8); }
             100% { opacity: 0.85; transform: scale(1.2); }
+        }
+
+        @keyframes fallAnimation {
+            0% { transform: translateY(-80px); opacity: 0; }
+            10% { opacity: 0.6; }
+            50% { transform: translateY(100vh); opacity: 0; }
+            100% { transform: translateY(100vh); opacity: 0; }
         }
 
         /* CARD PRINCIPAL RESPONSIVO */
@@ -81,7 +99,7 @@
 
         .card-content {
             width: 100%;
-            background: radial-gradient(circle at center, #1a1412 0%, #0d0703 100%);
+            background: radial-gradient(circle at center, #111625 0%, #040a17 100%);
             border-radius: 21px;
             overflow: hidden;
             position: relative;
@@ -156,7 +174,7 @@
             display: inline-block;
         }
 
-        /* SELO PREMIUM COM PÉROLA NEGRA */
+        /* SELO PREMIUM DE ALTA VISIBILIDADE COM PÉROLA NEGRA */
         .seal-container {
             display: flex;
             justify-content: center;
@@ -166,15 +184,15 @@
         }
 
         .wax-seal {
-            width: clamp(75px, 18vw, 90px);
-            height: clamp(75px, 18vw, 90px);
-            background: radial-gradient(circle at 35% 35%, #4b4b4e 0%, #222225 50%, #0b0b0d 100%);
+            width: clamp(80px, 20vw, 95px);
+            height: clamp(80px, 20vw, 95px);
+            background: radial-gradient(circle at 35% 35%, #5a5a5e 0%, #2a2a2e 50%, #0e0e12 100%);
             border-radius: 51% 49% 52% 48% / 48% 53% 47% 52%;
             display: flex;
             justify-content: center;
             align-items: center;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.8), inset 2px 2px 6px rgba(255, 255, 255, 0.15), inset -4px -4px 10px rgba(0, 0, 0, 0.9);
-            border: 1px solid #151518;
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.85), inset 2px 2px 6px rgba(255, 255, 255, 0.25), inset -4px -4px 10px rgba(0, 0, 0, 0.9);
+            border: 1px solid #1a1a1f;
             position: relative;
             z-index: 2;
             transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.4s ease;
@@ -182,35 +200,35 @@
 
         .perola-negra-canva {
             position: absolute;
-            width: 42%;
-            height: 42%;
+            width: 44%;
+            height: 44%;
             border-radius: 50%;
-            border: 1px solid rgba(229, 231, 235, 0.25);
-            box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.7);
+            border: 1.5px solid rgba(255, 255, 255, 0.4);
+            box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.8), 0 0 12px rgba(255, 255, 255, 0.15);
             pointer-events: none;
-            background: radial-gradient(circle at 30% 30%, #ffffff 0%, #e2e8f0 18%, #475569 45%, #0f172a 80%, #020617 100%);
+            background: radial-gradient(circle at 30% 30%, #ffffff 0%, #cbd5e1 20%, #475569 50%, #0f172a 85%, #020617 100%);
             animation: flutuarPerola 3.5s infinite ease-in-out;
         }
 
         .wax-seal:hover {
-            transform: scale(1.05) rotate(3deg);
-            box-shadow: 0 0 18px rgba(255, 255, 255, 0.95), 0 0 8px rgba(203, 213, 225, 0.6), inset -3px -3px 8px rgba(0,0,0,0.95), inset 4px 4px 6px rgba(255,255,255,0.7);
+            transform: scale(1.06) rotate(3deg);
+            box-shadow: 0 0 22px rgba(255, 255, 255, 0.4), inset -3px -3px 8px rgba(0,0,0,0.95), inset 4px 4px 6px rgba(255,255,255,0.7);
         }
 
         .psychiatry-symbol {
-            width: 38%;
-            height: 38%;
-            color: #f3f4f6;
-            filter: drop-shadow(1px 2px 3px rgba(0, 0, 0, 0.9));
+            width: 40%;
+            height: 40%;
+            color: #ffffff;
+            filter: drop-shadow(1px 2px 4px rgba(0, 0, 0, 0.95));
             z-index: 3;
         }
 
         @keyframes flutuarPerola {
             0%, 100% { transform: translateY(0px) scale(1); }
-            50% { transform: translateY(-3px) scale(1.03); }
+            50% { transform: translateY(-3px) scale(1.02); }
         }
 
-        /* BOTÃO DE AÇÃO RESPONSIVO */
+        /* BOTÃO DE AÇÃO RESPONSIVO - FERRO PRATA CHUMBADO LUXUOSO */
         .action-button-container {
             width: 100%;
             display: flex;
@@ -220,27 +238,27 @@
         }
 
         .btn-luxury {
-            background: rgba(15, 10, 5, 0.6);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            color: #fbf5b7;
+            background: linear-gradient(135deg, #2e3541 0%, #151a22 50%, #0b0d12 100%);
+            color: #ffffff;
             font-family: 'Playfair Display', serif; 
-            font-weight: 600;
-            font-size: clamp(10px, 2.5vw, 12px);
-            letter-spacing: 1px;
+            font-weight: 700;
+            font-size: clamp(12px, 2.8vw, 15px);
+            letter-spacing: 2px;
             text-transform: uppercase;
-            padding: 14px 20px;
+            padding: 16px 28px;
             border-radius: 40px;
             cursor: pointer;
             outline: none;
             position: relative;
             overflow: hidden;
-            border: 1px solid rgba(191, 149, 63, 0.5);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.5), inset 0 1px 2px rgba(252, 246, 186, 0.15);
-            animation: goldAuraPulse 3s infinite ease-in-out;
+            border: 1.5px solid rgba(255, 255, 255, 0.65);
+            box-shadow: 0 6px 22px rgba(0, 0, 0, 0.75), 
+                        inset 0 1px 4px rgba(255, 255, 255, 0.25),
+                        0 0 0 2px rgba(15, 20, 28, 0.8);
             transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
             width: 100%;
-            max-width: 380px; /* Leve aumento para comportar o texto perfeitamente */
+            max-width: 420px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.9);
         }
 
         .btn-luxury::after {
@@ -250,29 +268,35 @@
             left: -150%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(252, 246, 186, 0.3), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
             transform: skewX(-20deg);
-            animation: goldShimmerSweep 4s infinite ease-in-out;
+            animation: silverShimmerSweep 4.5s infinite ease-in-out;
         }
 
-        @keyframes goldShimmerSweep {
+        @media (min-width: 600px) {
+            .btn-luxury {
+                animation: silverAuraPulse 3s infinite ease-in-out;
+            }
+        }
+
+        @keyframes silverShimmerSweep {
             0% { left: -150%; }
-            25% { left: 150%; }
+            22% { left: 150%; }
             100% { left: 150%; }
         }
 
-        @keyframes goldAuraPulse {
-            0% { border-color: rgba(191, 149, 63, 0.4); box-shadow: 0 4px 15px rgba(0,0,0,0.4), 0 0 5px rgba(191, 149, 63, 0.15); }
-            50% { border-color: rgba(252, 246, 186, 0.9); box-shadow: 0 4px 20px rgba(0,0,0,0.4), 0 0 15px rgba(252, 246, 186, 0.4); }
-            100% { border-color: rgba(191, 149, 63, 0.4); box-shadow: 0 4px 15px rgba(0,0,0,0.4), 0 0 5px rgba(191, 149, 63, 0.15); }
+        @keyframes silverAuraPulse {
+            0% { border-color: rgba(255, 255, 255, 0.4); box-shadow: 0 6px 20px rgba(0,0,0,0.6), 0 0 5px rgba(255, 255, 255, 0.15); }
+            50% { border-color: rgba(255, 255, 255, 1); box-shadow: 0 6px 22px rgba(0,0,0,0.6), 0 0 15px rgba(255, 255, 255, 0.35); }
+            100% { border-color: rgba(255, 255, 255, 0.4); box-shadow: 0 6px 20px rgba(0,0,0,0.6), 0 0 5px rgba(255, 255, 255, 0.15); }
         }
 
         .btn-luxury:hover {
-            border-color: rgba(252, 246, 186, 1);
-            color: #ffffff;
-            letter-spacing: 2px;
-            transform: translateY(-1px);
-            background: rgba(35, 25, 15, 0.8);
+            border-color: rgba(255, 255, 255, 1);
+            letter-spacing: 2.5px;
+            transform: translateY(-2px);
+            background: linear-gradient(135deg, #3d4656 0%, #1c232e 50%, #0f131a 100%);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.85), inset 0 1px 4px rgba(255, 255, 255, 0.35);
         }
 
         /* PAINEL DE ÁUDIO REFINADO */
@@ -364,7 +388,7 @@
             </div>
 
             <div class="action-button-container">
-                <button class="btn-luxury" onclick="irParaProntuario()">Aperte com carinho para a próxima página</button>
+                <button class="btn-luxury" onclick="irParaProntuario()">APERTE COM CARINHO</button>
             </div>
         </div>
     </div>
@@ -377,10 +401,11 @@
     <audio id="bgAudio" src="elvis.html.mp3" loop></audio>
 
     <script>
-        // Gerador de estrelas dinâmico
+        // Gerador de estrelas dinâmico (Fixas e Cadentes de todos os lados)
         const starsContainer = document.getElementById('starsContainer');
-        const totalEstrelas = window.innerWidth < 600 ? 35 : 60;
+        const totalEstrelas = window.innerWidth < 600 ? 40 : 70;
         
+        // Estrelas cintilantes de fundo
         for (let i = 0; i < totalEstrelas; i++) {
             const star = document.createElement('div');
             star.className = 'star';
@@ -393,15 +418,33 @@
             starsContainer.appendChild(star);
         }
 
+        // Função para criar estrelas cadentes espalhadas de forma homogênea
+        function gerarEstrelaCadente() {
+            const fallingStar = document.createElement('div');
+            fallingStar.className = 'falling-star';
+            
+            // Permite surgir em qualquer largura do céu (esquerda, meio ou direita)
+            fallingStar.style.left = `${Math.random() * 96 + 2}%`;
+            fallingStar.style.top = `${Math.random() * 20}%`;
+            fallingStar.style.animationDuration = `${Math.random() * 2 + 2.5}s`;
+            
+            starsContainer.appendChild(fallingStar);
+            
+            setTimeout(() => {
+                fallingStar.remove();
+            }, 4500);
+        }
+
+        // Disparador contínuo para a chuva de estrelas vir de todas as direções
+        setInterval(gerarEstrelaCadente, 1200);
+
         const som = document.getElementById('bgAudio');
         const painel = document.getElementById('customControls');
         const mainCard = document.getElementById('mainCard');
 
-        // FUNÇÃO DO BOTÃO ATUALIZADA: Salva o tempo atual da música antes de redirecionar
         function irParaProntuario() {
             som.volume = 0.8;
             som.play().then(() => {
-                // Guarda no navegador que a música deve continuar e em qual segundo ela parou
                 localStorage.setItem('musicaTempo', som.currentTime);
                 localStorage.setItem('musicaTocando', 'true');
                 
@@ -414,7 +457,6 @@
                 }, 400);
             }).catch((err) => {
                 console.log("Erro ao reproduzir áudio:", err);
-                // Mesmo se o áudio falhar por bloqueio do navegador, redireciona
                 window.location.href = "prontuario.htm";
             });
         }
