@@ -1,6 +1,4 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
+<!DOCTYPE html><html lang="pt-BR"><head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>O DESTINO ENCONTRADO</title>
@@ -31,7 +29,7 @@
             flex-direction: column; 
             align-items: center;
             overflow-x: hidden;
-            padding: 90px 20px 40px 20px;
+            padding: 90px 20px 120px 20px; /* Aumentado o padding inferior para não cobrir o botão fixo */
             opacity: 0;
             transition: opacity 0.8s ease;
             perspective: 1500px;
@@ -136,22 +134,18 @@
             font-weight: 700;
         }
  
-        /* CARD PRINCIPAL COM BORDA PRATA CORRIDA E ZOOM */
+        /* CARD PRINCIPAL COM BORDA PRATA CORRIDA - ZOOM REMOVIDO */
         .card-principal {
             max-width: 750px;
             width: 100%;
             position: relative;
             background: var(--azul-card-escuro);
             border-radius: 24px;
-            padding: 3px; /* Espaço para ver a borda mágica */
+            padding: 3px;
             box-shadow: 0 50px 100px rgba(0,0,0,0.9), 0 0 30px rgba(255,255,255,0.03);
-            transition: transform 1s cubic-bezier(0.25, 1, 0.5, 1), width 2s ease, max-width 2s ease;
+            transition: width 2s ease, max-width 2s ease;
             transform-style: preserve-3d;
             overflow: hidden;
-        }
-
-        .card-principal:hover {
-            transform: scale(1.02);
         }
 
         /* Efeito de Prata Correndo na Borda */
@@ -180,7 +174,7 @@
             text-align: center;
         }
  
-        /* CARD INTERNO INFERIOR LUXUOSO COM ZOOM */
+        /* CARD INTERNO INFERIOR LUXUOSO - ZOOM REMOVIDO */
         .card-desfecho {
             background: rgba(2, 6, 23, 0.6);
             border: 2px solid rgba(226, 232, 240, 0.2);
@@ -188,11 +182,10 @@
             padding: 40px 25px;
             backdrop-filter: blur(10px);
             box-shadow: inset 0 0 30px rgba(0,0,0,0.8), 0 15px 35px rgba(0,0,0,0.6);
-            transition: transform 0.8s ease, box-shadow 0.8s ease;
+            transition: border-color 0.8s ease, box-shadow 0.8s ease;
         }
 
         .card-desfecho:hover {
-            transform: scale(1.01);
             box-shadow: inset 0 0 40px rgba(0,0,0,0.9), 0 20px 45px rgba(255,255,255,0.03);
             border-color: rgba(255, 255, 255, 0.4);
         }
@@ -275,6 +268,7 @@
             justify-content: center;
         }
  
+        /* BOTÃO DA OSTRA PERSONALIZADO */
         .instrucao-toque {
             font-family: 'Orbitron', sans-serif;
             font-size: 0.8rem;
@@ -282,9 +276,9 @@
             letter-spacing: 2px;
             text-transform: uppercase;
             font-weight: 600;
-            padding: 8px 20px;
+            padding: 12px 28px;
             border: 1px solid rgba(255, 255, 255, 0.3);
-            border-radius: 20px;
+            border-radius: 25px;
             background: rgba(3, 8, 30, 0.8);
             display: inline-block;
             cursor: pointer;
@@ -317,16 +311,15 @@
             text-align: center;
         }
  
-        /* SEÇÃO FINAL: ESTAMOS NO FIM DA JORNADA */
         .mensagem-final {
             font-family: 'Cinzel', serif;
             font-size: 2rem;
             letter-spacing: 5px;
-            color: #bfa15f; /* Ouro Escuro Elegante */
+            color: #bfa15f;
             font-weight: bold;
             margin-top: 40px;
             text-transform: uppercase;
-            text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff, 0 0 10px rgba(255,255,255,0.5); /* Borda de Prata/Branca */
+            text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff, 0 0 10px rgba(255,255,255,0.5);
         }
  
         .creditos {
@@ -337,6 +330,38 @@
             letter-spacing: 4px;
             margin-top: 40px;
         }
+
+        /* BOTÃO FIXO NO FINAL DA PÁGINA (ESTAMOS QUASE NO FIM) */
+        .botao-redirecionar-fixo {
+            position: fixed;
+            bottom: 25px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9rem;
+            color: #ffffff;
+            background: rgba(3, 8, 30, 0.9);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            padding: 14px 40px;
+            border-radius: 30px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 9999;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.6), 0 0 15px rgba(255,255,255,0.1);
+            transition: all 0.4s ease;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            white-space: nowrap;
+        }
+
+        .botao-redirecionar-fixo:hover {
+            background: #ffffff;
+            color: #020617;
+            box-shadow: 0 0 25px #ffffff;
+            border-color: #ffffff;
+        }
  
         @media (max-width: 600px) {
             .titulo-final { font-size: 1.8rem; letter-spacing: 4px; }
@@ -344,10 +369,9 @@
             .texto-conclusao { font-size: 1rem; line-height: 1.7; }
             .ostra-container.aberta .perola-negra.flutuando { bottom: 130px; }
             .mensagem-final { font-size: 1.3rem; }
+            .botao-redirecionar-fixo { width: 90%; padding: 12px 10px; font-size: 0.8rem; letter-spacing: 1.5px; }
         }
-    </style>
-</head>
-<body onclick="iniciarAudio()">
+    </style></head><body onclick="iniciarAudio()">
  
     <div id="fundo-cosmos"></div>
  
@@ -398,7 +422,7 @@
                </div>
  
                <div class="bloco-instrucao">
-                   <div class="instrucao-toque" id="textoInstrucao" onclick="irParaOFinal(event)">Aperte para ir direto ao final da jornada</div>
+                   <div class="instrucao-toque" id="textoInstrucao" onclick="event.stopPropagation(); cliqueOstra();">aperte para debora brilhar</div>
                </div>
  
                 <p class="texto-conclusao">
@@ -406,7 +430,7 @@
                 </p>
                 
                 <p class="texto-conclusao">
-                    A estrada longa ficou para trás e as dores do caminho transformaram-se em preciosas pérolas de sabedoria. Sob o manto infinito do cosmos, compreendemos que cada curva, cada grão de areia e cada passo incerto faziam parte de um plano maior. O horizonte não é mais um limite distante; agora, ele é o chão que você pisa com paz no coração, carregando a beleza da sua própria pérola negra.
+                    A estrada longa ficou para trás e as dores do caminho transformaram-se em preciosas pérolas de sabedoria. Sob o manto infinito do cosmos, compreendemos que cada curva, cada grão de areia e cada passo incerto faziam parte de um plano maior. O horizonete não é mais um limite distante; agora, ele é o chão que você pisa com paz no coração, carregando a beleza da sua própria pérola negra.
                 </p>
  
                 <p class="texto-desfecho-italico">
@@ -419,6 +443,8 @@
             </div>
         </div>
     </div>
+
+    <button class="botao-redirecionar-fixo" onclick="irParaProximaPagina(event)">Estamos quase no fim</button>
  
     <audio id="trilha" src="elvis.html.mp3" loop></audio>
  
@@ -453,22 +479,24 @@
         function cliqueOstra() {
             if (!ostraContainer.classList.contains('aberta')) {
                 ostraContainer.classList.add('aberta');
+                instrucao.innerText = "debora esta brilhando"; // Altera o texto quando aberto
                 setTimeout(() => {
                     perola.classList.add('flutuando');
                 }, 300);
             } else {
                 perola.classList.remove('flutuando');
+                instrucao.innerText = "aperte para debora brilhar"; // Retorna o texto se fechar
                 setTimeout(() => {
                     ostraContainer.classList.remove('aberta');
                 }, 400);
             }
         }
 
-        // Função exclusiva para rolar suavemente a tela até a mensagem final
-        function irParaOFinal(e) {
+        // Função para ir para a página final salvando o estado atual da música
+        function irParaProximaPagina(e) {
             e.stopPropagation();
-            cliqueOstra(); // Abre a ostra e flutua a pérola simultaneamente
-            secaoFinal.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            localStorage.setItem('musica_tempo', audio.currentTime);
+            window.location.href = "pagina final.html";
         }
  
         function iniciarAudio() {
@@ -517,6 +545,4 @@
         fragmento.appendChild(cadenteDir);
 
         cosmos.appendChild(fragmento);
-    </script>
-</body>
-</html>
+    </script></body></html>
