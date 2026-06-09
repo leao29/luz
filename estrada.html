@@ -192,7 +192,7 @@
             overflow: hidden;
             background: var(--azul-card-luxo);
             box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
-            margin-bottom: 40px;
+            margin-bottom: 30px;
         }
 
         /* Efeito Prata Correndo na Borda */
@@ -230,12 +230,13 @@
             flex-direction: column;
         }
 
-        /* Estilização para as Estrofes Poéticas */
+        /* Estilização para as Estrofes Poéticas (Centralizadas no Meio) */
         .bloco-estrofe {
             margin-bottom: 35px;
             opacity: 0;
             transform: translateY(20px);
             transition: opacity 1s ease, transform 1s ease;
+            text-align: center;
         }
 
         .bloco-estrofe.visivel {
@@ -258,13 +259,63 @@
         .verso-narrativo {
             line-height: 1.8; 
             font-size: 1.1rem; 
-            text-align: left;
+            text-align: center; 
             margin-bottom: 8px; 
             color: #cbd5e1;
         }
 
         .verso-narrativo strong {
             color: #ffffff;
+        }
+
+        /* CARD DO RODAPÉ FUTURISTA */
+        .card-rodape {
+            width: 100%;
+            max-width: 750px;
+            padding: 1px;
+            border-radius: 16px;
+            background: linear-gradient(135deg, rgba(138, 111, 39, 0.2), transparent, rgba(226, 232, 240, 0.1));
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+            margin-bottom: 40px;
+        }
+
+        .rodape-interno {
+            background: rgba(4, 10, 23, 0.95);
+            backdrop-filter: blur(15px);
+            padding: 35px;
+            border-radius: 15px;
+        }
+
+        .texto-explicativo {
+            font-family: 'Cinzel', serif;
+            font-size: 0.95rem;
+            color: var(--ouro-ativo);
+            text-align: center;
+            line-height: 1.7;
+            letter-spacing: 2px;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            border-bottom: 1px solid rgba(197, 168, 98, 0.15);
+            padding-bottom: 15px;
+        }
+
+        .traducao-titulo {
+            font-family: 'Cinzel', serif;
+            font-size: 1.4rem;
+            color: var(--prata-brilhante);
+            text-align: center;
+            letter-spacing: 4px;
+            margin-bottom: 20px;
+        }
+
+        .verso-traducao {
+            font-family: 'Lora', serif;
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: #94a3b8;
+            text-align: center;
+            margin-bottom: 14px;
+            font-style: italic;
         }
 
         .container-navegacao {
@@ -308,6 +359,9 @@
             .papel-antigo { padding: 30px 20px; }
             .verso-narrativo { font-size: 1rem; line-height: 1.7; }
             .btn-proximo { width: 100%; text-align: center; }
+            .rodape-interno { padding: 25px 15px; }
+            .texto-explicativo { font-size: 0.85rem; letter-spacing: 1px; }
+            .verso-traducao { font-size: 0.95rem; }
         }
     </style>
 </head>
@@ -346,7 +400,7 @@
                 <p class="verso-narrativo">Não há por que temer, eu estive te esperando por séculos.</p>
                 <p class="verso-narrativo">O meu peito sabe que este sentimento é maior que o próprio tempo,</p>
                 <p class="verso-narrativo">Uma certeza que atravessa eras e desafia qualquer despedida.</p>
-                <p class="verso-narrativo">Eu prometo te guiar, te proteger e segurar a sua mão,</p>
+                <p class="verso-narrativo">Eu prometo te guiar, te proteger e segurar a sua mano,</p>
                 <p class="verso-narrativo">Pois o nosso encontro já estava escrito nas estrelas.</p>
             </div>
  
@@ -364,6 +418,41 @@
             </div>
         </div>
     </div>
+
+    <div class="card-rodape">
+        <div class="rodape-interno">
+            <p class="texto-explicativo">
+                Essa é uma forma poética da música Christina Perri - A Thousand Years, a qual será minha maior realização que é meu futuro casamento.
+            </p>
+            
+            <h2 class="traducao-titulo">MIL ANOS (Traduzida)</h2>
+            
+            <p class="verso-traducao">
+                O coração bate acelerado. Cores e promessas. Como ser corajosa?<br>
+                Como posso amar quando tenho medo de me apaixonar?<br>
+                Mas ao ver você de pé, sozinha. De algum jeito, toda a minha dúvida some de repente.<br>
+                Um pouco mais perto.
+            </p>
+            
+            <p class="verso-traducao">
+                Eu morri todos os dias esperando por você.<br>
+                Querida, não tenha medo, eu te amei por mil anos.<br>
+                Eu te amarei por mais mil.
+            </p>
+            
+            <p class="verso-traducao">
+                O tempo para. A beleza em tudo o que ela é.<br>
+                Terei coragem. Não deixarei nada levar embora o que está à minha frente.<br>
+                Cada suspiro, cada momento nos trouxe aqui. Um pouco mais perto.
+            </p>
+            
+            <p class="verso-traducao">
+                E o tempo todo eu acreditei que encontraria você.<br>
+                O tempo trouxe o seu coração para mim.<br>
+                Eu te amei por mil anos. Eu te amarei por mais mil.
+            </p>
+        </div>
+    </div>
  
     <audio id="audio-player" loop>
         <source src="elvis.html.mp3" type="audio/mpeg">
@@ -375,9 +464,9 @@
         const btnPlayPause = document.getElementById('btnPlayPause');
         const sliderVolume = document.getElementById('sliderVolume');
 
-        // Sincronização automática na entrada da página
+        // Sincronização automática de áudio na entrada da página
         window.addEventListener('DOMContentLoaded', () => {
-            document.body.style.opacity = '1'; // Destrava a tela preta instantaneamente
+            document.body.style.opacity = '1'; 
 
             const tempoSalvo = localStorage.getItem('audioTempo');
             const tocandoSalvo = localStorage.getItem('audioTocando');
@@ -392,7 +481,6 @@
                 audio.currentTime = parseFloat(tempoSalvo);
             }
 
-            // Continua a música de onde parou de forma fluida
             if (tocandoSalvo === 'true') {
                 audio.play().then(() => {
                     btnPlayPause.textContent = "PAUSE";
@@ -426,7 +514,7 @@
             }
         }, 1000);
 
-        // 100 Estrelas
+        // Geração do Ecossistema de 100 Estrelas Cósmicas
         for (let i = 0; i < 100; i++) {
             const estrela = document.createElement('div');
             estrela.className = 'estrela';
@@ -440,7 +528,7 @@
             cosmos.appendChild(estrela);
         }
 
-        // Estrelas cadentes
+        // Sistema de Estrelas cadentes em loops randômicos
         function criarEstrelaCadente() {
             const queda = document.createElement('div');
             queda.className = 'estrela-cadente';
@@ -452,7 +540,7 @@
         }
         setInterval(criarEstrelaCadente, 2000);
 
-        // Avançar mantendo o estado da música
+        // Navegação inteligente salvando dados de áudio
         function irParaProxima() {
             localStorage.setItem('audioTempo', audio.currentTime);
             localStorage.setItem('audioTocando', !audio.paused);
@@ -464,7 +552,7 @@
             }, 800);
         }
  
-        // Fade-in controlado das estrofes ao rolar a página
+        // Fade-in controlado das estrofes com Scroll da Tela
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
