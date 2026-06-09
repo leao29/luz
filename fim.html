@@ -29,7 +29,7 @@
             flex-direction: column; 
             align-items: center;
             overflow-x: hidden;
-            padding: 90px 20px 120px 20px; /* Aumentado o padding inferior para não cobrir o botão fixo */
+            padding: 90px 20px 140px 20px; /* Aumentado ligeiramente para dar folga ao botão */
             opacity: 0;
             transition: opacity 0.8s ease;
             perspective: 1500px;
@@ -41,6 +41,7 @@
             width: 100%; height: 100%; 
             z-index: -1; 
             background: radial-gradient(circle at center, var(--azul-cosmos) 0%, var(--cosmos-fundo) 100%); 
+            pointer-events: none; /* Garante que o fundo não roube cliques de botões */
         }
 
         /* ESTRELAS PRATAS PULSANTES */
@@ -56,7 +57,7 @@
             50% { opacity: 1; transform: scale(1.3); } 
         }
 
-        /* ESTRELAS CADENTES LATERAIS (ESQUERDA E DIREITA) */
+        /* ESTRELAS CADENTES LATERAIS */
         .estrela-cadente-esq, .estrela-cadente-dir {
             position: fixed;
             width: 3px;
@@ -64,6 +65,7 @@
             background: linear-gradient(-45deg, #ffffff, rgba(255,255,255,0));
             filter: drop-shadow(0 0 8px #e2e8f0);
             opacity: 0;
+            pointer-events: none;
         }
         
         .estrela-cadente-esq {
@@ -90,14 +92,14 @@
             100% { transform: translateY(65vh) translateX(-100px) rotate(35deg) scale(0); opacity: 0; }
         }
 
-        /* PAINEL DE ÁUDIO REFINADO E DELICADO */
+        /* PAINEL DE ÁUDIO REFINADO */
         .painel-musica-fixo {
             position: fixed; top: 25px; right: 25px;
             background: rgba(3, 8, 30, 0.85);
             backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
             border: 1px solid rgba(226, 232, 240, 0.2);
             padding: 8px 16px; border-radius: 30px;
-            display: flex; align-items: center; gap: 12px; z-index: 9999;
+            display: flex; align-items: center; gap: 12px; z-index: 10000;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
         }
         
@@ -119,7 +121,7 @@
         .vol-slider { -webkit-appearance: none; appearance: none; cursor: pointer; background: #1e293b; height: 3px; border-radius: 2px; width: 70px; }
         .vol-slider::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 10px; height: 10px; border-radius: 50%; background: #d4af37; }
 
-        /* TÍTULO PRINCIPAL ATUALIZADO */
+        /* TÍTULO PRINCIPAL */
         .titulo-final {
             font-family: 'Cinzel', serif;
             font-size: 3rem;
@@ -134,7 +136,7 @@
             font-weight: 700;
         }
  
-        /* CARD PRINCIPAL COM BORDA PRATA CORRIDA - ZOOM REMOVIDO */
+        /* CARD PRINCIPAL */
         .card-principal {
             max-width: 750px;
             width: 100%;
@@ -146,9 +148,9 @@
             transition: width 2s ease, max-width 2s ease;
             transform-style: preserve-3d;
             overflow: hidden;
+            z-index: 1;
         }
 
-        /* Efeito de Prata Correndo na Borda */
         .card-principal::before {
             content: '';
             position: absolute;
@@ -174,7 +176,7 @@
             text-align: center;
         }
  
-        /* CARD INTERNO INFERIOR LUXUOSO - ZOOM REMOVIDO */
+        /* CARD INTERNO INFERIOR LUXUOSO */
         .card-desfecho {
             background: rgba(2, 6, 23, 0.6);
             border: 2px solid rgba(226, 232, 240, 0.2);
@@ -331,7 +333,7 @@
             margin-top: 40px;
         }
 
-        /* BOTÃO FIXO NO FINAL DA PÁGINA (ESTAMOS QUASE NO FIM) */
+        /* BOTÃO FIXO IMPORTANTE COM ELEVAÇÃO DE CAMADA (Z-INDEX) */
         .botao-redirecionar-fixo {
             position: fixed;
             bottom: 25px;
@@ -340,26 +342,26 @@
             font-family: 'Orbitron', sans-serif;
             font-size: 0.9rem;
             color: #ffffff;
-            background: rgba(3, 8, 30, 0.9);
-            border: 1px solid rgba(255, 255, 255, 0.4);
+            background: rgba(3, 8, 30, 0.95);
+            border: 1px solid rgba(255, 255, 255, 0.5);
             padding: 14px 40px;
             border-radius: 30px;
             letter-spacing: 3px;
             text-transform: uppercase;
             font-weight: bold;
             cursor: pointer;
-            z-index: 9999;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.6), 0 0 15px rgba(255,255,255,0.1);
+            z-index: 11000; /* Fica acima do painel de música e do card */
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8), 0 0 20px rgba(255,255,255,0.2);
             transition: all 0.4s ease;
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
             white-space: nowrap;
         }
 
         .botao-redirecionar-fixo:hover {
             background: #ffffff;
             color: #020617;
-            box-shadow: 0 0 25px #ffffff;
+            box-shadow: 0 0 30px #ffffff;
             border-color: #ffffff;
         }
  
@@ -369,7 +371,7 @@
             .texto-conclusao { font-size: 1rem; line-height: 1.7; }
             .ostra-container.aberta .perola-negra.flutuando { bottom: 130px; }
             .mensagem-final { font-size: 1.3rem; }
-            .botao-redirecionar-fixo { width: 90%; padding: 12px 10px; font-size: 0.8rem; letter-spacing: 1.5px; }
+            .botao-redirecionar-fixo { width: 90%; padding: 12px 10px; font-size: 0.8rem; letter-spacing: 1.5px; bottom: 15px; }
         }
     </style></head><body onclick="iniciarAudio()">
  
@@ -391,7 +393,7 @@
             <div class="card-desfecho">
                 
                <div class="cenario-ostra">
-                   <div class="ostra-container" id="ostraMagica" onclick="cliqueOstra()">
+                   <div class="ostra-container" id="ostraMagica" onclick="event.stopPropagation(); cliqueOstra();">
                        <svg class="concha-sup-svg" viewBox="0 0 100 65" fill="none" xmlns="http://www.w3.org/2000/svg">
                            <path d="M50 2C22 2 5 15 5 35C5 45 15 55 50 62C85 55 95 45 95 35C95 15 78 2 50 2Z" fill="url(#gradienteConcha)" stroke="#94a3b8" stroke-width="0.7"/>
                            <path d="M50 62C50 40 40 10 30 5M50 62C53 40 65 10 70 5M50 62C45 35 18 20 12 18M50 62C55 35 82 20 88 18" stroke="rgba(255,255,255,0.12)" stroke-width="0.5"/>
@@ -479,24 +481,31 @@
         function cliqueOstra() {
             if (!ostraContainer.classList.contains('aberta')) {
                 ostraContainer.classList.add('aberta');
-                instrucao.innerText = "debora esta brilhando"; // Altera o texto quando aberto
+                instrucao.innerText = "debora esta brilhando";
                 setTimeout(() => {
                     perola.classList.add('flutuando');
                 }, 300);
             } else {
                 perola.classList.remove('flutuando');
-                instrucao.innerText = "aperte para debora brilhar"; // Retorna o texto se fechar
+                instrucao.innerText = "aperte para debora brilhar";
                 setTimeout(() => {
                     ostraContainer.classList.remove('aberta');
                 }, 400);
             }
         }
 
-        // Função para ir para a página final salvando o estado atual da música
         function irParaProximaPagina(e) {
-            e.stopPropagation();
+            // Evita ativar cliques indesejados no body
+            if (e) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+            
+            // Salva o tempo atual da trilha sonora
             localStorage.setItem('musica_tempo', audio.currentTime);
-            window.location.href = "pagina final.html";
+            
+            // encodeURIComponent previne erros com espaços no nome do arquivo (.html)
+            window.location.href = encodeURI("pagina final.html");
         }
  
         function iniciarAudio() {
@@ -535,7 +544,6 @@
             fragmento.appendChild(estrela);
         }
  
-        // Injetando as estrelas cadentes específicas nas laterais
         const cadenteEsq = document.createElement('div');
         cadenteEsq.className = 'estrela-cadente-esq';
         fragmento.appendChild(cadenteEsq);
