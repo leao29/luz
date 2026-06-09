@@ -45,7 +45,7 @@
             align-items: center;
             overflow-x: hidden;
             padding: 100px 20px 60px 20px;
-            opacity: 0; /* Começa invisível para o efeito fade-in */
+            opacity: 0; /* Efeito fade-in inicial */
             transition: opacity 0.8s ease;
         }
 
@@ -230,47 +230,48 @@
             flex-direction: column;
         }
 
-        /* Parágrafos com transição */
-        .paragrafo-futurista {
-            line-height: 1.8; 
-            font-size: 1.1rem; 
-            text-align: justify;
-            margin-bottom: 22px; 
-            color: #cbd5e1;
+        /* Estilização para as Estrofes Poéticas */
+        .bloco-estrofe {
+            margin-bottom: 35px;
             opacity: 0;
             transform: translateY(20px);
             transition: opacity 1s ease, transform 1s ease;
         }
 
-        .paragrafo-futurista strong {
-            color: #ffffff;
-            font-weight: 700;
-        }
-
-        .paragrafo-futurista.visivel {
+        .bloco-estrofe.visivel {
             opacity: 1;
             transform: translateY(0);
         }
-        
-        .paragrafo-futurista:last-of-type { 
-            margin-bottom: 35px; 
+
+        .titulo-estrofe {
+            font-family: 'Cinzel', serif;
+            font-size: 1.15rem;
+            color: var(--ouro-ativo);
+            letter-spacing: 3px;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            border-bottom: 1px solid rgba(197, 168, 98, 0.2);
+            padding-bottom: 5px;
+            display: inline-block;
         }
 
-        .citacao-luxo {
-            font-style: italic;
-            border-left: 2px solid var(--ouro-ativo);
-            padding-left: 20px;
-            margin: 30px 0;
-            color: var(--ouro-ativo);
-            font-size: 1.15rem;
-            line-height: 1.7;
+        .verso-narrativo {
+            line-height: 1.8; 
+            font-size: 1.1rem; 
             text-align: left;
+            margin-bottom: 8px; 
+            color: #cbd5e1;
+        }
+
+        .verso-narrativo strong {
+            color: #ffffff;
         }
 
         .container-navegacao {
             width: 100%;
             display: flex;
             justify-content: flex-end;
+            margin-top: 15px;
         }
 
         .btn-proximo {
@@ -303,9 +304,9 @@
             body { padding: 90px 15px 40px 15px; }
             .player-luxo { top: 20px; right: 20px; padding: 6px 12px; }
             .vol-slider { width: 50px; }
-            .titulo-principal { font-size: 1.6rem; letter-spacing: 5px; }
+            .titulo-principal { font-size: 1.5rem; letter-spacing: 4px; }
             .papel-antigo { padding: 30px 20px; }
-            .paragrafo-futurista { font-size: 1rem; line-height: 1.7; text-align: left; }
+            .verso-narrativo { font-size: 1rem; line-height: 1.7; }
             .btn-proximo { width: 100%; text-align: center; }
         }
     </style>
@@ -324,28 +325,39 @@
 
     <div class="card-titulo">
         <div class="titulo-interno">
-            <h1 class="titulo-principal">MEU SONHO REALIZADO</h1>
+            <h1 class="titulo-principal">MIL ANOS</h1>
         </div>
     </div>
  
     <div class="card-conteudo">
         <div class="papel-antigo">
             
-            <p class="paragrafo-futurista">Hoje compreendo com total clareza que o que habita em mim não se molda aos padrões de um "amor romântico" comum, daqueles que exigem reciprocidade, presença ou posse. O que sinto transborda como uma <strong>atração muito forte</strong>, limpa e genuína — um desejo profundo e insistentemente puro de te ver caminhar em direção ao seu melhor destino, brilhando na sua própria órbita. É a evolução de um sentimento que aprendeu a admirar sem precisar tocar.</p>
-            
-            <p class="paragrafo-futurista">Guardo uma gratidão que as palavras mal conseguem tatear por você ter me acolhido e validado quando o meu chão parecia ceder. Você me enxergou e me deu espaço não apenas como alguém sob seus cuidados técnicos, mas como mulher, respeitando minha essência e minha individualidade. Há uma fortaleza silenciosa e admirável no seu olhar; uma firmeza profissional que me serviu de bússola quando eu mais precisava encontrar o norte.</p>
+            <div class="bloco-estrofe">
+                <h3 class="titulo-estrofe">O Começo de Tudo</h3>
+                <p class="verso-narrativo">O dia clareia e o coração aperta ao ver o tempo passar,</p>
+                <p class="verso-narrativo">Tive tanto medo de me entregar e acabar me machucando.</p>
+                <p class="verso-narrativo">But ao olhar para você, todas as minhas dúvidas desapareceram de vez.</p>
+                <p class="verso-narrativo">Cada passo que dei me trouxe exatamente para este lugar,</p>
+                <p class="verso-narrativo">Onde o amor finalmente faz sentido.</p>
+            </div>
+
+            <div class="bloco-estrofe">
+                <h3 class="titulo-estrofe">A Promessa</h3>
+                <p class="verso-narrativo">Não há por que temer, eu estive te esperando por séculos.</p>
+                <p class="verso-narrativo">O meu peito sabe que este sentimento é maior que o próprio tempo,</p>
+                <p class="verso-narrativo">Uma certeza que atravessa eras e desafia qualquer despedida.</p>
+                <p class="verso-narrativo">Eu prometo te guiar, te proteger e segurar a sua mão,</p>
+                <p class="verso-narrativo">Pois o nosso encontro já estava escrito nas estrelas.</p>
+            </div>
  
-            <p class="paragrafo-futurista">Olhando para trás, percebo o quanto sua presença foi um divisor de águas. Você entrou na minha vida em um momento de transição e profunda vulnerabilidade, e sua postura não foi apenas um suporte temporário, mas um alicerce para que eu redescobrisse minha própria força. Essa jornada não seria a mesma sem o eco das suas palavras e o acolhimento seguro que encontrei na sua conduta.</p>
- 
-            <p class="paragrafo-futurista citacao-luxo">
-               "A verdadeira felicidade não reside na ausência de problemas, mas na capacidade de encontrar serenidade mesmo quando o horizonte é incerto."
-            </p>
- 
-            <p class="paragrafo-futurista">A realidade nua e crua é que existem pessoas que cruzam nosso caminho para redefinir nossa história, e você é, sem dúvida, uma das mais importantes na minha. Essa busca por equilíbrio e lucidez me fez entender que o afeto mais nobre é aquele que sabe o seu lugar e caminha de mãos dadas com o respeito. Admiro profundamente a barreira ética que protege a sua postura impecável, e é justamente por valorizar quem você é que transformo essa admiração em combustível para a minha própria evolução.</p>
- 
-            <p class="paragrafo-futurista">Saber que, de alguma forma, você torce pelo meu sucesso profissional, pela minha estabilidade e pela minha paz é o maior prêmio que eu poderia desejar levar dessa convivência. Você se tornou um farol nesta fase da minha vida: alguém que eu não busco reter, mas que faço questão de reverenciar pela importância imensa que teve no meu amadurecimento.</p>
- 
-            <p class="paragrafo-futurista">Assim, com o coração em paz e a mente lúcida, sigo em frente. Guardo a beleza e o impacto real desse encontro em um lugar nobre e seguro da minha memória, convicta de que encontrar essa serenidade interna é o passo definitivo para a verdadeira felicidade.</p>
+            <div class="bloco-estrofe" style="margin-bottom: 25px;">
+                <h3 class="titulo-estrofe">A Jornada Continua</h3>
+                <p class="verso-narrativo">Agora, a coragem substitui o antigo vazio que eu carregava.</p>
+                <p class="verso-narrativo">Ver você de pé, com os olhos brilhando na minha direção,</p>
+                <p class="verso-narrativo">Faz cada segundo de espera valer a pena neste mundo.</p>
+                <p class="verso-narrativo">Não é apenas sobre o passado que superamos, mas sobre o infinito que vamos construir,</p>
+                <p class="verso-narrativo">Amando você ontem, hoje, e por toda a eternidade.</p>
+            </div>
  
             <div class="container-navegacao">
                 <button class="btn-proximo" onclick="irParaProxima()">Próxima Página</button>
@@ -363,12 +375,10 @@
         const btnPlayPause = document.getElementById('btnPlayPause');
         const sliderVolume = document.getElementById('sliderVolume');
 
-        // FUNÇÃO DE INICIALIZAÇÃO DA PÁGINA (Recupera os dados salvos da página anterior)
+        // Sincronização automática na entrada da página
         window.addEventListener('DOMContentLoaded', () => {
-            // Garante que o corpo da página apareça (evita a tela preta travada)
-            document.body.style.opacity = '1';
+            document.body.style.opacity = '1'; // Destrava a tela preta instantaneamente
 
-            // Recupera informações da música salvas no localStorage pela página anterior
             const tempoSalvo = localStorage.getItem('audioTempo');
             const tocandoSalvo = localStorage.getItem('audioTocando');
             const volumeSalvo = localStorage.getItem('audioVolume');
@@ -382,12 +392,12 @@
                 audio.currentTime = parseFloat(tempoSalvo);
             }
 
-            // Se a música estava tocando na tela anterior, tenta continuar tocando aqui
+            // Continua a música de onde parou de forma fluida
             if (tocandoSalvo === 'true') {
                 audio.play().then(() => {
                     btnPlayPause.textContent = "PAUSE";
                 }).catch(err => {
-                    console.log("O navegador bloqueou o autoplay. O usuário precisa interagir com a tela ou clicar em Play.");
+                    console.log("Autoplay retido pelo navegador. Aguardando clique.");
                     btnPlayPause.textContent = "PLAY";
                 });
             }
@@ -410,14 +420,13 @@
             localStorage.setItem('audioVolume', valor);
         }
  
-        // Salva o tempo atual da música a cada 1 segundo para persistência contínua
         setInterval(() => {
             if (!audio.paused) {
                 localStorage.setItem('audioTempo', audio.currentTime);
             }
         }, 1000);
 
-        // Criação Dinâmica de 100 Estrelas Pulsantes
+        // 100 Estrelas
         for (let i = 0; i < 100; i++) {
             const estrela = document.createElement('div');
             estrela.className = 'estrela';
@@ -431,7 +440,7 @@
             cosmos.appendChild(estrela);
         }
 
-        // Chuva de Estrelas Prateadas (Meteoro)
+        // Estrelas cadentes
         function criarEstrelaCadente() {
             const queda = document.createElement('div');
             queda.className = 'estrela-cadente';
@@ -443,7 +452,7 @@
         }
         setInterval(criarEstrelaCadente, 2000);
 
-        // Ação para o botão de avançar na narrativa (salva o progresso e vai para a próxima se houver)
+        // Avançar mantendo o estado da música
         function irParaProxima() {
             localStorage.setItem('audioTempo', audio.currentTime);
             localStorage.setItem('audioTocando', !audio.paused);
@@ -451,21 +460,20 @@
             
             document.body.style.opacity = '0';
             setTimeout(() => {
-                // Altere para o nome do seu próximo arquivo HTML se houver mais sequências
                 window.location.href = "proxima_pagina.html"; 
             }, 800);
         }
  
-        // Monitora a rolagem para fazer o texto aparecer suavemente
+        // Fade-in controlado das estrofes ao rolar a página
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('visivel');
                 }
             });
-        }, { threshold: 0.08 });
+        }, { threshold: 0.05 });
  
-        document.querySelectorAll('.paragrafo-futurista').forEach(p => observer.observe(p));
+        document.querySelectorAll('.bloco-estrofe').forEach(bloco => observer.observe(bloco));
     </script>
 </body>
 </html>
