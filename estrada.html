@@ -17,15 +17,15 @@
             --ouro-ativo: #c5a862;
         }
 
-        /* Barra de rolagem luxuosa prateada sutil */
+        /* Barra de rolagem luxuosa, prateada e futurista */
         ::-webkit-scrollbar {
-            width: 5px;
+            width: 6px;
         }
         ::-webkit-scrollbar-track {
             background: transparent;
         }
         ::-webkit-scrollbar-thumb {
-            background: linear-gradient(180deg, transparent, rgba(226, 232, 240, 0.3), transparent);
+            background: linear-gradient(180deg, transparent, rgba(226, 232, 240, 0.4), transparent);
             border-radius: 10px;
         }
 
@@ -44,16 +44,18 @@
             flex-direction: column; 
             align-items: center;
             overflow-x: hidden;
-            padding: 120px 20px 60px 20px;
+            padding: 100px 20px 60px 20px;
+            opacity: 0;
+            transition: opacity 0.8s ease;
         }
 
-        /* Fundo Cósmico e Estrelas Cadentes */
+        /* Fundo Cósmico Avançado */
         #cosmos { 
             position: fixed; 
             top: 0; left: 0; 
             width: 100%; height: 100%; 
             z-index: -1; 
-            background: radial-gradient(circle at center, #051226 0%, var(--cosmos-fundo) 100%); 
+            background: radial-gradient(circle at center, #06152b 0%, var(--cosmos-fundo) 100%); 
         }
         
         .estrela { 
@@ -63,37 +65,28 @@
             animation: brilhar 3s infinite ease-in-out; 
         }
 
-        .chuva-prata {
+        .estrela-cadente {
             position: absolute;
             width: 1px;
-            height: 80px;
-            background: linear-gradient(180deg, rgba(255,255,255,0.7), transparent);
+            height: 90px;
+            background: linear-gradient(180deg, rgba(226, 232, 240, 0.8), transparent);
             animation: cairEstrela 5s infinite linear;
             opacity: 0;
         }
         
         @keyframes brilhar { 
             0%, 100% { opacity: 0.1; transform: scale(0.8); } 
-            50% { opacity: 0.8; transform: scale(1.2); } 
+            50% { opacity: 0.9; transform: scale(1.3); } 
         }
 
         @keyframes cairEstrela {
-            0% { transform: translateY(-100px) translateX(0); opacity: 0; }
-            10% { opacity: 0.4; }
-            40% { transform: translateY(80vh) translateX(50px); opacity: 0; }
-            100% { transform: translateY(80vh) translateX(50px); opacity: 0; }
+            0% { transform: translateY(-100px); opacity: 0; }
+            15% { opacity: 0.6; }
+            60% { transform: translateY(90vh); opacity: 0; }
+            100% { transform: translateY(90vh); opacity: 0; }
         }
 
-        /* CONTAINER DO PLAYER DO YOUTUBE (OCULTO E CONTROLÁVEL) */
-        #youtube-player {
-            position: fixed;
-            width: 1px;
-            height: 1px;
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        /* CONTROLES LUXUOSOS DO ÁUDIO (TOPO DIREITO) */
+        /* CONTROLES DE ÁUDIO LUXUOSOS (TOPO DIREITO) */
         .player-luxo {
             position: fixed;
             top: 30px;
@@ -162,517 +155,172 @@
         .card-titulo {
             width: 100%;
             max-width: 750px;
-            margin-bottom: 40px;
-            padding: 1px;
-            border-radius: 14px;
-            background: linear-gradient(135deg, rgba(226, 232, 240, 0.2), transparent, rgba(226, 232, 240, 0.1));
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
-            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .card-titulo:hover {
-            transform: scale(1.02);
-        }
-
-        .titulo-interno {
-            background: var(--azul-card-luxo);
-            padding: 24px;
-            border-radius: 13px;
-            text-align: center;
-        }
-
-        .titulo-principal { 
-            font-family: 'Cinzel', serif; 
-            font-size: 2rem; 
-            letter-spacing: 7px; 
-            color: var(--prata-brilhante);
-            text-shadow: 0 2px 15px rgba(255,255,255,0.15);
-        }
-
-        /* 2. CARD DO TEXTO E DA MÚSICA (EFEITO HOLOFOTE & ZOOM) */
-        .card-conteudo {
-            max-width: 750px; 
-            width: 100%;
-            padding: 1px; 
-            border-radius: 20px; 
-            background: rgba(138, 111, 39, 0.15);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
-            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .card-conteudo:hover {
-            transform: scale(1.02);
-        }
-
-        .papel-antigo {
-            background: var(--azul-card-luxo);
-            /* Efeito sutil de Holofote de Cinema integrado ao fundo */
-            background-image: radial-gradient(circle at 50% 30%, rgba(138, 111, 39, 0.12) 0%, transparent 70%);
-            padding: 50px 45px; 
-            border-radius: 19px; 
-            text-align: center;
-        }
-
-        /* TÍTULO DA MÚSICA NO MEIO EM DESTAQUE */
-        .titulo-musica {
-            font-family: 'Cinzel', serif;
-            font-size: 2.3rem;
-            letter-spacing: 10px;
-            color: var(--ouro-ativo);
-            margin-bottom: 45px;
-            text-shadow: 0 0 20px rgba(197, 168, 98, 0.3);
-            text-align: center;
-        }
-
-        .bloco-estrofe {
-            margin-bottom: 35px;
-        }
-
-        .titulo-estrofe {
-            font-family: 'Cinzel', serif;
-            font-size: 0.85rem;
-            letter-spacing: 3px;
-            color: var(--ouro-escuro);
-            margin-bottom: 15px;
-            text-transform: uppercase;
-        }
-
-        /* Versos Traduzidos Resumidos Legíveis */
-        .verso-narrativo {
-            line-height: 2; 
-            font-size: 1.15rem; 
-            color: #94a3b8;
-            margin-bottom: 12px;
-            transition: color 0.4s ease;
-        }
-
-        .verso-narrativo:hover {
-            color: var(--prata-brilhante);
-        }
-
-        /* Responsividade Adaptável */
-        @media (max-width: 680px) {
-            body { padding: 100px 15px 40px 15px; }
-            .player-luxo { top: 20px; right: 20px; padding: 6px 14px; }
-            .vol-slider { width: 55px; }
-            .titulo-principal { font-size: 1.5rem; letter-spacing: 4px; }
-            .titulo-musica { font-size: 1.8rem; letter-spacing: 6px; margin-bottom: 35px; }
-            .papel-antigo { padding: 35px 20px; }
-            .verso-narrativo { font-size: 1.05rem; line-height: 1.9; }
-        }
-    </style>
-</head>
-<body>
-
-    <div id="cosmos"></div>
-
-    <div id="youtube-player"></div>
-
-    <div class="player-luxo">
-        <button class="btn-audio" id="btnPlayPause" onclick="togglePlayState()">PLAY</button>
-        <div class="controle-volume">
-            <span class="btn-audio" style="cursor:default; font-size:0.55rem; opacity:0.6;">VOL</span>
-            <input type="range" class="vol-slider" id="sliderVolume" min="0" max="100" step="5" value="40" oninput="mudarVolume(this.value)">
-        </div>
-    </div>
-
-    <div class="card-titulo">
-        <div class="titulo-interno">
-            <h1 class="titulo-principal">MEU SONHO REALIZADO</h1>
-        </div>
-    </div>
- 
-    <div class="card-conteudo">
-        <div class="papel-antigo">
-            
-            <h2 class="titulo-musica">MIL ANOS</h2>
-
-            <div class="bloco-estrofe">
-                <h3 class="titulo-estrofe">O Começo de Tudo</h3>
-                <p class="verso-narrativo">O dia clareia e o coração aperta ao ver o tempo passar,</p>
-                <p class="verso-narrativo">Tive tanto medo de me entregar e acabar me machucando.</p>
-                <p class="verso-narrativo">But ao olhar para você, todas as minhas dúvidas desapareceram de vez.</p>
-                <p class="verso-narrativo">Cada passo que dei me trouxe exatamente para este lugar,</p>
-                <p class="verso-narrativo">Onde o amor finalmente faz sentido.</p>
-            </div>
-
-            <div class="bloco-estrofe">
-                <h3 class="titulo-estrofe">A Promessa</h3>
-                <p class="verso-narrativo">Não há por que temer, eu estive te esperando por séculos.</p>
-                <p class="verso-narrativo">O meu peito sabe que este sentimento é maior que o próprio tempo,</p>
-                <p class="verso-narrativo">Uma certeza que atravessa eras e desafia qualquer despedida.</p>
-                <p class="verso-narrativo">Eu prometo te guiar, te proteger e segurar a sua mão,</p>
-                <p class="verso-narrativo">Pois o nosso encontro já estava escrito nas estrelas.</p>
-            </div>
- 
-            <div class="bloco-estrofe" style="margin-bottom: 0;">
-                <h3 class="titulo-estrofe">A Jornada Continua</h3>
-                <p class="verso-narrativo">Agora, a coragem substitui o antigo vazio que eu carregava.</p>
-                <p class="verso-narrativo">Ver você de pé, com os olhos brilhando na minha direção,</p>
-                <p class="verso-narrativo">Faz cada segundo de espera valer a pena neste mundo.</p>
-                <p class="verso-narrativo">Não é apenas sobre o passado que superamos, mas sobre o infinito que vamos construir,</p>
-                <p class="verso-narrativo">Amando você ontem, hoje, e por toda a eternidade.</p>
-            </div>
-
-        </div>
-    </div>
- 
-    <script>
-        const cosmos = document.getElementById('cosmos');
-        const btnPlayPause = document.getElementById('btnPlayPause');
-        let player;
-
-        // Carrega a API do IFrame do YouTube
-        const tag = document.createElement('script');
-        tag.src = "https://www.youtube.com/iframe_api";
-        const firstScriptTag = document.getElementsByTagName('script')[0];
-        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-        // Cria o player quando a API estiver pronta
-        function onYouTubeIframeAPIReady() {
-            player = new YT.Player('youtube-player', {
-                videoId: 'QgaTQ5-XfMM', // ID do vídeo do The Piano Guys escolhido
-                playerVars: {
-                    'autoplay': 0,
-                    'controls': 0,
-                    'loop': 1,
-                    'playlist': 'QgaTQ5-XfMM',
-                    'rel': 0
-                },
-                events: {
-                    'onReady': onPlayerReady,
-                    'onStateChange': onPlayerStateChange
-                }
-            });
-        }
-
-        function onPlayerReady(event) {
-            event.target.setVolume(40);
-        }
-
-        function onPlayerStateChange(event) {
-            if (event.data == YT.PlayerState.PLAYING) {
-                btnPlayPause.textContent = "PAUSE";
-            } else {
-                btnPlayPause.textContent = "PLAY";
-            }
-        }
-
-        function togglePlayState() {
-            if (player && player.getPlayerState) {
-                const estado = player.getPlayerState();
-                if (estado == YT.PlayerState.PLAYING) {
-                    player.pauseVideo();
-                } else {
-                    player.playVideo();
-                }
-            }
-        }
-
-      <!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Meu Sonho Realizado - Mil Anos</title>
-    
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-    
-    <style>
-        :root {
-            --cosmos-fundo: #02050c;
-            --azul-card-luxo: #040a17;
-            --prata-fino: #cbd5e1;
-            --prata-brilhante: #e2e8f0;
-            --ouro-escuro: #8a6f27;
-            --ouro-ativo: #c5a862;
-        }
-
-        /* Barra de rolagem luxuosa prateada sutil */
-        ::-webkit-scrollbar {
-            width: 5px;
-        }
-        ::-webkit-scrollbar-track {
-            background: transparent;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: linear-gradient(180deg, transparent, rgba(226, 232, 240, 0.3), transparent);
-            border-radius: 10px;
-        }
-
-        * { 
-            box-sizing: border-box; 
-            margin: 0; 
-            padding: 0; 
-        }
-
-        body {
-            background-color: var(--cosmos-fundo);
-            color: var(--prata-fino);
-            font-family: 'Lora', serif;
-            min-height: 100vh;
-            display: flex; 
-            flex-direction: column; 
-            align-items: center;
-            overflow-x: hidden;
-            padding: 120px 20px 120px 20px; /* Aumentado o padding inferior para não sobrepor o botão */
-            position: relative;
-        }
-
-        /* Fundo Cósmico e Estrelas Cadentes */
-        #cosmos { 
-            position: fixed; 
-            top: 0; left: 0; 
-            width: 100%; height: 100%; 
-            z-index: -1; 
-            background: radial-gradient(circle at center, #051226 0%, var(--cosmos-fundo) 100%); 
-        }
-        
-        .estrela { 
-            position: absolute; 
-            background: #ffffff; 
-            border-radius: 50%; 
-            animation: brilhar 3s infinite ease-in-out; 
-        }
-
-        .chuva-prata {
-            position: absolute;
-            width: 1px;
-            height: 80px;
-            background: linear-gradient(180deg, rgba(255,255,255,0.7), transparent);
-            animation: cairEstrela 5s infinite linear;
-            opacity: 0;
-        }
-        
-        @keyframes brilhar { 
-            0%, 100% { opacity: 0.1; transform: scale(0.8); } 
-            50% { opacity: 0.8; transform: scale(1.2); } 
-        }
-
-        @keyframes cairEstrela {
-            0% { transform: translateY(-100px) translateX(0); opacity: 0; }
-            10% { opacity: 0.4; }
-            40% { transform: translateY(80vh) translateX(50px); opacity: 0; }
-            100% { transform: translateY(80vh) translateX(50px); opacity: 0; }
-        }
-
-        /* CONTAINER DO PLAYER DO YOUTUBE (OCULTO E CONTROLÁVEL) */
-        #youtube-player {
-            position: fixed;
-            width: 1px;
-            height: 1px;
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        /* CONTROLES LUXUOSOS DO ÁUDIO (TOPO DIREITO) */
-        .player-luxo {
-            position: fixed;
-            top: 30px;
-            right: 30px;
-            z-index: 9999;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            background: rgba(4, 10, 23, 0.8);
-            backdrop-filter: blur(15px);
-            padding: 8px 18px;
-            border-radius: 30px;
-            border: 1px solid rgba(138, 111, 39, 0.3);
-            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.6);
-        }
-
-        .btn-audio {
-            background: none;
-            border: none;
-            color: var(--ouro-escuro);
-            font-family: 'Cinzel', serif;
-            font-size: 0.75rem;
-            letter-spacing: 2px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            outline: none;
-        }
-
-        .btn-audio:hover {
-            color: var(--ouro-ativo);
-            text-shadow: 0 0 6px rgba(197, 168, 98, 0.4);
-        }
-
-        .controle-volume {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .vol-slider {
-            -webkit-appearance: none;
-            appearance: none;
-            width: 70px;
-            height: 2px;
-            background: rgba(138, 111, 39, 0.25);
-            outline: none;
-        }
-
-        .vol-slider::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            appearance: none;
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: var(--ouro-escuro);
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .vol-slider::-webkit-slider-thumb:hover {
-            background: var(--ouro-ativo);
-            transform: scale(1.2);
-        }
-
-        /* 1. CARD DO TÍTULO - MEU SONHO REALIZADO (PRATA) */
-        .card-titulo {
-            width: 100%;
-            max-width: 750px;
-            margin-bottom: 40px;
-            padding: 1px;
-            border-radius: 14px;
-            background: linear-gradient(135deg, rgba(226, 232, 240, 0.2), transparent, rgba(226, 232, 240, 0.1));
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
-            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .card-titulo:hover {
-            transform: scale(1.02);
-        }
-
-        .titulo-interno {
-            background: var(--azul-card-luxo);
-            padding: 24px;
-            border-radius: 13px;
-            text-align: center;
-        }
-
-        .titulo-principal { 
-            font-family: 'Cinzel', serif; 
-            font-size: 2rem; 
-            letter-spacing: 7px; 
-            color: var(--prata-brilhante);
-            text-shadow: 0 2px 15px rgba(255,255,255,0.15);
-        }
-
-        /* 2. CARD DO TEXTO E DA MÚSICA (EFEITO HOLOFOTE & ZOOM) */
-        .card-conteudo {
-            max-width: 750px; 
-            width: 100%;
-            padding: 1px; 
-            border-radius: 20px; 
-            background: rgba(138, 111, 39, 0.15);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
-            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
             margin-bottom: 30px;
+            padding: 1px;
+            border-radius: 14px;
+            background: linear-gradient(135deg, rgba(226, 232, 240, 0.2), transparent, rgba(226, 232, 240, 0.1));
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .card-conteudo:hover {
+        .card-titulo:hover {
             transform: scale(1.02);
         }
 
-        .papel-antigo {
+        .titulo-interno {
             background: var(--azul-card-luxo);
-            /* Efeito sutil de Holofote de Cinema integrado ao fundo */
-            background-image: radial-gradient(circle at 50% 30%, rgba(138, 111, 39, 0.12) 0%, transparent 70%);
-            padding: 50px 45px; 
-            border-radius: 19px; 
+            padding: 24px;
+            border-radius: 13px;
             text-align: center;
         }
 
-        /* TÍTULO DA MÚSICA NO MEIO EM DESTAQUE */
-        .titulo-musica {
-            font-family: 'Cinzel', serif;
-            font-size: 2.3rem;
-            letter-spacing: 10px;
-            color: var(--ouro-ativo);
-            margin-bottom: 45px;
-            text-shadow: 0 0 20px rgba(197, 168, 98, 0.3);
-            text-align: center;
-        }
-
-        .bloco-estrofe {
-            margin-bottom: 35px;
-        }
-
-        .titulo-estrofe {
-            font-family: 'Cinzel', serif;
-            font-size: 0.85rem;
-            letter-spacing: 3px;
-            color: var(--ouro-escuro);
-            margin-bottom: 15px;
-            text-transform: uppercase;
-        }
-
-        /* Versos Traduzidos Resumidos Legíveis */
-        .verso-narrativo {
-            line-height: 2; 
-            font-size: 1.15rem; 
-            color: #94a3b8;
-            margin-bottom: 12px;
-            transition: color 0.4s ease;
-        }
-
-        .verso-narrativo:hover {
+        .titulo-principal { 
+            font-family: 'Cinzel', serif; 
+            font-size: 2rem; 
+            letter-spacing: 7px; 
             color: var(--prata-brilhante);
+            text-shadow: 0 2px 15px rgba(255,255,255,0.15);
         }
 
-        /* BOTÃO LUXUOSO "PRÓXIMA" (CONTEINER E DESIGN) */
+        /* 2. CARD DE CONTEÚDO (Borda de Prata Fluida e Efeito Zoom) */
+        .card-conteudo {
+            position: relative; 
+            max-width: 750px; 
+            width: 100%;
+            padding: 3px; 
+            border-radius: 20px; 
+            overflow: hidden;
+            background: var(--azul-card-luxo);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+            margin-bottom: 40px;
+            transform: scale(0.97);
+            transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 1.2s ease;
+        }
+
+        .card-conteudo.focado {
+            transform: scale(1);
+            box-shadow: 0 25px 60px rgba(10, 30, 61, 0.5);
+        }
+
+        /* Efeito Prata Correndo na Borda (Animação de gradiente contínuo) */
+        .card-conteudo::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(
+                from 0deg,
+                transparent 20%,
+                rgba(226, 232, 240, 0.1) 40%,
+                var(--prata-fino) 50%,
+                rgba(226, 232, 240, 0.1) 60%,
+                transparent 80%
+            );
+            animation: prataCorrendo 7s linear infinite;
+            z-index: 1;
+        }
+
+        @keyframes prataCorrendo {
+            100% { transform: rotate(360deg); }
+        }
+
+        .papel-antigo {
+            position: relative;
+            z-index: 2; 
+            background: rgba(4, 10, 23, 0.93);
+            backdrop-filter: blur(15px);
+            padding: 40px; 
+            border-radius: 17px; 
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Parágrafos com transição */
+        .paragrafo-futurista {
+            line-height: 1.8; 
+            font-size: 1.1rem; 
+            text-align: justify;
+            margin-bottom: 22px; 
+            color: #cbd5e1;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1s ease, transform 1s ease;
+        }
+
+        .paragrafo-futurista strong {
+            color: #ffffff;
+            font-weight: 700;
+        }
+
+        .paragrafo-futurista.visivel {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .paragrafo-futurista:last-of-type { 
+            margin-bottom: 35px; 
+        }
+
+        /* Citação Estilizada */
+        .citacao-luxo {
+            font-style: italic;
+            border-left: 2px solid var(--ouro-ativo);
+            padding-left: 20px;
+            margin: 30px 0;
+            color: var(--ouro-ativo);
+            font-size: 1.15rem;
+            line-height: 1.7;
+            text-align: left;
+        }
+
+        /* Alinhamento do botão no canto direito */
         .container-navegacao {
             width: 100%;
-            max-width: 750px;
             display: flex;
             justify-content: flex-end;
-            margin-top: 10px;
         }
 
-        .btn-proxima {
-            background: var(--ouro-escuro);
+        /* Botão Próximo Elegante Prateado */
+        .btn-proximo {
+            display: inline-block;
+            width: auto;
+            min-width: 260px;
+            padding: 15px 35px; 
+            border: 1px solid rgba(226, 232, 240, 0.3);
+            background: linear-gradient(135deg, rgba(4, 10, 23, 0.95), rgba(15, 23, 42, 0.6));
             color: var(--prata-brilhante);
-            font-family: 'Cinzel', serif;
-            font-size: 0.9rem;
-            font-weight: 700;
-            letter-spacing: 4px;
-            padding: 14px 42px;
-            border-radius: 4px;
-            border: 1px solid rgba(226, 232, 240, 0.2);
-            cursor: pointer;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255,255,255,0.1);
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            outline: none;
-            text-decoration: none;
+            border-radius: 30px; 
+            cursor: pointer; 
+            font-family: 'Cinzel', serif; 
+            font-weight: 700; 
+            font-size: 0.85rem;
+            transition: all 0.4s ease; 
+            text-transform: uppercase; 
+            letter-spacing: 3px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+            position: relative;
+            overflow: hidden;
         }
-
-        .btn-proxima:hover {
-            background: var(--ouro-ativo);
+        
+        .btn-proximo:hover { 
+            border-color: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 0 25px rgba(226, 232, 240, 0.2); 
+            transform: translateY(-2px);
             color: #ffffff;
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(197, 168, 98, 0.3), inset 0 1px 0 rgba(255,255,255,0.2);
-            letter-spacing: 6px; /* Efeito sutil de expansão da palavra */
         }
 
-        .btn-proxima:active {
-            transform: translateY(-1px);
-            box-shadow: 0 4px 15px rgba(197, 168, 98, 0.2);
-        }
-
-        /* Responsividade Adaptável */
+        /* Responsividade Minimalista */
         @media (max-width: 680px) {
-            body { padding: 100px 15px 100px 15px; }
-            .player-luxo { top: 20px; right: 20px; padding: 6px 14px; }
-            .vol-slider { width: 55px; }
-            .titulo-principal { font-size: 1.5rem; letter-spacing: 4px; }
-            .titulo-musica { font-size: 1.8rem; letter-spacing: 6px; margin-bottom: 35px; }
-            .papel-antigo { padding: 35px 20px; }
-            .verso-narrativo { font-size: 1.05rem; line-height: 1.9; }
-            .btn-proxima { padding: 12px 32px; font-size: 0.8rem; letter-spacing: 3px; }
-            .btn-proxima:hover { letter-spacing: 4px; }
+            body { padding: 90px 15px 40px 15px; }
+            .player-luxo { top: 20px; right: 20px; padding: 6px 12px; }
+            .vol-slider { width: 50px; }
+            .titulo-ferro { font-size: 1.6rem; letter-spacing: 5px; }
+            .papel-antigo { padding: 30px 20px; }
+            .paragrafo-futurista { font-size: 1rem; line-height: 1.7; text-align: left; }
+            .container-botao { justify-content: center; }
+            .btn-proximo { width: 100%; text-align: center; }
         }
     </style>
 </head>
@@ -680,13 +328,11 @@
 
     <div id="cosmos"></div>
 
-    <div id="youtube-player"></div>
-
     <div class="player-luxo">
-        <button class="btn-audio" id="btnPlayPause" onclick="togglePlayState()">PLAY</button>
+        <button class="btn-audio" id="btnPlayPause" onclick="togglePlay()">PLAY</button>
         <div class="controle-volume">
-            <span class="btn-audio" style="cursor:default; font-size:0.55rem; opacity:0.6;">VOL</span>
-            <input type="range" class="vol-slider" id="sliderVolume" min="0" max="100" step="5" value="40" oninput="mudarVolume(this.value)">
+            <span class="btn-audio" style="cursor:default; font-size:0.55rem; opacity:0.7;">VOL</span>
+            <input type="range" class="vol-slider" id="sliderVolume" min="0" max="1" step="0.05" value="0.5" oninput="mudarVolume(this.value)">
         </div>
     </div>
 
@@ -699,103 +345,54 @@
     <div class="card-conteudo">
         <div class="papel-antigo">
             
-            <h2 class="titulo-musica">MIL ANOS</h2>
-
-            <div class="bloco-estrofe">
-                <h3 class="titulo-estrofe">O Começo de Tudo</h3>
-                <p class="verso-narrativo">O dia clareia e o coração aperta ao ver o tempo passar,</p>
-                <p class="verso-narrativo">Tive tanto medo de me entregar e acabar me machucando.</p>
-                <p class="verso-narrativo">Mas ao olhar para você, todas as minhas dúvidas desapareceram de vez.</p>
-                <p class="verso-narrativo">Cada passo que dei me trouxe exatamente para este lugar,</p>
-                <p class="verso-narrativo">Onde o amor finalmente faz sentido.</p>
-            </div>
-
-            <div class="bloco-estrofe">
-                <h3 class="titulo-estrofe">A Promessa</h3>
-                <p class="verso-narrativo">Não há por que temer, eu estive te esperando por séculos.</p>
-                <p class="verso-narrativo">O meu peito sabe que este sentimento é maior que o próprio tempo,</p>
-                <p class="verso-narrativo">Uma certeza que atravessa eras e desafia qualquer despedida.</p>
-                <p class="verso-narrativo">Eu prometo te guiar, te proteger e segurar a sua mão,</p>
-                <p class="verso-narrativo">Pois o nosso encontro já estava escrito nas estrelas.</p>
-            </div>
+            <p class="paragrafo-futurista">Hoje compreendo com total clareza que o que habita em mim não se molda aos padrões de um "amor romântico" comum, daqueles que exigem reciprocidade, presença ou posse. O que sinto transborda como uma <strong>atração muito forte</strong>, limpa e genuína — um desejo profundo e insistentemente puro de te ver caminhar em direção ao seu melhor destino, brilhando na sua própria órbita. É a evolução de um sentimento que aprendeu a admirar sem precisar tocar.</p>
+            
+            <p class="paragrafo-futurista">Guardo uma gratidão que as palavras mal conseguem tatear por você ter me acolhido e validado quando o meu chão parecia ceder. Você me enxergou e me deu espaço não apenas como alguém sob seus cuidados técnicos, mas como mulher, respeitando minha essência e minha individualidade. Há uma fortaleza silenciosa e admirável no seu olhar; uma firmeza profissional que me serviu de bússola quando eu mais precisava encontrar o norte.</p>
  
-            <div class="bloco-estrofe" style="margin-bottom: 0;">
-                <h3 class="titulo-estrofe">A Jornada Continua</h3>
-                <p class="verso-narrativo">Agora, a coragem substitui o antigo vazio que eu carregava.</p>
-                <p class="verso-narrativo">Ver você de pé, com os olhos brilhando na minha direção,</p>
-                <p class="verso-narrativo">Faz cada segundo de espera valer a pena neste mundo.</p>
-                <p class="verso-narrativo">Não é apenas sobre o passado que superamos, mas sobre o infinito que vamos construir,</p>
-                <p class="verso-narrativo">Amando você ontem, hoje, e por toda a eternidade.</p>
+            <p class="paragrafo-futurista">Olhando para trás, percebo o quanto sua presença foi um divisor de águas. Você entrou na minha vida em um momento de transição e profunda vulnerabilidade, e sua postura não foi apenas um suporte temporário, mas um alicerce para que eu redescobrisse minha própria força. Essa jornada não seria a mesma sem o eco das suas palavras e o acolhimento seguro que encontrei na sua conduta.</p>
+ 
+            <p class="paragrafo-futurista citacao-luxo">
+               "A verdadeira felicidade não reside na ausência de problemas, mas na capacidade de encontrar serenidade mesmo quando o horizonte é incerto."
+            </p>
+ 
+            <p class="paragrafo-futurista">A realidade nua e crua é que existem pessoas que cruzam nosso caminho para redefinir nossa história, e você é, sem dúvida, uma das mais importantes na minha. Essa busca por equilíbrio e lucidez me fez entender que o afeto mais nobre é aquele que sabe o seu lugar e caminha de mãos dadas com o respeito. Admiro profundamente a barreira ética que protege a sua postura impecável, e é justamente por valorizar quem você é que transformo essa admiração em combustível para a minha própria evolução.</p>
+ 
+            <p class="paragrafo-futurista">Saber que, de alguma forma, você torce pelo meu sucesso profissional, pela minha stabileza e pela minha paz é o maior prêmio que eu poderia desejar levar dessa convivência. Você se tornou um farol nesta fase da minha vida: alguém que eu não busco reter, mas que faço questão de reverenciar pela importância imensa que teve no meu amadurecimento.</p>
+ 
+            <p class="paragrafo-futurista">Assim, com o coração em paz e a mente lúcida, sigo em frente. Guardo a beleza e o impacto real desse encontro em um lugar nobre e seguro da minha memória, convicta de que encontrar essa serenidade interna é o passo definitivo para a verdadeira felicidade.</p>
+ 
+            <div class="container-navegacao">
+                <button class="btn-proximo" onclick="irParaEstrada()">Seguir para Estrada</button>
             </div>
-
         </div>
     </div>
-
-    <!-- SEÇÃO DO BOTÃO PRÓXIMA ALINHADO À DIREITA -->
-    <div class="container-navegacao">
-        <button class="btn-proxima" onclick="proximaPagina()">PRÓXIMA</button>
-    </div>
+ 
+    <audio id="audio-player" loop prefetch>
+        <source src="elvis.html.mp3" type="audio/mpeg">
+    </audio>
  
     <script>
         const cosmos = document.getElementById('cosmos');
+        const audio = document.getElementById('audio-player');
         const btnPlayPause = document.getElementById('btnPlayPause');
-        let player;
 
-        // Carrega a API do IFrame do YouTube
-        const tag = document.createElement('script');
-        tag.src = "https://www.youtube.com/iframe_api";
-        const firstScriptTag = document.getElementsByTagName('script')[0];
-        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-        // Cria o player quando a API estiver pronta
-        function onYouTubeIframeAPIReady() {
-            player = new YT.Player('youtube-player', {
-                videoId: 'QgaTQ5-XfMM', // ID do vídeo do The Piano Guys escolhido
-                playerVars: {
-                    'autoplay': 0,
-                    'controls': 0,
-                    'loop': 1,
-                    'playlist': 'QgaTQ5-XfMM',
-                    'rel': 0
-                },
-                events: {
-                    'onReady': onPlayerReady,
-                    'onStateChange': onPlayerStateChange
-                }
-            });
-        }
-
-        function onPlayerReady(event) {
-            event.target.setVolume(40);
-        }
-
-        function onPlayerStateChange(event) {
-            if (event.data == YT.PlayerState.PLAYING) {
+        // Função de controle de Play/Pause Nativo
+        function togglePlay() {
+            if (audio.paused) {
+                audio.play();
                 btnPlayPause.textContent = "PAUSE";
             } else {
+                audio.pause();
                 btnPlayPause.textContent = "PLAY";
-            }
-        }
-
-        function togglePlayState() {
-            if (player && player.getPlayerState) {
-                const estado = player.getPlayerState();
-                if (estado == YT.PlayerState.PLAYING) {
-                    player.pauseVideo();
-                } else {
-                    player.playVideo();
-                }
             }
         }
 
         function mudarVolume(valor) {
-            if (player && player.setVolume) {
-                player.setVolume(valor);
-            }
+            audio.volume = valor;
         }
  
-        // Criação de 80 Estrelas Fixas Pulsantes Prateadas
-        for (let i = 0; i < 80; i++) {
+        // Criação Dinâmica de 100 Estrelas Pulsantes
+        for (let i = 0; i < 100; i++) {
             const estrela = document.createElement('div');
             estrela.className = 'estrela';
             const size = Math.random() * 2 + 1;
@@ -804,26 +401,60 @@
             estrela.style.top = Math.random() * 100 + '%';
             estrela.style.left = Math.random() * 100 + '%';
             estrela.style.animationDelay = Math.random() * 3 + 's';
-            estrela.style.animationDuration = (Math.random() * 3 + 2) + 's';
+            estrela.style.animationDuration = (Math.random() * 3 + 2.5) + 's';
             cosmos.appendChild(estrela);
         }
 
-        // Sistema Harmônico de Estrelas Prateadas Caindo do Céu
-        for (let i = 0; i < 5; i++) {
+        // Sistema de Chuva de Estrelas Prateadas (Meteoro)
+        function criarEstrelaCadente() {
             const queda = document.createElement('div');
-            queda.className = 'chuva-prata';
-            queda.style.top = '-100px';
-            queda.style.left = (Math.random() * 90) + '%';
-            queda.style.animationDelay = (Math.random() * 6) + 's';
-            queda.style.animationDuration = (Math.random() * 4 + 4) + 's';
+            queda.className = 'estrela-cadente';
+            
+            // Define o ponto de origem aleatório no topo e à direita
+            queda.style.top = (Math.random() * 40) + '%';
+            queda.style.left = (Math.random() * 50 + 40) + '%';
+            queda.style.animationDuration = (Math.random() * 2 + 2) + 's'; // Variar velocidade
+            
             cosmos.appendChild(queda);
+            
+            // Remove o elemento após a animação para não sobrecarregar
+            setTimeout(() => {
+                queda.remove();
+            }, 5000);
         }
 
-        // Ação do Botão Próxima (Substitua o link dentro do window.location.href pelo destino final desejado)
-        function proximaPagina() {
-            // Exemplo: window.location.href = "proxima_pagina.html";
-            alert("Dando continuidade à jornada eterna..."); 
+        // Dispara uma nova estrela cadente a cada 2 segundos
+        setInterval(criarEstrelaCadente, 2000);
+
+        // Redirecionamento correto com persistência do MP3 para estrada.html
+        function irParaEstrada() {
+            // Salva o estado do áudio no localStorage para ser lido na próxima página
+            localStorage.setItem('audioTempo', audio.currentTime);
+            localStorage.setItem('audioTocando', !audio.paused);
+            localStorage.setItem('audioVolume', audio.volume);
+            
+            document.body.style.opacity = '0';
+            setTimeout(() => {
+                window.location.href = "estrada.html";
+            }, 800);
         }
+ 
+        // Intersection Observer suave
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visivel');
+                }
+            });
+        }, { threshold: 0.08 });
+ 
+        document.querySelectorAll('.paragrafo-futurista').forEach(p => observer.observe(p));
+
+        setInterval(() => {
+            if (!audio.paused) {
+                localStorage.setItem('audioTempo', audio.currentTime);
+            }
+        }, 1000);
     </script>
 </body>
 </html>
