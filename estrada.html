@@ -17,7 +17,7 @@
             --ouro-ativo: #c5a862;
         }
 
-        /* Barra de rolagem luxuosa, prateada e futurista */
+        /* Barra de rolagem luxuosa */
         ::-webkit-scrollbar {
             width: 6px;
         }
@@ -45,7 +45,7 @@
             align-items: center;
             overflow-x: hidden;
             padding: 100px 20px 60px 20px;
-            opacity: 0;
+            opacity: 0; /* Começa invisível para o efeito fade-in */
             transition: opacity 0.8s ease;
         }
 
@@ -86,7 +86,7 @@
             100% { transform: translateY(90vh); opacity: 0; }
         }
 
-        /* CONTROLES DE ÁUDIO LUXUOSOS (TOPO DIREITO) */
+        /* CONTROLES DE ÁUDIO LUXUOSOS */
         .player-luxo {
             position: fixed;
             top: 30px;
@@ -151,7 +151,7 @@
             transform: scale(1.2);
         }
 
-        /* 1. CARD DO TÍTULO - MEU SONHO REALIZADO (PRATA) */
+        /* CARD DO TÍTULO */
         .card-titulo {
             width: 100%;
             max-width: 750px;
@@ -182,7 +182,7 @@
             text-shadow: 0 2px 15px rgba(255,255,255,0.15);
         }
 
-        /* 2. CARD DE CONTEÚDO (Borda de Prata Fluida e Efeito Zoom) */
+        /* CARD DE CONTEÚDO */
         .card-conteudo {
             position: relative; 
             max-width: 750px; 
@@ -193,16 +193,9 @@
             background: var(--azul-card-luxo);
             box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
             margin-bottom: 40px;
-            transform: scale(0.97);
-            transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 1.2s ease;
         }
 
-        .card-conteudo.focado {
-            transform: scale(1);
-            box-shadow: 0 25px 60px rgba(10, 30, 61, 0.5);
-        }
-
-        /* Efeito Prata Correndo na Borda (Animação de gradiente contínuo) */
+        /* Efeito Prata Correndo na Borda */
         .card-conteudo::before {
             content: '';
             position: absolute;
@@ -263,7 +256,6 @@
             margin-bottom: 35px; 
         }
 
-        /* Citação Estilizada */
         .citacao-luxo {
             font-style: italic;
             border-left: 2px solid var(--ouro-ativo);
@@ -275,14 +267,12 @@
             text-align: left;
         }
 
-        /* Alinhamento do botão no canto direito */
         .container-navegacao {
             width: 100%;
             display: flex;
             justify-content: flex-end;
         }
 
-        /* Botão Próximo Elegante Prateado */
         .btn-proximo {
             display: inline-block;
             width: auto;
@@ -300,8 +290,6 @@
             text-transform: uppercase; 
             letter-spacing: 3px;
             box-shadow: 0 4px 20px rgba(0,0,0,0.5);
-            position: relative;
-            overflow: hidden;
         }
         
         .btn-proximo:hover { 
@@ -311,15 +299,13 @@
             color: #ffffff;
         }
 
-        /* Responsividade Minimalista */
         @media (max-width: 680px) {
             body { padding: 90px 15px 40px 15px; }
             .player-luxo { top: 20px; right: 20px; padding: 6px 12px; }
             .vol-slider { width: 50px; }
-            .titulo-ferro { font-size: 1.6rem; letter-spacing: 5px; }
+            .titulo-principal { font-size: 1.6rem; letter-spacing: 5px; }
             .papel-antigo { padding: 30px 20px; }
             .paragrafo-futurista { font-size: 1rem; line-height: 1.7; text-align: left; }
-            .container-botao { justify-content: center; }
             .btn-proximo { width: 100%; text-align: center; }
         }
     </style>
@@ -357,17 +343,17 @@
  
             <p class="paragrafo-futurista">A realidade nua e crua é que existem pessoas que cruzam nosso caminho para redefinir nossa história, e você é, sem dúvida, uma das mais importantes na minha. Essa busca por equilíbrio e lucidez me fez entender que o afeto mais nobre é aquele que sabe o seu lugar e caminha de mãos dadas com o respeito. Admiro profundamente a barreira ética que protege a sua postura impecável, e é justamente por valorizar quem você é que transformo essa admiração em combustível para a minha própria evolução.</p>
  
-            <p class="paragrafo-futurista">Saber que, de alguma forma, você torce pelo meu sucesso profissional, pela minha stabileza e pela minha paz é o maior prêmio que eu poderia desejar levar dessa convivência. Você se tornou um farol nesta fase da minha vida: alguém que eu não busco reter, mas que faço questão de reverenciar pela importância imensa que teve no meu amadurecimento.</p>
+            <p class="paragrafo-futurista">Saber que, de alguma forma, você torce pelo meu sucesso profissional, pela minha estabilidade e pela minha paz é o maior prêmio que eu poderia desejar levar dessa convivência. Você se tornou um farol nesta fase da minha vida: alguém que eu não busco reter, mas que faço questão de reverenciar pela importância imensa que teve no meu amadurecimento.</p>
  
             <p class="paragrafo-futurista">Assim, com o coração em paz e a mente lúcida, sigo em frente. Guardo a beleza e o impacto real desse encontro em um lugar nobre e seguro da minha memória, convicta de que encontrar essa serenidade interna é o passo definitivo para a verdadeira felicidade.</p>
  
             <div class="container-navegacao">
-                <button class="btn-proximo" onclick="irParaEstrada()">Seguir para Estrada</button>
+                <button class="btn-proximo" onclick="irParaProxima()">Próxima Página</button>
             </div>
         </div>
     </div>
  
-    <audio id="audio-player" loop prefetch>
+    <audio id="audio-player" loop>
         <source src="elvis.html.mp3" type="audio/mpeg">
     </audio>
  
@@ -375,22 +361,62 @@
         const cosmos = document.getElementById('cosmos');
         const audio = document.getElementById('audio-player');
         const btnPlayPause = document.getElementById('btnPlayPause');
+        const sliderVolume = document.getElementById('sliderVolume');
 
-        // Função de controle de Play/Pause Nativo
+        // FUNÇÃO DE INICIALIZAÇÃO DA PÁGINA (Recupera os dados salvos da página anterior)
+        window.addEventListener('DOMContentLoaded', () => {
+            // Garante que o corpo da página apareça (evita a tela preta travada)
+            document.body.style.opacity = '1';
+
+            // Recupera informações da música salvas no localStorage pela página anterior
+            const tempoSalvo = localStorage.getItem('audioTempo');
+            const tocandoSalvo = localStorage.getItem('audioTocando');
+            const volumeSalvo = localStorage.getItem('audioVolume');
+
+            if (volumeSalvo !== null) {
+                audio.volume = volumeSalvo;
+                sliderVolume.value = volumeSalvo;
+            }
+
+            if (tempoSalvo !== null) {
+                audio.currentTime = parseFloat(tempoSalvo);
+            }
+
+            // Se a música estava tocando na tela anterior, tenta continuar tocando aqui
+            if (tocandoSalvo === 'true') {
+                audio.play().then(() => {
+                    btnPlayPause.textContent = "PAUSE";
+                }).catch(err => {
+                    console.log("O navegador bloqueou o autoplay. O usuário precisa interagir com a tela ou clicar em Play.");
+                    btnPlayPause.textContent = "PLAY";
+                });
+            }
+        });
+
         function togglePlay() {
             if (audio.paused) {
                 audio.play();
                 btnPlayPause.textContent = "PAUSE";
+                localStorage.setItem('audioTocando', 'true');
             } else {
                 audio.pause();
                 btnPlayPause.textContent = "PLAY";
+                localStorage.setItem('audioTocando', 'false');
             }
         }
 
         function mudarVolume(valor) {
             audio.volume = valor;
+            localStorage.setItem('audioVolume', valor);
         }
  
+        // Salva o tempo atual da música a cada 1 segundo para persistência contínua
+        setInterval(() => {
+            if (!audio.paused) {
+                localStorage.setItem('audioTempo', audio.currentTime);
+            }
+        }, 1000);
+
         // Criação Dinâmica de 100 Estrelas Pulsantes
         for (let i = 0; i < 100; i++) {
             const estrela = document.createElement('div');
@@ -405,41 +431,32 @@
             cosmos.appendChild(estrela);
         }
 
-        // Sistema de Chuva de Estrelas Prateadas (Meteoro)
+        // Chuva de Estrelas Prateadas (Meteoro)
         function criarEstrelaCadente() {
             const queda = document.createElement('div');
             queda.className = 'estrela-cadente';
-            
-            // Define o ponto de origem aleatório no topo e à direita
             queda.style.top = (Math.random() * 40) + '%';
             queda.style.left = (Math.random() * 50 + 40) + '%';
-            queda.style.animationDuration = (Math.random() * 2 + 2) + 's'; // Variar velocidade
-            
+            queda.style.animationDuration = (Math.random() * 2 + 2) + 's';
             cosmos.appendChild(queda);
-            
-            // Remove o elemento após a animação para não sobrecarregar
-            setTimeout(() => {
-                queda.remove();
-            }, 5000);
+            setTimeout(() => { queda.remove(); }, 5000);
         }
-
-        // Dispara uma nova estrela cadente a cada 2 segundos
         setInterval(criarEstrelaCadente, 2000);
 
-        // Redirecionamento correto com persistência do MP3 para estrada.html
-        function irParaEstrada() {
-            // Salva o estado do áudio no localStorage para ser lido na próxima página
+        // Ação para o botão de avançar na narrativa (salva o progresso e vai para a próxima se houver)
+        function irParaProxima() {
             localStorage.setItem('audioTempo', audio.currentTime);
             localStorage.setItem('audioTocando', !audio.paused);
             localStorage.setItem('audioVolume', audio.volume);
             
             document.body.style.opacity = '0';
             setTimeout(() => {
-                window.location.href = "estrada.html";
+                // Altere para o nome do seu próximo arquivo HTML se houver mais sequências
+                window.location.href = "proxima_pagina.html"; 
             }, 800);
         }
  
-        // Intersection Observer suave
+        // Monitora a rolagem para fazer o texto aparecer suavemente
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -449,12 +466,6 @@
         }, { threshold: 0.08 });
  
         document.querySelectorAll('.paragrafo-futurista').forEach(p => observer.observe(p));
-
-        setInterval(() => {
-            if (!audio.paused) {
-                localStorage.setItem('audioTempo', audio.currentTime);
-            }
-        }, 1000);
     </script>
 </body>
 </html>
